@@ -1,0 +1,6 @@
+node_modules
+bower_components
+public
+static/js
+static/css
+static/fonts

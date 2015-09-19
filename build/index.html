@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>App</title>
+    <style>
+      .layout-app {
+        position: fixed;
+        overflow: scroll;
+        top: 0; bottom: 0; left: 0;
+        width: 55%;
+      }
+      .layout-spec {
+        position: fixed;
+        overflow: scroll;
+        top: 0; bottom: 0; right: 0;
+        width: 45%;
+        background-color: #eee;
+      }
+      .layout-spec pre {
+        background-color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout-app">
+      <script src="app.js"></script>
+    </div><!-- .layout-app -->
+    <div class="layout-spec">
+      <script src="spec.js"></script>
+    </div><!-- .layout-spec -->
+  </body>
+</html>
