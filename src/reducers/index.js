@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import tests from './tests';
+import skill from './skill';
 
 const rootReducer = combineReducers({
-  tests
+  skill
 });
 
 export default rootReducer;
