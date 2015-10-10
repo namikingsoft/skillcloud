@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-import { sortBy } from 'lodash';
+import React, {Component, PropTypes} from 'react';
+import {map, sortBy} from 'lodash';
 import d3 from 'd3';
 import nv from 'nvd3/build/nv.d3';
 
@@ -13,56 +13,35 @@ class Chart extends Component
     );
   }
   componentDidMount() {
-    const { selected } = this.props;
-    const data = this.dataset(selected);
-    this.update(data);
+    this.dataset();
   }
 
   componentWillUnmount() {
   }
 
   componentDidUpdate() {
-    const { selected } = this.props;
-    const data = this.dataset(selected);
-    this.update(data);
+    this.dataset();
   }
 
-  dataset(selected) {
-    let subject = '';
-    let values = [];
-    if (selected && selected.rows) {
-      subject = selected.name;
-      for (const row of selected.rows) {
-        values.push({
-          label: row.name,
-          value: row.score,
-        });
-      }
-    } else {
-      subject = "Profile";
-      values = [
-        {
-          "label" : "Group A" ,
-          "value" : 1.8746444827653,
-        },
-        {
-          "label" : "Group B" ,
-          "value" : 8.0961543492239,
-        },
-        {
-          "label" : "Group C" ,
-          "value" : 0.57072943117674,
-        },
-      ];
+  dataset() {
+    let {data, selected} = this.props
+    if (!selected || !selected.rows) {
+      selected = data;
     }
-    values = sortBy(values, row => -row.value);
-    return [
+    let values = map(selected.rows, row => {
+      return {
+        label: row.name,
+        value: row.score,
+      }
+    })
+    values = sortBy(values, row => -row.value)
+    this.update([
       {
         key: '経験値',
         color: "#d67777",
         values,
       }
-    ];
+    ])
   }
 
   update(data) {
@@ -72,13 +51,25 @@ class Chart extends Component
       .y(function(d) { return d.value })
       .margin({top: 30, right: 20, bottom: 30, left: 100})
       .showValues(false)
-      .tooltips(true)
-      .showControls(false);
+      .showControls(false)
+      .tooltip.enabled(false)
     chart
       .yAxis.tickFormat(d3.format(',.2f'));
     d3.select(React.findDOMNode(this.refs.svg))
       .datum(data)
-      .call(chart);
+      .call(chart)
+      .selectAll('.nv-bar')
+        .on('click', (d) => {
+          const {data, selected, onSelect} = this.props;
+          if (selected && selected.rows) {
+            for (const row of selected.rows) {
+              if (d.label == row.name && row.rows) {
+                return onSelect(row);
+              }
+            }
+          }
+          onSelect(data);
+        })
     nv.utils.windowResize(chart.update);
   }
 }

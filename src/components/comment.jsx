@@ -1,6 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 
-class Comment extends Component {
+export default class Comment extends Component
+{
+  static propTypes = {
+    comment: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+  }
+
   render() {
     const { comment } = this.props;
     return (
@@ -10,9 +18,3 @@ class Comment extends Component {
     );
   }
 }
-
-Comment.propTypes = {
-  comment: PropTypes.string.isRequired,
-};
-
-export default Comment;

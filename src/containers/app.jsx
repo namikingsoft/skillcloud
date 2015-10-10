@@ -1,32 +1,24 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import Cloud from 'components/cloud';
-import Chart from 'components/chart';
-import Comment from 'components/comment';
-import * as SkillActions from '../actions/skill';
+import React, {Component, PropTypes} from 'react'
+import {Router, Route} from 'react-router'
+import {history} from 'react-router/lib/HashHistory';
+import Navigation from 'containers/navigation'
+import Canbe from 'containers/canbe'
+import Langs from 'containers/langs'
+import NotFound from 'containers/notfound'
 
-class App extends Component {
+export default class App extends Component
+{
   render() {
-    const { dispatch, data, comment, selected } = this.props;
-    const actions = bindActionCreators(SkillActions, dispatch);
     return (
       <div className="app">
-        <Cloud data={data} selected={selected} actions={actions} />
-        <Chart selected={selected} actions={actions} />
-        <Comment comment={comment} />
+        <Router history={history}>
+          <Route component={Navigation}>
+            <Route path="/" component={Canbe} />
+            <Route path="/langs/:type" component={Langs} />
+            <Route path="*" component={NotFound} />
+          </Route>
+        </Router>
       </div>
     );
   }
 }
-
-function mapStateToProps(state) {
-  const { data, comment, selected } = state.skill;
-  return {
-    data,
-    comment,
-    selected,
-  };
-}
-
-export default connect(mapStateToProps)(App);

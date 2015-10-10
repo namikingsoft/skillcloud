@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { filter } from 'lodash';
+import {filter} from 'lodash';
 import d3 from 'd3';
 
-class Cloud extends Component
+export default class Cloud extends Component
 {
   render() {
     return (
@@ -14,15 +14,15 @@ class Cloud extends Component
 
   componentDidMount() {
     this.init();
-    window.addEventListener('resize', () => {this.resize()});
+    window.addEventListener('resize', () => this.resize());
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', () => {this.resize()});
+    window.removeEventListener('resize', () => this.resize());
   }
 
   componentDidUpdate() {
-    const { selected } = this.props;
+    const {selected} = this.props;
     this.resize();
     this.dataset(selected);
   }
@@ -39,13 +39,13 @@ class Cloud extends Component
     this.resize();
     this.dataset();
     setTimeout(() => {
-      const { data, actions } = this.props;
-      actions.select(data);
-    }, 5000);
+      const {data, onSelect} = this.props;
+      onSelect(data);
+    }, 3000);
   }
 
   make(rows, parentNode) {
-    const { data } = this.props;
+    const {data} = this.props;
     const root = {
       row: data,
       active: true,
@@ -116,8 +116,8 @@ class Cloud extends Component
     const g = node.enter().append('g')
     .on('click', (d) => {
       if (d3.event.defaultPrevented) return;
-      const { actions } = this.props;
-      actions.select(d.row);
+      const {onSelect} = this.props;
+      onSelect(d.row);
 
     })
     .call(
@@ -210,7 +210,11 @@ class Cloud extends Component
   }
 
   svg() {
-    return d3.select(this.refs.svg.getDOMNode());
+    if (this.refs.svg) {
+      return d3.select(this.refs.svg.getDOMNode())
+    } else {
+      return d3.select("nothing.class") // @todo for empty tick situation
+    }
   }
 
   keyRow(row) {
@@ -229,9 +233,3 @@ class Cloud extends Component
     return null;
   }
 }
-
-Cloud.propTypes = {
-  actions: PropTypes.object.isRequired
-};
-
-export default Cloud;

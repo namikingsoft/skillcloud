@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import data from 'data';
+import data from 'data/skill.yaml';
 
 const initialState = {
   data,

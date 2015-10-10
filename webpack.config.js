@@ -3,14 +3,15 @@ var BowerWebpackPlugin = require("bower-webpack-plugin");
 var glob = require("glob");
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   entry: {
-    app: "./src/main.js",
+    app: "./src/app.js",
+    style: "./src/style.js",
     spec: glob.sync("./spec/**/*Spec.js"),
   },
   output: {
     filename: '[name].js',
-    path: "./build",
+    path: "./dest",
     publicPath: '/',
   },
   module: {
@@ -25,22 +26,22 @@ module.exports = {
         loaders: ['mocha', 'babel'],
         exclude: /(node_modules|bower_components)/,
       },
-      {
-        test: /\.styl$/,
-        loaders: ['style', 'css', 'stylus'],
-      },
-      {
-        test: /\.css$/,
-        loaders: ['style', 'css'],
-      },
+      { test: /\.styl$/, loader: 'style!css!stylus' },
+      { test: /\.css$/, loader: 'style!css' },
+      { test: /\.ya?ml/, loader: 'json!yaml' },
+      { test: /\.jpg$/, loader: 'url?minetype=image/jpeg' },
+      { test: /\.svg/, loader: 'url?minetype=image/svg+xml' },
+      { test: /\.ttf/, loader: 'url?minetype=application/octet-stream' },
+      { test: /\.woff/, loader: 'url?minetype=application/font-woff' },
+      { test: /\.eot/, loader: 'url?minetype=application/vnd.ms-fontobject' },
     ],
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
-    modulesDirectories: ['src', 'web_modules', 'node_modules'],
+    modulesDirectories: ['src', 'node_modules', 'bower_components'],
   },
   devServer: {
-    contentBase: "./build",
+    contentBase: "./dest",
     port: 1234,
     hot: true,
     inline: true,

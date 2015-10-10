@@ -1,0 +1,237 @@
+---
+name: Langs
+children:
+- name: Javascript
+  children:
+  - name: DOM
+    children:
+    - name: jQuery
+      exp: 32
+      want: 44
+    - name: react.js
+      exp: 40
+      want: 44
+    - name: D3.js
+      exp: 60
+      want: 44
+    - name: NVD3
+      exp: 30
+      want: 44
+  - name: Framework
+    children:
+    - name: Redux
+      exp: 40
+      want: 44
+    - name: AngularJS
+      exp: 24
+      want: 44
+    - name: Backbone.js
+      exp: 20
+      want: 44
+    - name: Knockout.js
+      exp: 12
+      want: 44
+  - name: AltJS
+    children:
+    - name: Typescript
+      exp: 50
+      want: 44
+    - name: CoffeeScript
+      exp: 40
+      want: 44
+    - name: ECMAScript6
+      exp: 50
+      want: 44
+    - name: ECMAScript7
+      exp: 20
+      want: 44
+  - name: Task runner
+    children:
+    - name: Grunt
+      exp: 12
+      want: 44
+    - name: gulp.js
+      exp: 20
+      want: 44
+    - name: webpack
+      exp: 32
+      want: 44
+    - name: browserify
+      exp: 12
+      want: 44
+- name: HTML/CSS
+  children:
+  - name: Meta
+    children:
+    - name: Jade
+      exp: 16
+      want: 44
+    - name: Sass
+      exp: 14
+      want: 44
+    - name: Stylus
+      exp: 40
+      want: 44
+  - name: CSS Structure
+    children:
+    - name: BEM
+      exp: 32
+      want: 44
+    - name: OOCSS
+      exp: 32
+      want: 44
+    - name: SMACSS
+      exp: 32
+      want: 44
+- name: BackEnd
+  children:
+  - name: PHP
+    children:
+    - name: Synfony2
+      exp: 24
+      want: 44
+    - name: CakePHP2
+      exp: 20
+      want: 44
+    - name: ZendFramework1
+      exp: 16
+      want: 44
+    - name: WordPress
+      exp: 16
+      want: 44
+    - name: EC-CUBE
+      exp: 14
+      want: 44
+  - name: Javascript
+    children:
+    - name: Node.js
+      exp: 42
+      want: 44
+    - name: Express4
+      exp: 36
+      want: 44
+  - name: Ruby
+    children:
+    - name: Rails
+      exp: 32
+      want: 44
+  - name: Java
+    children:
+    - name: Seaser2
+      exp: 12
+      want: 44
+    - name: SAStruts
+      exp: 12
+      want: 44
+  - name: IDE/Editor
+    children:
+    - name: Eclipse
+      exp: 24
+      want: 44
+    - name: Vim
+      exp: 32
+      want: 44
+    - name: Xcode
+      exp: 12
+      want: 44
+    - name: Visual Studio
+      exp: 12
+      want: 44
+    - name: Titanium Mobile CLI
+      exp: 20
+      want: 44
+    - name: Photoshop
+      exp: 32
+      want: 44
+    - name: Gimp
+      exp: 32
+      want: 44
+    - name: Illustrator
+      exp: 12
+      want: 44
+  - name: OS
+    children:
+    - name: Linux
+      exp: 24
+      want: 44
+    - name: Android
+      exp: 12
+      want: 44
+    - name: iOS
+      exp: 12
+      want: 44
+- name: Infrastructure
+  children:
+  - name: VPS
+    children:
+    - name: AWS
+      exp: 32
+      want: 44
+    - name: VPS
+      exp: 20
+      want: 44
+    - name: Vagrant
+      exp: 32
+      want: 44
+    - name: Docker
+      exp: 50
+      want: 44
+  - name: Provisioning
+    children:
+    - name: Chef
+      exp: 24
+      want: 44
+    - name: Ansible
+      exp: 50
+      want: 44
+    - name: Itamae
+      exp: 24
+      want: 44
+  - name: ShellScript
+    children:
+    - name: sh
+      exp: 12
+      want: 44
+    - name: bash
+      exp: 12
+      want: 44
+    - name: zsh
+      exp: 12
+      want: 44
+- name: Database
+  children:
+  - name: SQL
+    children:
+    - name: MySQL
+      exp: 30
+      want: 44
+    - name: PostgreSQL
+      exp: 16
+      want: 44
+    - name: SQLite
+      exp: 16
+      want: 44
+  - name: NoSQL
+    children:
+    - name: MongoDB
+      exp: 28
+      want: 44
+    - name: Redis
+      exp: 14
+      want: 44
+    - name: Memcache
+      exp: 14
+      want: 44
+- name: Management
+  children:
+  - name: Tools
+    children:
+    - name: Jenkins
+      exp: 24
+      want: 44
+    - name: GitLab
+      exp: 24
+      want: 44
+    - name: Redmine
+      exp: 18
+      want: 44
