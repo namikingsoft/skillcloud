@@ -88,10 +88,8 @@ export default class Force extends Component
             group: groupNo,
             no: nodes.length+1,
             name: child.name,
-            experience: child.exp,
-            interest: child.want,
-            size: 12,
-            radius: 12*3,
+            experience: child.experience,
+            interest: child.interest,
           })
         }
       }
@@ -101,13 +99,15 @@ export default class Force extends Component
   }
 
   update() {
-    console.log(this.nodes)
-    const node = this.svg.selectAll(".node")
+    const node = this.svg.selectAll("g")
     .data(this.nodes, d => {
-      return d.no.toString();
+      const {type} = this.props
+      const size = type == 'experience' ? d.experience : d.interest
+      d.size = size
+      d.radius = size*3
+      return d.no
     })
     node.exit().remove()
-    console.log(node.enter().size())
     const g = node.enter()
     .append("g")
     .on('mouseover', d => {
@@ -122,37 +122,31 @@ export default class Force extends Component
       .duration(200)
       .style("fill-opacity", 0.4)
     })
-    .on('click', d => {
-      this.update()
-    })
     .call(
       this.force.drag()
       .on("dragstart", function() {
         d3.event.sourceEvent.stopPropagation()
       })
     )
-    /*
-    node.attr('dataset', d => {
-      const {type} = this.props
-      const size = type == 'experience' ? d.experience : d.interest
-      d.size = size
-      d.radius = size*3
-      })
-      */
+    g.append("circle")
+    g.append("text")
 
-    g.append("svg:circle")
+    this.svg.selectAll('g')
+    .attr("class", d => "group" + d.group)
+
+    this.svg.selectAll('g circle')
+    .transition()
     .attr("r", d => d.radius - 2)
     .style("fill", (d, i) => color(d.group))
 
-    g.append("svg:text")
+    this.svg.selectAll('g text')
+    .transition()
     .attr("dy", ".3em")
     .style("text-anchor", "middle")
     .style('font-size', d => d.size)
     .text(d => d.name)
 
     this.force
-    .nodes(this.nodes)
-    .start()
     .on("tick", e => {
       var q = d3.geom.quadtree(this.nodes)
       for (const node of this.nodes) {
@@ -165,6 +159,8 @@ export default class Force extends Component
       .attr("x", d => d.x)
       .attr("y", d => d.y)
     })
+    .nodes(this.nodes)
+    .start()
   }
 
   collide(node) {

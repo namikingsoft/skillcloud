@@ -50,12 +50,14 @@ export default class Cloud extends Component
       row: data,
       active: true,
     };
+    root.row.group = 0
+    root.row.depth = 0
     const add = (rows, parentNode = root) => {
-      for (const row of rows) {
-        const node = {
-          row: row,
-          parentNode: parentNode,
-        };
+      let groupIndex = 0
+      for (let row of rows) {
+        row.group = parentNode.row.group ? parentNode.row.group : ++groupIndex
+        row.depth = parentNode.row.depth + 1
+        const node = {row, parentNode};
         const link = {
           source: parentNode,
           target: node,
@@ -72,6 +74,7 @@ export default class Cloud extends Component
       links: [],
     };
     add(data.rows);
+    console.log(this.graph.nodes)
   }
 
   dataset(selected = null) {
@@ -118,7 +121,6 @@ export default class Cloud extends Component
       if (d3.event.defaultPrevented) return;
       const {onSelect} = this.props;
       onSelect(d.row);
-
     })
     .call(
       this.force.drag()
