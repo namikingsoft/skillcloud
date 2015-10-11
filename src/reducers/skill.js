@@ -1,23 +1,27 @@
-import * as types from '../constants/actionTypes';
-import data from 'data/skill.yaml';
+import * as types from '../constants/actionTypes'
+import data from 'data/skill.yaml'
 
 const initialState = {
   data,
   comment: '初期化中',
   selected: null,
-};
+}
 
 export default function skill(state = initialState, action) {
   switch (action.type) {
   case types.SELECT:
-    if (state.selected == action.row) {
-      state.selected = data;
+    if (!action.row) {
+      state.selected = null
+      state.comment = '初期化中'
+    } else if (state.selected == action.row) {
+      state.selected = data
+      state.comment = state.selected.comment
     } else {
-      state.selected = action.row;
+      state.selected = action.row
+      state.comment = state.selected.comment
     }
-    state.comment = state.selected.comment;
-    return state;
+    return state
   default:
-    return state;
+    return state
   }
 }

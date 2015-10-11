@@ -28,19 +28,30 @@ class Chart extends Component
     if (!selected || !selected.rows) {
       selected = data;
     }
-    let values = map(selected.rows, row => {
+    let experiences = map(selected.rows, row => {
       return {
         label: row.name,
-        value: row.score,
+        value: row.experience,
       }
     })
-    values = sortBy(values, row => -row.value)
+    let interests = map(selected.rows, row => {
+      return {
+        label: row.name,
+        value: row.interest,
+      }
+    })
+    experiences = sortBy(experiences, row => -row.value)
     this.update([
       {
-        key: '経験値',
+        key: '経験',
         color: "#d67777",
-        values,
-      }
+        values: experiences,
+      },
+      {
+        key: '興味',
+        color: "#7777d6",
+        values: interests,
+      },
     ])
   }
 

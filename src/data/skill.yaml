@@ -1,98 +1,173 @@
 ---
 name: スキルジャンル
-score: 12
+experience: 12
+interest: 12
 comment: |
   ここにテキストが入ります。ここにテキストが入ります。
   ここにテキストが入ります。ここにテキストが入ります。
   ここにテキストが入ります。ここにテキストが入ります。
 rows:
 - name: Web系開発
-  score: 32
+  experience: 32
+  interest: 12
   comment: |
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
   rows:
   - name: フロントエンド
-    score: 12
-  - name: API実装
-    score: 12
-  - name: CMS構築
-    score: 12
+    experience: 12
+    interest: 12
+    rows:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
+      - name: AjaxAPI利用
+        experience: 12
+        interest: 12
+  - name: バックエンド
+    experience: 12
+    interest: 12
+    rows:
+      - name: API実装
+        experience: 12
+        interest: 12
+      - name: CMS構築
+        experience: 12
+        interest: 12
+      - name: test3
+        experience: 12
+        interest: 12
   - name: HTML/CSS
-    score: 12
+    experience: 12
+    interest: 12
+    rows:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
+      - name: test3
+        experience: 12
+        interest: 12
   - name: 開発環境構築
-    score: 12
+    experience: 12
+    interest: 12
+    rows:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
+      - name: test3
+        experience: 12
+        interest: 12
   - name: デザイン
-    score: 12
+    experience: 12
+    interest: 12
+    rows:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
+      - name: test3
+        experience: 12
+        interest: 12
 - name: アプリ開発
-  score: 20
+  experience: 20
+  interest: 12
   comment: |
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
   rows:
   - name: ハイブリッドアプリ
-    score: 12
+    experience: 12
+    interest: 12
   - name: スマートフォンアプリ
-    score: 12
+    experience: 12
+    interest: 12
   - name: ユーティリティアプリ
-    score: 12
+    experience: 12
+    interest: 12
 - name: インフラ構築
-  score: 24
+  experience: 24
+  interest: 12
   comment: |
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
   rows:
   - name: コンテナ構築
-    score: 12
+    experience: 12
+    interest: 12
   - name: 構成管理
-    score: 12
+    experience: 12
+    interest: 12
   - name: CI環境構築
-    score: 12
+    experience: 12
+    interest: 12
   - name: サーバー監視
-    score: 12
+    experience: 12
+    interest: 12
   - name: 大規模インフラ
-    score: 12
+    experience: 12
+    interest: 12
 - name: データベース
-  score: 22
+  experience: 22
+  interest: 12
   comment: |
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
   rows:
   - name: DB設計
-    score: 12
+    experience: 12
+    interest: 12
   - name: DBチューニング
-    score: 12
+    experience: 12
+    interest: 12
   - name: NoSQL
-    score: 12
+    experience: 12
+    interest: 12
 - name: マネジメント
-  score: 18
+  experience: 18
+  interest: 12
   comment: |
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
   rows:
   - name: プロジェクトリーダー
-    score: 18
+    experience: 18
+    interest: 12
   - name: スクラムマスター
-    score: 18
+    experience: 18
+    interest: 12
   - name: プロジェクト管理ツール導入
-    score: 18
+    experience: 18
+    interest: 12
 - name: 興味/趣味
-  score: 26
+  experience: 26
+  interest: 12
   comment: |
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
   rows:
   - name: OSS活動
-    score: 12
-  - name: lot開発
-    score: 12
-  - name: ビッグデータ
-    score: 12
+    experience: 12
+    interest: 12
+  - name: IoT開発
+    experience: 12
+    interest: 12
   - name: 機械学習
-    score: 12
+    experience: 12
+    interest: 12

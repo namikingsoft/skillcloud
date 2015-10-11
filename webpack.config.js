@@ -3,7 +3,7 @@ var BowerWebpackPlugin = require("bower-webpack-plugin");
 var glob = require("glob");
 
 module.exports = {
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   entry: {
     app: "./src/app.js",
     style: "./src/style.js",
