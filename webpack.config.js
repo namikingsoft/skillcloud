@@ -1,5 +1,4 @@
 var webpack = require('webpack');
-var BowerWebpackPlugin = require("bower-webpack-plugin");
 var glob = require("glob");
 
 module.exports = {
@@ -22,6 +21,11 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
       },
       {
+        test: /\.tsx?$/,
+        loaders: ['babel', 'ts'],
+        exclude: /(node_modules|bower_components)/,
+      },
+      {
         test: /Spec\.js$/,
         loaders: ['mocha', 'babel'],
         exclude: /(node_modules|bower_components)/,
@@ -37,7 +41,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js', '.jsx', '.ts', '.tsx'],
     modulesDirectories: ['src', 'node_modules', 'bower_components'],
   },
   devServer: {
@@ -48,6 +52,5 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new BowerWebpackPlugin(),
   ],
 };

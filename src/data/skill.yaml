@@ -6,7 +6,7 @@ comment: |
   ここにテキストが入ります。ここにテキストが入ります。
   ここにテキストが入ります。ここにテキストが入ります。
   ここにテキストが入ります。ここにテキストが入ります。
-rows:
+children:
 - name: Web系開発
   experience: 32
   interest: 12
@@ -14,11 +14,11 @@ rows:
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
-  rows:
+  children:
   - name: フロントエンド
     experience: 12
     interest: 12
-    rows:
+    children:
       - name: test1
         experience: 12
         interest: 12
@@ -31,7 +31,7 @@ rows:
   - name: バックエンド
     experience: 12
     interest: 12
-    rows:
+    children:
       - name: API実装
         experience: 12
         interest: 12
@@ -44,7 +44,7 @@ rows:
   - name: HTML/CSS
     experience: 12
     interest: 12
-    rows:
+    children:
       - name: test1
         experience: 12
         interest: 12
@@ -57,7 +57,7 @@ rows:
   - name: 開発環境構築
     experience: 12
     interest: 12
-    rows:
+    children:
       - name: test1
         experience: 12
         interest: 12
@@ -70,7 +70,7 @@ rows:
   - name: デザイン
     experience: 12
     interest: 12
-    rows:
+    children:
       - name: test1
         experience: 12
         interest: 12
@@ -87,7 +87,7 @@ rows:
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
-  rows:
+  children:
   - name: ハイブリッドアプリ
     experience: 12
     interest: 12
@@ -104,7 +104,7 @@ rows:
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
-  rows:
+  children:
   - name: コンテナ構築
     experience: 12
     interest: 12
@@ -127,7 +127,7 @@ rows:
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
-  rows:
+  children:
   - name: DB設計
     experience: 12
     interest: 12
@@ -144,7 +144,7 @@ rows:
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
-  rows:
+  children:
   - name: プロジェクトリーダー
     experience: 18
     interest: 12
@@ -161,7 +161,7 @@ rows:
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
-  rows:
+  children:
   - name: OSS活動
     experience: 12
     interest: 12

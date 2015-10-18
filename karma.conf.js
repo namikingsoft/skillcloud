@@ -1,31 +1,49 @@
 module.exports = function(config) {
   config.set({
     basePath: '',
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'chai'],
     files: [
-      'bower_components/power-assert/build/power-assert.js',
-      'spec/**/*Spec.js'
+      'spec/**/*Spec.*',
     ],
     exclude: [
     ],
     preprocessors: {
-      'spec/**/*Spec.js': ['webpack', 'sourcemap']
+      'spec/**/*Spec.*': ['webpack', 'sourcemap']
     },
-    reporters: ['dots'],
+    reporters: ['mocha'],
     port: 9876,
     colors: true,
     autoWatch: true,
     browsers: ['PhantomJS'],
-    singleRun: true,
+    singleRun: false,
     webpack: {
+      devtool: 'inline-source-map',
       module: {
         loaders: [
           {
-            test: /Spec\.js$/,
+            test: /.jsx?$/,
             loaders: ['babel'],
             exclude: /(node_modules|bower_components)/,
           },
+          {
+            test: /\.tsx?$/,
+            loaders: ['babel', 'ts'],
+            exclude: /(node_modules|bower_components)/,
+          },
+          {
+            test: /.coffee$/,
+            loaders: ['babel', 'coffee'],
+            exclude: /(node_modules|bower_components)/,
+          },
+          { test: /\.ya?ml/, loader: 'json!yaml' },
         ],
+      },
+      resolve: {
+        extensions: ['', '.js', '.jsx', '.ts', '.tsx'],
+        modulesDirectories: ['src', 'node_modules', 'bower_components'],
+      },
+      webpackMiddleware: {
+        noInfo: true
       },
     },
   });

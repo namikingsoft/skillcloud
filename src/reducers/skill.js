@@ -1,5 +1,6 @@
 import * as types from '../constants/actionTypes'
 import data from 'data/skill.yaml'
+import Test from 'domains/test'
 
 const initialState = {
   data,
@@ -10,6 +11,7 @@ const initialState = {
 export default function skill(state = initialState, action) {
   switch (action.type) {
   case types.SELECT:
+    console.log(new Test)
     if (!action.row) {
       state.selected = null
       state.comment = '初期化中'

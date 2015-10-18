@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import data from 'data/langs.yaml';
+import data from 'data/tag.yaml';
 
 const initialState = {
   data,

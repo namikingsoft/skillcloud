@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react'
 
 export default class Comment extends Component
 {
@@ -10,11 +10,11 @@ export default class Comment extends Component
   }
 
   render() {
-    const { comment } = this.props;
+    const { comment } = this.props
     return (
       <div className="comment">
         <p>{comment}</p>
       </div>
-    );
+    )
   }
 }

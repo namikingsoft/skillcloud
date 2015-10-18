@@ -1,5 +1,7 @@
 ---
 name: Langs
+experience: 32
+interest: 44
 children:
 - name: Javascript
   children:
