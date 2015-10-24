@@ -2,7 +2,7 @@ import TagFactory from 'domains/TagFactory'
 import Tag from 'domains/Tag'
 import data from 'data/tag.yaml'
 
-describe("Tag", function() {
+describe("TagFactory", function() {
 
   describe("create", () => {
     before(() => {
@@ -41,12 +41,6 @@ describe("Tag", function() {
       }
     })
     it("should be has grandson", () => {
-      assert.equal(this.tag.children[1].children.length, 1)
-      for (const child of this.tag.children[1].children) {
-        assert.ok(child instanceof Tag)
-      }
-    })
-    it("should be read tag.yaml", () => {
       assert.equal(this.tag.children[1].children.length, 1)
       for (const child of this.tag.children[1].children) {
         assert.ok(child instanceof Tag)

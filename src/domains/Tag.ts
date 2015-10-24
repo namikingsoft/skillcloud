@@ -20,6 +20,18 @@ export default class Tag
   }
 
   get children(): Tag[] {
-    return new Array<Tag>().concat(this.param.children)
+    if (this.param.children) {
+      return new Array<Tag>().concat(this.param.children)
+    } else {
+      return undefined
+    }
+  }
+
+  hasChildren(): boolean {
+    return this.children && this.children.length > 0
+  }
+
+  toString(): string {
+    return `${this.name}:${this.experience}:${this.interest}`
   }
 }

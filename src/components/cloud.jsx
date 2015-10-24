@@ -40,7 +40,7 @@ export default class Cloud extends Component
     }, 3000)
   }
 
-  make(rows, parentNode) {
+  make() {
     const {data} = this.props
     const root = {
       row: data,
@@ -48,9 +48,9 @@ export default class Cloud extends Component
     }
     root.row.group = 0
     root.row.depth = 0
-    const add = (rows, parentNode = root) => {
+    const add = (children, parentNode = root) => {
       let groupIndex = 0
-      for (let row of rows) {
+      for (let row of children) {
         row.group = parentNode.row.group ? parentNode.row.group : ++groupIndex
         row.depth = parentNode.row.depth + 1
         const node = {row, parentNode}
@@ -60,8 +60,8 @@ export default class Cloud extends Component
         }
         this.graph.nodes.push(node)
         this.graph.links.push(link)
-        if (row.rows) {
-          add(row.rows, node)
+        if (row.children) {
+          add(row.children, node)
         }
       }
     }
@@ -69,7 +69,7 @@ export default class Cloud extends Component
       nodes: [root],
       links: [],
     }
-    add(data.rows)
+    add(data.children)
   }
 
   dataset(selected = null) {
@@ -93,7 +93,7 @@ export default class Cloud extends Component
       return includeTarget && includeSource
     })
     forEach(this.graph.nodes, node => {
-      if (node.row.rows && (!selected || selected.group == node.row.group)) {
+      if (node.row.children && (!selected || selected.group == node.row.group)) {
         node.active = true
       } else {
         node.active = false

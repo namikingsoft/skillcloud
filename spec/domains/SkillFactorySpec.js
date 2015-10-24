@@ -1,7 +1,7 @@
 import SkillFactory from 'domains/SkillFactory'
 import Skill from 'domains/Skill'
 
-describe("Skill", function() {
+describe("SkillFactory", function() {
 
   describe("create", () => {
     before(() => {

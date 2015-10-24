@@ -36,6 +36,7 @@ export default class Force extends Component
   }
 
   init() {
+    console.log('TEST')
     this.force = d3.layout.force()
     .gravity(0.05)
     .charge(function(d, i) { return i ? 0 : 0 })
