@@ -1,4 +1,5 @@
 import Tag from 'domains/Tag'
+import TagNode, {TagNodeMode} from 'domains/TagNode'
 import {map} from 'lodash'
 
 export default class TagFactory

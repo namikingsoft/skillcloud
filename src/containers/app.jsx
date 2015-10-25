@@ -3,7 +3,7 @@ import {Router, Route} from 'react-router'
 import {history} from 'react-router/lib/HashHistory';
 import Navigation from 'containers/navigation'
 import Canbe from 'containers/canbe'
-import Langs from 'containers/langs'
+import TagCloudContainer from 'containers/TagCloudContainer'
 import NotFound from 'containers/notfound'
 
 export default class App extends Component
@@ -14,7 +14,7 @@ export default class App extends Component
         <Router history={history}>
           <Route component={Navigation}>
             <Route path="/" component={Canbe} />
-            <Route path="/langs/:type" component={Langs} />
+            <Route path="/tag/:mode" component={TagCloudContainer} />
             <Route path="*" component={NotFound} />
           </Route>
         </Router>

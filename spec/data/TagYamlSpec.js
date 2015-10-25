@@ -11,7 +11,7 @@ describe("TagYaml", function() {
     before(() => {
       this.tag = TagFactory.create(data)
     })
-    it("should be read correctly", () => {
+    it("should be create tag correctly", () => {
       assert.ok(this.tag instanceof Tag)
       assert.ok(this.tag.children.length > 0)
       for (const child of this.tag.children) {
@@ -22,10 +22,10 @@ describe("TagYaml", function() {
 
   describe("TagCloudFactory", () => {
     before(() => {
-      this.tag = TagFactory.create(data)
-      this.cloud = TagCloudFactory.create(this.tag)
+      const tag = TagFactory.create(data)
+      this.cloud = TagCloudFactory.create(tag)
     })
-    it("should be read correctly", () => {
+    it("should be create tag cloud correctly", () => {
       assert.ok(this.cloud instanceof TagCloud)
       assert.ok(this.cloud.nodes.length > 0)
       for (const node of this.cloud.nodes) {

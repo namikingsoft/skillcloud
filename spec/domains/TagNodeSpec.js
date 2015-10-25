@@ -1,4 +1,4 @@
-import TagNode from 'domains/TagNode'
+import TagNode, {TagNodeMode} from 'domains/TagNode'
 import Tag from 'domains/Tag'
 
 describe("TagNode", function() {
@@ -19,6 +19,7 @@ describe("TagNode", function() {
       group: 2,
       tag: this.tag,
       parentTag: this.parentTag,
+      mode: TagNodeMode.interest,
     })
   })
 
@@ -49,6 +50,23 @@ describe("TagNode", function() {
   describe("parentTag", () => {
     it("should be return initial param", () => {
       assert.equal(this.node.parentTag, this.parentTag)
+    })
+  })
+
+  describe("mode", () => {
+    it("should be return initial param", () => {
+      assert.equal(this.node.mode, TagNodeMode.interest)
+    })
+  })
+
+  describe("setMode", () => {
+    it("should be return set experience mode", () => {
+      this.node.setMode(TagNodeMode.experience)
+      assert.equal(this.node.mode, TagNodeMode.experience)
+    })
+    it("should be return set interest mode", () => {
+      this.node.setMode(TagNodeMode.interest)
+      assert.equal(this.node.mode, TagNodeMode.interest)
     })
   })
 })

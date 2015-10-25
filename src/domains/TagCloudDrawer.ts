@@ -1,4 +1,5 @@
-import TagCloud from 'domains/TagCloud'
+import TagCloudLayout from 'domains/TagCloudLayout'
+import TagNode from 'domains/TagNode'
 
 const d3 = require('d3')
 const color = d3.scale.category20()
@@ -9,11 +10,11 @@ export default class TagCloudDrawer
   private layout: TagCloudLayout
 
   constructor(private param: {
-    cloud: TagCloud,
+    nodes: TagNode[],
     svgElement: any,
   }) {
     this.svg = d3.select(this.svgElement)
-    this.layout = new TagCloudLayout(this.cloud.nodes, () => {
+    this.layout = new TagCloudLayout(this.nodes, () => {
       this.svg.selectAll("circle")
       .attr("cx", d => d.x)
       .attr("cy", d => d.y)
@@ -52,9 +53,9 @@ export default class TagCloudDrawer
     return this
   }
 
-  update(): TagCloudDrawer {
+  start(): TagCloudDrawer {
     const node = this.svg.selectAll("g")
-    .data(this.cloud.nodes, d => d.id)
+    .data(this.nodes, d => d.id)
 
     const g = node.enter()
     .append("g")
@@ -70,16 +71,20 @@ export default class TagCloudDrawer
       .duration(200)
       .style("fill-opacity", 0.4)
     })
-    .call(
-      this.layout.force.drag()
-      .on("dragstart", function() {
-        d3.event.sourceEvent.stopPropagation()
-      })
-    )
+    .call(this.layout.drag())
+
     g.append("circle")
     g.append("text")
 
-    node.exit().remove()
+    this.resize().update()
+    this.layout.start()
+
+    return this
+  }
+
+  update(): TagCloudDrawer {
+    // @todo for fix force freeze
+    this.layout.start()
 
     this.svg.selectAll('g')
     .attr("class", d => "group" + d.group)
@@ -94,72 +99,13 @@ export default class TagCloudDrawer
     .attr("dy", ".3em")
     .style("text-anchor", "middle")
     .style('font-size', d => d.size)
-    .text(d => d.name)
+    .text(d => d.tag.name)
 
     return this
   }
-}
 
-class TagCloudLayout
-{
-  private force: any
-
-  constructor(cloud: TagCloud, position: Function) {
-    this.force = d3.layout.force()
-    .gravity(0.05)
-    .charge(0)
-    .size([this.param.width, this.param.height])
-    .on("tick", e => {
-      var q = d3.geom.quadtree(this.nodes)
-      for (const node of this.nodes) {
-        q.visit(this.collide(node))
-      }
-      this.param.position();
-    })
-    .nodes(this.nodes)
-  }
-
-  get force(): any {
-    return this.force
-  }
-
-  resize(width: number, height: number) {
-    this.force.size([width, height])
-  }
-
-  start() {
-    this.force.start()
-  }
-
-  private collide(node) {
-    var r = node.radius + 16,
-      nx1 = node.x - r,
-      nx2 = node.x + r,
-      ny1 = node.y - r,
-      ny2 = node.y + r
-    return function(quad, x1, y1, x2, y2) {
-      if (quad.point && (quad.point !== node)) {
-        var x = node.x - quad.point.x,
-          y = node.y - quad.point.y,
-          l = Math.sqrt(x * x + y * y),
-          r = node.radius + quad.point.radius
-        if (l < r) {
-          l = (l - r) / l * .5
-          node.x -= x *= l
-          node.y -= y *= l
-          quad.point.x += x
-          quad.point.y += y
-        }
-      }
-      return x1 > nx2
-          || x2 < nx1
-          || y1 > ny2
-          || y2 < ny1
-    }
-  }
-
-  private get cloud(): TagCloud {
-    return this.param.cloud
+  private get nodes(): TagNode[] {
+    return this.param.nodes
   }
 
   private get svgElement(): any {
