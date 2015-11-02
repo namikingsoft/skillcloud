@@ -1,9 +1,12 @@
-import * as types from '../constants/actionTypes'
+import * as types from 'constants/actionTypes'
 import data from 'data/skill.yaml'
-import Test from 'domains/test'
+import SkillFactory from 'domains/SkillFactory'
+import SkillCloudFactory from 'domains/SkillCloudFactory'
 
 const initialState = {
-  data,
+  cloud: SkillCloudFactory.create(
+    SkillFactory.create(data)
+  ),
   comment: '初期化中',
   selected: null,
 }
@@ -11,15 +14,14 @@ const initialState = {
 export default function skill(state = initialState, action) {
   switch (action.type) {
   case types.SELECT:
-    console.log(new Test)
-    if (!action.row) {
+    if (!action.node) {
       state.selected = null
       state.comment = '初期化中'
-    } else if (state.selected == action.row) {
-      state.selected = data
+    } else if (state.selected == action.node) {
+      state.selected = state.cloud.nodes[0]
       state.comment = state.selected.comment
     } else {
-      state.selected = action.row
+      state.selected = action.node
       state.comment = state.selected.comment
     }
     return state

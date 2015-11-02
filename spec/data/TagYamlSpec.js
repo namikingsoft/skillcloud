@@ -13,6 +13,8 @@ describe("TagYaml", function() {
     })
     it("should be create tag correctly", () => {
       assert.ok(this.tag instanceof Tag)
+    })
+    it("should be create tag has children", () => {
       assert.ok(this.tag.children.length > 0)
       for (const child of this.tag.children) {
         assert.ok(child instanceof Tag)
@@ -25,8 +27,10 @@ describe("TagYaml", function() {
       const tag = TagFactory.create(data)
       this.cloud = TagCloudFactory.create(tag)
     })
-    it("should be create tag cloud correctly", () => {
+    it("should be create tag cloud", () => {
       assert.ok(this.cloud instanceof TagCloud)
+    })
+    it("should be create tag cloud has nodes", () => {
       assert.ok(this.cloud.nodes.length > 0)
       for (const node of this.cloud.nodes) {
         assert.ok(node instanceof TagNode)

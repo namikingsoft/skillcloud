@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
 
-export function select(row) {
-  return {type: types.SELECT, row};
+export function select(node) {
+  return {type: types.SELECT, node};
 }

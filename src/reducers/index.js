@@ -1,10 +1,9 @@
 import { combineReducers } from 'redux';
-import skill from './skill';
-import langs from './langs';
-import tag from './tag';
+import skill from 'reducers/skill';
+import tag from 'reducers/tag';
 
 const rootReducer = combineReducers({
-  skill, langs, tag
+  skill, tag
 });
 
 export default rootReducer;

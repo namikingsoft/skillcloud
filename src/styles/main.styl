@@ -59,7 +59,7 @@
       background-repeat repeat
       z-index 0
 
-    & .cloud
+    & .cloud, & .skillcloud
       position absolute
       top 0
       right 0
@@ -72,7 +72,7 @@
         width 100%
         height 100%
 
-        g.node
+        g
           cursor pointer
 
           circle
@@ -86,6 +86,8 @@
             circle
               r 100
               opacity 0.2
+            text
+              text-anchor middle
 
             &.grandchild
               circle

@@ -25,16 +25,16 @@ class Chart extends Component
 
   dataset() {
     let {data, selected} = this.props
-    if (!selected || !selected.rows) {
+    if (!selected || !selected.children) {
       selected = data;
     }
-    let experiences = map(selected.rows, row => {
+    let experiences = map(selected.children, row => {
       return {
         label: row.name,
         value: row.experience,
       }
     })
-    let interests = map(selected.rows, row => {
+    let interests = map(selected.children, row => {
       return {
         label: row.name,
         value: row.interest,
@@ -72,9 +72,9 @@ class Chart extends Component
       .selectAll('.nv-bar')
         .on('click', (d) => {
           const {data, selected, onSelect} = this.props;
-          if (selected && selected.rows) {
-            for (const row of selected.rows) {
-              if (d.label == row.name && row.rows) {
+          if (selected && selected.children) {
+            for (const row of selected.children) {
+              if (d.label == row.name && row.children) {
                 return onSelect(row);
               }
             }

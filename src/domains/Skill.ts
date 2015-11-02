@@ -27,4 +27,8 @@ export default class Skill
   get children(): Skill[] {
     return new Array<Skill>().concat(this.param.children)
   }
+
+  hasChildren(): boolean {
+    return this.children && this.children.length > 0
+  }
 }
