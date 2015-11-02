@@ -19,10 +19,10 @@ export default function skill(state = initialState, action) {
       state.comment = '初期化中'
     } else if (state.selected == action.node) {
       state.selected = state.cloud.nodes[0]
-      state.comment = state.selected.comment
+      state.comment = state.selected.skill.comment
     } else {
       state.selected = action.node
-      state.comment = state.selected.comment
+      state.comment = state.selected.skill.comment
     }
     return state
   default:

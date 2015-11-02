@@ -9,7 +9,7 @@ export default class Navigation extends Component
         <div className="navigation">
           <h1><Link to="/">Skill Cloud</Link></h1>
           <ul>
-            <li><Link to="/">Skill</Link></li>
+            <li><Link to="/skill">Skill</Link></li>
             <li><Link to="/tag/experience">Experience</Link></li>
             <li><Link to="/tag/interest">Interest</Link></li>
           </ul>
