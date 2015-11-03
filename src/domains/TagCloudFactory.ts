@@ -9,7 +9,7 @@ export default class TagCloudFactory
     let groupSeq = 0
     let groupHash = {}
     function buildNodes(tag: Tag, parentTag?: Tag): TagNode[] {
-      if (tag.hasChildren()) {
+      if (tag.hasChildren) {
         let nodes = new Array<TagNode>()
         for (const child of tag.children) {
           nodes = nodes.concat(

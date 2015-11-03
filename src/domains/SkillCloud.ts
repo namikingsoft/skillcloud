@@ -1,4 +1,5 @@
 import SkillNode, {SkillLink} from 'domains/SkillNode'
+import Skill from 'domains/Skill'
 import {filter} from 'lodash'
 
 export default class SkillCloud
@@ -37,12 +38,21 @@ export default class SkillCloud
       return includeTarget && includeSource
     })
     for(const node of this.nodes) {
-      if (node.skill.hasChildren() && (!selected || selected.group == node.group)) {
+      if (node.skill.hasChildren && (!selected || selected.group == node.group)) {
         node.active = true
       } else {
         node.active = false
       }
     }
     return new SkillCloud({nodes, links})
+  }
+
+  findNodeBySkill(skill: Skill): SkillNode {
+    for (const node of this.nodes) {
+      if (node.skill === skill) {
+        return node
+      }
+    }
+    return null
   }
 }

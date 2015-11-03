@@ -4,6 +4,7 @@
     "jsx": "react"
   },
   "files": [
-    "typings/tsd.d.ts"
+    "typings/tsd.d.ts",
+    "node_modules/immutable/dist/immutable.d.ts"
   ]
 }

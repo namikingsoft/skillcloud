@@ -10,7 +10,7 @@ module.exports = function(config) {
     preprocessors: {
       'spec/**/*Spec.*': ['webpack', 'sourcemap']
     },
-    reporters: ['mocha'],
+    //reporters: ['mocha'],
     port: 9876,
     colors: true,
     autoWatch: true,

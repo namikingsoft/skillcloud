@@ -27,7 +27,7 @@ module.exports = {
       },
       {
         test: /Spec\.js$/,
-        loaders: ['mocha', 'babel'],
+        loaders: ['mocha', 'babel', 'imports?assert=assert'],
         exclude: /(node_modules|bower_components)/,
       },
       { test: /\.styl$/, loader: 'style!css!stylus' },

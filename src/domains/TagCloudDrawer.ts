@@ -98,7 +98,7 @@ export default class TagCloudDrawer
     .transition()
     .attr("dy", ".3em")
     .style("text-anchor", "middle")
-    .style('font-size', d => d.size)
+    .style('font-size', d => d.fontSize)
     .text(d => d.tag.name)
 
     return this

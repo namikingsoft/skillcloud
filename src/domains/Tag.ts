@@ -27,7 +27,7 @@ export default class Tag
     }
   }
 
-  hasChildren(): boolean {
+  get hasChildren(): boolean {
     return this.children && this.children.length > 0
   }
 

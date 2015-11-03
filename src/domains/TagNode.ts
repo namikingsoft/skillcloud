@@ -34,16 +34,20 @@ export default class TagNode
     return this.param.mode
   }
 
-  get size(): number {
+  get fontSize(): number {
+    return this.weight * 0.5
+  }
+
+  get radius(): number {
+    return this.weight * 1.5
+  }
+
+  private get weight(): number {
     switch (this.mode) {
       case TagNodeMode.experience: return this.tag.experience
       case TagNodeMode.interest: return this.tag.interest
       default: return 0
     }
-  }
-
-  get radius(): number {
-    return this.size * 3
   }
 
   setMode(mode: TagNodeMode): TagNode {

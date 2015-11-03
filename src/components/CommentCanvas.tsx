@@ -5,7 +5,7 @@ interface Props {
   comment: string
 }
 
-export default class SkillCloudComment extends Component<Props, any>
+export default class CommentCanvas extends Component<Props, any>
 {
   render() {
     const {comment} = this.props

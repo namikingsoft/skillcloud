@@ -14,7 +14,7 @@ interface Props {
   onSelect: Function
 }
 
-export default class SkillCloudChart extends Component<Props, any>
+export default class ChartCanvas extends Component<Props, any>
 {
   render() {
     return (
@@ -38,7 +38,7 @@ export default class SkillCloudChart extends Component<Props, any>
   dataset() {
     const {cloud, selected} = this.props
     let node: SkillNode
-    if (!selected || !selected.skill.hasChildren()) {
+    if (!selected || !selected.skill.hasChildren) {
       node = cloud.nodes[0]
     } else {
       node = selected
@@ -87,10 +87,10 @@ export default class SkillCloudChart extends Component<Props, any>
       .selectAll('.nv-bar')
         .on('click', (d) => {
           const {cloud, selected, onSelect} = this.props;
-          if (selected && selected.skill.hasChildren()) {
+          if (selected && selected.skill.hasChildren) {
             for (const skill of selected.skill.children) {
               if (d.label == skill.name && skill.hasChildren) {
-                //return onSelect(skill);
+                return onSelect(cloud.findNodeBySkill(skill));
               }
             }
           }
