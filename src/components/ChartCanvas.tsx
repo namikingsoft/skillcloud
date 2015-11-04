@@ -3,7 +3,7 @@ import SkillNode from 'domains/SKillNode'
 import Skill from 'domains/SKill'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
-import {map, sortBy} from 'lodash'
+import {sortBy} from 'lodash'
 
 const d3 = require('d3')
 const nv = require('nvd3/build/nv.d3')
@@ -39,22 +39,22 @@ export default class ChartCanvas extends Component<Props, any>
     const {cloud, selected} = this.props
     let node: SkillNode
     if (!selected || !selected.skill.hasChildren) {
-      node = cloud.nodes[0]
+      node = cloud.nodes.get(0)
     } else {
       node = selected
     }
-    let experiences = map<Skill, Object>(node.skill.children, skill => {
+    let experiences = node.skill.children.map<Object>(skill => {
       return {
         label: skill.name,
         value: skill.experience,
       }
-    })
-    let interests = map<Skill, Object>(node.skill.children, skill => {
+    }).toArray()
+    let interests = node.skill.children.map<Object>(skill => {
       return {
         label: skill.name,
         value: skill.interest,
       }
-    })
+    }).toArray()
     experiences = sortBy(experiences, row => -row['value'])
     this.update([
       {
@@ -88,13 +88,13 @@ export default class ChartCanvas extends Component<Props, any>
         .on('click', (d) => {
           const {cloud, selected, onSelect} = this.props;
           if (selected && selected.skill.hasChildren) {
-            for (const skill of selected.skill.children) {
+            selected.skill.children.forEach(skill => {
               if (d.label == skill.name && skill.hasChildren) {
                 return onSelect(cloud.findNodeBySkill(skill));
               }
-            }
+            })
           }
-          onSelect(cloud.nodes[0]);
+          onSelect(cloud.nodes.get(0));
         })
     nv.utils.windowResize(chart.update);
   }

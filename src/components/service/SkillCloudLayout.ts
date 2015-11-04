@@ -26,8 +26,8 @@ export default class SkillCloudLayout
 
   update(cloud: SkillCloud) {
     this.force
-    .nodes(cloud.nodes)
-    .links(cloud.links)
+    .nodes(cloud.nodes.toArray())
+    .links(cloud.links.toArray())
     .start()
   }
 

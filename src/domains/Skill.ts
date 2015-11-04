@@ -1,3 +1,5 @@
+import {List} from 'immutable'
+
 export default class Skill
 {
   constructor(private param: {
@@ -5,7 +7,7 @@ export default class Skill
     experience: number,
     interest: number,
     comment?: string,
-    children?: Skill[],
+    children?: List<Skill>,
   }) {}
 
   get name(): string {
@@ -24,11 +26,11 @@ export default class Skill
     return this.param.comment
   }
 
-  get children(): Skill[] {
-    return new Array<Skill>().concat(this.param.children)
+  get children(): List<Skill> {
+    return this.param.children
   }
 
   get hasChildren(): boolean {
-    return this.children && this.children.length > 0
+    return this.children && this.children.size > 0
   }
 }

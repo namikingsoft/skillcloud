@@ -37,16 +37,16 @@ describe("SkillFactory", function() {
       assert.ok(this.skill instanceof Skill)
     })
     it("should be has children", () => {
-      assert.equal(this.skill.children.length, 2)
-      for (const child of this.skill.children) {
+      assert.equal(this.skill.children.size, 2)
+      this.skill.children.forEach(child => {
         assert.ok(child instanceof Skill)
-      }
+      })
     })
     it("should be has grandson", () => {
-      assert.equal(this.skill.children[1].children.length, 1)
-      for (const child of this.skill.children[1].children) {
+      assert.equal(this.skill.children.get(1).children.size, 1)
+      this.skill.children.get(1).children.forEach(child => {
         assert.ok(child instanceof Skill)
-      }
+      })
     })
   })
 })

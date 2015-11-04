@@ -35,7 +35,7 @@ describe("TagNode", function() {
     })
   })
 
-  describe("id", () => {
+  describe("group", () => {
     it("should be return initial param", () => {
       assert.equal(this.node.group, 2)
     })

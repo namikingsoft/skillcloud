@@ -1,13 +1,14 @@
 import Skill from 'domains/Skill'
 import SkillNode, {SkillLink} from 'domains/SkillNode'
 import SkillCloud from 'domains/SkillCloud'
+import {List} from 'immutable'
 
 export default class SkillCloudFactory
 {
   static create(root: Skill): SkillCloud {
     let idSeq = 0
-    const nodes = new Array<SkillNode>()
-    const links = new Array<SkillLink>()
+    let nodes = List<SkillNode>()
+    let links = List<SkillLink>()
     const rootNode = new SkillNode({
       id: ++idSeq,
       group: 0,
@@ -15,9 +16,9 @@ export default class SkillCloudFactory
       skill: root,
       active: true,
     })
-    const buildNodes = (children: Skill[], parentNode: SkillNode) => {
+    const buildNodes = (children: List<Skill>, parentNode: SkillNode) => {
       let groupSeq = 0
-      for (const skill of children) {
+      children.forEach(skill => {
         const group = parentNode.group ? parentNode.group : ++groupSeq
         const depth = parentNode.depth + 1
         const node = new SkillNode({
@@ -30,14 +31,14 @@ export default class SkillCloudFactory
           source: parentNode,
           target: node,
         }
-        nodes.push(node)
-        links.push(link)
+        nodes = nodes.push(node)
+        links = links.push(link)
         if (skill.children) {
           buildNodes(skill.children, node)
         }
-      }
+      })
     }
-    nodes.push(rootNode)
+    nodes = nodes.push(rootNode)
     buildNodes(root.children, rootNode)
     return new SkillCloud({nodes, links})
   }

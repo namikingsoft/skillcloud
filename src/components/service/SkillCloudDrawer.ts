@@ -1,4 +1,4 @@
-import SkillCloudLayout from 'domains/SkillCloudLayout'
+import SkillCloudLayout from 'components/service/SkillCloudLayout'
 import SkillCloud from 'domains/SkillCloud'
 import SkillNode from 'domains/SkillNode'
 
@@ -64,7 +64,7 @@ export default class SkillCloudDrawer
 
   update(cloud: SkillCloud): SkillCloudDrawer {
     const node = this.svg.selectAll('g')
-    .data(cloud.nodes, d => d.id)
+    .data(cloud.nodes.toArray(), d => d.id)
 
     node.exit().remove()
 
@@ -96,7 +96,7 @@ export default class SkillCloudDrawer
     .text(d => d.skill.name)
 
     const link = this.svg.selectAll('line')
-    .data(cloud.links)
+    .data(cloud.links.toArray())
     link.exit().remove()
     link.enter().append('line')
 

@@ -2,7 +2,7 @@ import SkillCloud from 'domains/SkillCloud'
 import SkillNode from 'domains/SkillNode'
 import SkillFactory from 'domains/SkillFactory'
 import SkillCloudFactory from 'domains/SkillCloudFactory'
-import SkillCloudDrawer from 'domains/SkillCloudDrawer'
+import SkillCloudDrawer from 'components/service/SkillCloudDrawer'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 
@@ -36,7 +36,7 @@ export default class SkillCloudCanvas extends Component<Props, any>
     window.addEventListener('resize', () => this.drawer.resize())
 
     setTimeout(() => {
-      onSelect(cloud.nodes[0])
+      onSelect(cloud.nodes.get(0))
     }, 3000)
   }
 

@@ -16,10 +16,10 @@ describe("SkillYaml", function() {
     })
     it("should be create skill has children", () => {
       assert.ok(this.skill instanceof Skill)
-      assert.ok(this.skill.children.length > 0)
-      for (const child of this.skill.children) {
+      assert.ok(this.skill.children.size > 0)
+      this.skill.children.forEach(child => {
         assert.ok(child instanceof Skill)
-      }
+      })
     })
   })
 
@@ -32,17 +32,17 @@ describe("SkillYaml", function() {
       assert.ok(this.cloud instanceof SkillCloud)
     })
     it("should be create skill cloud has nodes", () => {
-      assert.ok(this.cloud.nodes.length > 0)
-      for (const node of this.cloud.nodes) {
+      assert.ok(this.cloud.nodes.size > 0)
+      this.cloud.nodes.forEach(node => {
         assert.ok(node instanceof SkillNode)
-      }
+      })
     })
     it("should be create skill cloud has links", () => {
-      assert.ok(this.cloud.links.length > 0)
-      for (const link of this.cloud.links) {
+      assert.ok(this.cloud.links.size > 0)
+      this.cloud.links.forEach(link => {
         assert.ok(link.source instanceof SkillNode)
         assert.ok(link.target instanceof SkillNode)
-      }
+      })
     })
   })
 })

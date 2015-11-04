@@ -1,9 +1,10 @@
 import Skill from 'domains/Skill'
+import {List} from 'immutable'
 
 describe("Skill", function() {
 
   before(() => {
-    this.children = [
+    this.children = List.of(
       new Skill({
         name: "Name1",
         experience: 1234,
@@ -16,7 +17,7 @@ describe("Skill", function() {
         interesta: 4567,
         comment: "Comment2",
       })
-    ]
+    )
     this.skill = new Skill({
       name: "Name",
       experience: 1234,
@@ -58,14 +59,7 @@ describe("Skill", function() {
 
   describe("children", () => {
     it("should be return initial param", () => {
-      assert.deepEqual(this.skill.children, this.children)
-    })
-    it("should be return copy", () => {
-      const children = this.skill.children
-      assert.notEqual(children, this.tags)
-      assert.ok(children.shift() instanceof Skill)
-      assert.equal(children.length, 1)
-      assert.equal(this.skill.children.length, 2)
+      assert.equal(this.skill.children, this.children)
     })
   })
 })

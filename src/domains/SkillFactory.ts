@@ -1,5 +1,14 @@
 import Skill from 'domains/Skill'
+import {List} from 'immutable'
 import {map} from 'lodash'
+
+interface Param {
+  name: string
+  experience: number
+  interest: number
+  comment?: string
+  children?: Param[]
+}
 
 export default class SkillFactory
 {
@@ -12,15 +21,7 @@ export default class SkillFactory
       experience: data.experience,
       interest: data.interest,
       comment: data.comment,
-      children,
+      children: List<Skill>(children),
     })
   }
-}
-
-interface Param {
-  name: string
-  experience: number
-  interest: number
-  comment?: string
-  children?: Param[]
 }
