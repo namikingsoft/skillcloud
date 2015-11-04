@@ -1,5 +1,6 @@
-import TagCloudLayout from 'domains/TagCloudLayout'
+import TagCloudLayout from 'components/service/TagCloudLayout'
 import TagNode from 'domains/TagNode'
+import {List} from 'immutable'
 
 const d3 = require('d3')
 const color = d3.scale.category20()
@@ -10,7 +11,7 @@ export default class TagCloudDrawer
   private layout: TagCloudLayout
 
   constructor(private param: {
-    nodes: TagNode[],
+    nodes: List<TagNode>,
     svgElement: any,
   }) {
     this.svg = d3.select(this.svgElement)
@@ -55,7 +56,7 @@ export default class TagCloudDrawer
 
   start(): TagCloudDrawer {
     const node = this.svg.selectAll("g")
-    .data(this.nodes, d => d.id)
+    .data(this.nodes.toArray(), d => d.id)
 
     const g = node.enter()
     .append("g")
@@ -104,7 +105,7 @@ export default class TagCloudDrawer
     return this
   }
 
-  private get nodes(): TagNode[] {
+  private get nodes(): List<TagNode> {
     return this.param.nodes
   }
 

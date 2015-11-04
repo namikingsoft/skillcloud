@@ -35,16 +35,16 @@ describe("TagFactory", function() {
       assert.ok(this.tag instanceof Tag)
     })
     it("should be has children", () => {
-      assert.equal(this.tag.children.length, 2)
-      for (const child of this.tag.children) {
+      assert.equal(this.tag.children.size, 2)
+      this.tag.children.forEach(child => {
         assert.ok(child instanceof Tag)
-      }
+      })
     })
     it("should be has grandson", () => {
-      assert.equal(this.tag.children[1].children.length, 1)
-      for (const child of this.tag.children[1].children) {
+      assert.equal(this.tag.children.get(1).children.size, 1)
+      this.tag.children.get(1).children.forEach(child => {
         assert.ok(child instanceof Tag)
-      }
+      })
     })
   })
 })

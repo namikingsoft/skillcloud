@@ -1,7 +1,7 @@
 import TagCloud from 'domains/TagCloud'
 import TagFactory from 'domains/TagFactory'
 import TagCloudFactory from 'domains/TagCloudFactory'
-import TagCloudDrawer from 'domains/TagCloudDrawer'
+import TagCloudDrawer from 'components/service/TagCloudDrawer'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 

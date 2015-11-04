@@ -1,5 +1,6 @@
 import Tag from 'domains/Tag'
 import TagNode, {TagNodeMode} from 'domains/TagNode'
+import {List} from 'immutable'
 import {map} from 'lodash'
 
 export default class TagFactory
@@ -12,7 +13,7 @@ export default class TagFactory
       name: data.name,
       experience: data.experience,
       interest: data.interest,
-      children,
+      children: List<Tag>(children),
     })
   }
 }

@@ -1,4 +1,5 @@
 import TagNode from 'domains/TagNode'
+import {List} from 'immutable'
 
 const d3 = require('d3')
 const color = d3.scale.category20()
@@ -7,18 +8,18 @@ export default class TagCloudLayout
 {
   private force: any
 
-  constructor(nodes: TagNode[], position: Function) {
+  constructor(nodes: List<TagNode>, position: Function) {
     this.force = d3.layout.force()
     .gravity(0.05)
     .charge(0)
     .on("tick", e => {
-      var q = d3.geom.quadtree(nodes)
-      for (const node of nodes) {
+      var q = d3.geom.quadtree(nodes.toArray())
+      nodes.forEach(node => {
         q.visit(this.collide(node))
-      }
+      })
       position();
     })
-    .nodes(nodes)
+    .nodes(nodes.toArray())
   }
 
   resize(width: number, height: number) {

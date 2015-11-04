@@ -1,9 +1,10 @@
 import Tag from 'domains/Tag'
+import {List} from 'immutable'
 
 describe("Tag", function() {
 
   before(() => {
-    this.children = [
+    this.children = List.of(
       new Tag({
         name: "Name1",
         experience: 1234,
@@ -14,7 +15,7 @@ describe("Tag", function() {
         experience: 3456,
         interesta: 4567,
       })
-    ]
+    )
     this.tag = new Tag({
       name: "Name",
       experience: 1234,
@@ -49,14 +50,7 @@ describe("Tag", function() {
 
   describe("children", () => {
     it("should be return initial param", () => {
-      assert.deepEqual(this.tag.children, this.children)
-    })
-    it("should be return copy", () => {
-      const children = this.tag.children
-      assert.notEqual(children, this.children)
-      assert.ok(children.shift() instanceof Tag)
-      assert.equal(children.length, 1)
-      assert.equal(this.tag.children.length, 2)
+      assert.equal(this.tag.children, this.children)
     })
   })
 })

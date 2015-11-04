@@ -15,10 +15,10 @@ describe("TagYaml", function() {
       assert.ok(this.tag instanceof Tag)
     })
     it("should be create tag has children", () => {
-      assert.ok(this.tag.children.length > 0)
-      for (const child of this.tag.children) {
+      assert.ok(this.tag.children.size > 0)
+      this.tag.children.forEach(child => {
         assert.ok(child instanceof Tag)
-      }
+      })
     })
   })
 
@@ -31,10 +31,10 @@ describe("TagYaml", function() {
       assert.ok(this.cloud instanceof TagCloud)
     })
     it("should be create tag cloud has nodes", () => {
-      assert.ok(this.cloud.nodes.length > 0)
-      for (const node of this.cloud.nodes) {
+      assert.ok(this.cloud.nodes.size > 0)
+      this.cloud.nodes.forEach(node => {
         assert.ok(node instanceof TagNode)
-      }
+      })
     })
   })
 })

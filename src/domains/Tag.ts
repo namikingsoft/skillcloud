@@ -1,10 +1,12 @@
+import {List} from 'immutable'
+
 export default class Tag
 {
   constructor(private param: {
     name: string,
     experience: number,
     interest: number,
-    children?: Tag[],
+    children?: List<Tag>,
   }) {}
 
   get name(): string {
@@ -19,16 +21,12 @@ export default class Tag
     return this.param.interest
   }
 
-  get children(): Tag[] {
-    if (this.param.children) {
-      return new Array<Tag>().concat(this.param.children)
-    } else {
-      return undefined
-    }
+  get children(): List<Tag> {
+    return this.param.children
   }
 
   get hasChildren(): boolean {
-    return this.children && this.children.length > 0
+    return this.children && this.children.size > 0
   }
 
   toString(): string {

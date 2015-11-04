@@ -1,12 +1,13 @@
 import TagNode, {TagNodeMode} from 'domains/TagNode'
+import {List} from 'immutable'
 
 export default class TagCloud
 {
   constructor(private param: {
-    nodes: TagNode[],
+    nodes: List<TagNode>,
   }) {}
 
-  get nodes(): TagNode[] {
+  get nodes(): List<TagNode> {
     return this.param.nodes
   }
 
@@ -18,9 +19,9 @@ export default class TagCloud
         default: return TagNodeMode.experience
       }
     })()
-    for (const node of this.nodes) {
+    this.nodes.forEach(node => {
       node.setMode(tagNodeMode)
-    }
+    })
     return this
   }
 }
