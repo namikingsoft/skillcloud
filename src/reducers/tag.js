@@ -1,4 +1,4 @@
-import * as types from '../constants/actionTypes';
+import * as types from '../constants/ActionTypes';
 import data from 'data/tag.yaml';
 
 const initialState = {data};

@@ -1,7 +1,12 @@
-import React, { Component, PropTypes } from 'react';
+import * as React from 'react'
+import {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 
-export default class Navigation extends Component
+interface Props {
+  children: Array<any>
+}
+
+export default class Navigation extends Component<Props, any>
 {
   render() {
     return (

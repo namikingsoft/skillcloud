@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "jsx": "react"
+    "jsx": "react",
+    "moduleResolution": "node",
+    "experimentalDecorators": true
   },
   "files": [
     "typings/tsd.d.ts",

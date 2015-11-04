@@ -1,17 +1,20 @@
-import React, {Component, PropTypes} from 'react'
+import * as React from 'react'
+import {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import TagCloudCanvas from 'components/TagCloudCanvas'
-import * as Actions from '../actions/app'
+import {clone} from 'lodash'
+
+interface Props {
+  data: Object
+  params: {[index: string]: string}
+}
 
 @connect(
-  state => {
-    const  {data} = state.tag
-    return {data}
-  },
-  dispatch => bindActionCreators(Actions, dispatch)
+  state => clone(state.tag)
 )
-export default class TagCloudContainer extends Component
+
+export default class TagCloudContainer extends Component<Props, any>
 {
   render() {
     const {data} = this.props
