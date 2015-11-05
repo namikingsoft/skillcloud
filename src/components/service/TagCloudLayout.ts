@@ -7,27 +7,22 @@ const color = d3.scale.category20()
 export default class TagCloudLayout
 {
   private force: any
+  private nodes: List<TagNode>
+  private tick: ()=>void
 
-  constructor(nodes: List<TagNode>, position: Function) {
+  constructor() {
+    this.nodes = List<TagNode>()
+    this.tick = ()=>{}
     this.force = d3.layout.force()
     .gravity(0.05)
     .charge(0)
     .on("tick", e => {
-      var q = d3.geom.quadtree(nodes.toArray())
-      nodes.forEach(node => {
+      var q = d3.geom.quadtree(this.nodes.toArray())
+      this.nodes.forEach(node => {
         q.visit(this.collide(node))
       })
-      position();
+      this.tick();
     })
-    .nodes(nodes.toArray())
-  }
-
-  resize(width: number, height: number) {
-    this.force.size([width, height])
-  }
-
-  start() {
-    this.force.start()
   }
 
   drag(): any {
@@ -35,6 +30,21 @@ export default class TagCloudLayout
     .on("dragstart", function() {
       d3.event.sourceEvent.stopPropagation()
     })
+  }
+
+  resize(width: number, height: number): TagCloudLayout {
+    this.force.size([width, height])
+    return this
+  }
+
+  update(nodes: List<TagNode>): TagCloudLayout {
+    this.nodes = nodes
+    this.force.nodes(nodes.toArray()).start()
+    return this
+  }
+
+  onTick(tick: ()=>void) {
+    this.tick = tick
   }
 
   private collide(node) {

@@ -9,13 +9,12 @@ export default class TagCloudDrawer
 {
   private svg: any
   private layout: TagCloudLayout
+  private ride: (d: TagNode)=>void
 
-  constructor(private param: {
-    nodes: List<TagNode>,
-    svgElement: any,
-  }) {
-    this.svg = d3.select(this.svgElement)
-    this.layout = new TagCloudLayout(this.nodes, () => {
+  constructor(svgElement: any) {
+    this.svg = d3.select(svgElement)
+    this.layout = new TagCloudLayout()
+    this.layout.onTick(() => {
       this.svg.selectAll("circle")
       .attr("cx", d => d.x)
       .attr("cy", d => d.y)
@@ -23,6 +22,8 @@ export default class TagCloudDrawer
       .attr("x", d => d.x)
       .attr("y", d => d.y)
     })
+    this.ride = ()=>{}
+    this.resize()
   }
 
   resize(): TagCloudDrawer {
@@ -54,9 +55,21 @@ export default class TagCloudDrawer
     return this
   }
 
-  start(): TagCloudDrawer {
+  onRide(ride: (d: TagNode)=>void) {
+    this.ride = ride
+    return this
+  }
+
+  update(nodes: List<TagNode>): TagCloudDrawer {
+    this.insert(nodes).draw()
+    this.layout.update(nodes) // for force freeze
+
+    return this
+  }
+
+  private insert(nodes: List<TagNode>): TagCloudDrawer {
     const node = this.svg.selectAll("g")
-    .data(this.nodes.toArray(), d => d.id)
+    .data(nodes.toArray(), d => d.id)
 
     const g = node.enter()
     .append("g")
@@ -65,6 +78,7 @@ export default class TagCloudDrawer
       .transition()
       .duration(200)
       .style("fill-opacity", 1)
+      this.ride(d)
     })
     .on('mouseout', d => {
       this.svg.selectAll(`g.group${d.group} circle`)
@@ -72,21 +86,18 @@ export default class TagCloudDrawer
       .duration(200)
       .style("fill-opacity", 0.4)
     })
+    .on('click', d => {
+      this.ride(d)
+    })
     .call(this.layout.drag())
 
     g.append("circle")
     g.append("text")
 
-    this.resize().update()
-    this.layout.start()
-
     return this
   }
 
-  update(): TagCloudDrawer {
-    // @todo for fix force freeze
-    this.layout.start()
-
+  private draw(): TagCloudDrawer {
     this.svg.selectAll('g')
     .attr("class", d => "group" + d.group)
 
@@ -103,13 +114,5 @@ export default class TagCloudDrawer
     .text(d => d.tag.name)
 
     return this
-  }
-
-  private get nodes(): List<TagNode> {
-    return this.param.nodes
-  }
-
-  private get svgElement(): any {
-    return this.param.svgElement
   }
 }

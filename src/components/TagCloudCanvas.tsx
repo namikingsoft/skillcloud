@@ -6,7 +6,7 @@ import * as React from 'react'
 import {Component, PropTypes} from 'react'
 
 interface Props {
-  data: any
+  cloud: TagCloud
   mode: string
 }
 
@@ -24,14 +24,10 @@ export default class TagCloudCanvas extends Component<Props, any>
   }
 
   componentDidMount() {
-    this.cloud = TagCloudFactory.create(
-      TagFactory.create(this.props.data)
-    ).setMode(this.props.mode)
-
-    this.drawer = new TagCloudDrawer({
-      nodes: this.cloud.nodes,
-      svgElement: React.findDOMNode(this.refs['svg']),
-    }).start()
+    const {cloud, mode} = this.props
+    this.drawer = new TagCloudDrawer(
+      React.findDOMNode(this.refs['svg'])
+    ).update(cloud.setMode(mode).nodes)
 
     window.addEventListener('resize', () => this.drawer.resize())
   }
@@ -41,7 +37,7 @@ export default class TagCloudCanvas extends Component<Props, any>
   }
 
   componentDidUpdate() {
-    this.cloud.setMode(this.props.mode)
-    this.drawer.update()
+    const {cloud, mode} = this.props
+    this.drawer.update(cloud.setMode(mode).nodes)
   }
 }

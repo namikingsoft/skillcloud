@@ -9,28 +9,30 @@ export default class SkillCloudDrawer
 {
   private svg: any
   private layout: SkillCloudLayout
+  private click: (d: SkillNode)=>void
 
-  constructor(private param: {
-    svgElement: any,
-    onClick: (d: SkillNode)=>void,
-  }) {
-    this.svg = d3.select(this.svgElement)
-    this.layout = new SkillCloudLayout({
-      tick: () => {
-        this.svg.selectAll('line')
-        .attr('x1', d => d.source.x)
-        .attr('y1', d => d.source.y)
-        .attr('x2', d => d.target.x)
-        .attr('y2', d => d.target.y)
-        this.svg.selectAll('circle')
-        .attr('cx', d => d.x)
-        .attr('cy', d => d.y)
-        this.svg.selectAll('text')
-        .attr('x', d => d.x)
-        .attr('y', d => d.y)
-      }
+  constructor(svgElement) {
+    this.svg = d3.select(svgElement)
+    this.layout = new SkillCloudLayout()
+    this.layout.onTick(() => {
+      this.svg.selectAll('line')
+      .attr('x1', d => d.source.x)
+      .attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x)
+      .attr('y2', d => d.target.y)
+      this.svg.selectAll('circle')
+      .attr('cx', d => d.x)
+      .attr('cy', d => d.y)
+      this.svg.selectAll('text')
+      .attr('x', d => d.x)
+      .attr('y', d => d.y)
     })
     this.resize()
+  }
+
+  onClick(click: (d: SkillNode)=>void) {
+    this.click = click
+    return this
   }
 
   resize(): SkillCloudDrawer {
@@ -63,13 +65,20 @@ export default class SkillCloudDrawer
   }
 
   update(cloud: SkillCloud): SkillCloudDrawer {
+    this.insert(cloud).draw()
+    this.layout.update(cloud)
+
+    return this
+  }
+
+  private insert(cloud: SkillCloud): SkillCloudDrawer {
     const node = this.svg.selectAll('g')
     .data(cloud.nodes.toArray(), d => d.id)
 
     node.exit().remove()
 
     const g = node.enter().append('g')
-    .on('click', this.onClick)
+    .on('click', d => this.click(d))
     .call(
       this.layout.drag()
       .on("dragstart", function() {
@@ -79,8 +88,15 @@ export default class SkillCloudDrawer
     g.append('circle')
     g.append('text')
 
-    this.layout.update(cloud)
+    const link = this.svg.selectAll('line')
+    .data(cloud.links.toArray())
+    link.exit().remove()
+    link.enter().append('line')
 
+    return this
+  }
+
+  private draw(): SkillCloudDrawer {
     this.svg.selectAll('g')
     .attr("class", d => d.classes)
 
@@ -95,20 +111,6 @@ export default class SkillCloudDrawer
     .style('font-size', d => d.fontSize)
     .text(d => d.skill.name)
 
-    const link = this.svg.selectAll('line')
-    .data(cloud.links.toArray())
-    link.exit().remove()
-    link.enter().append('line')
-
     return this
   }
-
-  private get svgElement(): any {
-    return this.param.svgElement
-  }
-
-  private get onClick(): (d: SkillNode)=>void {
-    return this.param.onClick
-  }
-
 }

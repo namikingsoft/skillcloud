@@ -1,12 +1,13 @@
+import TagCloud from 'domains/TagCloud'
+import TagCloudCanvas from 'components/TagCloudCanvas'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import TagCloudCanvas from 'components/TagCloudCanvas'
 import {clone} from 'lodash'
 
 interface Props {
-  data: Object
+  cloud: TagCloud
   params: {[index: string]: string}
 }
 
@@ -14,14 +15,14 @@ interface Props {
   state => clone(state.tag)
 )
 
-export default class TagCloudContainer extends Component<Props, any>
+export default class TagPage extends Component<Props, any>
 {
   render() {
-    const {data} = this.props
+    const {cloud} = this.props
     const {mode} = this.props.params
     return (
       <div className="tagCloudContainer">
-        <TagCloudCanvas data={data} mode={mode} />
+        <TagCloudCanvas cloud={cloud} mode={mode} />
       </div>
     )
   }

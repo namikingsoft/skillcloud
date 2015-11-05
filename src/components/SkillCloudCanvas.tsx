@@ -26,12 +26,11 @@ export default class SkillCloudCanvas extends Component<Props, any>
 
   componentDidMount() {
     const {cloud, onSelect} = this.props
-    this.drawer = new SkillCloudDrawer({
-      svgElement: React.findDOMNode(this.refs['svg']),
-      onClick: (d: SkillNode) => {
-        onSelect(d)
-      },
-    }).resize().update(cloud.filter(null))
+    this.drawer = new SkillCloudDrawer(
+      React.findDOMNode(this.refs['svg'])
+    )
+    .onClick(d => onSelect(d))
+    .update(cloud.filter(null))
 
     window.addEventListener('resize', () => this.drawer.resize())
 

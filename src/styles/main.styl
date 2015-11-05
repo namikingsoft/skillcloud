@@ -62,9 +62,9 @@
     & .skillcloud
       position absolute
       top 0
+      left 30%
       right 0
-      width 70%
-      height 100%
+      bottom 0
       background-color rgba(0, 0, 0, 1)
       z-index 1
 
@@ -103,6 +103,28 @@
           stroke-width 1
           opacity 0.2
 
+    & .tagcloud
+      position absolute
+      top 0
+      left 30%
+      right 0
+      bottom 0
+      background #222
+
+      svg
+        width 100%
+        height 100%
+
+        g
+          cursor pointer
+          user-select none
+
+        circle
+          fill-opacity .4
+        text
+          fill #fff
+          font-size 12px
+
     & .chart
       position absolute
       left 0%
@@ -129,83 +151,3 @@
       z-index 1
       p
         padding 1em
-
-    & .babble
-      position absolute
-      top 0
-      left 0
-      right 0
-      bottom 0
-      background #fff
-
-      svg
-        width 100%
-        height 200%
-
-        circle
-          fill-opacity .6
-
-        .leaf circle
-          fill #ff7f0e
-          fill-opacity 1
-
-        text
-          font 10px sans-serif
-
-    & .pack
-      position absolute
-      top 0
-      left 0
-      right 0
-      bottom 0
-      background #fff
-
-      svg
-        width 100%
-        height 100%
-
-        text
-          font-size 11px
-          pointer-events none
-
-        text.parent
-          fill #1f77b4
-
-        circle
-          fill #ccc
-          stroke #999
-          pointer-events all
-
-        circle.parent
-          fill #1f77b4
-          fill-opacity .1
-          stroke steelblue
-
-        circle.parenthover
-          stroke #ff7f0e
-          stroke-width .5px
-
-        circle.child
-          pointer-events none
-
-    & .tagcloud
-      position absolute
-      top 0
-      left 0
-      right 0
-      bottom 0
-      background #222
-
-      svg
-        width 100%
-        height 100%
-
-        g
-          cursor pointer
-          user-select none
-
-        circle
-          fill-opacity .4
-        text
-          fill #fff
-          font-size 12px

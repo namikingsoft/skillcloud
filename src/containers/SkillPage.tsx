@@ -22,7 +22,7 @@ interface Props {
   dispatch => bindActionCreators(Actions, dispatch)
 )
 
-export default class SkillCloudContainer extends Component<Props, any>
+export default class SkillPage extends Component<Props, any>
 {
   render() {
     const {cloud, comment, selected, select} = this.props
