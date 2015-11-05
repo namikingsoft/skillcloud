@@ -1,6 +1,6 @@
-import SkillNode from 'domains/SkillNode'
+import Tag from 'domains/Tag'
 import * as Types from 'constants/ActionTypes';
 
-export function select(node: SkillNode) {
-  return {type: Types.SELECT, node};
+export function select(selected: Tag) {
+  return {type: Types.SELECT, selected};
 }

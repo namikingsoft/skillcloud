@@ -1,5 +1,5 @@
 import Skill from 'domains/Skill'
-import * as types from 'constants/ActionTypes'
+import * as Types from 'constants/ActionTypes'
 
 interface State {
   selected: Skill
@@ -16,7 +16,7 @@ const initialState = {
 
 export default function skill(state: State = initialState, action: Action) {
   switch (action.type) {
-  case types.SELECT:
+  case Types.SELECT:
     state.selected = action.selected
     return state
   default:

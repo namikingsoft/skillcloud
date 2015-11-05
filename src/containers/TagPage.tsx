@@ -1,5 +1,13 @@
-import TagCloud from 'domains/TagCloud'
+import Tag from 'domains/Tag'
+import TagNode from 'domains/TagNode'
 import TagCloudCanvas from 'components/TagCloudCanvas'
+import ChartValue from 'domains/ChartValue'
+import ChartData from 'domains/ChartData'
+import ChartDataFactory from 'domains/ChartDataFactory'
+import ChartCanvas from 'components/ChartCanvas'
+import CommentCanvas from 'components/CommentCanvas'
+import * as TagConst from 'constants/TagConst'
+import * as Actions from 'actions/tag'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
@@ -7,23 +15,46 @@ import {connect} from 'react-redux'
 import {clone} from 'lodash'
 
 interface Props {
-  cloud: TagCloud
+  selected: Tag
   params: {[index: string]: string}
+  select: (tag: Tag)=>Object
 }
 
 @connect(
-  state => clone(state.tag)
+  state => clone(state.tag),
+  dispatch => bindActionCreators(Actions, dispatch)
 )
 
 export default class TagPage extends Component<Props, any>
 {
   render() {
-    const {cloud} = this.props
-    const {mode} = this.props.params
+    const {selected, params} = this.props
+    const data: ChartData = (()=>{
+      if (selected) {
+        return ChartDataFactory.createByTagList(selected.children)
+      } else {
+        return null
+      }
+    })()
+    const comment = (()=>{
+      return "Initializing..."
+    })()
     return (
       <div className="tagCloudContainer">
-        <TagCloudCanvas cloud={cloud} mode={mode} />
+        <TagCloudCanvas
+          cloud={TagConst.rootCloud}
+          mode={params['mode']}
+          onSelect={node => this.onSelectNode(node)} />
+        <ChartCanvas
+          data={data}
+          root={TagConst.rootChart} />
+        <CommentCanvas comment={comment} />
       </div>
     )
+  }
+
+  onSelectNode(node: TagNode) {
+    const {select} = this.props
+    select(node.parentTag)
   }
 }

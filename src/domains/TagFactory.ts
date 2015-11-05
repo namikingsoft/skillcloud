@@ -13,6 +13,7 @@ export default class TagFactory
       name: data.name,
       experience: data.experience,
       interest: data.interest,
+      comment: data.comment,
       children: List<Tag>(children),
     })
   }
@@ -22,5 +23,6 @@ interface Param {
   name: string
   experience: number
   interest: number
+  comment?: string
   children?: Param[]
 }

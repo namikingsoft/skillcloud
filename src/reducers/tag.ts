@@ -1,16 +1,24 @@
-import TagCloudFactory from 'domains/TagCloudFactory'
-import TagFactory from 'domains/TagFactory'
-import * as types from '../constants/ActionTypes'
-const data = require('data/tag.yaml')
+import Tag from 'domains/Tag'
+import * as Types from '../constants/ActionTypes'
+
+interface State {
+  selected: Tag
+}
+
+interface Action {
+  type: string
+  selected?: Tag
+}
 
 const initialState = {
-  cloud: TagCloudFactory.create(
-    TagFactory.create(data)
-  ),
+  selected: null,
 }
 
 export default function tag(state = initialState, action) {
   switch (action.type) {
+  case Types.SELECT:
+    state.selected = action.selected
+    return state
   default:
     return state
   }

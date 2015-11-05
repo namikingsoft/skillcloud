@@ -9,17 +9,20 @@ describe("Tag", function() {
         name: "Name1",
         experience: 1234,
         interest: 2345,
+        comment: "Comment1",
       }),
       new Tag({
         name: "Name2",
         experience: 3456,
         interesta: 4567,
+        comment: "Comment2",
       })
     )
     this.tag = new Tag({
       name: "Name",
       experience: 1234,
       interest: 2345,
+      comment: "Comment",
       children: this.children,
     })
   })
@@ -45,6 +48,12 @@ describe("Tag", function() {
   describe("interest", () => {
     it("should be return initial param", () => {
       assert.equal(this.tag.interest, 2345)
+    })
+  })
+
+  describe("comment", () => {
+    it("should be return initial param", () => {
+      assert.equal(this.tag.comment, "Comment")
     })
   })
 

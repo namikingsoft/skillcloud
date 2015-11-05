@@ -6,6 +6,7 @@ export default class Tag
     name: string,
     experience: number,
     interest: number,
+    comment?: string,
     children?: List<Tag>,
   }) {}
 
@@ -19,6 +20,10 @@ export default class Tag
 
   get interest(): number {
     return this.param.interest
+  }
+
+  get comment(): string {
+    return this.param.comment
   }
 
   get children(): List<Tag> {

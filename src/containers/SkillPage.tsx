@@ -7,7 +7,7 @@ import SkillCloudCanvas from 'components/SkillCloudCanvas'
 import ChartCanvas from 'components/ChartCanvas'
 import CommentCanvas from 'components/CommentCanvas'
 import * as SkillConst from 'constants/SkillConst'
-import * as Actions from '../actions/skill'
+import * as Actions from 'actions/skill'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
@@ -16,7 +16,7 @@ import {clone} from 'lodash'
 
 interface Props {
   selected: Skill
-  select: (node: Skill)=>Object
+  select: (skill: Skill)=>Object
 }
 
 @connect(
@@ -30,8 +30,8 @@ export default class SkillPage extends Component<Props, any>
     const {selected} = this.props
     const node = SkillConst.rootCloud.findNodeBySkill(selected)
     const data: ChartData = (()=>{
-      if (node) {
-        return ChartDataFactory.createBySkillList(node.skill.children)
+      if (selected) {
+        return ChartDataFactory.createBySkillList(selected.children)
       } else {
         return null
       }

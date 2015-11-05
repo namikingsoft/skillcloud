@@ -1,6 +1,5 @@
+import TagNode from 'domains/TagNode'
 import TagCloud from 'domains/TagCloud'
-import TagFactory from 'domains/TagFactory'
-import TagCloudFactory from 'domains/TagCloudFactory'
 import TagCloudDrawer from 'components/service/TagCloudDrawer'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
@@ -8,11 +7,11 @@ import {Component, PropTypes} from 'react'
 interface Props {
   cloud: TagCloud
   mode: string
+  onSelect: (node: TagNode)=>void
 }
 
 export default class TagCloudCanvas extends Component<Props, any>
 {
-  private cloud: TagCloud
   private drawer: TagCloudDrawer
 
   render() {
@@ -24,10 +23,12 @@ export default class TagCloudCanvas extends Component<Props, any>
   }
 
   componentDidMount() {
-    const {cloud, mode} = this.props
+    const {cloud, mode, onSelect} = this.props
     this.drawer = new TagCloudDrawer(
       React.findDOMNode(this.refs['svg'])
-    ).update(cloud.setMode(mode).nodes)
+    )
+    .onClick(node => onSelect(node))
+    .update(cloud.setMode(mode).nodes)
 
     window.addEventListener('resize', () => this.drawer.resize())
   }

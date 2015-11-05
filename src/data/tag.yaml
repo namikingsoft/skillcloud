@@ -1,11 +1,18 @@
 ---
 name: Langs
-experience: 32
-interest: 44
+experience: 12
+interest: 12
+comment: コメント
 children:
 - name: Javascript
+  experience: 12
+  interest: 12
+  comment: コメント
   children:
   - name: DOM
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: jQuery
       experience: 32
@@ -20,6 +27,9 @@ children:
       experience: 30
       interest: 44
   - name: Framework
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: Redux
       experience: 40
@@ -34,6 +44,9 @@ children:
       experience: 12
       interest: 44
   - name: AltJS
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: Typescript
       experience: 50
@@ -48,6 +61,9 @@ children:
       experience: 20
       interest: 44
   - name: Task runner
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: Grunt
       experience: 12
@@ -62,8 +78,14 @@ children:
       experience: 12
       interest: 44
 - name: HTML/CSS
+  experience: 12
+  interest: 12
+  comment: コメント
   children:
   - name: Meta
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: Jade
       experience: 16
@@ -75,6 +97,9 @@ children:
       experience: 40
       interest: 44
   - name: CSS Structure
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: BEM
       experience: 32
@@ -86,8 +111,14 @@ children:
       experience: 32
       interest: 44
 - name: BackEnd
+  experience: 12
+  interest: 12
+  comment: コメント
   children:
   - name: PHP
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: Synfony2
       experience: 24
@@ -105,6 +136,9 @@ children:
       experience: 14
       interest: 44
   - name: Javascript
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: Node.js
       experience: 42
@@ -113,11 +147,17 @@ children:
       experience: 36
       interest: 44
   - name: Ruby
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: Rails
       experience: 32
       interest: 44
   - name: Java
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: Seaser2
       experience: 12
@@ -126,6 +166,9 @@ children:
       experience: 12
       interest: 44
   - name: IDE/Editor
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: Eclipse
       experience: 24
@@ -152,6 +195,9 @@ children:
       experience: 12
       interest: 44
   - name: OS
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: Linux
       experience: 24
@@ -163,8 +209,14 @@ children:
       experience: 12
       interest: 44
 - name: Infrastructure
+  experience: 12
+  interest: 12
+  comment: コメント
   children:
   - name: VPS
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: AWS
       experience: 32
@@ -179,6 +231,9 @@ children:
       experience: 50
       interest: 44
   - name: Provisioning
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: Chef
       experience: 24
@@ -190,6 +245,9 @@ children:
       experience: 24
       interest: 44
   - name: ShellScript
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: sh
       experience: 12
@@ -201,8 +259,14 @@ children:
       experience: 12
       interest: 44
 - name: Database
+  experience: 12
+  interest: 12
+  comment: コメント
   children:
   - name: SQL
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: MySQL
       experience: 30
@@ -214,6 +278,9 @@ children:
       experience: 16
       interest: 44
   - name: NoSQL
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: MongoDB
       experience: 28
@@ -225,8 +292,14 @@ children:
       experience: 14
       interest: 44
 - name: Management
+  experience: 12
+  interest: 12
+  comment: コメント
   children:
   - name: Tools
+    experience: 12
+    interest: 12
+    comment: コメント
     children:
     - name: Jenkins
       experience: 24

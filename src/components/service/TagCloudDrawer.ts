@@ -9,7 +9,7 @@ export default class TagCloudDrawer
 {
   private svg: any
   private layout: TagCloudLayout
-  private ride: (d: TagNode)=>void
+  private click: (d: TagNode)=>void
 
   constructor(svgElement: any) {
     this.svg = d3.select(svgElement)
@@ -22,7 +22,7 @@ export default class TagCloudDrawer
       .attr("x", d => d.x)
       .attr("y", d => d.y)
     })
-    this.ride = ()=>{}
+    this.click = ()=>{}
     this.resize()
   }
 
@@ -55,8 +55,8 @@ export default class TagCloudDrawer
     return this
   }
 
-  onRide(ride: (d: TagNode)=>void) {
-    this.ride = ride
+  onClick(click: (d: TagNode)=>void) {
+    this.click = click
     return this
   }
 
@@ -78,7 +78,6 @@ export default class TagCloudDrawer
       .transition()
       .duration(200)
       .style("fill-opacity", 1)
-      this.ride(d)
     })
     .on('mouseout', d => {
       this.svg.selectAll(`g.group${d.group} circle`)
@@ -86,8 +85,8 @@ export default class TagCloudDrawer
       .duration(200)
       .style("fill-opacity", 0.4)
     })
-    .on('click', d => {
-      this.ride(d)
+    .on('mousedown', d => {
+      this.click(d)
     })
     .call(this.layout.drag())
 

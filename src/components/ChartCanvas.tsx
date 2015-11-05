@@ -9,7 +9,7 @@ const nv = require('nvd3/build/nv.d3')
 interface Props {
   data: ChartData
   root: ChartData
-  onSelect: Function
+  onSelect?: Function
 }
 
 export default class ChartCanvas extends Component<Props, any>
