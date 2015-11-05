@@ -1,11 +1,17 @@
 import ChartValue from 'domains/ChartValue'
+import {Map} from 'immutable'
 
 describe("ChartValue", function() {
 
   before(() => {
-    this.object = {
+    this.source = Map({
       label: "Label",
       value: 1234,
+    })
+    this.object = {
+      label: this.source.get('label'),
+      value: this.source.get('value'),
+      source: this.source,
     }
     this.row = new ChartValue(this.object)
   })
@@ -28,12 +34,9 @@ describe("ChartValue", function() {
     })
   })
 
-  describe("toObject", () => {
+  describe("source", () => {
     it("should be return initial param", () => {
-      assert.deepEqual(this.row.toObject, this.object)
-    })
-    it("should be another object instance", () => {
-      assert.notEqual(this.row.toObject, this.object)
+      assert.equal(this.row.source, this.source)
     })
   })
 })

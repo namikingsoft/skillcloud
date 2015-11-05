@@ -39,6 +39,17 @@ describe("SkillCloud", function() {
         comment: "Comment3",
       })
     })
+    this.dummy = new SkillNode({
+      id: 3,
+      group: 2,
+      depth: 2,
+      skill: new Skill({
+        name: "Name3",
+        experience: 3,
+        interest: 4,
+        comment: "Comment3",
+      })
+    })
     this.nodes = List.of(this.source, this.target, this.other)
     this.links = List.of({
       target: this.target,
@@ -92,6 +103,25 @@ describe("SkillCloud", function() {
         assert.ok(this.selectedCloud instanceof SkillCloud)
         assert.equal(this.selectedCloud.nodes.size, 3)
         assert.equal(this.selectedCloud.links.size, 1)
+      })
+    })
+  })
+
+  describe("findNodeBySkill", () => {
+    context("case exists", () => {
+      before(() => {
+        this.foundedNode = this.cloud.findNodeBySkill(this.target.skill)
+      })
+      it("should be return founded node", () => {
+        assert.equal(this.foundedNode, this.target)
+      })
+    })
+    context("case not exists", () => {
+      before(() => {
+        this.foundedNode = this.cloud.findNodeBySkill(this.dummy.skill)
+      })
+      it("should be return undefined", () => {
+        assert.equal(this.foundedNode, undefined)
       })
     })
   })

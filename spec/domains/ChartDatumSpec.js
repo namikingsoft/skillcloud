@@ -51,16 +51,7 @@ describe("ChartDatum", function() {
       assert.deepEqual(this.datum.toObject, {
         key: "Key",
         color: "#f00",
-        values: [
-          {
-            label: "Label1",
-            value: 1234,
-          },
-          {
-            label: "Label2",
-            value: 2345,
-          },
-        ]
+        values: this.values.toArray(),
       })
     })
   })

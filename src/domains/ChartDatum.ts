@@ -25,7 +25,7 @@ export default class ChartDatum
     return {
       key: this.key,
       color: this.color,
-      values: this.values.map(value => value.toObject).toArray(),
+      values: this.values.toArray(),
     }
   }
 }

@@ -1,9 +1,13 @@
-import SkillCloud from 'domains/SkillCloud'
+import Skill from 'domains/Skill'
 import SkillNode from 'domains/SkillNode'
+import ChartValue from 'domains/ChartValue'
+import ChartData from 'domains/ChartData'
+import ChartDataFactory from 'domains/ChartDataFactory'
 import SkillCloudCanvas from 'components/SkillCloudCanvas'
 import ChartCanvas from 'components/ChartCanvas'
 import CommentCanvas from 'components/CommentCanvas'
-import * as Actions from '../actions/SkillAction'
+import * as SkillConst from 'constants/SkillConst'
+import * as Actions from '../actions/skill'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
@@ -11,10 +15,8 @@ import {connect} from 'react-redux'
 import {clone} from 'lodash'
 
 interface Props {
-  cloud: SkillCloud
-  comment: string
-  selected: SkillNode
-  select: (node: SkillNode)=>Object
+  selected: Skill
+  select: (node: Skill)=>Object
 }
 
 @connect(
@@ -25,13 +27,44 @@ interface Props {
 export default class SkillPage extends Component<Props, any>
 {
   render() {
-    const {cloud, comment, selected, select} = this.props
+    const {selected} = this.props
+    const node = SkillConst.rootCloud.findNodeBySkill(selected)
+    const data: ChartData = (()=>{
+      if (node) {
+        return ChartDataFactory.createBySkillList(node.skill.children)
+      } else {
+        return null
+      }
+    })()
+    const comment = (()=>{
+      if (selected) {
+        return selected.comment
+      } else {
+        return "Initializing..."
+      }
+    })()
     return (
       <div className="skillCloudContainer">
-        <SkillCloudCanvas cloud={cloud} selected={selected} onSelect={select} />
-        <ChartCanvas cloud={cloud} selected={selected} onSelect={select} />
+        <SkillCloudCanvas
+          cloud={SkillConst.rootCloud}
+          selected={node}
+          onSelect={node => this.onSelectCloud(node)} />
+        <ChartCanvas
+          data={data}
+          root={SkillConst.rootChart}
+          onSelect={value => this.onSelectChart(value)} />
         <CommentCanvas comment={comment} />
       </div>
     )
+  }
+
+  onSelectCloud(node: SkillNode) {
+    const {select} = this.props
+    select(node.skill)
+  }
+
+  onSelectChart(value: ChartValue) {
+    const {select} = this.props
+    select(value.source)
   }
 }

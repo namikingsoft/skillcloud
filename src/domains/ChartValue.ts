@@ -1,10 +1,9 @@
-import {clone} from 'lodash'
-
 export default class ChartValue
 {
   constructor(private param: {
     label: string,
     value: number,
+    source?: any,
   }) {}
 
   get label(): string {
@@ -15,7 +14,7 @@ export default class ChartValue
     return this.param.value
   }
 
-  get toObject(): Object {
-    return clone(this.param)
+  get source(): any {
+    return this.param.source
   }
 }
