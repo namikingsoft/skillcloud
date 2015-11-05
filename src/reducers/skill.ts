@@ -1,7 +1,8 @@
-import * as types from 'constants/ActionTypes'
-import data from 'data/skill.yaml'
 import SkillFactory from 'domains/SkillFactory'
 import SkillCloudFactory from 'domains/SkillCloudFactory'
+import * as types from 'constants/ActionTypes'
+
+const data = require('data/skill.yaml')
 
 const initialState = {
   cloud: SkillCloudFactory.create(
