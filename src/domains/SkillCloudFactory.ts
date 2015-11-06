@@ -14,7 +14,6 @@ export default class SkillCloudFactory
       group: 0,
       depth: 0,
       skill: root,
-      active: true,
     })
     const buildNodes = (children: List<Skill>, parentNode: SkillNode) => {
       let groupSeq = 0

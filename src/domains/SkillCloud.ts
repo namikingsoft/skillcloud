@@ -37,13 +37,6 @@ export default class SkillCloud
       })
       return includeTarget && includeSource
     }).toList()
-    this.nodes.forEach(node => {
-      if (node.skill.hasChildren && (!selected || selected.group == node.group)) {
-        node.active = true
-      } else {
-        node.active = false
-      }
-    })
     return new SkillCloud({nodes, links})
   }
 

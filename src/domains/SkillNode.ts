@@ -7,7 +7,6 @@ export default class SkillNode
     group: number,
     depth: number,
     skill: Skill,
-    active?: boolean,
   }) {}
 
   get id(): number {
@@ -41,21 +40,10 @@ export default class SkillNode
     if (this.id == 1) {
       classes += ' root'
     }
-    if (this.active) {
-      classes += ' active'
-    }
     if (this.depth > 1) {
       classes += ' grandchild'
     }
     return classes
-  }
-
-  get active(): boolean {
-    return !!this.param.active
-  }
-
-  set active(active: boolean) {
-    this.param.active = active
   }
 }
 

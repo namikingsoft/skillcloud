@@ -15,7 +15,6 @@ describe("SkillNode", function() {
       group: 2,
       depth: 3,
       skill: this.skill,
-      active: true,
     })
   })
 
@@ -52,16 +51,6 @@ describe("SkillNode", function() {
   describe("classes", () => {
     it("should be return node's class name", () => {
       assert.equal(this.node.classes, "node root active grandchild")
-    })
-  })
-
-  describe("active", () => {
-    it("should be return initial param", () => {
-      assert.ok(this.node.active)
-    })
-    it("should be set param", () => {
-      this.node.active = false
-      assert.notOk(this.node.active)
     })
   })
 })
