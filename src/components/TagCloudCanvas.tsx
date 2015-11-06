@@ -13,6 +13,7 @@ interface Props {
 export default class TagCloudCanvas extends Component<Props, any>
 {
   private drawer: TagCloudDrawer
+  private preMode: string
 
   render() {
     return (
@@ -27,8 +28,9 @@ export default class TagCloudCanvas extends Component<Props, any>
     this.drawer = new TagCloudDrawer(
       React.findDOMNode(this.refs['svg'])
     )
-    .onClick(node => onSelect(node))
+    .onRide(node => onSelect(node))
     .update(cloud.setMode(mode).nodes)
+    this.preMode = mode
 
     window.addEventListener('resize', () => this.drawer.resize())
   }
@@ -39,6 +41,9 @@ export default class TagCloudCanvas extends Component<Props, any>
 
   componentDidUpdate() {
     const {cloud, mode} = this.props
-    this.drawer.update(cloud.setMode(mode).nodes)
+    if (mode !== this.preMode) {
+      this.drawer.update(cloud.setMode(mode).nodes)
+      this.preMode = mode
+    }
   }
 }
