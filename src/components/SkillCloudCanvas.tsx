@@ -1,5 +1,6 @@
 import SkillCloud from 'domains/SkillCloud'
 import SkillNode from 'domains/SkillNode'
+import Skill from 'domains/Skill'
 import SkillFactory from 'domains/SkillFactory'
 import SkillCloudFactory from 'domains/SkillCloudFactory'
 import SkillCloudDrawer from 'components/service/SkillCloudDrawer'
@@ -9,7 +10,7 @@ import {Component, PropTypes} from 'react'
 interface Props {
   cloud: SkillCloud
   selected: SkillNode
-  onSelect: Function
+  onSelect: (skill: Skill)=>void
 }
 
 export default class SkillCloudCanvas extends Component<Props, any>
@@ -29,13 +30,12 @@ export default class SkillCloudCanvas extends Component<Props, any>
     this.drawer = new SkillCloudDrawer(
       React.findDOMNode(this.refs['svg'])
     )
-    .onClick(d => onSelect(d))
-    .update(cloud.filter(null))
+    .onClick(d => onSelect(d.skill))
 
     window.addEventListener('resize', () => this.drawer.resize())
 
-    setTimeout(() => {
-      onSelect(cloud.nodes.get(0))
+    onSelect(null);setTimeout(() => {
+      onSelect(cloud.nodes.get(0).skill)
     }, 3000)
   }
 
@@ -45,6 +45,7 @@ export default class SkillCloudCanvas extends Component<Props, any>
 
   componentDidUpdate() {
     const {cloud, selected} = this.props
+    console.log(selected)
     this.drawer.update(cloud.filter(selected))
   }
 }

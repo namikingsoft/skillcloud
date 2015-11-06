@@ -11,7 +11,7 @@ interface Action {
 }
 
 const initialState = {
-  selected: null,
+  selected: undefined,
 }
 
 export default function skill(state: State = initialState, action: Action) {

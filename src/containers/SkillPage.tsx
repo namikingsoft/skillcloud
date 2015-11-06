@@ -48,7 +48,7 @@ export default class SkillPage extends Component<Props, any>
         <SkillCloudCanvas
           cloud={SkillConst.rootCloud}
           selected={node}
-          onSelect={node => this.onSelectCloud(node)} />
+          onSelect={skill => this.onSelectCloud(skill)} />
         <ChartCanvas
           data={data}
           root={SkillConst.rootChart}
@@ -58,9 +58,9 @@ export default class SkillPage extends Component<Props, any>
     )
   }
 
-  onSelectCloud(node: SkillNode) {
+  onSelectCloud(skill: Skill) {
     const {select} = this.props
-    select(node.skill)
+    select(skill)
   }
 
   onSelectChart(value: ChartValue) {
