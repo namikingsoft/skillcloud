@@ -13,24 +13,29 @@ export default class ChartDataFactory
         new ChartDatum({
           key: '経験',
           color: '#f00',
-          values: skills.map<ChartValue>(skill => {
-            return new ChartValue({
-              label: skill.name,
-              value: skill.experience,
-              source: skill,
+          values: skills
+            .map<ChartValue>(skill => {
+              return new ChartValue({
+                label: skill.name,
+                value: skill.experience,
+                source: skill,
+              })
             })
-          }).toList()
+            .sortBy(row => -row.value)
+            .toList()
         }),
         new ChartDatum({
           key: '興味',
           color: '#0f0',
-          values: skills.map<ChartValue>(skill => {
-            return new ChartValue({
-              label: skill.name,
-              value: skill.interest,
-              source: skill,
+          values: skills
+            .map<ChartValue>(skill => {
+              return new ChartValue({
+                label: skill.name,
+                value: skill.interest,
+                source: skill,
+              })
             })
-          }).toList()
+            .toList()
         })
       )
     )
@@ -42,24 +47,29 @@ export default class ChartDataFactory
         new ChartDatum({
           key: '経験',
           color: '#f00',
-          values: tags.map<ChartValue>(tag => {
-            return new ChartValue({
-              label: tag.name,
-              value: tag.experience,
-              source: tag,
+          values: tags
+            .map<ChartValue>(tag => {
+              return new ChartValue({
+                label: tag.name,
+                value: tag.experience,
+                source: tag,
+              })
             })
-          }).toList()
+            .sortBy(row => -row.value)
+            .toList()
         }),
         new ChartDatum({
           key: '興味',
           color: '#0f0',
-          values: tags.map<ChartValue>(tag => {
-            return new ChartValue({
-              label: tag.name,
-              value: tag.interest,
-              source: tag,
+          values: tags
+            .map<ChartValue>(tag => {
+              return new ChartValue({
+                label: tag.name,
+                value: tag.interest,
+                source: tag,
+              })
             })
-          }).toList()
+            .toList()
         })
       )
     )

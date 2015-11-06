@@ -12,6 +12,8 @@ export default class ChartData
   }
 
   get forNVD3(): Array<Object> {
-    return this.data.map<Object>(datum => datum.toObject).toArray()
+    return this.data
+    .map<Object>(datum => datum.toObject)
+    .toArray()
   }
 }
