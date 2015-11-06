@@ -37,7 +37,11 @@ export default class TagPage extends Component<Props, any>
       }
     })()
     const comment = (()=>{
-      return "Initializing..."
+      if (selected) {
+        return selected.comment
+      } else {
+        return "Initializing..."
+      }
     })()
     return (
       <div className="tagCloudContainer">

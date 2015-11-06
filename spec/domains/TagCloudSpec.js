@@ -1,5 +1,5 @@
 import TagCloud from 'domains/TagCloud'
-import TagNode, {TagNodeMode} from 'domains/TagNode'
+import TagNode from 'domains/TagNode'
 import Tag from 'domains/Tag'
 
 describe("TagCloud", function() {
@@ -37,21 +37,6 @@ describe("TagCloud", function() {
       assert.equal(this.cloud.nodes.length, 2)
       assert.equal(this.cloud.nodes[0], this.nodes[0])
       assert.equal(this.cloud.nodes[1], this.nodes[1])
-    })
-  })
-
-  describe("setMode", () => {
-    it("should be return set experience mode", () => {
-      this.cloud.setMode('experience')
-      for (const node of this.cloud.nodes) {
-        assert.equal(node.mode, TagNodeMode.experience)
-      }
-    })
-    it("should be return set interest mode", () => {
-      this.cloud.setMode('interest')
-      for (const node of this.cloud.nodes) {
-        assert.equal(node.mode, TagNodeMode.interest)
-      }
     })
   })
 })

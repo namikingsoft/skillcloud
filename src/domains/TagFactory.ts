@@ -1,5 +1,4 @@
 import Tag from 'domains/Tag'
-import TagNode, {TagNodeMode} from 'domains/TagNode'
 import {List} from 'immutable'
 import {map} from 'lodash'
 

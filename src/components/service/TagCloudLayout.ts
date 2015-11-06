@@ -7,11 +7,11 @@ const color = d3.scale.category20()
 export default class TagCloudLayout
 {
   private force: any
-  private nodes: List<TagNode>
+  private nodes: List<any>
   private tick: ()=>void
 
   constructor() {
-    this.nodes = List<TagNode>()
+    this.nodes = List<any>()
     this.tick = ()=>{}
     this.force = d3.layout.force()
     .gravity(0.05)
@@ -37,18 +37,23 @@ export default class TagCloudLayout
     return this
   }
 
-  update(nodes: List<TagNode>): TagCloudLayout {
-    this.nodes = nodes
+  update(nodes: List<TagNode>, mode: string): TagCloudLayout {
+    this.nodes = nodes.map<any>(node => {
+      const obj: any = node
+      obj.r = node.radius(mode)
+      return obj
+    }).toList()
     this.force.nodes(nodes.toArray()).start()
     return this
   }
 
-  onTick(tick: ()=>void) {
+  onTick(tick: ()=>void): TagCloudLayout {
     this.tick = tick
+    return this
   }
 
-  private collide(node) {
-    var r = node.radius + 16,
+  private collide(node: any) {
+    var r = node.r + 16,
       nx1 = node.x - r,
       nx2 = node.x + r,
       ny1 = node.y - r,
@@ -58,7 +63,7 @@ export default class TagCloudLayout
         var x = node.x - quad.point.x,
           y = node.y - quad.point.y,
           l = Math.sqrt(x * x + y * y),
-          r = node.radius + quad.point.radius
+          r = node.r + quad.point.r
         if (l < r) {
           l = (l - r) / l * .5
           node.x -= x *= l
