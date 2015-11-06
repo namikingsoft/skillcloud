@@ -34,7 +34,6 @@ export default class ChartDrawer
   }
 
   update(data: ChartData): ChartDrawer {
-    console.log(data)
     this.svg
     .datum(data.forNVD3)
     .call(this.chart)

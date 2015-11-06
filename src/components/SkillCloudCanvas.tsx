@@ -45,7 +45,6 @@ export default class SkillCloudCanvas extends Component<Props, any>
 
   componentDidUpdate() {
     const {cloud, selected} = this.props
-    console.log(selected)
     this.drawer.update(cloud.filter(selected))
   }
 }
