@@ -59,8 +59,10 @@ export default class SkillPage extends Component<Props, any>
   }
 
   onSelectCloud(skill: Skill) {
-    const {select} = this.props
-    select(skill)
+    if (!skill || skill.hasChildren) {
+      const {select} = this.props
+      select(skill)
+    }
   }
 
   onSelectChart(value: ChartValue) {

@@ -3,16 +3,14 @@ name: スキルジャンル
 experience: 12
 interest: 12
 comment: |
-  ここにテキストが入ります。ここにテキストが入ります。
-  ここにテキストが入ります。ここにテキストが入ります。
+  スキルジャンルについてのコメントです。
   ここにテキストが入ります。ここにテキストが入ります。
 children:
 - name: Web系開発
   experience: 32
   interest: 12
   comment: |
-    ここにテキストが入ります。ここにテキストが入ります。
-    ここにテキストが入ります。ここにテキストが入ります。
+    Web系開発についてのコメントです。
     ここにテキストが入ります。ここにテキストが入ります。
   children:
   - name: フロントエンド
@@ -91,12 +89,33 @@ children:
   - name: ハイブリッドアプリ
     experience: 12
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
   - name: スマートフォンアプリ
     experience: 12
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
   - name: ユーティリティアプリ
     experience: 12
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
 - name: インフラ構築
   experience: 24
   interest: 12
@@ -108,18 +127,53 @@ children:
   - name: コンテナ構築
     experience: 12
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
   - name: 構成管理
     experience: 12
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
   - name: CI環境構築
     experience: 12
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
   - name: サーバー監視
     experience: 12
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
   - name: 大規模インフラ
     experience: 12
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
 - name: データベース
   experience: 22
   interest: 12
@@ -131,12 +185,33 @@ children:
   - name: DB設計
     experience: 12
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
   - name: DBチューニング
     experience: 12
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
   - name: NoSQL
     experience: 12
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
 - name: マネジメント
   experience: 18
   interest: 12
@@ -148,12 +223,33 @@ children:
   - name: プロジェクトリーダー
     experience: 18
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
   - name: スクラムマスター
     experience: 18
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
   - name: プロジェクト管理ツール導入
     experience: 18
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
 - name: 興味/趣味
   experience: 26
   interest: 12
@@ -165,9 +261,30 @@ children:
   - name: OSS活動
     experience: 12
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
   - name: IoT開発
     experience: 12
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
   - name: 機械学習
     experience: 12
     interest: 12
+    children:
+      - name: test1
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
