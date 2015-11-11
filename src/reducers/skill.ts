@@ -1,5 +1,6 @@
 import Skill from 'domains/Skill'
 import * as Types from 'constants/ActionTypes'
+import match from 'match-case'
 
 interface State {
   selected: Skill
@@ -15,11 +16,11 @@ const initialState = {
 }
 
 export default function skill(state: State = initialState, action: Action) {
-  switch (action.type) {
-  case Types.SELECT:
-    state.selected = action.selected
-    return state
-  default:
-    return state
-  }
+  return match<string, State>(action.type).
+    caseOf(Types.SELECT, v => {
+      state.selected = action.selected
+      return state
+    }).
+    caseOfElse(v => state).
+  end()
 }

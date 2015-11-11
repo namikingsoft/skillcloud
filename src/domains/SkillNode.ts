@@ -1,4 +1,5 @@
 import Skill from 'domains/Skill'
+import match from 'match-case'
 
 export default class SkillNode
 {
@@ -26,13 +27,13 @@ export default class SkillNode
   }
 
   get fontSize(): number {
-    switch (this.depth) {
-      case 0: return 11
-      case 1: return 20
-      case 2: return 16
-      case 3: return 11
-    }
-    return 12
+    return match<number,number>(this.depth).
+      caseOf(0, 11).
+      caseOf(1, 20).
+      caseOf(2, 16).
+      caseOf(3, 11).
+      caseOfElse(12).
+    end()
   }
 
   get classes(): string {

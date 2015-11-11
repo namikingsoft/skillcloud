@@ -1,4 +1,5 @@
 import Tag from 'domains/Tag'
+import match from 'match-case'
 
 export default class TagNode
 {
@@ -34,10 +35,10 @@ export default class TagNode
   }
 
   private factor(mode: string): number {
-    switch (mode) {
-      case "experience": return this.tag.experience
-      case "interest": return this.tag.interest
-      default: return 0
-    }
+    return match<string,number>(mode).
+      caseOf("experience", this.tag.experience).
+      caseOf("interest", this.tag.interest).
+      caseOfElse(0).
+    end()
   }
 }
