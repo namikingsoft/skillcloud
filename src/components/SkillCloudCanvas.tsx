@@ -112,13 +112,13 @@ export default class SkillCloudCanvas extends Component<Props, any>
     .data(cloud.nodes.toArray(), d => d.id)
 
     const g = node.enter().append('g')
-    .on('click', d => onSelect(d.skill))
     .call(
       this.layout.drag()
-      .on("dragstart", function() {
-        d3.event.sourceEvent.stopPropagation()
-      })
+      .on("dragstart", () => d3.event.sourceEvent.stopPropagation())
     )
+    .on('click', d => {
+      if (!d3.event.defaultPrevented) onSelect(d.skill)
+    })
     g.append('circle')
     g.append('text')
 
