@@ -1,6 +1,7 @@
 import SkillNode, {SkillLink} from 'domains/SkillNode'
 import Skill from 'domains/Skill'
 import {List} from 'immutable'
+import match from 'match-case'
 
 export default class SkillCloud
 {
@@ -15,6 +16,10 @@ export default class SkillCloud
 
   get links(): List<SkillLink> {
     return this.param.links
+  }
+
+  get rootNode(): SkillNode {
+    return this.nodes.find(d => d.id === 1)
   }
 
   filter(selected: SkillNode) {
@@ -42,5 +47,23 @@ export default class SkillCloud
 
   findNodeBySkill(skill: Skill): SkillNode {
     return this.nodes.find(node => node.skill === skill)
+  }
+
+  adjustNodePosition(node: SkillNode) {
+    const root = this.rootNode
+    node.skill.children.
+    map<SkillNode>(skill => this.findNodeBySkill(skill)).
+    forEach(child => {
+      // factor @todo magic number
+      const dxRoot = (root.x - node.x) * 5
+      const dyRoot = (root.y - node.y) * 5
+      const dxNode = (node.x - child.x) / 10
+      const dyNode = (node.x - child.y) / 10
+      child.x = node.x + dxRoot + dxNode
+      child.y = node.y + dyRoot + dyNode
+      child.px = node.px + dxRoot + dxNode
+      child.py = node.py + dyRoot + dyNode
+      this.adjustNodePosition(child)
+    })
   }
 }

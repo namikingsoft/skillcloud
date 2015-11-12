@@ -41,4 +41,10 @@ export default class TagNode
       caseOfElse(0).
     end()
   }
+
+  // position for d3.js
+  x: number
+  y: number
+  px: number
+  py: number
 }

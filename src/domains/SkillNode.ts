@@ -46,6 +46,12 @@ export default class SkillNode
     }
     return classes
   }
+
+  // position for d3.js
+  x: number
+  y: number
+  px: number
+  py: number
 }
 
 export interface SkillLink {

@@ -6,6 +6,7 @@ import SkillCloudFactory from 'domains/SkillCloudFactory'
 import SkillCloudLayout from 'components/service/SkillCloudLayout'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
+import {List} from 'immutable'
 
 const d3 = require('d3')
 const color = d3.scale.category20()
@@ -106,8 +107,6 @@ export default class SkillCloudCanvas extends Component<Props, any>
   }
 
   private insertAndRemove(cloud: SkillCloud): SkillCloudCanvas {
-    const {onSelect} = this.props
-
     const node = this.svg.selectAll('g')
     .data(cloud.nodes.toArray(), d => d.id)
 
@@ -117,7 +116,9 @@ export default class SkillCloudCanvas extends Component<Props, any>
       .on("dragstart", () => d3.event.sourceEvent.stopPropagation())
     )
     .on('click', d => {
-      if (!d3.event.defaultPrevented) onSelect(d.skill)
+      if (!d3.event.defaultPrevented) {
+        this.select(d)
+      }
     })
     g.append('circle')
     g.append('text')
@@ -153,5 +154,11 @@ export default class SkillCloudCanvas extends Component<Props, any>
     .text(d => d.skill.name)
 
     return this
+  }
+
+  private select(node: SkillNode) {
+    const {cloud, onSelect} = this.props;
+    cloud.adjustNodePosition(node)
+    onSelect(node.skill)
   }
 }

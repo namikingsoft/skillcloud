@@ -76,6 +76,12 @@ describe("SkillCloud", function() {
     })
   })
 
+  describe("rootNode", () => {
+    it("should be return node has first id", () => {
+      assert.equal(this.cloud.rootNode, this.source)
+    })
+  })
+
   describe("links", () => {
     it("should be return initial param", () => {
       assert.equal(this.cloud.links.size, 1)
