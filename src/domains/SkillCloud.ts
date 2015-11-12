@@ -23,14 +23,13 @@ export default class SkillCloud
   }
 
   filter(selected: SkillNode) {
-    const nodes = this.nodes.filter(node => {
-      if (!selected || selected.group == node.group || node.depth < 2) {
-        return true
-      } else {
-        return false
-      }
-    }).toList()
-    const links = this.links.filter(link => {
+    const nodes = this.nodes.
+    filter(node =>
+      (!selected && node.depth < 3) ||
+      ((selected && selected.group == node.group) || node.depth < 2)
+    ).toList()
+    const links = this.links.
+    filter(link => {
       let includeTarget, includeSource = false
       nodes.forEach(node => {
         if (node == link.target) {
@@ -47,6 +46,10 @@ export default class SkillCloud
 
   findNodeBySkill(skill: Skill): SkillNode {
     return this.nodes.find(node => node.skill === skill)
+  }
+
+  isIncludeNode(node: SkillNode): boolean {
+    return !!node.skill.children.find(skill => !!this.findNodeBySkill(skill))
   }
 
   adjustNodePosition(node: SkillNode) {

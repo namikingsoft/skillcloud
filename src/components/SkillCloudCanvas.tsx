@@ -7,6 +7,7 @@ import SkillCloudLayout from 'components/service/SkillCloudLayout'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 import {List} from 'immutable'
+import match from 'match-case'
 
 const d3 = require('d3')
 const color = d3.scale.category20()
@@ -37,7 +38,7 @@ export default class SkillCloudCanvas extends Component<Props, any>
     const {cloud, onSelect} = this.props
     onSelect(null);setTimeout(() => {
       onSelect(cloud.nodes.get(0).skill)
-    }, 3000)
+    }, 3600)
   }
 
   componentWillUnmount() {
@@ -134,13 +135,13 @@ export default class SkillCloudCanvas extends Component<Props, any>
   }
 
   private update(cloud: SkillCloud): SkillCloudCanvas {
-    this.svg.selectAll('g')
-    .attr("class", d => {
-      if (d.skill.children.find(skill => cloud.nodes.find(n => n.skill == skill))) {
-        return `${d.classes} active`
-      }
-      return d.classes
-    })
+    this.svg.selectAll('g').
+    attr("class", d =>
+      match<string>(cloud.isIncludeNode(d)).
+        caseOf(true, `${d.classes} active`).
+        caseOfElse(d.classes).
+      end()
+    )
 
     this.svg.selectAll('g circle')
     .transition()
