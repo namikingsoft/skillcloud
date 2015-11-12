@@ -53,7 +53,9 @@ export default class SkillPage extends Component<Props, any>
           data={data}
           root={SkillConst.rootChart}
           onSelect={value => this.onSelectChart(value)} />
-        <CommentCanvas comment={comment} />
+        <CommentCanvas
+          title={selected? selected.name: ''}
+          comment={comment} />
       </div>
     )
   }

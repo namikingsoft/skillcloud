@@ -52,7 +52,9 @@ export default class TagPage extends Component<Props, any>
         <ChartCanvas
           data={data}
           root={TagConst.rootChart} />
-        <CommentCanvas comment={comment} />
+        <CommentCanvas
+          title="Test"
+          comment={comment} />
       </div>
     )
   }
