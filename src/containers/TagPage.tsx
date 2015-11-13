@@ -53,7 +53,7 @@ export default class TagPage extends Component<Props, any>
           data={data}
           root={TagConst.rootChart} />
         <CommentCanvas
-          title="Test"
+          title={selected? selected.name: ''}
           comment={comment} />
       </div>
     )
