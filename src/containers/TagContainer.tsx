@@ -25,7 +25,7 @@ interface Props {
   dispatch => bindActionCreators(Actions, dispatch)
 )
 
-export default class TagPage extends Component<Props, any>
+export default class TagContainer extends Component<Props, any>
 {
   render() {
     const {selected, params} = this.props

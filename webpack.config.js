@@ -34,6 +34,7 @@ module.exports = {
       { test: /\.css$/, loader: 'style!css' },
       { test: /\.ya?ml/, loader: 'json!yaml' },
       { test: /\.jpg$/, loader: 'url?minetype=image/jpeg' },
+      { test: /\.png$/, loader: 'url?minetype=image/png' },
       { test: /\.svg/, loader: 'url?minetype=image/svg+xml' },
       { test: /\.ttf/, loader: 'url?minetype=application/octet-stream' },
       { test: /\.woff/, loader: 'url?minetype=application/font-woff' },

@@ -7,6 +7,7 @@
   bottom 0
   left 0
   right 0
+  background-color rgba(36, 36, 36, 1)
 
   & .navigation
     position absolute
@@ -15,12 +16,12 @@
     width 100%
     background-color rgba(0, 0, 0, 0.1)
     font-family Eau Douce,Helvetica Neue,Calibri,Emoji,sans-serif
+    height $navigation-height
     z-index 2
-    padding 0.3em
 
     h1
       display inline
-      line-height $navigation-height
+      line-height $navigation-height - 5px
       margin-left 0.5em
       a
         color #fff
@@ -29,15 +30,30 @@
 
     ul
       display inline-block
+      line-height $navigation-height - 5px
       list-style none
       margin 0
       padding 0
       li
         display inline-block
-        margin-left 1.0em
+        margin-left 1.45em
         a
           color #eee
           text-decoration none
+          i
+            margin-right 0.5em
+
+  & .background
+    position absolute
+    top -1000%
+    left -1000%
+    right -1000%
+    bottom -1000%
+    background-image url(../assets/background.png)
+    background-repeat repeat
+    opacity 0.06
+    z-index -1
+    transition all 1.5s ease-out
 
   & .content
     position fixed
@@ -46,18 +62,18 @@
     bottom 0
     right 0
     overflow scroll
-    background-color rgba(36, 36, 36, 1)
     z-index 1
 
-    & .space
+    & .description
       position absolute
-      top 0
-      right 0
-      width 70%
-      height 100%
-      background-image url(../assets/background.jpg)
-      background-repeat repeat
-      z-index 0
+      top $navigation-height
+      margin 1.2em
+      color #999
+      font-size 0.8em
+      line-height 1.6
+      i
+        font-size 1.2em
+        margin-right: 0.2em
 
     & .skillcloud
       position absolute
@@ -65,7 +81,6 @@
       left 0
       right 0
       bottom 0
-      background-color rgba(36, 36, 36, 1)
       z-index 1
 
       svg
@@ -109,7 +124,6 @@
       left 0
       right 0
       bottom 0
-      background-color rgba(36, 36, 36, 1)
 
       svg
         width 100%
@@ -176,3 +190,11 @@
           color #6f6
           font-weight bold
           animation blink 1s step-end infinite
+
+  .copyright
+    position fixed
+    right 20px
+    bottom 20px
+    color #999
+    font-size: 0.7em
+    z-index 3

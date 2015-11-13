@@ -24,7 +24,7 @@ interface Props {
   dispatch => bindActionCreators(Actions, dispatch)
 )
 
-export default class SkillPage extends Component<Props, any>
+export default class SkillContainer extends Component<Props, any>
 {
   render() {
     const {selected} = this.props
@@ -56,6 +56,10 @@ export default class SkillPage extends Component<Props, any>
         <CommentCanvas
           title={selected? selected.name: ''}
           comment={comment} />
+        <div className="description">
+          <i className="fa fa-pencil-square-o"></i>
+          スキル名のクリックで更に詳細が見れます。
+        </div>
       </div>
     )
   }
