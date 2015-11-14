@@ -1,6 +1,5 @@
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
-import {Link} from 'react-router'
 
 interface State {
   top: number

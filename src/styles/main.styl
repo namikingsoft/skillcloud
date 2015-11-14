@@ -17,7 +17,7 @@
     background-color rgba(0, 0, 0, 0.1)
     font-family Eau Douce,Helvetica Neue,Calibri,Emoji,sans-serif
     height $navigation-height
-    z-index 2
+    z-index 3
 
     h1
       display inline
@@ -52,8 +52,25 @@
     background-image url(../assets/background.png)
     background-repeat repeat
     opacity 0.06
-    z-index -1
     transition all 1.5s ease-out
+    z-index -2
+
+  & .crosshair
+    z-index -1
+    & .line
+      position absolute
+      background-color red
+      transition all 0.5s ease-in-out
+      &.vertical
+        top 0
+        left 50%
+        width 1px
+        height 100%
+      &.horizontal
+        top 50%
+        left 0
+        width 100%
+        height 1px
 
   & .content
     position fixed
@@ -62,7 +79,7 @@
     bottom 0
     right 0
     overflow scroll
-    z-index 1
+    z-index 2
 
     & .description
       position absolute
@@ -71,9 +88,27 @@
       color #999
       font-size 0.8em
       line-height 1.6
+      z-index 2
       i
         font-size 1.2em
         margin-right: 0.2em
+      p
+        margin 0
+        padding 0
+      ul
+        list-style none
+        margin 0
+        margin-top 1em
+        padding 0
+        li
+          display inline-block
+          margin-right 1em
+          &:before
+            content '\00bb'
+            margin-right 0.5em
+          a
+            color #fff
+            text-decoration none
 
     & .skillcloud
       position absolute
@@ -124,6 +159,7 @@
       left 0
       right 0
       bottom 0
+      z-index 1
 
       svg
         width 100%
@@ -198,3 +234,6 @@
     color #999
     font-size: 0.7em
     z-index 3
+    i
+      font-size 1.2em
+      margin-right 0.2em

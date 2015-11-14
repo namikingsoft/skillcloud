@@ -1,4 +1,5 @@
 import Background from 'components/Background'
+import CrossHair from 'components/CrossHair'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
@@ -13,6 +14,7 @@ export default class Navigation extends Component<Props, any>
     return (
       <div>
         <Background />
+        <CrossHair />
         <div className="navigation">
           <h1><Link to="/">Skill Cloud</Link></h1>
           <ul>
