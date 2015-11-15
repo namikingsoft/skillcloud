@@ -21,7 +21,7 @@ export default class Background extends Component<any, State>
 
   render() {
     return (
-      <div className="background" style={this.state}></div>
+      <div className="module-background" style={this.state}></div>
     )
   }
 

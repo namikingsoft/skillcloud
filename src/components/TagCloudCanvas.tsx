@@ -22,7 +22,7 @@ export default class TagCloudCanvas extends Component<Props, any>
 
   render() {
     return (
-      <div className="tagcloud">
+      <div className="module-tagcloud">
         <svg ref="svg"></svg>
       </div>
     )

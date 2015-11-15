@@ -18,7 +18,7 @@ export default class ChartCanvas extends Component<Props, any>
 
   render() {
     return (
-      <div className="chart">
+      <div className="module-chart">
         <svg ref="svg"></svg>
       </div>
     )

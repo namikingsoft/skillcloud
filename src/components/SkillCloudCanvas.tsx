@@ -25,7 +25,7 @@ export default class SkillCloudCanvas extends Component<Props, any>
 
   render() {
     return (
-      <div className="skillcloud">
+      <div className="module-skillcloud">
         <svg ref="svg"></svg>
       </div>
     )

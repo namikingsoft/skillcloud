@@ -25,7 +25,7 @@ export default class CommentCanvas extends Component<Props, State>
     const {title, comment} = this.props
     const {detail, finished} = this.state
     return (
-      <div className="comment">
+      <div className="module-comment">
         <h3>{title || "Initializing..."}</h3>
         <p className={finished? '' : 'writing'}>{detail}</p>
       </div>

@@ -15,17 +15,17 @@ export default class Navigation extends Component<Props, any>
       <div>
         <Background />
         <CrossHair />
-        <div className="navigation">
+        <div className="layout-navigation">
           <h1><Link to="/">Skill Cloud</Link></h1>
           <ul>
             <li><Link to="/skill"><i className="fa fa-pie-chart"></i>Skill</Link></li>
             <li><Link to="/tag/experience"><i className="fa fa-tags"></i>Tags</Link></li>
           </ul>
         </div>
-        <div className="content">
+        <div className="layout-content">
           {this.props.children}
         </div>
-        <small className="copyright">
+        <small className="module-copyright">
           Copyright 2015 <i className="fa fa-copyright"></i>namikingsoft
         </small>
       </div>

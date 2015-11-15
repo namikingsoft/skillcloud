@@ -27,7 +27,7 @@ export default class CrossHair extends Component<any, State>
   render() {
     const {top, left, opacity} = this.state
     return (
-      <div className="crosshair">
+      <div className="module-crosshair">
         <div className="line vertical" style={{left, opacity}} />
         <div className="line horizontal" style={{top, opacity,}} />
       </div>

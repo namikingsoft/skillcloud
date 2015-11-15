@@ -10,7 +10,7 @@ export default class App extends Component
 {
   render() {
     return (
-      <div className="app">
+      <div className="layout-app">
         <Router history={createHashHistory()}>
           <Route component={Navigation}>
             <Route path="/" component={SkillContainer} />

@@ -5,7 +5,7 @@ export default class NotFound extends Component<any, any>
 {
   render() {
     return (
-      <div className="notfound">
+      <div className="layout-notfound">
         Not Found
       </div>
     );
