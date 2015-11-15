@@ -28,7 +28,7 @@ export default class SkillNode
 
   get fontSize(): number {
     return match<number,number>(this.depth).
-      caseOf(0, 11).
+      caseOf(0, 14).
       caseOf(1, 20).
       caseOf(2, 16).
       caseOf(3, 11).
