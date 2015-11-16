@@ -27,7 +27,7 @@ export default class CommentCanvas extends Component<Props, State>
     return (
       <div className="module-comment">
         <h3>{title || "Initializing..."}</h3>
-        <p className={finished? '' : 'writing'}>{detail}</p>
+        <p className={finished? '' : 'writing'} dangerouslySetInnerHTML={{__html:detail}}></p>
       </div>
     )
   }
