@@ -3,22 +3,25 @@ name: スキルジャンル
 experience: 12
 interest: 12
 comment: |
-  スキルジャンルについてのコメントです。
-  ここにテキストが入ります。ここにテキストが入ります。
+  <p>今までに経験してきた技術、興味がある技術をまとめています。</p>
+  <p>評価されてきたWeb系のフロントエンド開発をはじめ、
+  その他にも様々なジャンルを勉強して、実践に投入してきた</p>
 children:
 - name: Web系開発
   experience: 32
   interest: 12
   comment: |
-    Web系開発についてのコメントです。
-    ここにテキストが入ります。ここにテキストが入ります。
-    ここにテキストが入ります。ここにテキストが入ります。
+    <p>
+      バックエンド開発、マークアップ、デザインなど、万遍なく経験していますが、
+      主にJavascript周りのフロントエンド開発で評価をいただくことが多いです。
+    </p>
+    他にも開発環境構築の自動化やアセットパイプライン構築も進んで行います。
   children:
   - name: フロントエンド
-    experience: 12
-    interest: 12
+    experience: 42
+    interest: 42
     children:
-      - name: test1
+      - name: Javascript
         experience: 12
         interest: 12
       - name: test2
@@ -28,8 +31,8 @@ children:
         experience: 12
         interest: 12
   - name: バックエンド
-    experience: 12
-    interest: 12
+    experience: 36
+    interest: 36
     children:
       - name: API実装
         experience: 12
@@ -40,52 +43,41 @@ children:
       - name: test3
         experience: 12
         interest: 12
-  - name: HTML/CSS
-    experience: 12
-    interest: 12
+  - name: マークアップ
+    experience: 24
+    interest: 28
     children:
-      - name: test1
+      - name: SMACSS
         experience: 12
         interest: 12
-      - name: test2
+      - name: BEM
         experience: 12
         interest: 12
-      - name: test3
+      - name: Jade
+        experience: 12
+        interest: 12
+      - name: Adobe CS
         experience: 12
         interest: 12
   - name: 開発環境構築
-    experience: 12
-    interest: 12
+    experience: 36
+    interest: 42
     children:
-      - name: test1
+      - name: Vagrant
         experience: 12
         interest: 12
-      - name: test2
-        experience: 12
-        interest: 12
-      - name: test3
-        experience: 12
-        interest: 12
-  - name: デザイン
-    experience: 12
-    interest: 12
-    children:
-      - name: test1
-        experience: 12
-        interest: 12
-      - name: test2
-        experience: 12
-        interest: 12
-      - name: test3
+      - name: Gulp/Webpack
         experience: 12
         interest: 12
 - name: アプリ開発
   experience: 20
   interest: 12
   comment: |
-    ここにテキストが入ります。ここにテキストが入ります。
-    ここにテキストが入ります。ここにテキストが入ります。
-    ここにテキストが入ります。ここにテキストが入ります。
+    <p>
+      業務経験はWeb系ほどありませんが、Titanium Mobileを用いたiOS/Android対応のアプリ開発/運用の実績があります。
+      趣味で、iOS/Androidの開発を行うこともあります。
+    </p>
+    最近では、Swift/Kotlinを用いた開発に興味があります。
   children:
   - name: ハイブリッドアプリ
     experience: 12
@@ -121,73 +113,68 @@ children:
   experience: 24
   interest: 12
   comment: |
-    ここにテキストが入ります。ここにテキストが入ります。
-    ここにテキストが入ります。ここにテキストが入ります。
-    ここにテキストが入ります。ここにテキストが入ります。
+    <p>
+      Linuxによるサーバー構築の
+      シェルスクリプト/Chef/Ansible/Dockerを用いての環境構築や
+    </p>
+    Gitlab/Jenkins環境構築の実績があります。
+    高負荷/大規模インフラ構築や運用の経験がほとんどないため、興味があります。
   children:
   - name: コンテナ構築
     experience: 12
     interest: 12
     children:
-      - name: test1
+      - name: Docker
         experience: 12
         interest: 12
-      - name: test2
+      - name: docker-compose
         experience: 12
         interest: 12
   - name: 構成管理
     experience: 12
     interest: 12
     children:
-      - name: test1
+      - name: Chef
         experience: 12
         interest: 12
-      - name: test2
+      - name: Ansible
         experience: 12
         interest: 12
   - name: CI環境構築
     experience: 12
     interest: 12
     children:
-      - name: test1
+      - name: Jenkins
         experience: 12
         interest: 12
-      - name: test2
-        experience: 12
-        interest: 12
-  - name: サーバー監視
-    experience: 12
-    interest: 12
-    children:
-      - name: test1
-        experience: 12
-        interest: 12
-      - name: test2
+      - name: TravisCI
         experience: 12
         interest: 12
   - name: 大規模インフラ
     experience: 12
-    interest: 12
+    interest: 34
     children:
-      - name: test1
+      - name: サーバー監視
         experience: 12
         interest: 12
-      - name: test2
+      - name: スケーリング
+        experience: 12
+        interest: 12
+      - name: ロードバランサー
         experience: 12
         interest: 12
 - name: データベース
   experience: 22
   interest: 12
   comment: |
-    ここにテキストが入ります。ここにテキストが入ります。
-    ここにテキストが入ります。ここにテキストが入ります。
-    ここにテキストが入ります。ここにテキストが入ります。
+    SQLチューニングの実績があります。
+    最近ではMongoDB
   children:
   - name: DB設計
     experience: 12
     interest: 12
     children:
-      - name: test1
+      - name: MySQL
         experience: 12
         interest: 12
       - name: test2
@@ -197,7 +184,7 @@ children:
     experience: 12
     interest: 12
     children:
-      - name: test1
+      - name: EXPLAIN
         experience: 12
         interest: 12
       - name: test2
@@ -207,7 +194,7 @@ children:
     experience: 12
     interest: 12
     children:
-      - name: test1
+      - name: MongoDB
         experience: 12
         interest: 12
       - name: test2
@@ -217,6 +204,7 @@ children:
   experience: 18
   interest: 12
   comment: |
+    マネジメントについてのコメントです。
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
     ここにテキストが入ります。ここにテキストが入ります。
@@ -251,15 +239,23 @@ children:
       - name: test2
         experience: 12
         interest: 12
-- name: 興味/趣味
+- name: 主な開発言語
   experience: 26
   interest: 12
   comment: |
-    ここにテキストが入ります。ここにテキストが入ります。
-    ここにテキストが入ります。ここにテキストが入ります。
-    ここにテキストが入ります。ここにテキストが入ります。
+    静的型付け関数型言語の学習に重点を置いています。
   children:
-  - name: OSS活動
+  - name: PHP
+    experience: 12
+    interest: 12
+    children:
+      - name: PHP
+        experience: 12
+        interest: 12
+      - name: test2
+        experience: 12
+        interest: 12
+  - name: Javascript
     experience: 12
     interest: 12
     children:
@@ -269,7 +265,7 @@ children:
       - name: test2
         experience: 12
         interest: 12
-  - name: IoT開発
+  - name: Ruby
     experience: 12
     interest: 12
     children:
@@ -279,7 +275,7 @@ children:
       - name: test2
         experience: 12
         interest: 12
-  - name: 機械学習
+  - name: Scala
     experience: 12
     interest: 12
     children:

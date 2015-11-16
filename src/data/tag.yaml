@@ -12,7 +12,8 @@ children:
   - name: DOM
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      DOMについてのコメントです。
     children:
     - name: jQuery
       experience: 32
@@ -29,7 +30,8 @@ children:
   - name: Framework
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      Frameworkについてのコメントです。
     children:
     - name: Redux
       experience: 40
@@ -46,7 +48,8 @@ children:
   - name: AltJS
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      AltJSについてのコメントです。
     children:
     - name: Typescript
       experience: 50
@@ -63,7 +66,8 @@ children:
   - name: Task runner
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      TaskRunnerについてのコメントです。
     children:
     - name: Grunt
       experience: 12
@@ -85,7 +89,8 @@ children:
   - name: Meta
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      Metaについてのコメントです。
     children:
     - name: Jade
       experience: 16
@@ -99,7 +104,8 @@ children:
   - name: CSS Structure
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      CSSについてのコメントです。
     children:
     - name: BEM
       experience: 32
@@ -116,9 +122,14 @@ children:
   comment: コメント
   children:
   - name: PHP
-    experience: 12
+    experience: 32
     interest: 12
-    comment: コメント
+    comment: |
+      <p>
+        PHPは業務経験が長い言語です。
+        オープンソースCMSのカスタマイズや、Webフレームワークを用いた開発を多く行っていました。
+      </p>
+      最近ではScala
     children:
     - name: Synfony2
       experience: 24
@@ -138,7 +149,8 @@ children:
   - name: Javascript
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      Javascriptについてのコメントです。
     children:
     - name: Node.js
       experience: 42
@@ -149,15 +161,20 @@ children:
   - name: Ruby
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      Rubyについてのコメントです。
     children:
     - name: Rails
+      experience: 32
+      interest: 44
+    - name: Grapes
       experience: 32
       interest: 44
   - name: Java
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      Javaについてのコメントです。
     children:
     - name: Seaser2
       experience: 12
@@ -168,7 +185,8 @@ children:
   - name: IDE/Editor
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      IDE/Editorについてのコメントです。
     children:
     - name: Eclipse
       experience: 24
@@ -197,7 +215,8 @@ children:
   - name: OS
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      OSについてのコメントです。
     children:
     - name: Linux
       experience: 24
@@ -216,7 +235,8 @@ children:
   - name: VPS
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      VPSについてのコメントです。
     children:
     - name: AWS
       experience: 32
@@ -233,7 +253,8 @@ children:
   - name: Provisioning
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      Provisionについてのコメントです。
     children:
     - name: Chef
       experience: 24
@@ -247,7 +268,8 @@ children:
   - name: ShellScript
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      ShellScriptについてのコメントです。
     children:
     - name: sh
       experience: 12
@@ -266,7 +288,8 @@ children:
   - name: SQL
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      SQLについてのコメントです。
     children:
     - name: MySQL
       experience: 30
@@ -280,7 +303,8 @@ children:
   - name: NoSQL
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      NoSQLについてのコメントです。
     children:
     - name: MongoDB
       experience: 28
@@ -299,7 +323,8 @@ children:
   - name: Tools
     experience: 12
     interest: 12
-    comment: コメント
+    comment: |
+      Toolsについてのコメントです。
     children:
     - name: Jenkins
       experience: 24
