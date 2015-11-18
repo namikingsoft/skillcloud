@@ -1,86 +1,90 @@
 ---
-name: Langs
+name: Tags
 experience: 12
 interest: 12
-comment: コメント
+comment: タグ
 children:
 - name: Javascript
   experience: 12
   interest: 12
   comment: コメント
   children:
-  - name: DOM
+  - name: Javascript View
     experience: 12
     interest: 12
     comment: |
-      DOMについてのコメントです。
+      最近開発するSPAでは、React.jsを使うことが多いです。
+      フロントエンド界隈は、変化が激しくて大変ですが、
+      表現の手段が増えていき、楽しいです。
     children:
     - name: jQuery
-      experience: 32
-      interest: 44
-    - name: react.js
       experience: 40
-      interest: 44
+      interest: 24
+    - name: React
+      experience: 50
+      interest: 52
     - name: D3.js
       experience: 60
-      interest: 44
-    - name: NVD3
-      experience: 30
-      interest: 44
+      interest: 52
+    - name: Canvas
+      experience: 36
+      interest: 26
   - name: Framework
     experience: 12
     interest: 12
     comment: |
-      Frameworkについてのコメントです。
+      最近の私用な開発では、Fluxフレームワークを用いています。
+      Reduxのexamplesには、モダンな開発のノウハウが詰まっていて、
+      とても勉強になりました。
     children:
     - name: Redux
       experience: 40
-      interest: 44
+      interest: 50
     - name: AngularJS
-      experience: 24
-      interest: 44
+      experience: 32
+      interest: 32
     - name: Backbone.js
-      experience: 20
-      interest: 44
+      experience: 32
+      interest: 24
     - name: Knockout.js
-      experience: 12
-      interest: 44
+      experience: 24
+      interest: 16
   - name: AltJS
     experience: 12
     interest: 12
     comment: |
-      AltJSについてのコメントです。
+      最近では、静的型付け言語でES6とも互換性のあるTypeScript一択なのですが、
+      個人的には、書いていて気持ちいいCoffeeScriptも好きです。
+      実用段階ではなさそうですが、関数型言語のPureScriptも気になっています。
     children:
-    - name: Typescript
+    - name: TypeScript
       experience: 50
-      interest: 44
+      interest: 56
     - name: CoffeeScript
       experience: 40
-      interest: 44
-    - name: ECMAScript6
+      interest: 40
+    - name: ECMAScript6~
+      experience: 42
+      interest: 50
+    - name: PureScript
       experience: 50
-      interest: 44
-    - name: ECMAScript7
-      experience: 20
-      interest: 44
-  - name: Task runner
+      interest: 56
+  - name: Task runner (Asset Pipeline)
     experience: 12
     interest: 12
     comment: |
-      TaskRunnerについてのコメントです。
+      最近では、お手軽で多機能なwebpackを使うことが多いですが、
+      細かいタスクを組みたい場合はgulpを使ったります。
     children:
     - name: Grunt
-      experience: 12
-      interest: 44
-    - name: gulp.js
-      experience: 20
-      interest: 44
+      experience: 24
+      interest: 16
+    - name: gulp
+      experience: 36
+      interest: 36
     - name: webpack
-      experience: 32
-      interest: 44
-    - name: browserify
-      experience: 12
-      interest: 44
+      experience: 42
+      interest: 42
 - name: HTML/CSS
   experience: 12
   interest: 12
@@ -90,7 +94,8 @@ children:
     experience: 12
     interest: 12
     comment: |
-      Metaについてのコメントです。
+      node.jsとの親和性の高くシンプルに書けるStylusを使うことが多いです。
+      BEMなどのまどろっこしい命名規約もスマートに書けるので、気に入っています。
     children:
     - name: Jade
       experience: 16
@@ -105,7 +110,8 @@ children:
     experience: 12
     interest: 12
     comment: |
-      CSSについてのコメントです。
+      最近はディレクトリ整理にSMACSS、命名規約にBEMなど、複数の設計技法を組み合わせるやり方を最近意識しています。
+      CSSとはいえ、突き詰めるとなかなか奥が深く、面白いです。
     children:
     - name: BEM
       experience: 32
@@ -121,15 +127,12 @@ children:
   interest: 12
   comment: コメント
   children:
-  - name: PHP
+  - name: Webフレームワーク
     experience: 32
     interest: 12
     comment: |
-      <p>
-        PHPは業務経験が長い言語です。
-        オープンソースCMSのカスタマイズや、Webフレームワークを用いた開発を多く行っていました。
-      </p>
-      最近ではScala
+      言語的に気持ちよく書ける、Railsも好きですが、
+      最近では、関数型言語に魅せられて、Scalatraを導入したりしています。
     children:
     - name: Synfony2
       experience: 24
@@ -140,48 +143,15 @@ children:
     - name: ZendFramework1
       experience: 16
       interest: 44
-    - name: WordPress
-      experience: 16
-      interest: 44
-    - name: EC-CUBE
-      experience: 14
-      interest: 44
-  - name: Javascript
-    experience: 12
-    interest: 12
-    comment: |
-      Javascriptについてのコメントです。
-    children:
-    - name: Node.js
-      experience: 42
-      interest: 44
-    - name: express4
+    - name: Express4
       experience: 36
       interest: 44
-  - name: Ruby
-    experience: 12
-    interest: 12
-    comment: |
-      Rubyについてのコメントです。
-    children:
+    - name: Scalatra
+      experience: 24
+      interest: 44
     - name: Rails
       experience: 32
-      interest: 44
-    - name: Grapes
-      experience: 32
-      interest: 44
-  - name: Java
-    experience: 12
-    interest: 12
-    comment: |
-      Javaについてのコメントです。
-    children:
-    - name: Seaser2
-      experience: 12
-      interest: 44
-    - name: SAStruts
-      experience: 12
-      interest: 44
+      interest: 36
   - name: IDE/Editor
     experience: 12
     interest: 12
@@ -232,30 +202,37 @@ children:
   interest: 12
   comment: コメント
   children:
-  - name: VPS
+  - name: Infrastructure
     experience: 12
     interest: 12
     comment: |
-      VPSについてのコメントです。
+      Dockerについては、最近積極的に取り組んでおり、
+      開発環境からCI環境、本番環境まで、一貫して活用した実績があります。
+      Swarmを用いたコンテナのクラスタリングなどに興味があります。
     children:
     - name: AWS
       experience: 32
       interest: 44
     - name: VPS
-      experience: 20
-      interest: 44
-    - name: Vagrant
       experience: 32
-      interest: 44
+      interest: 32
+    - name: Vagrant
+      experience: 42
+      interest: 32
     - name: Docker
       experience: 50
-      interest: 44
+      interest: 52
   - name: Provisioning
     experience: 12
     interest: 12
     comment: |
-      Provisionについてのコメントです。
+      開発環境用のプロビジョニング自動化については、進んで取り組んできました。
+      最近では、Dockerなどのイミュータブルインフラが出てきたので、
+      冪等性についてはあまり意識せず、シェルスクリプトで書く事が多いです。
     children:
+    - name: Shell
+      experience: 36
+      interest: 44
     - name: Chef
       experience: 24
       interest: 44
@@ -264,21 +241,6 @@ children:
       interest: 44
     - name: Itamae
       experience: 24
-      interest: 44
-  - name: ShellScript
-    experience: 12
-    interest: 12
-    comment: |
-      ShellScriptについてのコメントです。
-    children:
-    - name: sh
-      experience: 12
-      interest: 44
-    - name: bash
-      experience: 12
-      interest: 44
-    - name: zsh
-      experience: 12
       interest: 44
 - name: Database
   experience: 12
@@ -289,14 +251,15 @@ children:
     experience: 12
     interest: 12
     comment: |
-      SQLについてのコメントです。
+      主にMySQLを利用したアプリケーションを組むことが多いです。
+      SQLのチューニングを担当することもあります。
     children:
     - name: MySQL
-      experience: 30
-      interest: 44
+      experience: 40
+      interest: 40
     - name: PostgreSQL
-      experience: 16
-      interest: 44
+      experience: 20
+      interest: 20
     - name: SQLite
       experience: 16
       interest: 44
@@ -304,27 +267,33 @@ children:
     experience: 12
     interest: 12
     comment: |
-      NoSQLについてのコメントです。
+      JavaScriptと親和性の高いのMongoDBをよく使います。
+      Expressと連携して、MEANスタックを組んだことがありますが、
+      シングルスレッドのイベント駆動のためか、
+      クエリ数が多い時になかなかスピードが出ずに苦労したこともありました。
     children:
     - name: MongoDB
-      experience: 28
+      experience: 32
       interest: 44
     - name: Redis
-      experience: 14
-      interest: 44
+      experience: 20
+      interest: 36
     - name: Memcache
-      experience: 14
-      interest: 44
+      experience: 16
+      interest: 16
 - name: Management
   experience: 12
   interest: 12
   comment: コメント
   children:
-  - name: Tools
+  - name: Management Tools
     experience: 12
     interest: 12
     comment: |
-      Toolsについてのコメントです。
+      Redmine(Alminium),GitLab,Jenkinsを利用して、
+      プロジェクト管理＆CIビルド環境の構築をやっていました。
+      最近では、TAIGAのようなアジャイル特化されたかんばんツールでの
+      プロジェクト管理に興味があります。
     children:
     - name: Jenkins
       experience: 24
