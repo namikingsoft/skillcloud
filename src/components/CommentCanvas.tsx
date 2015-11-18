@@ -8,7 +8,6 @@ interface Props {
 
 interface State {
   detail: string
-  finished: boolean
 }
 
 export default class CommentCanvas extends Component<Props, State>
@@ -17,45 +16,34 @@ export default class CommentCanvas extends Component<Props, State>
     super()
     this.state = {
       detail: '',
-      finished: false,
     }
   }
 
   render() {
     const {title, comment} = this.props
-    const {detail, finished} = this.state
+    const {detail} = this.state
     return (
       <div className="module-comment">
         <h3>{title || "Initializing..."}</h3>
-        <p className={finished? '' : 'writing'} dangerouslySetInnerHTML={{__html:detail}}></p>
+        <p dangerouslySetInnerHTML={{__html:detail}}></p>
       </div>
     )
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: Props, prevState: State) {
     const {comment} = this.props
-    const {detail, finished} = this.state
-    if (finished && comment !== detail) {
+    const {detail} = this.state
+    if (comment !== prevProps.comment) {
       this.setState({
         detail: '',
-        finished: false,
       })
     }
     else if (detail.length < comment.length) {
       setTimeout(() => {
         this.setState({
           detail: comment.slice(0, detail.length + 1),
-          finished: false,
         })
       }, 10)
-    }
-    else if (!finished) {
-      setTimeout(() => {
-        this.setState({
-          detail: comment,
-          finished: true,
-        })
-      }, 100)
     }
   }
 }
