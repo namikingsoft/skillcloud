@@ -170,18 +170,43 @@ children:
     - name: Visual Studio
       experience: 12
       interest: 44
-    - name: Titanium Mobile CLI
+  - name: スマホアプリ開発
+    experience: 12
+    interest: 12
+    comment: |
+      昔、趣味でAndroidの勝手アプリを作っていたりしていました。
+      業務としては、Titanium Mobileを用いてのアプリ開発と保守経験があります。
+      最近になり、SwiftやKotlinのようなモダン言語の影響で、
+      何か良いネタはないかと、探っているところです。
+    children:
+    - name: Titanium Mobile
       experience: 20
       interest: 44
-    - name: Photoshop
-      experience: 32
-      interest: 44
-    - name: Gimp
-      experience: 32
-      interest: 44
-    - name: Illustrator
+    - name: Swift
       experience: 12
       interest: 44
+    - name: Kotlin
+      experience: 12
+      interest: 44
+  - name: IoT開発
+    experience: 12
+    interest: 12
+    comment: |
+      業務経験ではなく、個人の趣味になりますが、
+      ArduinoNano+RaspberryPi+MEANスタックを用いて、Bluetoothラジコンを作ったり、
+      リモートから家電を操作できるIoTリモコンを作ろうと頑張った時期があります。
+      ソフト開発と比べて、なかなか上手くは行かないことが多いですが、
+      今後も非常に興味がある分野です。
+    children:
+    - name: Arduino
+      experience: 32
+      interest: 50
+    - name: RaspberryPi
+      experience: 24
+      interest: 50
+    - name: 電子工作
+      experience: 32
+      interest: 50
   - name: OS
     experience: 12
     interest: 12
