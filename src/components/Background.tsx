@@ -2,8 +2,8 @@ import * as React from 'react'
 import {Component, PropTypes} from 'react'
 
 interface State {
-  top: number
-  left: number
+  x: number
+  y: number
 }
 
 export default class Background extends Component<any, State>
@@ -13,15 +13,17 @@ export default class Background extends Component<any, State>
   constructor() {
     super()
     this.state = {
-      top: -2000,
-      left: -2000,
+      x: 0,
+      y: 0,
     }
     this.dx = this.dy = 0
   }
 
   render() {
     return (
-      <div className="module-background" style={this.state}></div>
+      <div className="module-background" style={{
+        backgroundPosition: `${this.state.x}px ${this.state.y}px`,
+      }}></div>
     )
   }
 
@@ -39,8 +41,8 @@ export default class Background extends Component<any, State>
     const dist = Math.sqrt(this.dx*this.dx + this.dy*this.dy)
     if (dist > 44) {
       this.setState({
-        top: this.state.top - this.dy,
-        left: this.state.left - this.dx,
+        x: this.state.x - this.dy,
+        y: this.state.y - this.dx,
       })
       this.dx = this.dy = 0
     }
