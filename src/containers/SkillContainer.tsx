@@ -56,12 +56,6 @@ export default class SkillContainer extends Component<Props, any>
         <CommentCanvas
           title={selected? selected.name: ''}
           comment={comment} />
-        <div className="module-description">
-          <p>
-            <i className="fa fa-pencil-square-o"></i>
-            スキル名のクリックで更に詳細が見れます。
-          </p>
-        </div>
       </div>
     )
   }

@@ -56,16 +56,6 @@ export default class TagContainer extends Component<Props, any>
         <CommentCanvas
           title={selected? selected.name: ''}
           comment={comment} />
-        <div className="module-description">
-          <p>
-            <i className="fa fa-pencil-square-o"></i>
-            スキル名のクリックで更に詳細が見れます。
-          </p>
-          <ul>
-            <li><Link to="/tag/experience">Experiece</Link></li>
-            <li><Link to="/tag/interest">Interest</Link></li>
-          </ul>
-        </div>
       </div>
     )
   }

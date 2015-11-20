@@ -1,10 +1,10 @@
-import React, {Component, PropTypes} from 'react'
-import {Router, Route} from 'react-router'
-import createHashHistory from 'history/lib/createHashHistory'
-import Navigation from 'containers/Navigation'
+import Base from 'containers/Base'
 import SkillContainer from 'containers/SkillContainer'
 import TagContainer from 'containers/TagContainer'
 import NotFound from 'containers/NotFound'
+import React, {Component, PropTypes} from 'react'
+import {Router, Route} from 'react-router'
+import createHashHistory from 'history/lib/createHashHistory'
 
 export default class App extends Component
 {
@@ -12,7 +12,7 @@ export default class App extends Component
     return (
       <div className="layout-app">
         <Router history={createHashHistory()}>
-          <Route component={Navigation}>
+          <Route component={Base}>
             <Route path="/" component={SkillContainer} />
             <Route path="/skill" component={SkillContainer} />
             <Route path="/tag/:mode" component={TagContainer} />

@@ -47,7 +47,7 @@ export default class SkillCloudCanvas extends Component<Props, any>
 
   componentDidUpdate() {
     const {cloud, selected} = this.props
-    this.draw(cloud.filter(selected))
+    this.resize().draw(cloud.filter(selected))
   }
 
   private init(): SkillCloudCanvas {
@@ -80,20 +80,10 @@ export default class SkillCloudCanvas extends Component<Props, any>
     const drag = d3.behavior.drag().on('drag', () => {
       viewX -= d3.event.dx
       viewY -= d3.event.dy
-      this.svg.attr('translate', `${viewX} ${viewY}`)
-    })
-    const zoom = d3.behavior.zoom().on('zoom', () => {
-      let viewWidthPre = viewWidth
-      let viewHeightPre = viewHeight
-      viewWidth = box.width * d3.event.scale
-      viewHeight = box.height * d3.event.scale
-      viewX += (viewWidthPre - viewWidth) / 2
-      viewY += (viewHeightPre - viewHeight) / 2
-      this.svg.attr('viewBox', `${viewX} ${viewY} ${viewWidth} ${viewHeight}`)
+      this.svg.attr('viewBox', `${viewX} ${viewY} ${box.width} ${box.height}`)
     })
     this.svg
     .call(drag)
-    .call(zoom) // @todo touch device
     .attr('viewBox', `${viewX} ${viewY} ${box.width} ${box.height}`)
     this.layout.resize(box.width, box.height)
 
