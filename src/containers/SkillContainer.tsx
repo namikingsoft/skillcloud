@@ -58,6 +58,12 @@ export default class SkillContainer extends Component<Props, any>
     this.componentDidUpdate()
   }
 
+  componentWillUnmount() {
+    // @todo messy
+    const {select} = this.props
+    select(SkillConst.rootCloud.rootNode.skill)
+  }
+
   componentDidUpdate(prevProps: Props = null) {
     const {action} = this.props.params
     const prevAction = prevProps? prevProps.params['action'] : null
@@ -80,14 +86,10 @@ export default class SkillContainer extends Component<Props, any>
 
   selectBySkill(skill: Skill) {
     if (!skill || skill.hasChildren) {
+      // @todo messy
       const {select} = this.props
-      select(skill)
+      select(skill === SkillConst.rootCloud.rootNode.skill ? null : skill)
     }
-  }
-
-  onSelectChart(value: ChartValue) {
-    const {select} = this.props
-    select(value.source)
   }
 
   private get title(): string {
