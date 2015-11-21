@@ -56,6 +56,7 @@ export default class SkillCloud
     return !!node.skill.children.find(skill => !!this.findNodeBySkill(skill))
   }
 
+  // @todo not use
   adjustNodePosition(node: SkillNode) {
     const root = this.rootNode
     node.skill.children.

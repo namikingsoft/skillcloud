@@ -157,7 +157,6 @@ export default class SkillCloudCanvas extends Component<Props, any>
   private select(node: SkillNode) {
     if (!d3.event.defaultPrevented && node.skill.hasChildren) {
       const {cloud} = this.props;
-      cloud.adjustNodePosition(node)
       location.hash = `skill/${node.skill.name}`
     }
   }
