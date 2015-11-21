@@ -13,10 +13,14 @@ import {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {clone} from 'lodash'
+import match from 'match-case'
 
 interface Props {
   selected: Skill
+  displayed: Skill
   select: (skill: Skill)=>Object
+  display: (skill: Skill)=>Object
+  params: {[index: string]: string}
 }
 
 @connect(
@@ -27,40 +31,54 @@ interface Props {
 export default class SkillContainer extends Component<Props, any>
 {
   render() {
-    const {selected} = this.props
-    const node = SkillConst.rootCloud.findNodeBySkill(selected)
-    const data: ChartData = (()=>{
-      if (selected) {
-        return ChartDataFactory.createBySkillList(selected.children)
-      } else {
-        return null
-      }
-    })()
-    const comment = (()=>{
-      if (selected) {
-        return selected.comment
-      } else {
-        return "Initializing..."
-      }
-    })()
+    const {selected, displayed} = this.props
+    const cloud = SkillConst.rootCloud
+    const node = cloud.findNodeBySkill(selected)
+    const data: ChartData = selected?
+      ChartDataFactory.createBySkillList(selected.children) : null
+
     return (
       <div className="layout-skill">
         <SkillCloudCanvas
-          cloud={SkillConst.rootCloud}
+          cloud={cloud}
           selected={node}
-          onSelect={skill => this.onSelectCloud(skill)} />
+          onRide={skill => this.ride(skill)}
+          onDown={skill => this.ride(null)} />
         <ChartCanvas
           data={data}
-          root={SkillConst.rootChart}
-          onSelect={value => this.onSelectChart(value)} />
+          root={SkillConst.rootChart} />
         <CommentCanvas
-          title={selected? selected.name: ''}
-          comment={comment} />
+          title={this.title}
+          comment={this.comment} />
       </div>
     )
   }
 
-  onSelectCloud(skill: Skill) {
+  componentDidMount() {
+    this.componentDidUpdate()
+  }
+
+  componentDidUpdate(prevProps: Props = null) {
+    const {action} = this.props.params
+    const prevAction = prevProps? prevProps.params['action'] : null
+    if (action === prevAction) return
+    this.selectByName(action)
+  }
+
+  ride(skill: Skill) {
+    if (!skill || skill.hasChildren) {
+      const {display} = this.props
+      display(skill)
+    }
+  }
+
+  selectByName(name: string) {
+    const node = SkillConst.rootCloud.findNodeByName(name)
+    const skill = node? node.skill : null
+    this.selectBySkill(skill)
+  }
+
+  selectBySkill(skill: Skill) {
     if (!skill || skill.hasChildren) {
       const {select} = this.props
       select(skill)
@@ -70,5 +88,31 @@ export default class SkillContainer extends Component<Props, any>
   onSelectChart(value: ChartValue) {
     const {select} = this.props
     select(value.source)
+  }
+
+  private get title(): string {
+    const {selected, displayed} = this.props
+    return match<Skill, string>(displayed).
+      caseOfNone(
+        match<Skill, string>(selected).
+          caseOfNone(SkillConst.rootCloud.rootNode.skill.name).
+          caseOfElse(skill => skill.name).
+        end()
+      ).
+      caseOfElse(skill => skill.name).
+    end()
+  }
+
+  private get comment(): string {
+    const {selected, displayed} = this.props
+    return match<Skill, string>(displayed).
+      caseOfNone(
+        match<Skill, string>(selected).
+          caseOfNone(SkillConst.rootCloud.rootNode.skill.comment).
+          caseOfElse(skill => skill.comment).
+        end()
+      ).
+      caseOfElse(skill => skill.comment).
+    end()
   }
 }

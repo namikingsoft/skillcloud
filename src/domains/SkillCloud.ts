@@ -48,6 +48,10 @@ export default class SkillCloud
     return this.nodes.find(node => node.skill === skill)
   }
 
+  findNodeByName(name: string): SkillNode {
+    return this.nodes.find(node => node.skill.name === name)
+  }
+
   isIncludeNode(node: SkillNode): boolean {
     return !!node.skill.children.find(skill => !!this.findNodeBySkill(skill))
   }

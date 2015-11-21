@@ -10,12 +10,13 @@ import {List} from 'immutable'
 import match from 'match-case'
 
 const d3 = require('d3')
-const color = d3.scale.category20()
+const color = d3.scale.category10()
 
 interface Props {
   cloud: SkillCloud
   selected: SkillNode
-  onSelect: (skill: Skill)=>void
+  onRide: (skill: Skill)=>void
+  onDown: (skill: Skill)=>void
 }
 
 export default class SkillCloudCanvas extends Component<Props, any>
@@ -34,20 +35,17 @@ export default class SkillCloudCanvas extends Component<Props, any>
   componentDidMount() {
     this.init().resize()
     window.addEventListener('resize', () => this.resize())
-
-    const {cloud, onSelect} = this.props
-    onSelect(null);setTimeout(() => {
-      onSelect(cloud.nodes.get(0).skill)
-    }, 3600)
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', () => this.resize())
   }
 
-  componentDidUpdate() {
-    const {cloud, selected} = this.props
-    this.resize().draw(cloud.filter(selected))
+  componentDidUpdate(prevProps: Props) {
+    if (this.props.selected !== prevProps.selected) {
+      const {cloud, selected} = this.props
+      this.resize().draw(cloud.filter(selected))
+    }
   }
 
   private init(): SkillCloudCanvas {
@@ -106,11 +104,9 @@ export default class SkillCloudCanvas extends Component<Props, any>
       this.layout.drag()
       .on("dragstart", () => d3.event.sourceEvent.stopPropagation())
     )
-    .on('click', d => {
-      if (!d3.event.defaultPrevented) {
-        this.select(d)
-      }
-    })
+    .on('click', d => this.select(d))
+    .on('mouseover', d => this.ride(d))
+    .on('mouseout', d => this.down(d))
     g.append('circle')
     g.append('text')
 
@@ -125,10 +121,11 @@ export default class SkillCloudCanvas extends Component<Props, any>
   }
 
   private update(cloud: SkillCloud): SkillCloudCanvas {
+    const {selected} = this.props
     this.svg.selectAll('g').
     attr("class", d =>
       match<string>(cloud.isIncludeNode(d)).
-        caseOf(true, `${d.classes} active`).
+        caseOf(true, `${d.classes} active` + (d===selected ? ' selected' : '')).
         caseOfElse(d.classes).
       end()
     )
@@ -147,9 +144,21 @@ export default class SkillCloudCanvas extends Component<Props, any>
     return this
   }
 
+  private ride(node: SkillNode) {
+    const {onRide} = this.props;
+    onRide(node.skill)
+  }
+
+  private down(node: SkillNode) {
+    const {onDown} = this.props;
+    onDown(node.skill)
+  }
+
   private select(node: SkillNode) {
-    const {cloud, onSelect} = this.props;
-    cloud.adjustNodePosition(node)
-    onSelect(node.skill)
+    if (!d3.event.defaultPrevented && node.skill.hasChildren) {
+      const {cloud} = this.props;
+      cloud.adjustNodePosition(node)
+      location.hash = `skill/${node.skill.name}`
+    }
   }
 }

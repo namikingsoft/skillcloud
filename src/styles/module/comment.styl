@@ -2,30 +2,34 @@
   position absolute
   left 0
   bottom 0
-  width 30%
+  width 360px
   margin 0.5em
   padding 1em
   color #fff
   z-index 1
+  transition all 0.5s linear
 
-  & > h3
+  h3
     font-size 1.32em
     font-weight bold
-    margin-top 0
-    margin-bottom 0.5em
+    margin 0
+    margin-bottom 0.4em
     padding-bottom 0.3em
     border-bottom 1px solid #ccc
     &:before
       content '●'
       margin-right 0.25em
 
-  & > p
+    .typing
+      &:after
+        content '｜'
+        color #6f6
+        animation blink 1s step-end infinite
+
+  .comment
+    display inline-block
     color: #fff
     line-height 1.8
-    &:after
-      content 'I'
-      color #6f6
-      font-weight bold
-      animation blink 1s step-end infinite
     p
-      margin-top 0.8em
+      display inline-block
+      margin-top 0.6em
