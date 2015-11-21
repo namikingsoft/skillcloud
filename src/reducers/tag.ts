@@ -3,22 +3,22 @@ import * as Types from '../constants/ActionTypes'
 import match from 'match-case'
 
 interface State {
-  selected: Tag
+  displayed: Tag
 }
 
 interface Action {
   type: string
-  selected?: Tag
+  displayed?: Tag
 }
 
 const initialState = {
-  selected: null,
+  displayed: null,
 }
 
 export default function tag(state = initialState, action) {
   return match<string, State>(action.type).
-    caseOf(Types.SELECT, v => {
-      state.selected = action.selected
+    caseOf(Types.DISPLAY, v => {
+      state.displayed = action.displayed
       return state
     }).
     caseOfElse(v => state).

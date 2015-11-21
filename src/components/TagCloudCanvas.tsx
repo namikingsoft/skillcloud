@@ -11,7 +11,8 @@ const color = d3.scale.category20()
 interface Props {
   cloud: TagCloud
   mode: string
-  onSelect: (node: TagNode)=>void
+  onRide: (node: TagNode)=>void
+  onDown: (node: TagNode)=>void
 }
 
 export default class TagCloudCanvas extends Component<Props, any>
@@ -95,25 +96,25 @@ export default class TagCloudCanvas extends Component<Props, any>
 
     const g = node.enter()
     .append("g")
+    .call(this.layout.drag())
     .on('mouseover', d => {
       this.svg.selectAll(`g.group${d.group} circle`)
       .transition()
       .duration(200)
       .style("fill-opacity", 1)
-      const {onSelect} = this.props
-      onSelect(d)
+      const {onRide} = this.props
+      onRide(d)
     })
     .on('mouseout', d => {
       this.svg.selectAll(`g.group${d.group} circle`)
       .transition()
       .duration(200)
       .style("fill-opacity", 0.4)
+      const {onDown} = this.props
+      onDown(d)
     })
-    .on('mousedown', d => {
-      const {onSelect} = this.props
-      onSelect(d)
-    })
-    .call(this.layout.drag())
+    .on('mousedown', d => this.props.onRide(d))
+    //.on('mouseup', d => this.props.onDown(d))
 
     g.append("circle")
     g.append("text")

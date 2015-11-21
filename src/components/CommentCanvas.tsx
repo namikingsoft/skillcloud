@@ -34,6 +34,10 @@ export default class CommentCanvas extends Component<Props, State>
     )
   }
 
+  componentWillMount() {
+    this.componentDidUpdate(this.props, this.state)
+  }
+
   componentDidUpdate(prevProps: Props, prevState: State) {
     const {title} = this.props
     const {typing} = this.state

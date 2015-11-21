@@ -14,11 +14,12 @@ import {Link} from 'react-router'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {clone} from 'lodash'
+import match from 'match-case'
 
 interface Props {
-  selected: Tag
+  displayed: Tag
   params: {[index: string]: string}
-  select: (tag: Tag)=>Object
+  display: (tag: Tag)=>Object
 }
 
 @connect(
@@ -29,39 +30,62 @@ interface Props {
 export default class TagContainer extends Component<Props, any>
 {
   render() {
-    const {selected, params} = this.props
-    const data: ChartData = (()=>{
-      if (selected) {
-        return ChartDataFactory.createByTagList(selected.children)
-      } else {
-        return null
-      }
-    })()
-    const comment = (()=>{
-      if (selected) {
-        return selected.comment
-      } else {
-        return "Initializing..."
-      }
-    })()
+    const {displayed, params} = this.props
+    const data: ChartData = displayed?
+      ChartDataFactory.createByTagList(displayed.children) : null
     return (
       <div className="layout-tag">
         <TagCloudCanvas
           cloud={TagConst.rootCloud}
           mode={params['mode']}
-          onSelect={node => this.onSelectNode(node)} />
+          onRide={node => this.display(node)}
+          onDown={node => this.display(null)} />
         <ChartCanvas
           data={data}
           root={TagConst.rootChart} />
         <CommentCanvas
-          title={selected? selected.name: ''}
-          comment={comment} />
+          title={this.title}
+          comment={this.comment} />
       </div>
     )
   }
 
-  onSelectNode(node: TagNode) {
-    const {select} = this.props
-    select(node.parentTag)
+  display(node: TagNode) {
+    const {display} = this.props
+    display(node ? node.parentTag : null)
+  }
+
+  private get title() {
+    const {displayed, params} = this.props
+    return match<Tag, string>(displayed).
+      caseOfNone(none =>
+        match<string, string>(params['mode']).
+          caseOf("experience", v => "経験のある技術").
+          caseOf("interest", v => "興味のある技術").
+          caseOfElse("Initializing...").
+        end()
+      ).
+      caseOfElse(tag => tag.name).
+    end()
+  }
+
+  private get comment() {
+    const {displayed, params} = this.props
+    return match<Tag, string>(displayed).
+      caseOfNone(none =>
+        match<string, string>(params['mode']).
+          caseOf("experience", v =>
+            "経験のある技術を、ボールの大きさで経験度の度合いを表しています。\n\n" +
+            "ボールにマウスに乗せると、関連のある技術がハイライトされます。"
+          ).
+          caseOf("interest", v =>
+            "興味のある技術を、ボールの大きさで興味度の度合いを表しています。\n\n" +
+            "ボールにマウスに乗せると、関連のある技術がハイライトされます。"
+          ).
+          caseOfElse("Initializing...").
+        end()
+      ).
+      caseOfElse(tag => tag.comment).
+    end()
   }
 }
