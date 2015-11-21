@@ -3,7 +3,8 @@ name: スキルジャンル
 experience: 12
 interest: 12
 comment: |
-  <p>今までに経験してきた技術、興味がある技術をまとめています。</p>
+  今までに経験してきた技術、興味がある技術をまとめています。
+
   評価されてきたWeb系のフロントエンド開発をはじめ、
   その他にも様々なジャンルを勉強して、実践に投入してきた
 children:
@@ -11,15 +12,18 @@ children:
   experience: 32
   interest: 12
   comment: |
-    <p>
-      バックエンド開発、マークアップ、デザインなど、万遍なく経験していますが、
-      主にJavascript周りのフロントエンド開発で評価をいただくことが多いです。
-    </p>
+    バックエンド開発、マークアップ、デザインなど、万遍なく経験していますが、
+    主にJavascript周りのフロントエンド開発で評価をいただくことが多いです。
+
     他にも開発環境構築の自動化やアセットパイプライン構築も進んで行います。
   children:
   - name: フロントエンド
     experience: 42
     interest: 42
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
       - name: Javascript
         experience: 12
@@ -33,6 +37,10 @@ children:
   - name: バックエンド
     experience: 36
     interest: 36
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
       - name: API実装
         experience: 12
@@ -43,25 +51,30 @@ children:
       - name: test3
         experience: 12
         interest: 12
-  - name: マークアップ
-    experience: 24
-    interest: 28
+  - name: データベース
+    experience: 22
+    interest: 12
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
-      - name: SMACSS
+      - name: MySQL
         experience: 12
         interest: 12
-      - name: BEM
+      - name: SQLチューニング
         experience: 12
         interest: 12
-      - name: Jade
-        experience: 12
-        interest: 12
-      - name: Adobe CS
+      - name: MongoDB
         experience: 12
         interest: 12
   - name: 開発環境構築
     experience: 36
     interest: 42
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
       - name: Vagrant
         experience: 12
@@ -73,15 +86,19 @@ children:
   experience: 20
   interest: 12
   comment: |
-    <p>
-      業務経験はWeb系ほどありませんが、Titanium Mobileを用いたiOS/Android対応のアプリ開発/運用の実績があります。
-      趣味で、iOS/Androidの開発を行うこともあります。
-    </p>
+    業務経験はWeb系ほどありませんが、
+    Titanium Mobileを用いたiOS/Android対応のアプリ開発/運用の実績があります。
+
+    趣味で、iOS/Androidの開発を行うこともあります。
     最近では、Swift/Kotlinを用いた開発に興味があります。
   children:
   - name: ハイブリッドアプリ
     experience: 12
     interest: 12
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
       - name: test1
         experience: 12
@@ -92,6 +109,10 @@ children:
   - name: スマートフォンアプリ
     experience: 12
     interest: 12
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
       - name: test1
         experience: 12
@@ -102,6 +123,10 @@ children:
   - name: ユーティリティアプリ
     experience: 12
     interest: 12
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
       - name: test1
         experience: 12
@@ -113,16 +138,19 @@ children:
   experience: 24
   interest: 12
   comment: |
-    <p>
-      Linuxによるサーバー構築の
-      シェルスクリプト/Chef/Ansible/Dockerを用いての環境構築や
-    </p>
+    Linuxによるサーバー構築の
+    シェルスクリプト/Chef/Ansible/Dockerを用いての環境構築や
     Gitlab/Jenkins環境構築の実績があります。
+
     高負荷/大規模インフラ構築や運用の経験がほとんどないため、興味があります。
   children:
   - name: コンテナ構築
     experience: 12
     interest: 12
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
       - name: Docker
         experience: 12
@@ -133,6 +161,10 @@ children:
   - name: 構成管理
     experience: 12
     interest: 12
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
       - name: Chef
         experience: 12
@@ -143,6 +175,10 @@ children:
   - name: CI環境構築
     experience: 12
     interest: 12
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
       - name: Jenkins
         experience: 12
@@ -153,6 +189,10 @@ children:
   - name: 大規模インフラ
     experience: 12
     interest: 34
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
       - name: サーバー監視
         experience: 12
@@ -163,80 +203,72 @@ children:
       - name: ロードバランサー
         experience: 12
         interest: 12
-- name: データベース
-  experience: 22
+- name: 趣味・特技
+  experience: 26
   interest: 12
   comment: |
-    SQLチューニングの実績があります。
-    最近ではMongoDB
+    静的型付け関数型言語の学習に重点を置いています。
   children:
-  - name: DB設計
+  - name: 関数型言語
     experience: 12
     interest: 12
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
-      - name: MySQL
+      - name: Scala
         experience: 12
         interest: 12
-      - name: test2
+      - name: Haskell
         experience: 12
         interest: 12
-  - name: DBチューニング
+  - name: IoT開発
     experience: 12
     interest: 12
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
-      - name: EXPLAIN
+      - name: Arduino
         experience: 12
         interest: 12
-      - name: test2
+      - name: Raspberrypi
         experience: 12
         interest: 12
-  - name: NoSQL
+      - name: 電子工作
+        experience: 12
+        interest: 12
+  - name: 水泳
     experience: 12
     interest: 12
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
-      - name: MongoDB
+      - name: Tiスイム
         experience: 12
         interest: 12
-      - name: test2
+      - name: クロール
         experience: 12
         interest: 12
-- name: マネジメント
-  experience: 18
-  interest: 12
-  comment: |
-    マネジメントについてのコメントです。
-    ここにテキストが入ります。ここにテキストが入ります。
-    ここにテキストが入ります。ここにテキストが入ります。
-    ここにテキストが入ります。ここにテキストが入ります。
-  children:
-  - name: プロジェクトリーダー
-    experience: 18
+  - name: 一皿料理
+    experience: 12
     interest: 12
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
-      - name: test1
+      - name: チャーハン
         experience: 12
         interest: 12
-      - name: test2
+      - name: ペペロンチーノ
         experience: 12
         interest: 12
-  - name: スクラムマスター
-    experience: 18
-    interest: 12
-    children:
-      - name: test1
-        experience: 12
-        interest: 12
-      - name: test2
-        experience: 12
-        interest: 12
-  - name: プロジェクト管理ツール導入
-    experience: 18
-    interest: 12
-    children:
-      - name: test1
-        experience: 12
-        interest: 12
-      - name: test2
+      - name: カレー
         experience: 12
         interest: 12
 - name: 主な開発言語
@@ -248,6 +280,10 @@ children:
   - name: PHP
     experience: 12
     interest: 12
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
       - name: PHP
         experience: 12
@@ -258,6 +294,10 @@ children:
   - name: Javascript
     experience: 12
     interest: 12
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
       - name: test1
         experience: 12
@@ -268,6 +308,10 @@ children:
   - name: Ruby
     experience: 12
     interest: 12
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
       - name: test1
         experience: 12
@@ -275,9 +319,13 @@ children:
       - name: test2
         experience: 12
         interest: 12
-  - name: Scala
+  - name: Java
     experience: 12
     interest: 12
+    comment: |
+      ここにコメントが入ります。
+      ここにコメントが入ります。
+      ここにコメントが入ります。
     children:
       - name: test1
         experience: 12
