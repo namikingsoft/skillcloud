@@ -9,3 +9,4 @@ export const rootCloud = SkillCloudFactory.create(
 export const rootChart = ChartDataFactory.createBySkillList(
   rootCloud.nodes.get(0).skill.children
 )
+export const initialSkill = rootCloud.rootNode.skill

@@ -55,27 +55,20 @@ export default class SkillContainer extends Component<Props, any>
   }
 
   componentDidMount() {
-    this.componentDidUpdate()
+    const {action} = this.props.params
+    this.selectByName(action)
   }
 
   componentWillUnmount() {
     // @todo messy
     const {select} = this.props
-    select(SkillConst.rootCloud.rootNode.skill)
+    select(SkillConst.initialSkill)
   }
 
   componentDidUpdate(prevProps: Props = null) {
     const {action} = this.props.params
-    const prevAction = prevProps? prevProps.params['action'] : null
-    if (action === prevAction) return
+    if (action === prevProps.params['action']) return
     this.selectByName(action)
-  }
-
-  ride(skill: Skill) {
-    if (!skill || skill.hasChildren) {
-      const {display} = this.props
-      display(skill)
-    }
   }
 
   selectByName(name: string) {
@@ -86,9 +79,15 @@ export default class SkillContainer extends Component<Props, any>
 
   selectBySkill(skill: Skill) {
     if (!skill || skill.hasChildren) {
-      // @todo messy
       const {select} = this.props
-      select(skill === SkillConst.rootCloud.rootNode.skill ? null : skill)
+      select(skill)
+    }
+  }
+
+  ride(skill: Skill) {
+    if (!skill || skill.hasChildren) {
+      const {display} = this.props
+      display(skill)
     }
   }
 

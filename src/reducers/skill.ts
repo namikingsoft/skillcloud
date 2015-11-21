@@ -1,4 +1,5 @@
 import Skill from 'domains/Skill'
+import * as SkillConst from 'constants/SkillConst'
 import * as Types from 'constants/ActionTypes'
 import match from 'match-case'
 
@@ -14,7 +15,7 @@ interface Action {
 }
 
 const initialState = {
-  selected: undefined,
+  selected: SkillConst.initialSkill,
   displayed: undefined,
 }
 
