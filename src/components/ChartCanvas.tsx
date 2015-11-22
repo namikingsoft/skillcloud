@@ -8,7 +8,6 @@ const nv = require('nvd3/build/nv.d3')
 
 interface Props {
   data: ChartData
-  root: ChartData
   onClick?: Function
 }
 
@@ -29,18 +28,13 @@ export default class ChartCanvas extends Component<Props, any>
       React.findDOMNode(this.refs['svg'])
     )
     .onClick(value => this.props.onClick(value))
-    .update(this.data)
+    .update(this.props.data)
   }
 
   componentWillUnmount() {
   }
 
   componentDidUpdate() {
-    this.drawer.update(this.data)
-  }
-
-  get data(): ChartData {
-    const {data, root} = this.props
-    return data ? data : root
+    this.drawer.update(this.props.data)
   }
 }

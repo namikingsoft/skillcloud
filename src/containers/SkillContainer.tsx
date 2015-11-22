@@ -31,22 +31,15 @@ interface Props {
 export default class SkillContainer extends Component<Props, any>
 {
   render() {
-    const {selected, displayed} = this.props
-    const cloud = SkillConst.rootCloud
-    const node = cloud.findNodeBySkill(selected)
-    const data: ChartData = selected?
-      ChartDataFactory.createBySkillList(selected.children) : null
-
     return (
       <div className="layout-skill">
         <SkillCloudCanvas
-          cloud={cloud}
-          selected={node}
+          cloud={SkillConst.rootCloud}
+          selected={this.selectedNode}
           onRide={skill => this.ride(skill)}
           onDown={skill => this.ride(null)} />
         <ChartCanvas
-          data={data}
-          root={SkillConst.rootChart} />
+          data={this.chartData} />
         <CommentCanvas
           title={this.title}
           comment={this.comment} />
@@ -114,6 +107,24 @@ export default class SkillContainer extends Component<Props, any>
         end()
       ).
       caseOfElse(skill => skill.comment).
+    end()
+  }
+
+  private get selectedNode(): SkillNode {
+    const {selected, displayed} = this.props
+    return SkillConst.rootCloud.findNodeBySkill(selected)
+  }
+
+  private get chartData(): ChartData {
+    const {selected, displayed} = this.props
+    return match<Skill, ChartData>(displayed).
+      caseOfNone(skill =>
+        match<Skill, ChartData>(selected).
+          caseOfNone(none => SkillConst.rootChart).
+          caseOfElse(skill => ChartDataFactory.createBySkillList(selected.children)).
+        end()
+      ).
+      caseOfElse(skill => ChartDataFactory.createBySkillList(displayed.children)).
     end()
   }
 }

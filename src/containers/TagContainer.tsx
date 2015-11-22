@@ -41,8 +41,7 @@ export default class TagContainer extends Component<Props, any>
           onRide={node => this.display(node)}
           onDown={node => this.display(null)} />
         <ChartCanvas
-          data={data}
-          root={TagConst.rootChart} />
+          data={this.chartData} />
         <CommentCanvas
           title={this.title}
           comment={this.comment} />
@@ -86,6 +85,14 @@ export default class TagContainer extends Component<Props, any>
         end()
       ).
       caseOfElse(tag => tag.comment).
+    end()
+  }
+
+  private get chartData(): ChartData {
+    const {displayed} = this.props
+    return match<Tag, ChartData>(displayed).
+      caseOfNone(none => TagConst.rootChart).
+      caseOfElse(tag => ChartDataFactory.createByTagList(displayed.children)).
     end()
   }
 }
