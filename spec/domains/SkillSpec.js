@@ -1,9 +1,16 @@
 import Skill from 'domains/Skill'
+import SkillImage from 'domains/SkillImage'
 import {List} from 'immutable'
 
 describe("Skill", function() {
 
   before(() => {
+    this.image = new SkillImage({
+      key: "key1",
+      url: "http://www.example.com",
+      width: 100,
+      height: 200,
+    })
     this.children = List.of(
       new Skill({
         name: "Name1",
@@ -23,6 +30,7 @@ describe("Skill", function() {
       experience: 1234,
       interest: 2345,
       comment: "Comment",
+      image: this.image,
       children: this.children,
     })
   })
@@ -54,6 +62,12 @@ describe("Skill", function() {
   describe("comment", () => {
     it("should be return initial param", () => {
       assert.equal(this.skill.comment, "Comment")
+    })
+  })
+
+  describe("image", () => {
+    it("should be return initial param", () => {
+      assert.equal(this.skill.image, this.image)
     })
   })
 

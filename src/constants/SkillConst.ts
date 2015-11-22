@@ -1,7 +1,6 @@
 import SkillFactory from 'domains/SkillFactory'
 import SkillCloudFactory from 'domains/SkillCloudFactory'
 import ChartDataFactory from 'domains/ChartDataFactory'
-import {Map} from 'immutable'
 
 export const rootCloud = SkillCloudFactory.create(
   SkillFactory.create(require('data/skill.yaml'))

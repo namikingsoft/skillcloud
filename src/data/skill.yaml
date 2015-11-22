@@ -25,13 +25,13 @@ children:
       ここにコメントが入ります。
       ここにコメントが入ります。
     children:
-      - name: Javascript
+      - name: React
         experience: 12
         interest: 12
-      - name: test2
+      - name: d3.js
         experience: 12
         interest: 12
-      - name: AjaxAPI利用
+      - name: jQuery
         experience: 12
         interest: 12
   - name: バックエンド
@@ -45,10 +45,10 @@ children:
       - name: API実装
         experience: 12
         interest: 12
-      - name: CMS構築
+      - name: Symfony
         experience: 12
         interest: 12
-      - name: test3
+      - name: Rails
         experience: 12
         interest: 12
   - name: データベース
@@ -68,6 +68,11 @@ children:
       - name: MongoDB
         experience: 12
         interest: 12
+        image:
+          key: mongodb
+          href: "https://www.mongodb.com/"
+          width: 140
+          height: 50
   - name: 開発環境構築
     experience: 36
     interest: 42
@@ -79,7 +84,10 @@ children:
       - name: Vagrant
         experience: 12
         interest: 12
-      - name: Gulp/Webpack
+      - name: Gulp
+        experience: 12
+        interest: 12
+      - name: Webpack
         experience: 12
         interest: 12
 - name: アプリ開発

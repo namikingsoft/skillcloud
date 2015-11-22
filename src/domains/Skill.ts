@@ -1,3 +1,4 @@
+import SkillImage from 'domains/SkillImage'
 import {List} from 'immutable'
 
 export default class Skill
@@ -7,6 +8,7 @@ export default class Skill
     experience: number,
     interest: number,
     comment?: string,
+    image?: SkillImage,
     children?: List<Skill>,
   }) {}
 
@@ -24,6 +26,10 @@ export default class Skill
 
   get comment(): string {
     return this.param.comment
+  }
+
+  get image(): SkillImage {
+    return this.param.image
   }
 
   get children(): List<Skill> {

@@ -64,6 +64,9 @@ export default class SkillCloudCanvas extends Component<Props, any>
       this.svg.selectAll('text')
       .attr('x', d => d.x)
       .attr('y', d => d.y)
+      this.svg.selectAll('image')
+      .attr('x', d => d.x - d.skill.image.width/2)
+      .attr('y', d => d.y - d.skill.image.height/2)
     })
 
     return this
@@ -107,15 +110,28 @@ export default class SkillCloudCanvas extends Component<Props, any>
     .on('click', d => this.select(d))
     .on('mouseover', d => this.ride(d))
     .on('mouseout', d => this.down(d))
-    g.append('circle')
-    g.append('text')
 
-    node.exit().remove()
+    const gText = g.filter(d => d.skill.image == undefined)
+    gText.append('circle')
+    gText.append('text')
+    .attr('dx', 10)
+    .attr('dy', '.35em')
+    .text(d => d.skill.name)
+    const gImage = g.filter(d => d.skill.image != undefined)
+    gImage.append('image')
+    .attr('width', d => d.skill.image.width)
+    .attr('height', d => d.skill.image.height)
+    .attr('xlink:href', d => d.skill.image.data)
+    .on('click', d => {
+      if (d.skill.image.href) open(d.skill.image.href, '_blank')
+    })
 
     const link = this.svg.selectAll('line')
     .data(cloud.links.toArray())
     link.exit().remove()
     link.enter().append('line')
+
+    node.exit().remove()
 
     return this
   }
@@ -136,10 +152,10 @@ export default class SkillCloudCanvas extends Component<Props, any>
 
     this.svg.selectAll('g text')
     .transition()
-    .attr('dx', 10)
-    .attr('dy', '.35em')
     .style('font-size', d => d.fontSize)
-    .text(d => d.skill.name)
+
+    this.svg.selectAll('line')
+    .style('visibility', d => d.target.skill.image ? 'hidden' : 'visible')
 
     return this
   }

@@ -10,6 +10,12 @@ describe("SkillFactory", function() {
         experience: 1,
         interest: 2,
         comment: 'Comment',
+        image: {
+          key: "key1",
+          url: "http://www.example.com",
+          width: 100,
+          height: 200,
+        },
         children: [
           {
             name: "Name1",
