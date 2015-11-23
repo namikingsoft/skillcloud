@@ -20,16 +20,23 @@ export default class Handle extends Component<Props, State>
   static SCROLL_RESET_MSEC = 250
   static LOCK_WHEEL_MSEC = 1000
 
+  static KEYCODE_LEFT = 37
+  static KEYCODE_UP = 38
+  static KEYCODE_RIGHT = 39
+  static KEYCODE_DOWN = 40
+  static KEYCODE_1 = 49
+  static KEYCODE_TENKEY_1 = 97
+
   private timerId: any
   private isLockWheel: boolean
 
   constructor() {
     super()
+    this.isLockWheel = false
     this.state = {
       nextProgress: 0,
       backProgress: 0,
     }
-    this.isLockWheel = false
   }
 
   render() {
@@ -50,10 +57,12 @@ export default class Handle extends Component<Props, State>
 
   componentDidMount() {
     window.addEventListener('wheel', e => this.wheel(e))
+    window.addEventListener('keyup', e => this.keyup(e))
   }
 
   componentWillUnmount() {
     window.removeEventListener('wheel', e => this.wheel(e))
+    window.removeEventListener('keyup', e => this.keyup(e))
   }
 
   componentDidUpdate() {
@@ -74,6 +83,11 @@ export default class Handle extends Component<Props, State>
       })
       this.lockWheelLittle()
     }
+  }
+
+  lockWheelLittle() {
+    this.isLockWheel = true
+    setTimeout(() => this.isLockWheel = false, Handle.LOCK_WHEEL_MSEC)
   }
 
   wheel(e) {
@@ -98,8 +112,35 @@ export default class Handle extends Component<Props, State>
     }), Handle.SCROLL_RESET_MSEC)
   }
 
-  lockWheelLittle() {
-    this.isLockWheel = true
-    setTimeout(() => this.isLockWheel = false, Handle.LOCK_WHEEL_MSEC)
+  keyup(e) {
+    match<number, any>(e.keyCode).
+      caseOf(n => n === Handle.KEYCODE_LEFT, v => this.onBack()).
+      caseOf(n => n === Handle.KEYCODE_UP, v => this.onBack()).
+      caseOf(n => n === Handle.KEYCODE_RIGHT, v => this.onNext()).
+      caseOf(n => n === Handle.KEYCODE_DOWN, v => this.onNext()).
+      caseOf(
+        n => Handle.KEYCODE_1 <= n&&n <= Handle.KEYCODE_1+9,
+        v => this.onIndex(v - Handle.KEYCODE_1)
+      ).
+      caseOf(
+        n => Handle.KEYCODE_TENKEY_1 <= n&&n <= Handle.KEYCODE_TENKEY_1+9,
+        v => this.onIndex(v - Handle.KEYCODE_TENKEY_1)
+      ).
+    end()
+  }
+
+  onNext() {
+    const {onNext} = this.props
+    if (onNext) onNext()
+  }
+
+  onBack() {
+    const {onBack} = this.props
+    if (onBack) onBack()
+  }
+
+  onIndex(index: number) {
+    const {onIndex} = this.props
+    if (onIndex) onIndex(index)
   }
 }
