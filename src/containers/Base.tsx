@@ -22,7 +22,6 @@ export default class Base extends Component<Props, any>
           {this.props.children}
         </div>
         <Background />
-        <CrossHair />
         <Copyright />
       </div>
     )

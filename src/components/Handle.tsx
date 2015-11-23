@@ -16,7 +16,7 @@ interface State {
 
 export default class Handle extends Component<Props, State>
 {
-  static SCROLL_THRESHOLD = 2000
+  static SCROLL_THRESHOLD = 1755
   static SCROLL_RESET_MSEC = 250
   static LOCK_WHEEL_MSEC = 1000
 

@@ -43,30 +43,26 @@ export default class CrossHair extends Component<any, State>
   }
 
   mousemove(e) {
-    return
-    if (e.buttons > 0) {
-      // if press anything button
-      this.dx += e.movementX
-      this.dy += e.movementY
-      const dist = Math.sqrt(this.dx*this.dx + this.dy*this.dy)
-      if (dist > 50) {
-        clearTimeout(this.timerId)
-        this.dx = this.dy = 0
+    this.dx += e.movementX
+    this.dy += e.movementY
+    const dist = Math.sqrt(this.dx*this.dx + this.dy*this.dy)
+    if (dist > 50) {
+      clearTimeout(this.timerId)
+      this.dx = this.dy = 0
+      this.setState({
+        top: e.clientY,
+        opacity: 0.4,
+      })
+      setTimeout(() => {
         this.setState({
-          top: e.clientY,
-          opacity: 0.4,
+          left: e.clientX,
         })
-        setTimeout(() => {
+        this.timerId = setTimeout(() => {
           this.setState({
-            left: e.clientX,
+            opacity: 0,
           })
-          this.timerId = setTimeout(() => {
-            this.setState({
-              opacity: 0,
-            })
-          }, 500)
         }, 500)
-      }
+      }, 500)
     }
   }
 }
