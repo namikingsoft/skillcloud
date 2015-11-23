@@ -1,3 +1,4 @@
+import Handle from 'components/Handle'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
@@ -7,7 +8,7 @@ export default class Navigation extends Component<any, any>
   render() {
     return (
       <div className="module-navigation">
-        <Link to="/" activeClassName="active">
+        <Link to="/" ref="link1" activeClassName="active">
           <dl>
             <dt>01</dt>
             <dd>はじめに</dd>
@@ -55,16 +56,47 @@ export default class Navigation extends Component<any, any>
             <dd>興味のある技術</dd>
           </dl>
         </Link>
+        <Handle
+          onNext={() => this.next()}
+          onBack={() => this.back()}
+          onIndex={index => this.index(index)} />
       </div>
     )
   }
 
-  componentDidMount() {
+  next() {
+    const currentIndex = this.currentIndex()
+    if (currentIndex < this.size()) {
+      this.index(currentIndex + 1)
+    }
   }
 
-  componentWillUnmount() {
+  back() {
+    const currentIndex = this.currentIndex()
+    if (currentIndex > 0) {
+      this.index(currentIndex - 1)
+    }
   }
 
-  componentDidUpdate() {
+  index(index: number) {
+    const thisElement = React.findDOMNode(this)
+    const linkElements = thisElement.querySelectorAll('a')
+    location.hash = linkElements[index].getAttribute('href')
+  }
+
+  size(): number {
+    const thisElement = React.findDOMNode(this)
+    const linkElements = thisElement.querySelectorAll('a')
+    return linkElements.length
+  }
+
+  currentIndex(): number {
+    const thisElement = React.findDOMNode(this)
+    const linkElements = thisElement.querySelectorAll('a')
+    for (let i=0; i<linkElements.length; i++) {
+      const element = linkElements[i]
+      if (element.getAttribute('class') === 'active') return i
+    }
+    return 0
   }
 }
