@@ -44,7 +44,15 @@ export default class SkillCloudCanvas extends Component<Props, any>
   componentDidUpdate(prevProps: Props) {
     if (this.props.selected !== prevProps.selected) {
       const {cloud, selected} = this.props
-      this.resize().draw(cloud.filter(selected))
+      // Two-step node update @todo complex
+      if (prevProps.selected) {
+        this.resize().draw(cloud.filter(null))
+        if (selected) {
+          setTimeout(() => this.draw(cloud.filter(selected)), 600)
+        }
+      } else {
+        this.draw(cloud.filter(selected))
+      }
     }
   }
 
