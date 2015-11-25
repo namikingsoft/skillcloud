@@ -7,7 +7,7 @@ import ChartDataFactory from 'domains/ChartDataFactory'
 import ChartCanvas from 'components/ChartCanvas'
 import CommentCanvas from 'components/CommentCanvas'
 import * as TagConst from 'constants/TagConst'
-import * as Actions from 'actions/tag'
+import * as Action from 'actions/Action'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
@@ -19,12 +19,12 @@ import match from 'match-case'
 interface Props {
   displayed: Tag
   params: {[index: string]: string}
-  display: (tag: Tag)=>Object
+  displayTag: (tag: Tag)=>Object
 }
 
 @connect(
   state => clone(state.tag),
-  dispatch => bindActionCreators(Actions, dispatch)
+  dispatch => bindActionCreators(Action, dispatch)
 )
 
 export default class TagContainer extends Component<Props, any>
@@ -50,8 +50,8 @@ export default class TagContainer extends Component<Props, any>
   }
 
   display(node: TagNode) {
-    const {display} = this.props
-    display(node ? node.parentTag : null)
+    const {displayTag} = this.props
+    displayTag(node ? node.parentTag : null)
   }
 
   private get title() {

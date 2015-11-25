@@ -7,7 +7,7 @@ import SkillCloudCanvas from 'components/SkillCloudCanvas'
 import ChartCanvas from 'components/ChartCanvas'
 import CommentCanvas from 'components/CommentCanvas'
 import * as SkillConst from 'constants/SkillConst'
-import * as Actions from 'actions/skill'
+import * as Action from 'actions/Action'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
@@ -18,14 +18,14 @@ import match from 'match-case'
 interface Props {
   selected: Skill
   displayed: Skill
-  select: (skill: Skill)=>Object
-  display: (skill: Skill)=>Object
+  selectSkill: (skill: Skill)=>Object
+  displaySkill: (skill: Skill)=>Object
   params: {[index: string]: string}
 }
 
 @connect(
   state => clone(state.skill),
-  dispatch => bindActionCreators(Actions, dispatch)
+  dispatch => bindActionCreators(Action, dispatch)
 )
 
 export default class SkillContainer extends Component<Props, any>
@@ -54,8 +54,8 @@ export default class SkillContainer extends Component<Props, any>
 
   componentWillUnmount() {
     // @todo messy
-    const {select} = this.props
-    select(SkillConst.initialSkill)
+    const {selectSkill} = this.props
+    selectSkill(SkillConst.initialSkill)
   }
 
   componentDidUpdate(prevProps: Props = null) {
@@ -72,15 +72,15 @@ export default class SkillContainer extends Component<Props, any>
 
   selectBySkill(skill: Skill) {
     if (!skill || skill.hasChildren) {
-      const {select} = this.props
-      select(skill)
+      const {selectSkill} = this.props
+      selectSkill(skill)
     }
   }
 
   ride(skill: Skill) {
     if (!skill || skill.hasChildren) {
-      const {display} = this.props
-      display(skill)
+      const {displaySkill} = this.props
+      displaySkill(skill)
     }
   }
 

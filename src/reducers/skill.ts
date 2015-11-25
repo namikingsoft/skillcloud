@@ -21,11 +21,11 @@ const initialState = {
 
 export default function skill(state: State = initialState, action: Action) {
   return match<string, State>(action.type).
-    caseOf(Types.SELECT, v => {
+    caseOf(Types.SELECT_SKILL, v => {
       state.selected = action.selected
       return state
     }).
-    caseOf(Types.DISPLAY, v => {
+    caseOf(Types.DISPLAY_SKILL, v => {
       state.displayed = action.displayed
       return state
     }).

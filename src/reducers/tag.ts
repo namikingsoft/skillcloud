@@ -17,7 +17,7 @@ const initialState = {
 
 export default function tag(state = initialState, action) {
   return match<string, State>(action.type).
-    caseOf(Types.DISPLAY, v => {
+    caseOf(Types.DISPLAY_TAG, v => {
       state.displayed = action.displayed
       return state
     }).
