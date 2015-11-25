@@ -16,6 +16,7 @@ interface Props {
     x: number,
     y: number,
     opacity: number,
+    timeout: number,
   },
 }
 
@@ -41,16 +42,16 @@ export default class Base extends Component<Props, any>
   }
 
   componentDidUpdate(prevProps: Props) {
-    const {timeout, seq} = this.props.background
-    const {x, y, opacity} = this.props.crosshair
-    if (seq !== prevProps.background.seq) {
-      setTimeout(() => this.background.flash(), timeout)
+    const {background, crosshair} = this.props
+    const {x, y, opacity, timeout} = crosshair
+    if (background.seq !== prevProps.background.seq) {
+      setTimeout(() => this.background.flash(), background.timeout)
     }
     if (x !== prevProps.crosshair.x || y !== prevProps.crosshair.y) {
-      this.crosshair.move(x, y)
+      this.crosshair.move(x, y, timeout)
     }
     if (opacity !== prevProps.crosshair.opacity) {
-      this.crosshair.opacity(opacity)
+      this.crosshair.opacity(opacity, timeout)
     }
   }
 }
