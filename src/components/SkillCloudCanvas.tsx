@@ -48,7 +48,7 @@ export default class SkillCloudCanvas extends Component<Props, any>
       if (prevProps.selected) {
         this.resize().draw(cloud.filter(null))
         if (selected) {
-          setTimeout(() => this.draw(cloud.filter(selected)), 600)
+          setTimeout(() => this.draw(cloud.filter(selected)), 100)
         }
       } else {
         this.draw(cloud.filter(selected))
