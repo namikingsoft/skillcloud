@@ -1,15 +1,18 @@
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 
+interface Props {
+  ref: any
+}
+
 interface State {
   x: number
   y: number
   opacity: number
 }
 
-export default class Background extends Component<any, State>
+export default class Background extends Component<Props, State>
 {
-  private blinkTimerId: any
   private dx: number
   private dy: number
 
@@ -34,12 +37,10 @@ export default class Background extends Component<any, State>
 
   componentDidMount() {
     window.addEventListener('mousemove', e => this.mousemove(e))
-    this.blinkTimerId = setInterval(() => this.blink(), 7500)
   }
 
   componentWillUnmount() {
     window.removeEventListener('mousemove', e => this.mousemove(e))
-    clearInterval(this.blinkTimerId)
   }
 
   mousemove(e) {
@@ -62,19 +63,16 @@ export default class Background extends Component<any, State>
     }
   }
 
-  blink() {
-    if (this.dx === 0 && this.dy === 0) {
-      // Do not run while drag
-      this.setState({
-        x: this.state.x,
-        y: this.state.y,
-        opacity: 0.25,
-      })
-      setTimeout(() => this.setState({
-        x: this.state.x,
-        y: this.state.y,
-        opacity: 0.06,
-      }), 250)
-    }
+  flash() {
+    this.setState({
+      x: this.state.x,
+      y: this.state.y,
+      opacity: 0.25,
+    })
+    setTimeout(() => this.setState({
+      x: this.state.x,
+      y: this.state.y,
+      opacity: 0.06,
+    }), 250)
   }
 }

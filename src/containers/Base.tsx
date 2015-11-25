@@ -11,8 +11,21 @@ interface Props {
   children: Array<any>
 }
 
-export default class Base extends Component<Props, any>
+interface State {
+  flashTimeout: number
+}
+
+export default class Base extends Component<Props, State>
 {
+  private background: Background
+
+  constructor() {
+    super()
+    this.state = {
+      flashTimeout: 650,
+    }
+  }
+
   render() {
     return (
       <div className="layout-base">
@@ -21,9 +34,17 @@ export default class Base extends Component<Props, any>
         <div className="layout-content">
           {this.props.children}
         </div>
-        <Background />
+        <Background ref={v => this.background = v} />
         <Copyright />
       </div>
     )
+  }
+
+  componentDidMount() {
+    setTimeout(() => this.background.flash(), 1000)
+  }
+
+  componentDidUpdate(prevProps: Props, prevState: State) {
+    setTimeout(() => this.background.flash(), 650)
   }
 }
