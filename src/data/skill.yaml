@@ -1,98 +1,98 @@
 ---
-name: スキルジャンル
-experience: 12
-interest: 12
+name: スキルクラウド
+experience: 55
+interest: 55
 comment: |
-  今までに経験してきた技術、興味がある技術をまとめています。
+  新しい物には、とりあえず触れてみる。チャンスがあれば、率先して実践に投入することで、幅広いジャンルの技術を経験してきました。
 
-  評価されてきたWeb系のフロントエンド開発をはじめ、
-  その他にも様々なジャンルを勉強して、実践に投入してきた
+  中央にある各ノードにマウスを乗せると、更に詳細が表示できます。
 children:
 - name: Web系開発
-  experience: 32
-  interest: 12
+  experience: 50
+  interest: 50
   comment: |
-    バックエンド開発、マークアップ、デザインなど、万遍なく経験していますが、
     主にJavascript周りのフロントエンド開発で評価をいただくことが多いです。
 
-    他にも開発環境構築の自動化やアセットパイプライン構築も進んで行います。
+    業務期間が長いので、開発環境構築、バックエンド開発、デザインなど、まんべんなく経験しています。
   children:
   - name: フロントエンド
     experience: 42
-    interest: 42
+    interest: 50
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      HTML5のCanvasやd3.jsなどを利用したダイナミックな表現に定評があります。
+
+      変化が激しくて大変ではありますが、新しいもの好きなので、
+      やりがいを感じる分野です。
     children:
       - name: React
-        experience: 12
-        interest: 12
+        experience: 24
+        interest: 42
       - name: d3.js
-        experience: 12
-        interest: 12
+        experience: 32
+        interest: 42
       - name: jQuery
-        experience: 12
-        interest: 12
+        experience: 40
+        interest: 24
   - name: バックエンド
-    experience: 36
-    interest: 36
+    experience: 32
+    interest: 28
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      様々なフレームワークを利用して、WebアプリケーションやAPI実装などを経験してきました。
+
+      最近では、フルスタックよりも、DDD設計などにも導入しやすいマイクロフレームワークを好んで使います。
     children:
-      - name: API実装
-        experience: 12
-        interest: 12
+      - name: Express4
+        experience: 32
+        interest: 28
       - name: Symfony
-        experience: 12
-        interest: 12
+        experience: 24
+        interest: 20
       - name: Rails
-        experience: 12
-        interest: 12
+        experience: 24
+        interest: 30
   - name: データベース
-    experience: 22
-    interest: 12
+    experience: 28
+    interest: 24
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      主にMySQLのDB設計やSQLチューニングの業務経験があります。
+
+      最近では、得意なJavaScriptとの親和性の高い
+      MongoDB(MEANスタック)を使っていました。
     children:
       - name: MySQL
-        experience: 12
-        interest: 12
+        experience: 42
+        interest: 40
       - name: SQLチューニング
-        experience: 12
-        interest: 12
+        experience: 32
+        interest: 30
       - name: MongoDB
-        experience: 12
-        interest: 12
+        experience: 32
+        interest: 36
         image:
           key: mongodb
           href: "https://www.mongodb.com/"
           width: 140
           height: 50
   - name: 開発環境構築
-    experience: 36
-    interest: 42
+    experience: 32
+    interest: 44
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      開発環境構築の自動化やアセットパイプライン構築も進んで行います。
+
+      この辺りの作業は要塞を堅固にしている感覚があり、組んでいて楽しいです。
     children:
       - name: Vagrant
-        experience: 12
-        interest: 12
+        experience: 40
+        interest: 40
       - name: Gulp
-        experience: 12
-        interest: 12
+        experience: 36
+        interest: 40
       - name: Webpack
-        experience: 12
-        interest: 12
+        experience: 32
+        interest: 40
 - name: アプリ開発
-  experience: 20
-  interest: 12
+  experience: 30
+  interest: 42
   comment: |
     業務経験はWeb系ほどありませんが、
     Titanium Mobileを用いたiOS/Android対応のアプリ開発/運用の実績があります。
@@ -100,51 +100,66 @@ children:
     趣味で、iOS/Androidの開発を行うこともあります。
     最近では、Swift/Kotlinを用いた開発に興味があります。
   children:
-  - name: ハイブリッドアプリ
+  - name: Android
+    experience: 24
+    interest: 40
+    comment: |
+      自身の端末がAndroid機なので、
+      ちょっとした勝手アプリを作って利用していた時期があります。
+
+      最近では、Kotlin言語に興味があるので、感を取り戻すために、
+      なにか組んでみようかと模索しています。
+    children:
+      - name: Kotlin
+        experience: 12
+        interest: 44
+      - name: Javaネイティブ
+        experience: 24
+        interest: 20
+      - name: Titanium Mobile
+        experience: 36
+        interest: 18
+  - name: iOS
     experience: 12
     interest: 12
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      フルネイティブアプリ開発はモックレベルの実装経験しかありませんが、
+      Titanium MobileとDeployGateを用いたAdHocアプリの開発・運用経験があるので、
+      証明書関連、デプロイ関連の感はあります。
+
+      Swift言語に興味があり、練習がてらに何か組んでみたい思惑があります。
     children:
-      - name: test1
-        experience: 12
+      - name: Objective-C
+        experience: 16
         interest: 12
-      - name: test2
+      - name: DeployGate
+        experience: 28
+        interest: 24
+      - name: Swift
         experience: 12
-        interest: 12
-  - name: スマートフォンアプリ
+        interest: 44
+  - name: ハイブリッド
     experience: 12
     interest: 12
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      有料化したため使いにくくなってしまいましたが、
+      Titanium Mobileを用いたAdHoc業務アプリ開発＆運用の経験があります。
+
+      代替としてReact NativeやElectronを用いたデスクトップアプリ開発が
+      気になるところです。
     children:
-      - name: test1
+      - name: Titanium Mobile
+        experience: 36
+        interest: 18
+      - name: React Native
         experience: 12
-        interest: 12
-      - name: test2
+        interest: 40
+      - name: Electron
         experience: 12
-        interest: 12
-  - name: ユーティリティアプリ
-    experience: 12
-    interest: 12
-    comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-    children:
-      - name: test1
-        experience: 12
-        interest: 12
-      - name: test2
-        experience: 12
-        interest: 12
+        interest: 40
 - name: インフラ構築
-  experience: 24
-  interest: 12
+  experience: 38
+  interest: 42
   comment: |
     Linuxによるサーバー構築の
     シェルスクリプト/Chef/Ansible/Dockerを用いての環境構築や
@@ -153,145 +168,184 @@ children:
     高負荷/大規模インフラ構築や運用の経験がほとんどないため、興味があります。
   children:
   - name: コンテナ構築
-    experience: 12
-    interest: 12
+    experience: 36
+    interest: 50
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      Dockerについては、開発環境、CIビルド環境、本番環境(小規模)に
+      一貫して導入した経験があります。
+
+      そもそも開発環境として使うものでもないのですが、
+      どの環境でも一貫したDockerfileを使いたかったため。
+      (Windowsユーザー開発者向けの開発環境を構築するのに
+      苦労した記憶があります)
     children:
       - name: Docker
-        experience: 12
-        interest: 12
+        experience: 38
+        interest: 50
       - name: docker-compose
+        experience: 34
+        interest: 48
+      - name: Swarm
         experience: 12
-        interest: 12
-  - name: 構成管理
-    experience: 12
-    interest: 12
+        interest: 47
+  - name: サーバー構成管理
+    experience: 38
+    interest: 28
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      開発環境やCI環境が主ですが、ChefやAnsible、シェルスクリプトを用いて構成管理を書いています。
+
+      コンテナ技術のおかげで、冪等性をあまり意識する必要がなくなり、
+      今後の使いドコロに困っています。
     children:
-      - name: Chef
-        experience: 12
-        interest: 12
       - name: Ansible
-        experience: 12
-        interest: 12
+        experience: 40
+        interest: 38
+      - name: Chef
+        experience: 32
+        interest: 24
+      - name: シェルスクリプト
+        experience: 42
+        interest: 44
   - name: CI環境構築
-    experience: 12
-    interest: 12
+    experience: 38
+    interest: 42
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      JenkinsとDockerを組み合わせて、CI環境を構築した経験があります。
+
+      その他、GitLabにマージリクエストしたら、そのブランチを自動的にテストして、結果を知らせてくれる仕組みなども。
     children:
       - name: Jenkins
-        experience: 12
-        interest: 12
+        experience: 38
+        interest: 32
       - name: TravisCI
+        experience: 24
+        interest: 36
+      - name: CircleCI
         experience: 12
-        interest: 12
+        interest: 38
   - name: 大規模インフラ
     experience: 12
-    interest: 34
+    interest: 38
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      サーバー監視や負荷分散など、本番環境向けのノウハウが薄いので、
+      今後はこの分野も経験を詰めていけたら、と思っています。
     children:
       - name: サーバー監視
-        experience: 12
-        interest: 12
+        experience: 20
+        interest: 40
       - name: スケーリング
         experience: 12
-        interest: 12
-      - name: ロードバランサー
+        interest: 34
+      - name: 負荷分散技術
         experience: 12
-        interest: 12
+        interest: 36
 - name: 趣味・特技
-  experience: 26
+  experience: 36
   interest: 12
   comment: |
-    静的型付け関数型言語の学習に重点を置いています。
+    業務外で力を入れていること、といっても、概ねプログラミング関係になります。
+
+    趣味とはいえ、やるからにはどんどん深みにハマっていきたいです。
   children:
-  - name: 関数型言語
+  - name: 学習中の言語
     experience: 12
     interest: 12
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      関数型言語の習得と実用に力を入れています。
+
+      Haskellの教本(すごいHaskell)では、徹底的な不変・再帰、モナドなどの
+      新しい概念に感心しつつ、
+      別言語での開発でも取り入れていきたいと思っています。
     children:
       - name: Scala
-        experience: 12
-        interest: 12
+        experience: 20
+        interest: 44
       - name: Haskell
         experience: 12
-        interest: 12
+        interest: 40
   - name: IoT開発
     experience: 12
     interest: 12
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      Arduino+RaspberryPi+MEANスタックを用いて、Bluetoothラジコンを作ったり、
+      リモートから家電を操作できるIoTリモコンを作ろうと頑張った時期があります。
+
+      ソフト開発と比べて、メモリ管理が非常にシビアで、
+      先人の苦労を思い知らされますが、
+      今後も非常に興味がある分野です。
     children:
       - name: Arduino
-        experience: 12
-        interest: 12
-      - name: Raspberrypi
-        experience: 12
-        interest: 12
+        experience: 24
+        interest: 40
+        image:
+          key: arduino
+          width: 100
+          height: 200
+      - name: RaspberryPI
+        experience: 20
+        interest: 42
       - name: 電子工作
-        experience: 12
-        interest: 12
+        experience: 18
+        interest: 36
   - name: 水泳
     experience: 12
     interest: 12
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      ジョギングでのダイエット中に足をやったのをキッカケに始めたのですが、
+      Tiスイムの9ストロークフリースタイル動画に魅せられてから、
+      毎日ジムのプールに通い、水を味方につける方法を徹底的に追求しました。
+
+      スピードを競う世界ではない。
+      エレガントに泳ぐことなら、そこらへんの一般スイマーには負けません。
     children:
       - name: Tiスイム
-        experience: 12
-        interest: 12
-      - name: クロール
-        experience: 12
-        interest: 12
+        experience: 36
+        interest: 40
+      - name: 9ストローク
+        experience: 40
+        interest: 46
+      - name: フリースタイル
+        experience: 34
+        interest: 36
+        image:
+          key: crawl
+          width: 200
+          height: 90
   - name: 一皿料理
     experience: 12
     interest: 12
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      一人暮らし独身の唯一の楽しみ。
+      チャーハンやペペロンチーノなどの一皿料理については徹底的に拘ります。
+
+      一般的にペペロンチーノの作り方は宗教戦争に発展するケースが多いですが、
+      原理主義者の意見も尊重しつつ、新しい味への挑戦を忘れません。
     children:
       - name: チャーハン
-        experience: 12
-        interest: 12
+        experience: 42
+        interest: 50
       - name: ペペロンチーノ
-        experience: 12
-        interest: 12
+        experience: 40
+        interest: 50
       - name: カレー
-        experience: 12
-        interest: 12
+        experience: 32
+        interest: 40
 - name: 主な開発言語
   experience: 26
   interest: 12
   comment: |
-    静的型付け関数型言語の学習に重点を置いています。
+    主に業務で使ってきた言語では、案件数の関係でPHPが多いです。
+    最近では、AltJSでの実装が
   children:
   - name: PHP
     experience: 12
     interest: 12
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      主にバックエンドやバッチ処理として、PHPでの実装に関わってきました。
+      CakePHP,ZendFramework,Symfonyでの開発経験があります。
+
+      バックエンド側も静的型付け言語にシフトしたい、とは思っているのですが、
+      案件数的に考えると、切っても切れない言語です。
     children:
       - name: PHP
         experience: 12
@@ -303,11 +357,16 @@ children:
     experience: 12
     interest: 12
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      フロントエンドでは、AngularJS,Backbone.js,Reactなど、
+      バックエンドでは、Node.js,Express,
+
+      AltJSでは、TypeScript,CoffeeScript,
+      タスクランナーでは、Gulp,Webpack,Grunt...
+
+      ここ2,3年で、これだけ多くの技術に関わってきました。
+      混沌としていますが、マンネリ化しないので、なかなか楽しいです。
     children:
-      - name: test1
+      - name: React
         experience: 12
         interest: 12
       - name: test2
@@ -317,14 +376,16 @@ children:
     experience: 12
     interest: 12
     comment: |
-      ここにコメントが入ります。
-      ここにコメントが入ります。
-      ここにコメントが入ります。
+      自社システムのバックエンド(管理画面＆API)として、
+      Railsを採用した実績があります。
+
+      Rubyといっていいかはわかりませんが、
+      ChefやItamaeのレシピをガリガリ書くこともあります。
     children:
-      - name: test1
+      - name: Rails
         experience: 12
         interest: 12
-      - name: test2
+      - name: Chef
         experience: 12
         interest: 12
   - name: Java
