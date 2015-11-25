@@ -3,28 +3,33 @@ import Navigation from 'components/Navigation'
 import Background from 'components/Background'
 import CrossHair from 'components/CrossHair'
 import Copyright from 'components/Copyright'
+import * as Action from 'actions/Action'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import {clone} from 'lodash'
 
 interface Props {
   children: Array<any>
+  background: {
+    timeout: number,
+    seq: number,
+  },
+  flashBackground: (timeout: number)=>Object
 }
 
-interface State {
-  flashTimeout: number
-}
+@connect(
+  state => new Object({
+    background: clone(state.background),
+  }),
+  dispatch => bindActionCreators(Action, dispatch)
+)
 
-export default class Base extends Component<Props, State>
+export default class Base extends Component<Props, any>
 {
   private background: Background
-
-  constructor() {
-    super()
-    this.state = {
-      flashTimeout: 650,
-    }
-  }
 
   render() {
     return (
@@ -40,11 +45,13 @@ export default class Base extends Component<Props, State>
     )
   }
 
-  componentDidMount() {
-    setTimeout(() => this.background.flash(), 1000)
-  }
-
-  componentDidUpdate(prevProps: Props, prevState: State) {
-    setTimeout(() => this.background.flash(), 650)
+  componentDidUpdate(prevProps: Props) {
+    const {flashBackground} = this.props
+    const {timeout, seq} = this.props.background
+    if (seq !== prevProps.background.seq) {
+      setTimeout(() => this.background.flash(), timeout)
+    } else {
+      flashBackground(650)
+    }
   }
 }
