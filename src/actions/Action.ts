@@ -17,3 +17,11 @@ export function displayTag(displayed: Tag) {
 export function flashBackground(timeout: number = 0) {
   return {type: ActionType.FLASH_BACKGROUND, timeout}
 }
+
+export function moveCrossHair(x: number, y: number) {
+  return {type: ActionType.MOVE_CROSSHAIR, x, y}
+}
+
+export function opacityCrossHair(opacity: number) {
+  return {type: ActionType.OPACITY_CROSSHAIR, opacity}
+}

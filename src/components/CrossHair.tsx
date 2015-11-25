@@ -1,18 +1,18 @@
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 
-interface State {
-  top?: number
-  left?: number
-  opacity?: number
+interface Props {
+  ref: any
 }
 
-export default class CrossHair extends Component<any, State>
-{
-  private dx: number
-  private dy: number
-  private timerId: any
+interface State {
+  top: number
+  left: number
+  opacity: number
+}
 
+export default class CrossHair extends Component<Props, State>
+{
   constructor() {
     super()
     this.state = {
@@ -20,7 +20,6 @@ export default class CrossHair extends Component<any, State>
       left: 0,
       opacity: 0,
     }
-    this.dx = this.dy = 0
   }
 
   render() {
@@ -33,36 +32,13 @@ export default class CrossHair extends Component<any, State>
     )
   }
 
-  componentDidMount() {
-    window.addEventListener('mousemove', e => this.mousemove(e))
-
+  move(left: number, top: number) {
+    const {opacity} = this.state
+    this.setState({top, left, opacity})
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('mousemove', e => this.mousemove(e))
-  }
-
-  mousemove(e) {
-    this.dx += e.movementX
-    this.dy += e.movementY
-    const dist = Math.sqrt(this.dx*this.dx + this.dy*this.dy)
-    if (dist > 50) {
-      clearTimeout(this.timerId)
-      this.dx = this.dy = 0
-      this.setState({
-        top: e.clientY,
-        opacity: 0.4,
-      })
-      setTimeout(() => {
-        this.setState({
-          left: e.clientX,
-        })
-        this.timerId = setTimeout(() => {
-          this.setState({
-            opacity: 0,
-          })
-        }, 500)
-      }, 500)
-    }
+  opacity(opacity: number) {
+    const {top, left} = this.state
+    this.setState({top, left, opacity})
   }
 }
