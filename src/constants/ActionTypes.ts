@@ -1,3 +1,0 @@
-export const SELECT_SKILL = 'SELECT_SKILL'
-export const DISPLAY_SKILL = 'DISPLAY_SKILL'
-export const DISPLAY_TAG = 'DISPLAY_TAG'

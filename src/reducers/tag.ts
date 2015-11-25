@@ -1,5 +1,5 @@
 import Tag from 'domains/Tag'
-import * as Types from '../constants/ActionTypes'
+import {ActionType} from '../constants/ActionConst'
 import match from 'match-case'
 
 interface State {
@@ -7,7 +7,7 @@ interface State {
 }
 
 interface Action {
-  type: string
+  type: ActionType
   displayed?: Tag
 }
 
@@ -16,8 +16,8 @@ const initialState = {
 }
 
 export default function tag(state = initialState, action) {
-  return match<string, State>(action.type).
-    caseOf(Types.DISPLAY_TAG, v => {
+  return match<ActionType, State>(action.type).
+    caseOf(ActionType.DISPLAY_TAG, v => {
       state.displayed = action.displayed
       return state
     }).
