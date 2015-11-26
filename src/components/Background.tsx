@@ -63,6 +63,14 @@ export default class Background extends Component<Props, State>
     }
   }
 
+  move(x: number, y: number) {
+    this.setState({
+      x: this.state.x + x,
+      y: this.state.y + y,
+      opacity: this.state.opacity,
+    })
+  }
+
   flash() {
     this.setState({
       x: this.state.x,

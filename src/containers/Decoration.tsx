@@ -9,8 +9,11 @@ import {clone} from 'lodash'
 
 interface Props {
   background?: {
+    x: number,
+    y: number,
     timeout: number,
-    seq: number,
+    seqMove: number,
+    seqFlash: number,
   },
   crosshair?: {
     x: number,
@@ -44,7 +47,10 @@ export default class Base extends Component<Props, any>
   componentDidUpdate(prevProps: Props) {
     const {background, crosshair} = this.props
     const {x, y, opacity, timeout} = crosshair
-    if (background.seq !== prevProps.background.seq) {
+    if (background.seqMove !== prevProps.background.seqMove) {
+      this.background.move(background.x, background.y)
+    }
+    if (background.seqFlash !== prevProps.background.seqFlash) {
       setTimeout(() => this.background.flash(), background.timeout)
     }
     if (x !== prevProps.crosshair.x || y !== prevProps.crosshair.y) {

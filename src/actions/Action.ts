@@ -14,6 +14,10 @@ export function displayTag(displayed: Tag) {
   return {type: ActionType.DISPLAY_TAG, displayed}
 }
 
+export function moveBackground(x: number, y: number) {
+  return {type: ActionType.MOVE_BACKGROUND, x, y}
+}
+
 export function flashBackground(timeout: number = 0) {
   return {type: ActionType.FLASH_BACKGROUND, timeout}
 }
