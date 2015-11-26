@@ -50,14 +50,14 @@ export default class Handle extends Component<Props, State>
         <div className="module-handle__back" style={{
           marginBottom: -backY,
         }}>
-          <p style={{left: -backPer*300+150, opacity: backPer-0.3}}>
+          <p style={{left: -backPer*100+50, opacity: backPer-0.3}}>
             <i className="fa fa-arrow-circle-o-left"></i> Back
           </p>
         </div>
         <div className="module-handle__next" style={{
           marginTop: -nextY,
         }}>
-          <p style={{left: nextPer*300-150, opacity: nextPer-0.3}}>
+          <p style={{left: nextPer*100-50, opacity: nextPer-0.3}}>
             Next <i className="fa fa-arrow-circle-o-right"></i>
           </p>
         </div>
