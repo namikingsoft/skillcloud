@@ -1,11 +1,18 @@
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 
+interface Rect {
+  left: number
+  top: number
+  width: number
+  height: number
+}
+
 export default class ProfileContainer extends Component<any, any>
 {
   render() {
     return (
-      <div className="module-profile">
+      <div className="module-profile" ref="profile">
         <div className="module-profile__position">
           Front-end Engineer
         </div>
@@ -17,7 +24,9 @@ export default class ProfileContainer extends Component<any, any>
         </div>
         <div className="module-profile__avator">
           <img src="https://s.gravatar.com/avatar/3706c1a344dc2282c6683b6c6d0926f2?s=200" />
-          <p>My Global Avator</p>
+          <p>
+            <i className="fa fa-copyright"></i> namikingsoft
+          </p>
         </div>
         <div className="module-profile__link">
           <ul>
@@ -36,7 +45,17 @@ export default class ProfileContainer extends Component<any, any>
             見せたほうが早い。作る理由は、作ってから決める。
           </p>
         </div>
+        <div className="module-profile__forkme">
+          <a href="#">
+            Fork me on GitHub
+          </a>
+        </div>
       </div>
     );
+  }
+
+  get rect(): Rect {
+    const element = React.findDOMNode(this.refs['profile'])
+    return element.getBoundingClientRect()
   }
 }

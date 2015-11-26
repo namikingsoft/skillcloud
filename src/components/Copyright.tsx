@@ -8,17 +8,13 @@ export default class Navigation extends Component<any, any>
       <div className="module-copyright">
         <small>
           <p>
-            *このプログラムのソースは<a href="#">GitHub</a>に公開しています
-          </p>
-          <p>
-            Copyright 2015 <i className="fa fa-copyright"></i>namikingsoft
             Powered By <a href="#">React</a>, <a href="#">Redux</a>
           </p>
-          <ul>
-            <li><i className="fa fa-pie-chart"></i><a href="#">d3.js</a></li>
-            <li><i className="fa fa-align-left"></i><a href="#">NVD3</a></li>
-            <li>and more</li>
-          </ul>
+          <p>
+            <i className="fa fa-pie-chart"></i><a href="#">d3.js</a>
+            <i className="fa fa-align-left"></i><a href="#">NVD3</a>
+            &nbsp; and more
+          </p>
         </small>
       </div>
     )
