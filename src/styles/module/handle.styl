@@ -1,4 +1,15 @@
 .module-handle
+  overflow hidden
+
+  p
+    position absolute
+    color #fff
+    text-align center
+    width 100%
+    font-size 120px
+    text-shadow 2px 2px 2px #000
+    opacity 0.4
+    margin 0.4em
 
   &__back
     position fixed
@@ -9,6 +20,8 @@
     background-color rgba(255, 0, 0, 0.1)
     border-bottom 1px solid #f00
     z-index 4
+    p
+      bottom 0
 
   &__next
     position fixed
@@ -19,3 +32,5 @@
     background-color rgba(0, 255, 0, 0.1)
     border-top 1px solid #0f0
     z-index 4
+    p
+      top 0

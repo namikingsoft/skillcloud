@@ -43,14 +43,24 @@ export default class Handle extends Component<Props, State>
     const {nextProgress, backProgress} = this.state
     const nextY = window.innerHeight / Handle.SCROLL_THRESHOLD * nextProgress
     const backY = window.innerHeight / Handle.SCROLL_THRESHOLD * backProgress
+    const nextPer = nextProgress / Handle.SCROLL_THRESHOLD
+    const backPer = backProgress / Handle.SCROLL_THRESHOLD
     return (
       <div className="module-handle">
         <div className="module-handle__back" style={{
           marginBottom: -backY,
-        }} />
+        }}>
+          <p style={{left: -backPer*300+150, opacity: backPer-0.3}}>
+            <i className="fa fa-arrow-circle-o-left"></i> Back
+          </p>
+        </div>
         <div className="module-handle__next" style={{
           marginTop: -nextY,
-        }} />
+        }}>
+          <p style={{left: nextPer*300-150, opacity: nextPer-0.3}}>
+            Next <i className="fa fa-arrow-circle-o-right"></i>
+          </p>
+        </div>
       </div>
     )
   }
