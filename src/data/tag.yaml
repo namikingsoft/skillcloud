@@ -21,14 +21,14 @@ children:
       experience: 40
       interest: 24
     - name: React
-      experience: 50
+      experience: 32
       interest: 52
     - name: D3.js
-      experience: 60
-      interest: 52
+      experience: 54
+      interest: 50
     - name: Canvas
-      experience: 36
-      interest: 26
+      experience: 34
+      interest: 30
   - name: Framework
     experience: 12
     interest: 12
@@ -38,37 +38,33 @@ children:
       とても勉強になりました。
     children:
     - name: Redux
-      experience: 40
+      experience: 32
       interest: 50
     - name: AngularJS
-      experience: 32
-      interest: 32
+      experience: 34
+      interest: 24
     - name: Backbone.js
       experience: 32
       interest: 24
     - name: Knockout.js
       experience: 24
-      interest: 16
+      interest: 20
   - name: AltJS
     experience: 12
     interest: 12
     comment: |
       最近では、静的型付け言語でES6とも互換性のあるTypeScript一択なのですが、
       個人的には、書いていて気持ちいいCoffeeScriptも好きです。
-      実用段階ではなさそうですが、関数型言語のPureScriptも気になっています。
     children:
     - name: TypeScript
-      experience: 50
-      interest: 56
+      experience: 60
+      interest: 50
     - name: CoffeeScript
-      experience: 40
+      experience: 44
       interest: 40
     - name: ECMAScript6~
       experience: 42
-      interest: 50
-    - name: PureScript
-      experience: 50
-      interest: 56
+      interest: 54
   - name: Task runner (Asset Pipeline)
     experience: 12
     interest: 12
@@ -83,14 +79,14 @@ children:
       experience: 36
       interest: 36
     - name: webpack
-      experience: 42
-      interest: 42
+      experience: 44
+      interest: 40
 - name: HTML/CSS
   experience: 12
   interest: 12
   comment: コメント
   children:
-  - name: Meta
+  - name: Preprocessor
     experience: 12
     interest: 12
     comment: |
@@ -98,30 +94,33 @@ children:
       BEMなどのまどろっこしい命名規約もスマートに書けるので、気に入っています。
     children:
     - name: Jade
-      experience: 16
-      interest: 44
+      experience: 20
+      interest: 20
     - name: Sass
       experience: 14
-      interest: 44
+      interest: 32
     - name: Stylus
-      experience: 40
+      experience: 50
       interest: 44
   - name: CSS Structure
     experience: 12
     interest: 12
     comment: |
-      最近はディレクトリ整理にSMACSS、命名規約にBEMなど、複数の設計技法を組み合わせるやり方を最近意識しています。
-      CSSとはいえ、突き詰めるとなかなか奥が深く、面白いです。
+      最近はディレクトリ整理にSMACSS、命名規約にBEMなど、
+      複数の設計技法を組み合わせるやり方を最近意識しています。
+
+      CSSは自由度が高く、サイト構造によって一変するので、
+      定石が作りにくく、なかなか難しいです。
     children:
     - name: BEM
       experience: 32
-      interest: 44
+      interest: 34
     - name: OOCSS
-      experience: 32
-      interest: 44
+      experience: 30
+      interest: 38
     - name: SMACSS
       experience: 32
-      interest: 44
+      interest: 36
 - name: BackEnd
   experience: 12
   interest: 12
@@ -131,43 +130,47 @@ children:
     experience: 32
     interest: 12
     comment: |
-      言語的に気持ちよく書ける、Railsも好きですが、
-      最近では、関数型言語に魅せられて、Scalatraを導入したりしています。
+      マイクロフレームワークが好みで、
+      言語的に気持ちよく書ける、Railsも好きです。
+      最近では、関数型言語に魅せられて、Scalatraを使ってみたりしています。。
     children:
     - name: Synfony2
       experience: 24
-      interest: 44
+      interest: 22
     - name: CakePHP2
-      experience: 20
-      interest: 44
+      experience: 32
+      interest: 16
     - name: ZendFramework1
-      experience: 16
-      interest: 44
+      experience: 34
+      interest: 14
     - name: Express4
       experience: 36
-      interest: 44
+      interest: 20
     - name: Scalatra
-      experience: 24
+      experience: 18
       interest: 44
     - name: Rails
-      experience: 32
+      experience: 24
       interest: 36
   - name: IDE/Editor
     experience: 12
     interest: 12
     comment: |
-      IDE/Editorについてのコメントです。
+      有志のプラグインが多い点、
+      Linuxであれば、どのマシン環境でもクラウドの設定ファイルから
+      自分なりの環境をすぐに構築できる点から、
+      主にVimを使ってコーディングしています。
     children:
     - name: Eclipse
-      experience: 24
-      interest: 44
+      experience: 35
+      interest: 32
     - name: Vim
-      experience: 32
-      interest: 44
+      experience: 40
+      interest: 45
     - name: Xcode
-      experience: 12
-      interest: 44
-    - name: Visual Studio
+      experience: 24
+      interest: 32
+    - name: Sublime Text
       experience: 12
       interest: 44
   - name: スマホアプリ開発
@@ -180,8 +183,8 @@ children:
       何か良いネタはないかと、探っているところです。
     children:
     - name: Titanium Mobile
-      experience: 20
-      interest: 44
+      experience: 38
+      interest: 14
     - name: Swift
       experience: 12
       interest: 44
@@ -199,29 +202,14 @@ children:
       今後も非常に興味がある分野です。
     children:
     - name: Arduino
-      experience: 32
-      interest: 50
+      experience: 24
+      interest: 42
     - name: RaspberryPi
-      experience: 24
-      interest: 50
+      experience: 20
+      interest: 44
     - name: 電子工作
-      experience: 32
-      interest: 50
-  - name: OS
-    experience: 12
-    interest: 12
-    comment: |
-      OSについてのコメントです。
-    children:
-    - name: Linux
-      experience: 24
-      interest: 44
-    - name: Android
-      experience: 12
-      interest: 44
-    - name: iOS
-      experience: 12
-      interest: 44
+      experience: 18
+      interest: 36
 - name: Infrastructure
   experience: 12
   interest: 12
@@ -236,17 +224,14 @@ children:
       Swarmを用いたコンテナのクラスタリングなどに興味があります。
     children:
     - name: AWS
-      experience: 32
+      experience: 24
       interest: 44
-    - name: VPS
-      experience: 32
-      interest: 32
     - name: Vagrant
-      experience: 42
+      experience: 40
       interest: 32
     - name: Docker
-      experience: 50
-      interest: 52
+      experience: 44
+      interest: 64
   - name: Provisioning
     experience: 12
     interest: 12
@@ -257,16 +242,13 @@ children:
     children:
     - name: Shell
       experience: 36
-      interest: 44
+      interest: 40
     - name: Chef
-      experience: 24
-      interest: 44
+      experience: 30
+      interest: 18
     - name: Ansible
-      experience: 50
-      interest: 44
-    - name: Itamae
-      experience: 24
-      interest: 44
+      experience: 40
+      interest: 32
 - name: Database
   experience: 12
   interest: 12
@@ -281,13 +263,13 @@ children:
     children:
     - name: MySQL
       experience: 40
-      interest: 40
+      interest: 34
     - name: PostgreSQL
       experience: 20
-      interest: 20
+      interest: 16
     - name: SQLite
-      experience: 16
-      interest: 44
+      experience: 24
+      interest: 26
   - name: NoSQL
     experience: 12
     interest: 12
@@ -298,14 +280,14 @@ children:
       クエリ数が多い時になかなかスピードが出ずに苦労したこともありました。
     children:
     - name: MongoDB
-      experience: 32
+      experience: 36
       interest: 44
     - name: Redis
       experience: 20
       interest: 36
     - name: Memcache
-      experience: 16
-      interest: 16
+      experience: 20
+      interest: 18
 - name: Management
   experience: 12
   interest: 12
@@ -321,11 +303,17 @@ children:
       プロジェクト管理に興味があります。
     children:
     - name: Jenkins
-      experience: 24
-      interest: 44
+      experience: 46
+      interest: 42
     - name: GitLab
-      experience: 24
+      experience: 36
       interest: 44
     - name: Redmine
-      experience: 18
-      interest: 44
+      experience: 24
+      interest: 16
+    - name: TravisCI
+      experience: 16
+      interest: 34
+    - name: CircleCI
+      experience: 12
+      interest: 36
