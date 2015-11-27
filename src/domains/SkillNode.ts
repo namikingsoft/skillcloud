@@ -38,13 +38,30 @@ export default class SkillNode
 
   get classes(): string {
     let classes = 'node'
-    if (this.id == 1) {
+    if (this.isRoot) {
       classes += ' root'
     }
-    if (this.depth > 1) {
+    if (this.isGrandChild) {
       classes += ' grandchild'
     }
     return classes
+  }
+
+  get isRoot(): boolean {
+    return this.id === 1
+  }
+
+  get isGrandChild(): boolean {
+    return this.depth > 1
+  }
+
+  radius(isActive: boolean = false): number {
+    return match<SkillNode,number>(this).
+      caseOf(n => n.isRoot, v => 100).
+      caseOf(n => isActive && n.isGrandChild, v => 60).
+      caseOf(n => isActive, v => 100).
+      caseOfElse(5).
+    end()
   }
 
   // position for d3.js

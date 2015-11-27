@@ -155,7 +155,7 @@ export default class SkillCloudCanvas extends Component<Props, any>
     )
 
     this.svg.selectAll('g circle')
-    .transition()
+    .attr("r", d => d.radius(cloud.isIncludeNode(d)))
     .style("fill", (d, i) => color(d.group))
 
     this.svg.selectAll('g text')
