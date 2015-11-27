@@ -7,26 +7,18 @@ interface Props {
 }
 
 interface State {
-  typing: string
+  transition?: string
+  transform?: string
+  transformOrigin?: string
 }
 
 export default class CommentCanvas extends Component<Props, State>
 {
-  private timerId: any
-
-  constructor() {
-    super()
-    this.state = {
-      typing: '',
-    }
-  }
-
   render() {
     const {title, comment} = this.props
-    const {typing} = this.state
     return (
-      <div className="module-comment">
-        <h3><span className="typing">{typing}</span></h3>
+      <div className="module-comment" style={this.state}>
+        <h3>{title}</h3>
         <div className="comment">
           {this.nl2br(comment)}
         </div>
@@ -39,20 +31,23 @@ export default class CommentCanvas extends Component<Props, State>
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    const {title} = this.props
-    const {typing} = this.state
-    if (title !== prevProps.title) {
-      clearTimeout(this.timerId)
-      this.setState({
-        typing: '',
-      })
-    }
-    else if (title !== typing) {
-      this.timerId = setTimeout(() => {
+    const {title, comment} = this.props
+    if (title !== prevProps.title || comment !== prevProps.comment) {
+      new Promise((resolve, reject) => {
         this.setState({
-          typing: title.slice(0, typing.length + 1),
+          transition: "0.15s",
+          transform: "translate(0, 500px)",
+          transformOrigin: "0 0",
         })
-      }, 50)
+        setTimeout(resolve, 150)
+      }).
+      then(() => new Promise((resolve, reject) => {
+        this.setState({
+          transition: "0.2s",
+          transform: "",
+          transformOrigin: "0 0",
+        })
+      }))
     }
   }
 
