@@ -1,4 +1,4 @@
-import Base from 'containers/Base'
+import CloudBase from 'containers/CloudBase'
 import FirstContainer from 'containers/FirstContainer'
 import SkillContainer from 'containers/SkillContainer'
 import TagContainer from 'containers/TagContainer'
@@ -13,13 +13,13 @@ export default class App extends Component
     return (
       <div className="layout-app">
         <Router history={createHashHistory()}>
-          <Route component={Base}>
-            <Route path="/" component={FirstContainer} />
-            <Route path="/skill" component={SkillContainer} />
-            <Route path="/skill/:action" component={SkillContainer} />
-            <Route path="/tag/:mode" component={TagContainer} />
-            <Route path="*" component={NotFound} />
+          <Route component={CloudBase}>
+            <Route path="/cloud" component={FirstContainer} />
+            <Route path="/cloud/skill" component={SkillContainer} />
+            <Route path="/cloud/skill/:action" component={SkillContainer} />
+            <Route path="/cloud/tag/:mode" component={TagContainer} />
           </Route>
+          <Route path="*" component={NotFound} />
         </Router>
       </div>
     );

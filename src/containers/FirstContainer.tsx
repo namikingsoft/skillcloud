@@ -24,7 +24,7 @@ interface State {
   dispatch => bindActionCreators(Action, dispatch)
 )
 
-export default class FirstContainer extends Component<Props, State>
+export default class First extends Component<Props, State>
 {
   render() {
     return (

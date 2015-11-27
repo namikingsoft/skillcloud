@@ -182,7 +182,7 @@ export default class SkillCloudCanvas extends Component<Props, any>
     if (!d3.event.defaultPrevented && node.skill.hasChildren) {
       // @todo messy
       const {cloud} = this.props;
-      location.hash = `skill/${node !== cloud.rootNode ? node.skill.name : ''}`
+      location.hash = `cloud/skill/${node !== cloud.rootNode ? node.skill.name : ''}`
     }
   }
 }
