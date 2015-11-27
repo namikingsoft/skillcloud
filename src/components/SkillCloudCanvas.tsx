@@ -107,6 +107,11 @@ export default class SkillCloudCanvas extends Component<Props, any>
   }
 
   private insertAndRemove(cloud: SkillCloud): SkillCloudCanvas {
+    const link = this.svg.selectAll('line')
+    .data(cloud.links.toArray())
+    link.exit().remove()
+    link.enter().append('line')
+
     const node = this.svg.selectAll('g')
     .data(cloud.nodes.toArray(), d => d.id)
 
@@ -133,11 +138,6 @@ export default class SkillCloudCanvas extends Component<Props, any>
     .on('click', d => {
       if (d.skill.image.href) open(d.skill.image.href, '_blank')
     })
-
-    const link = this.svg.selectAll('line')
-    .data(cloud.links.toArray())
-    link.exit().remove()
-    link.enter().append('line')
 
     node.exit().remove()
 
