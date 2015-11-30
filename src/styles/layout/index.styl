@@ -1,0 +1,203 @@
+.layout-index
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background-color #fff
+  color #333
+  font-weight 200
+  overflow-x hidden
+
+  a
+    color #333
+    text-decoration none
+
+
+  .block
+    display block
+    position relative
+    box-sizing border-box
+    padding 2em
+
+    h2
+      font-weight 200
+      font-size 39px
+      line-height 1.2
+      margin 0
+      margin-top 0.2em
+      margin-bottom 0.8em
+
+  .meta
+    font-size 0.75em
+    margin-top 50px
+    h3
+      margin 0
+      margin-top 1.0em
+      margin-bottom 0.2em
+      font-weight 400
+      font-size 16px
+    ul
+      list-style none
+      margin 0
+      padding 0
+      li
+        display inline-block
+        &:after
+          content '/'
+          margin-left 0.2em
+          margin-right 0.2em
+          color #aaa
+        &:last-child:after
+          content ''
+
+  .block__profile
+    background-color #fff
+    &__meta
+      width 400px
+      &__position
+        font-size 18px
+      &__name
+        font-size 64px
+        text-align center
+        line-height 1.4
+      &__ruby
+        font-size 16px
+        text-align center
+        color #fff
+        background-color #333
+        padding 5px
+        letter-spacing 1px
+      &__sns
+        font-size 20px
+        margin-top 1.0em
+        ul
+          list-style none
+          margin 0
+          padding 0
+          li
+            display inline-block
+            margin-right 1em
+            i
+              font-size 1.5em
+              margin-right 0.1em
+
+  .block__technology
+    &__text
+      margin-top 50px
+      text-align center
+    &__screen
+      margin-top 100px
+      ul
+        display inline-block
+        list-style none
+        text-align center
+        margin 0
+        padding 0
+        li
+          display inline-block
+          width 50%
+          text-align center
+          img
+            width 70%
+            box-shadow 1px 1px 3px #333
+    &__logo
+      margin-top 50px
+      ul
+        display inline-block
+        text-align center
+        list-style none
+        margin 0
+        padding 0
+        li
+          display inline-block
+          width 50%
+          text-align center
+          margin-bottom 50px
+          img
+            width 50%
+
+  .block__tachiyomi
+    &__image
+      position absolute
+      right -20px
+      left 45%
+      img.display
+        width 100%
+      img.anime
+        position absolute
+        top 11%
+        left 12%
+        width 76%
+    &__text
+      position absolute
+      top 0%
+      left 5%
+      width 400px
+      span
+        color #666
+        font-size 0.9em
+
+  .block__search
+    &__image
+      position absolute
+      left 30px
+      right 48%
+      img.display
+        width 100%
+      img.anime
+        position absolute
+        top 4.5%
+        left 4%
+        width 92%
+    &__text
+      position absolute
+      top 0%
+      left 60%
+      right 5%
+
+  .block__fullstack
+    &__image
+      position absolute
+      right 10px
+      left 52%
+      img
+        width 100%
+    &__text
+      position absolute
+      top 0%
+      left 5%
+      width 500px
+      span
+        color #666
+        font-size 0.9em
+
+  .block__automation
+    &__image
+      position absolute
+      top 0
+      left 0
+      right 50%
+      bottom 0
+      margin auto
+      background-color #f1f1f1
+      border-radius 50%
+      text-align center
+      img
+        position absolute
+        left 50%
+        top 50%
+        width 80%
+        transform translate(-50%, -50%)
+    &__text
+      position absolute
+      top 0
+      left 50%
+      right 0
+      bottom 0
+      padding-top 100px
+      padding-left 75px
+      padding-right 50px
+
+  .block__cloud
+    display block

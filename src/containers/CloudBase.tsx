@@ -18,11 +18,11 @@ interface Props {
   dispatch => bindActionCreators(Action, dispatch)
 )
 
-export default class Base extends Component<Props, any>
+export default class CloudBase extends Component<Props, any>
 {
   render() {
     return (
-      <div className="layout-base">
+      <div className="layout-cloud">
         <Header />
         <Navigation />
         <div className="layout-content">

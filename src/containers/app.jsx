@@ -1,3 +1,4 @@
+import Index from 'containers/Index'
 import CloudBase from 'containers/CloudBase'
 import FirstContainer from 'containers/FirstContainer'
 import SkillContainer from 'containers/SkillContainer'
@@ -13,6 +14,7 @@ export default class App extends Component
     return (
       <div className="layout-app">
         <Router history={createHashHistory()}>
+          <Route path="/" component={Index} />
           <Route component={CloudBase}>
             <Route path="/cloud" component={FirstContainer} />
             <Route path="/cloud/skill" component={SkillContainer} />
