@@ -21,7 +21,7 @@ export default class App extends Component
             <Route path="/cloud/skill/:action" component={SkillContainer} />
             <Route path="/cloud/tag/:mode" component={TagContainer} />
           </Route>
-          <Route path="*" component={NotFound} />
+          <Route path="*" component={Index} />
         </Router>
       </div>
     );

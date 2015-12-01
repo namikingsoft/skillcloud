@@ -18,7 +18,6 @@
     display block
     position relative
     box-sizing border-box
-    padding 2em
 
     h2
       font-weight 200
@@ -27,6 +26,9 @@
       margin 0
       margin-top 0.2em
       margin-bottom 0.8em
+
+    .half
+      vertical-middle()
 
   .meta
     font-size 0.75em
@@ -54,72 +56,130 @@
   .block__profile
     background-color #fff
     &__meta
-      width 400px
+      z-index 3
+      left 0
+      right 0
+      margin-left 5%
+      margin-right 5%
+      text-align center
       &__position
         font-size 18px
       &__name
         font-size 64px
-        text-align center
-        line-height 1.4
+        line-height 1
+        margin-top 0.15em
+        margin-bottom 0.3em
       &__ruby
+        display inline-block
         font-size 16px
-        text-align center
+        width 500px
         color #fff
         background-color #333
         padding 5px
-        letter-spacing 1px
+        letter-spacing 5px
       &__sns
-        font-size 20px
+        font-size 24px
         margin-top 1.0em
+        margin-bottom 2em
         ul
           list-style none
           margin 0
           padding 0
+          text-align center
           li
             display inline-block
             margin-right 1em
             i
               font-size 1.5em
               margin-right 0.1em
+    &__guard
+      position absolute
+      top 0
+      left 0
+      right 0
+      bottom 0
+      z-index 2
+    &__skillcloud
+      position absolute
+      top 0
+      left 0
+      right 0
+      bottom 0
+      z-index 1
+      opacity 0.3
+      svg
+        g
+          circle
+            opacity 1
+          text
+            fill #000
+          &.active
+            circle
+              opacity 0.2
+          &.root
+            circle
+              opacity 0.3
+        line
+          stroke #f77
+          stroke-width 1
+          opacity 0.3
 
-  .block__technology
-    &__text
-      margin-top 50px
-      text-align center
-    &__screen
-      margin-top 100px
+  .block__index
+    background-color #f5f5f5
+    &__anchor
+      left 0
+      right 50%
+      margin-left 5%
+      margin-right 5%
+      h2
+        margin-top 2.5em
+        margin-bottom 1em
+        font-size 32px
       ul
-        display inline-block
-        list-style none
-        text-align center
-        margin 0
-        padding 0
-        li
-          display inline-block
-          width 50%
-          text-align center
-          img
-            width 70%
-            box-shadow 1px 1px 3px #333
-    &__logo
-      margin-top 50px
-      ul
-        display inline-block
-        text-align center
         list-style none
         margin 0
         padding 0
         li
+          display block
+          margin-bottom 0.5em
+          a
+            font-size 1.1em
+    &__technology
+      left 50%
+      right 0
+      margin-left 5%
+      margin-right 5%
+      h2
+        font-size 32px
+      &__text
+        text-align center
+      &__logo
+        margin-top 75px
+        ul
           display inline-block
-          width 50%
           text-align center
-          margin-bottom 50px
-          img
+          list-style none
+          margin 0
+          padding 0
+          li
+            display inline-block
             width 50%
+            text-align center
+            margin-bottom 50px
+            img
+              width 80%
 
   .block__tachiyomi
+    background-color #fff
+    &__text
+      left 0
+      right 55%
+      margin-left 5%
+      margin-right 5%
+      span
+        color #666
+        font-size 0.9em
     &__image
-      position absolute
       right -20px
       left 45%
       img.display
@@ -129,20 +189,17 @@
         top 11%
         left 12%
         width 76%
-    &__text
-      position absolute
-      top 0%
-      left 5%
-      width 400px
-      span
-        color #666
-        font-size 0.9em
 
   .block__search
+    background-color #f5f5f5
+    &__text
+      left 55%
+      right 0
+      margin-left 5%
+      margin-right 5%
     &__image
-      position absolute
       left 30px
-      right 48%
+      right 50%
       img.display
         width 100%
       img.anime
@@ -150,54 +207,50 @@
         top 4.5%
         left 4%
         width 92%
-    &__text
-      position absolute
-      top 0%
-      left 60%
-      right 5%
 
   .block__fullstack
+    background-color #fff
+    &__text
+      left 0
+      right 52%
+      margin-left 5%
+      margin-right 5%
+      span
+        color #666
+        font-size 0.9em
     &__image
-      position absolute
       right 10px
       left 52%
       img
         width 100%
-    &__text
-      position absolute
-      top 0%
-      left 5%
-      width 500px
-      span
-        color #666
-        font-size 0.9em
 
   .block__automation
-    &__image
-      position absolute
-      top 0
-      left 0
-      right 50%
-      bottom 0
-      margin auto
-      background-color #f1f1f1
-      border-radius 50%
-      text-align center
-      img
-        position absolute
-        left 50%
-        top 50%
-        width 80%
-        transform translate(-50%, -50%)
+    background-color #f5f5f5
     &__text
-      position absolute
-      top 0
       left 50%
       right 0
-      bottom 0
-      padding-top 100px
-      padding-left 75px
-      padding-right 50px
+      margin-left 5%
+      margin-right 5%
+    &__image
+      left 0
+      right 50%
+      text-align center
+      img
+        width 80%
 
   .block__cloud
     display block
+
+
+@media (max-width: 900px)
+
+  .layout-index
+
+    .block
+      padding 50px 30px
+      min-height auto
+
+      .half
+        position static
+        transform translate(0, 0)
+        margin 50px 0

@@ -3,6 +3,7 @@ import {Component, PropTypes} from 'react'
 
 interface Props {
   className: string
+  id?: string
   children?: Component<any, any>[]
 }
 
@@ -14,7 +15,7 @@ export default class FullBlock extends Component<Props, State>
 {
   render() {
     return (
-      <div className={this.props.className} style={this.state}>
+      <div className={this.props.className} id={this.props.id} style={this.state}>
         {this.props.children}
       </div>
     )
