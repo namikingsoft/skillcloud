@@ -31,8 +31,17 @@ export default class FullBlock extends Component<Props, State>
   }
 
   resize() {
+    const element = React.findDOMNode(this)
+    const children = element.querySelectorAll(':scope > *')
+    let maxHeight = window.innerHeight
+    for (let i=0; i<children.length; i++) {
+      const height = children[i].clientHeight
+      if (maxHeight <  height) {
+        maxHeight = height
+      }
+    }
     this.setState({
-      minHeight: window.innerHeight,
+      minHeight: maxHeight,
     })
   }
 }
