@@ -279,14 +279,34 @@
 
     .block
       padding 50px 30px
-      min-height auto
+      min-height auto !important
 
       .half
         position static
         transform translate(0, 0)
         margin 50px 0
+        padding 0
 
     .block__index
       &__technology
         &__text
           display none
+
+    .block__profile
+      &__meta
+        &__position
+          display block
+        &__name
+          display block
+          margin-top 0.1em
+        &__ruby
+          display block
+          width auto
+          letter-spacing 0px
+        &__sns
+          ul
+            li
+              font-size 0
+              i
+                font-size 50px
+                margin-right 0.3em

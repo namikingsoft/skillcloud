@@ -35,7 +35,7 @@ export default class Index extends Component<Props, State>
         <FullBlock className="block block__profile">
           <div className="half block__profile__meta">
             <div className="block__profile__meta__position">
-              フロントエンドエンジニアのポートフォリオ
+              フロントエンドエンジニア
             </div>
             <div className="block__profile__meta__name">
               並木　翼
