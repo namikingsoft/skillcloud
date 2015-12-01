@@ -29,6 +29,9 @@
 
     .half
       vertical-middle()
+      & > strong
+        font-weight 100
+        display block
 
   .meta
     font-size 0.75em
@@ -67,7 +70,7 @@
       &__name
         font-size 64px
         line-height 1
-        margin-top 0.15em
+        margin-top 0.2em
         margin-bottom 0.3em
       &__ruby
         display inline-block
@@ -132,29 +135,52 @@
       margin-left 5%
       margin-right 5%
       h2
-        margin-top 2.5em
-        margin-bottom 1em
-        font-size 32px
+        margin-bottom 1.75em
       ul
+        counter-reset number
         list-style none
         margin 0
         padding 0
         li
           display block
-          margin-bottom 0.5em
+          counter-increment number
           a
-            font-size 1.1em
+            display block
+            font-size 1.2em
+            margin-bottom 1.0em
+            h3
+              font-weight 200
+              font-size 1em
+              margin 0
+              &:before
+                content counter(number)
+                background #444
+                float left
+                margin-right 0.5em
+                font-weight bold
+                width 1.5em
+                height 1.5em
+                border-radius 50%
+                color #fff
+                text-align center
+                line-height 1.5
+            p
+              margin 0
+              font-size 0.8em
+              color #999
     &__technology
       left 50%
       right 0
       margin-left 5%
       margin-right 5%
       h2
-        font-size 32px
+        font-size 26px
+        font-weight 300
       &__text
+        font-size 0.9em
         text-align center
       &__logo
-        margin-top 75px
+        margin-top 30px
         ul
           display inline-block
           text-align center
@@ -165,7 +191,7 @@
             display inline-block
             width 50%
             text-align center
-            margin-bottom 50px
+            margin-top 50px
             img
               width 80%
 
@@ -238,8 +264,9 @@
       img
         width 80%
 
-  .block__cloud
+  .block__skillcloud
     display block
+    background-color #f5f5f5
 
 
 @media (max-width: 900px)
@@ -254,3 +281,8 @@
         position static
         transform translate(0, 0)
         margin 50px 0
+
+    .block__index
+      &__technology
+        &__text
+          display none

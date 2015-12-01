@@ -111,7 +111,7 @@ export default class SkillContainer extends Component<Props, any>
   }
 
   private get selectedNode(): SkillNode {
-    const {selected, displayed} = this.props
+    const {selected} = this.props
     return SkillConst.rootCloud.findNodeBySkill(selected)
   }
 
