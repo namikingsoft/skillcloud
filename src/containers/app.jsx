@@ -16,7 +16,7 @@ export default class App extends Component
         <Router history={createHashHistory()}>
           <Route path="/" component={Index} />
           <Route component={CloudBase}>
-            <Route path="/cloud" component={FirstContainer} />
+            <Route path="/cloud" component={SkillContainer} />
             <Route path="/cloud/skill" component={SkillContainer} />
             <Route path="/cloud/skill/:action" component={SkillContainer} />
             <Route path="/cloud/tag/:mode" component={TagContainer} />

@@ -8,34 +8,34 @@ export default class Navigation extends Component<any, any>
   render() {
     return (
       <div className="module-navigation">
-        <Link to="/cloud/" ref="link1" activeClassName="active">
+        <Link to="/cloud" activeClassName="active">
           <dl>
             <dt>01</dt>
-            <dd>はじめに</dd>
-          </dl>
-        </Link>
-        <Link to="/cloud/skill" activeClassName="active">
-          <dl>
-            <dt>02</dt>
             <dd>スキルクラウド</dd>
           </dl>
         </Link>
         <Link to="/cloud/skill/Web系開発" activeClassName="active">
           <dl>
-            <dt>03</dt>
+            <dt>02</dt>
             <dd>Web系開発</dd>
           </dl>
         </Link>
         <Link to="/cloud/skill/インフラ構築" activeClassName="active">
           <dl>
-            <dt>04</dt>
+            <dt>03</dt>
             <dd>インフラ構築</dd>
           </dl>
         </Link>
         <Link to="/cloud/skill/アプリ開発" activeClassName="active">
           <dl>
-            <dt>05</dt>
+            <dt>04</dt>
             <dd>アプリ開発</dd>
+          </dl>
+        </Link>
+        <Link to="/cloud/skill/主な開発言語" activeClassName="active">
+          <dl>
+            <dt>05</dt>
+            <dd>主な開発言語</dd>
           </dl>
         </Link>
         <Link to="/cloud/skill/趣味・特技" activeClassName="active">

@@ -111,7 +111,7 @@
       right 0
       bottom 0
       z-index 1
-      opacity 0.3
+      opacity 0
       svg
         g
           circle
@@ -204,9 +204,6 @@
       right 55%
       margin-left 5%
       margin-right 5%
-      span
-        color #666
-        font-size 0.9em
     &__image
       right -20px
       left 45%
@@ -245,9 +242,6 @@
       right 52%
       margin-left 5%
       margin-right 5%
-      span
-        color #666
-        font-size 0.9em
     &__image
       right 10px
       left 52%
@@ -269,8 +263,27 @@
         width 80%
 
   .block__skillcloud
-    display block
-    background-color #f5f5f5
+    background-color #fff
+    &__text
+      left 0
+      right 52%
+      margin-left 5%
+      margin-right 5%
+      h2
+        letter-spacing -1px
+    &__image
+      right 10px
+      left 52%
+      i.fa
+        position absolute
+        top 50%
+        left 50%
+        transform translate(-50%, -50%)
+        font-size 500px
+        &.fa-line-chart
+          opacity 0.05
+        &.fa-bar-chart
+          opacity 0.25
 
 
 @media (max-width: 800px), (orientation: portrait)
@@ -286,6 +299,8 @@
         transform translate(0, 0)
         margin 50px 0
         padding 0
+        h2
+          font-size 28px
 
     .block__index
       &__technology
@@ -310,3 +325,7 @@
               i
                 font-size 50px
                 margin-right 0.3em
+
+    .block__skillcloud
+      &__image
+        display none

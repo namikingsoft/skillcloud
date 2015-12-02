@@ -1,4 +1,5 @@
 import FullBlock from 'components/FullBlock'
+import CloudLink from 'components/CloudLink'
 import SkillCloudCanvas from 'components/SkillCloudCanvas'
 import Skill from 'domains/Skill'
 import SkillNode from 'domains/SkillNode'
@@ -45,9 +46,9 @@ export default class Index extends Component<Props, State>
             </div>
             <div className="block__profile__meta__sns">
               <ul>
-                <li><i className="fa fa-github"></i> GitHub</li>
-                <li><i className="fa fa-twitter"></i> Twitter</li>
-                <li><i className="fa fa-home"></i> Blog</li>
+                <li><a href="http://github.com/namikingsoft/"><i className="fa fa-github"></i> GitHub</a></li>
+                <li><a href="https://twitter.com/namikingsoft/"><i className="fa fa-twitter"></i> Twitter</a></li>
+                <li><a href="http://blog.namiking.net/"><i className="fa fa-home"></i> Blog</a></li>
               </ul>
             </div>
           </div>
@@ -98,9 +99,9 @@ export default class Index extends Component<Props, State>
               </li>
               <li>
                 <a href="#skillcloud">
-                  <h3>スキルクラウド</h3>
+                  <h3>フロントエンドのデモンストレーション</h3>
                   <p>
-                    スキルごとの経験や興味を視覚化したをフロントエンドのデモ。
+                    技術ごとの経験や興味を視覚化したスキルクラウド。
                   </p>
                 </a>
               </li>
@@ -132,7 +133,7 @@ export default class Index extends Component<Props, State>
             <h2>サイト訪問者を楽しませたかった。</h2>
             <p>
               誰に言われるわけでもなく、気づいたらプロトタイプを作っていました。
-              １プロジェクトに立ち上げに成功し、運用開発を含めたリーダーとして携わりました。
+              １プロジェクトの立ち上げに成功し、運用開発を含めたリーダーとして携わりました。
             </p>
             <p>
               導入後、立ち読みコンテンツを起点としたページの
@@ -246,9 +247,9 @@ export default class Index extends Component<Props, State>
             <strong>インフラ環境構築の自動化</strong>
             <h2>自動化は漢のロマン。</h2>
             <p>
-              煩雑化しやすい開発環境構築の自動化、
-              プルリクエストされたブランチの自動ビルドを行い、
-              マージ前に、通知してくれる仕組みを構築などを進んで行いました。
+              開発環境構築の自動化や、CI環境構築を行っていました。
+              プルリクエストされたブランチを自動ビルドして、
+              テスト結果をコメントしてくれる仕組みの構築など。
             </p>
             <p>
               新規参入メンバーの環境構築の時間短縮、
@@ -275,36 +276,35 @@ export default class Index extends Component<Props, State>
           </div>
         </FullBlock>
         <FullBlock className="block block__skillcloud" id="skillcloud">
-          <div className="half block__automation__text">
-            <strong>インフラ環境構築の自動化</strong>
-            <h2>自動化は漢のロマン。</h2>
+          <div className="half block__skillcloud__text">
+            <strong>フロントエンドのデモンストレーション</strong>
+            <h2>スキルクラウド</h2>
             <p>
-              煩雑化しやすい開発環境構築の自動化、
-              プルリクエストされたブランチの自動ビルドを行い、
-              マージ前に、通知してくれる仕組みを構築などを進んで行いました。
+              関わった技術の経験/興味の度合いを視覚的に表現したデモです。
             </p>
             <p>
-              新規参入メンバーの環境構築の時間短縮、
-              作業用MacのSSDが飛んだ時のリカバリーに重宝しました。
+              1280x768ほどの解像度に最適化されています。
+              スマートフォンまたはタッチ端末では正常に動作しない可能性があります。
             </p>
             <div className="meta">
               <h3>開発期間・規模</h3>
               <ul>
-                <li>2014年初期以降(1人)</li>
+                <li>2015年後期1.5ヶ月以降(1人)</li>
               </ul>
               <h3>使用技術</h3>
               <ul>
-                <li>Docker</li>
-                <li>Chef</li>
-                <li>Ansible</li>
-                <li>Vagrant</li>
-                <li>Jenkins</li>
-                <li>GitLab</li>
+                <li>React</li>
+                <li>Redux</li>
+                <li>D3.js</li>
+                <li>webpack</li>
+                <li>Karma</li>
               </ul>
             </div>
+            <CloudLink text="デモを起動する" />
           </div>
-          <div className="half block__automation__image">
-            <img src="/images/automation.png" />
+          <div className="half block__skillcloud__image">
+            <i className="fa fa-line-chart" />
+            <i className="fa fa-bar-chart" />
           </div>
         </FullBlock>
       </div>
@@ -314,15 +314,15 @@ export default class Index extends Component<Props, State>
   componentDidMount() {
     new Promise((resolve, reject) => {
       this.props.selectSkill(null)
-      setTimeout(resolve, 2500)
+      setTimeout(resolve, 1500)
     }).
     then(() => new Promise((resolve, reject) => {
       this.setState({
         transform: "scale(1.75)",
-        transition: "1.0s ease-in",
-        opacity: 1.0,
+        transition: "0.5s ease-out",
+        opacity: 0.5,
       })
-      setTimeout(resolve, 1000)
+      setTimeout(resolve, 500)
     })).
     then(() => new Promise((resolve, reject) => {
       this.setState({
@@ -337,6 +337,10 @@ export default class Index extends Component<Props, State>
         display: 'none',
       })
     }))
+  }
+
+  componentWillUnmount() {
+    this.props.selectSkill(SkillConst.initialSkill)
   }
 
   private get selectedNode(): SkillNode {
