@@ -33,6 +33,14 @@ export default class Index extends Component<Props, State>
   render() {
     return (
       <div className="layout-index">
+        <div className="block__svg" style={this.state}>
+          <SkillCloudCanvas
+            cloud={SkillConst.rootCloud}
+            selected={this.selectedNode}
+            onRide={skill => null}
+            onDown={skill => null} />
+          <div className="block__svg__guard" />
+        </div>
         <FullBlock className="block block__profile">
           <div className="half block__profile__meta">
             <div className="block__profile__meta__position">
@@ -51,14 +59,6 @@ export default class Index extends Component<Props, State>
                 <li><a href="http://blog.namiking.net/"><i className="fa fa-home"></i> Blog</a></li>
               </ul>
             </div>
-          </div>
-          <div className="block__profile__guard" />
-          <div className="block__profile__skillcloud" style={this.state}>
-            <SkillCloudCanvas
-              cloud={SkillConst.rootCloud}
-              selected={this.selectedNode}
-              onRide={skill => null}
-              onDown={skill => null} />
           </div>
         </FullBlock>
         <FullBlock className="block block__index">
