@@ -117,12 +117,12 @@ export default class Index extends Component<Props, State>
             </div>
             <div className="block__index__technology__logo">
               <ul>
-                <li><img src="/images/logo-nodejs.png" /></li>
-                <li><img src="/images/logo-typescript.png" /></li>
-                <li><img src="/images/logo-react.png" /></li>
-                <li><img src="/images/screen-d3js.png" /></li>
-                <li><img src="/images/logo-docker.png" /></li>
-                <li><img src="/images/logo-mongodb.png" /></li>
+                <li><a href="https://nodejs.org/"><img src="/images/logo-nodejs.png" /></a></li>
+                <li><a href="http://www.typescriptlang.org/"><img src="/images/logo-typescript.png" /></a></li>
+                <li><a href="https://facebook.github.io/react/"><img src="/images/logo-react.png" /></a></li>
+                <li><a href="http://d3js.org/"><img src="/images/screen-d3js.png" /></a></li>
+                <li><a href="https://www.docker.com/"><img src="/images/logo-docker.png" /></a></li>
+                <li><a href="https://facebook.github.io/react/"><img src="/images/logo-mongodb.png" /></a></li>
               </ul>
             </div>
           </div>
