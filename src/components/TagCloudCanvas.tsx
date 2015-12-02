@@ -33,11 +33,11 @@ export default class TagCloudCanvas extends Component<Props, any>
     const {cloud, mode} = this.props
     this.init().resize().draw(cloud.nodes, mode)
     this.preMode = mode
-    window.addEventListener('resize', () => this.resize())
+    window.addEventListener('resize', this.resizeEvent)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', () => this.resize())
+    window.removeEventListener('resize', this.resizeEvent)
   }
 
   componentDidUpdate() {
@@ -141,5 +141,9 @@ export default class TagCloudCanvas extends Component<Props, any>
     .text(d => d.tag.name)
 
     return this
+  }
+
+  private resizeEvent = e => {
+    this.resize()
   }
 }

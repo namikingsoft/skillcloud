@@ -34,11 +34,11 @@ export default class SkillCloudCanvas extends Component<Props, any>
 
   componentDidMount() {
     this.init().resize()
-    window.addEventListener('resize', () => this.resize())
+    window.addEventListener('resize', this.resizeEvent)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', () => this.resize())
+    window.removeEventListener('resize', this.resizeEvent)
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -186,5 +186,9 @@ export default class SkillCloudCanvas extends Component<Props, any>
         `cloud/skill/${node !== cloud.rootNode ? node.skill.name : ''}`
       )
     }
+  }
+
+  private resizeEvent = e => {
+    this.resize()
   }
 }

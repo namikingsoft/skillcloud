@@ -36,17 +36,17 @@ export default class Background extends Component<Props, State>
   }
 
   componentDidMount() {
-    window.addEventListener('mousemove', e => this.mousemove(e))
+    window.addEventListener('mousemove', this.mousemove)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('mousemove', e => this.mousemove(e))
+    window.removeEventListener('mousemove', this.mousemove)
   }
 
   // @todo messy
   private prevX
   private prevY
-  mousemove(e) {
+  private mousemove = e => {
     const movementX = (this.prevX!==undefined) ? e.pageX - this.prevX : 0
     const movementY = (this.prevY!==undefined) ? e.pageY - this.prevY : 0
     this.prevX = e.pageX

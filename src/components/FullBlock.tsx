@@ -22,15 +22,15 @@ export default class FullBlock extends Component<Props, State>
   }
 
   componentDidMount() {
-    this.resize()
-    window.addEventListener('resize', e => this.resize())
+    this.resize(null)
+    window.addEventListener('resize', this.resize)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', e => this.resize())
+    window.removeEventListener('resize', this.resize)
   }
 
-  resize() {
+  private resize = e => {
     const element = React.findDOMNode(this)
     const children = element.querySelectorAll(':scope > *')
     let maxHeight = window.innerHeight
