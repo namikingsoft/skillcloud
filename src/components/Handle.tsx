@@ -30,6 +30,9 @@ export default class Handle extends Component<Props, State>
   private timerId: any
   private isLockWheel: boolean
 
+  private eventHandleWheel: any
+  private eventHandleKeyup: any
+
   constructor() {
     super()
     this.isLockWheel = false
@@ -66,13 +69,13 @@ export default class Handle extends Component<Props, State>
   }
 
   componentDidMount() {
-    window.addEventListener('wheel', e => this.wheel(e))
-    window.addEventListener('keyup', e => this.keyup(e))
+    window.addEventListener('wheel', this.wheel)
+    window.addEventListener('keyup', this.keyup)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('wheel', e => this.wheel(e))
-    window.removeEventListener('keyup', e => this.keyup(e))
+    window.removeEventListener('wheel', this.wheel)
+    window.removeEventListener('keyup', this.keyup)
   }
 
   componentDidUpdate() {
@@ -100,7 +103,25 @@ export default class Handle extends Component<Props, State>
     setTimeout(() => this.isLockWheel = false, Handle.LOCK_WHEEL_MSEC)
   }
 
-  wheel(e) {
+  onNext() {
+    const {onNext} = this.props
+    if (onNext) onNext()
+  }
+
+  onBack() {
+    const {onBack} = this.props
+    if (onBack) onBack()
+  }
+
+  onIndex(index: number) {
+    const {onIndex} = this.props
+    if (onIndex) onIndex(index)
+  }
+
+  private wheel = e => {
+    // cancel bounce scroll
+    e.preventDefault()
+
     if (this.isLockWheel) return
 
     match<number, any>(e.deltaY).
@@ -122,7 +143,7 @@ export default class Handle extends Component<Props, State>
     }), Handle.SCROLL_RESET_MSEC)
   }
 
-  keyup(e) {
+  private keyup = e => {
     match<number, any>(e.keyCode).
       caseOf(n => n === Handle.KEYCODE_LEFT, v => this.onBack()).
       caseOf(n => n === Handle.KEYCODE_UP, v => this.onBack()).
@@ -137,20 +158,5 @@ export default class Handle extends Component<Props, State>
         v => this.onIndex(v - Handle.KEYCODE_TENKEY_1)
       ).
     end()
-  }
-
-  onNext() {
-    const {onNext} = this.props
-    if (onNext) onNext()
-  }
-
-  onBack() {
-    const {onBack} = this.props
-    if (onBack) onBack()
-  }
-
-  onIndex(index: number) {
-    const {onIndex} = this.props
-    if (onIndex) onIndex(index)
   }
 }
