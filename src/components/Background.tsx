@@ -43,11 +43,18 @@ export default class Background extends Component<Props, State>
     window.removeEventListener('mousemove', e => this.mousemove(e))
   }
 
+  // @todo messy
+  private prevX
+  private prevY
   mousemove(e) {
-    if (e.buttons > 0) {
-      // if press anything button
-      this.dx += e.movementX
-      this.dy += e.movementY
+    const movementX = (this.prevX!==undefined) ? e.pageX - this.prevX : 0
+    const movementY = (this.prevY!==undefined) ? e.pageY - this.prevY : 0
+    this.prevX = e.pageX
+    this.prevY = e.pageY
+    if (this.isClicked(e)) {
+    console.log(movementX)
+      this.dx += movementX
+      this.dy += movementY
       const dist = Math.sqrt(this.dx*this.dx + this.dy*this.dy)
       if (dist > 44) {
         this.setState({
@@ -82,5 +89,9 @@ export default class Background extends Component<Props, State>
       y: this.state.y,
       opacity: 0.06,
     }), 250)
+  }
+
+  private isClicked(e) {
+    return e.buttons || e.which
   }
 }
