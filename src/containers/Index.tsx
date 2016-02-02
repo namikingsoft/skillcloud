@@ -1,46 +1,16 @@
 import FullBlock from 'components/FullBlock'
 import CloudLink from 'components/CloudLink'
-import SkillCloudCanvas from 'components/SkillCloudCanvas'
-import Skill from 'domains/Skill'
-import SkillNode from 'domains/SkillNode'
-import * as SkillConst from 'constants/SkillConst'
-import * as Action from 'actions/Action'
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {clone} from 'lodash'
 
-interface Props {
-  selected: Skill
-  selectSkill: (skill: Skill)=>Object
-}
-
-interface State {
-  transform?: string
-  transition?: string
-  opacity?: number
-  display?: string
-}
-
-@connect(
-  state => clone(state.skill),
-  dispatch => bindActionCreators(Action, dispatch)
-)
-
-export default class Index extends Component<Props, State>
+export default class Index extends Component<any, any>
 {
   render() {
     return (
       <div className="layout-index">
-        <div className="block__svg" style={this.state}>
-          <SkillCloudCanvas
-            cloud={SkillConst.rootCloud}
-            selected={this.selectedNode}
-            onRide={skill => null}
-            onDown={skill => null} />
-          <div className="block__svg__guard" />
-        </div>
         <FullBlock className="block block__profile">
           <div className="half block__profile__meta">
             <div className="block__profile__meta__position">
@@ -315,42 +285,5 @@ export default class Index extends Component<Props, State>
         </FullBlock>
       </div>
     )
-  }
-
-  componentDidMount() {
-    new Promise((resolve, reject) => {
-      this.props.selectSkill(null)
-      setTimeout(resolve, 1500)
-    }).
-    then(() => new Promise((resolve, reject) => {
-      this.setState({
-        transform: "scale(1.75)",
-        transition: "0.5s ease-out",
-        opacity: 0.5,
-      })
-      setTimeout(resolve, 500)
-    })).
-    then(() => new Promise((resolve, reject) => {
-      this.setState({
-        transform: "scale(5)",
-        transition: "0.3s",
-        opacity: 0,
-      })
-      setTimeout(resolve, 300)
-    })).
-    then(() => new Promise((resolve, reject) => {
-      this.setState({
-        display: 'none',
-      })
-    }))
-  }
-
-  componentWillUnmount() {
-    this.props.selectSkill(SkillConst.initialSkill)
-  }
-
-  private get selectedNode(): SkillNode {
-    const {selected} = this.props
-    return SkillConst.rootCloud.findNodeBySkill(selected)
   }
 }
