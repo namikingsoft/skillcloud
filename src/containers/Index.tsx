@@ -162,6 +162,12 @@ export default class Index extends Component<Props, State>
           <div className="half block__tachiyomi__image">
             <img className="display" src="/images/display1.png" />
             <img className="anime" src="/images/tachiyomi.gif" />
+            <small>
+            画像提供：
+            漫画 on web
+            ブラックジャックによろしく
+            佐藤秀峰
+            </small>
           </div>
         </FullBlock>
         <FullBlock className="block block__search" id="search">
