@@ -119,8 +119,8 @@ export default class Handle extends Component<Props, State>
   }
 
   private wheel = e => {
-    // cancel bounce scroll
-    e.preventDefault()
+    // cancel bounce scroll @todo cannot swipe page back
+    //e.preventDefault()
 
     if (this.isLockWheel) return
 
