@@ -14,8 +14,8 @@ export default class App extends Component
     return (
       <div className="layout-app">
         <Router history={createHashHistory()}>
-          <Route path="/" component={Index} />
           <Route component={CloudBase}>
+            <Route path="/" component={FirstContainer} />
             <Route path="/cloud" component={SkillContainer} />
             <Route path="/cloud/skill" component={SkillContainer} />
             <Route path="/cloud/skill/:action" component={SkillContainer} />
