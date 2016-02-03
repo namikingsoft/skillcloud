@@ -96,44 +96,31 @@ export default class First extends Component<Props, State>
     } = this.props
 
     new Promise((resolve, reject) => {
-      this.setState({
-        transition: "0.5s linear",
-        transform: "scale(6)",
-        transformOrigin: "0 340px",
-      })
-      setTimeout(resolve, 200)
+      moveCrossHair(940, 576, 0)
+      setTimeout(resolve, 500)
     }).
     then(() => new Promise((resolve, reject) => {
-      this.setState({
-        transition: "1.5s",
-        transform: "scale(6) translate(-300px, 0px)",
-        transformOrigin: "0 340px",
-      })
-      opacityCrossHair(0.4, 0)
-      moveCrossHair(window.innerWidth/4*3, window.innerHeight/4, 500)
-      moveBackground(-100, -100)
-      setTimeout(resolve, 500)
-    })).
-    then(() => new Promise((resolve, reject) => {
-      moveCrossHair(window.innerWidth/4, window.innerHeight/4*3, 500)
-      moveBackground(-100, 0)
-      setTimeout(resolve, 500)
-    })).
-    then(() => new Promise((resolve, reject) => {
-      moveCrossHair(window.innerWidth, window.innerHeight, 500)
+      opacityCrossHair(0.35, 200)
+      moveBackground(150, 100)
       setTimeout(resolve, 200)
     })).
     then(() => new Promise((resolve, reject) => {
-      this.setState({
-        transition: "0.2s",
-        transform: "scale(1)",
-      })
+      moveCrossHair(475, 310, 500)
+      setTimeout(resolve, 500)
+    })).
+    then(() => new Promise((resolve, reject) => {
+      moveCrossHair(window.innerWidth-108, 105, 1000)
+      moveBackground(150, 100)
+      setTimeout(resolve, 1100)
+    })).
+    then(() => new Promise((resolve, reject) => {
+      moveBackground(-150, 100)
       flashBackground(0)
+      opacityCrossHair(1.0, 500)
       setTimeout(resolve, 200)
     })).
     then(() => new Promise((resolve, reject) => {
-      opacityCrossHair(0, 0)
-      moveBackground(-100, 100)
+      opacityCrossHair(0.0, 500)
     }))
   }
 
