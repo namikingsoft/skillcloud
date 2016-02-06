@@ -14,6 +14,7 @@ export default class ZoomSlider extends Component<Props, any>
         <i className="fa fa-search"></i>
         <input type="range" min="50" max="150" defaultValue="100"
           ref="slider" onChange={e => onChange(this.value)} />
+        <i className="fa fa-plus"></i>
       </div>
     )
   }
