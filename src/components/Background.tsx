@@ -52,7 +52,6 @@ export default class Background extends Component<Props, State>
     this.prevX = e.pageX
     this.prevY = e.pageY
     if (this.isClicked(e)) {
-    console.log(movementX)
       this.dx += movementX
       this.dy += movementY
       const dist = Math.sqrt(this.dx*this.dx + this.dy*this.dy)
