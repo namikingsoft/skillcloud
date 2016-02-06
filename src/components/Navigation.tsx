@@ -8,28 +8,28 @@ export default class Navigation extends Component<any, any>
   render() {
     return (
       <div className="module-navigation">
-        <Link to="/" activeClassName="active">
-          <dl>
-            <dt>01</dt>
-            <dd>トップページ</dd>
-          </dl>
-        </Link>
         <Link to="/cloud" activeClassName="active">
           <dl>
-            <dt>02</dt>
+            <dt>01</dt>
             <dd>スキルクラウド</dd>
           </dl>
         </Link>
         <Link to={encodeURI('/cloud/skill/Web系開発')} activeClassName="active">
           <dl>
-            <dt>03</dt>
+            <dt>02</dt>
             <dd>Web系開発</dd>
           </dl>
         </Link>
         <Link to={encodeURI('/cloud/skill/インフラ構築')} activeClassName="active">
           <dl>
-            <dt>04</dt>
+            <dt>03</dt>
             <dd>インフラ構築</dd>
+          </dl>
+        </Link>
+        <Link to={encodeURI('/cloud/skill/データベース')} activeClassName="active">
+          <dl>
+            <dt>04</dt>
+            <dd>データベース</dd>
           </dl>
         </Link>
         <Link to={encodeURI('/cloud/skill/アプリ開発')} activeClassName="active">
@@ -59,29 +59,37 @@ export default class Navigation extends Component<any, any>
         <Handle
           onNext={() => this.next()}
           onBack={() => this.back()}
-          onIndex={index => this.index(index)} />
+          onIndex={index => this.toIndex(index)} />
       </div>
     )
   }
 
   next() {
-    const currentIndex = this.currentIndex()
-    if (currentIndex < this.size()) {
-      this.index(currentIndex + 1)
+    const nextIndex = this.currentIndex() + 1
+    if (nextIndex < this.size()) {
+      this.toIndex(nextIndex)
+    } else {
+      this.toTop()
     }
   }
 
   back() {
-    const currentIndex = this.currentIndex()
-    if (currentIndex > 0) {
-      this.index(currentIndex - 1)
+    const backIndex = this.currentIndex() - 1
+    if (backIndex > 0) {
+      this.toIndex(backIndex)
+    } else {
+      this.toTop()
     }
   }
 
-  index(index: number) {
+  toIndex(index: number) {
     const thisElement = React.findDOMNode(this)
     const linkElements = thisElement.querySelectorAll('a')
     location.hash = linkElements[index].getAttribute('href')
+  }
+
+  toTop() {
+    location.hash = '/'
   }
 
   size(): number {
@@ -95,8 +103,10 @@ export default class Navigation extends Component<any, any>
     const linkElements = thisElement.querySelectorAll('a')
     for (let i=0; i<linkElements.length; i++) {
       const element = linkElements[i]
-      if (element.getAttribute('class') === 'active') return i
+      if (element.getAttribute('class') === 'active') {
+        return i
+      }
     }
-    return 0
+    return -1
   }
 }
