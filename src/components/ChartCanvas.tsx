@@ -11,17 +11,15 @@ interface Props {
   onClick?: Function
 }
 
-interface State {
-  isDisplay?: boolean
-}
-
-export default class ChartCanvas extends Component<Props, State>
+export default class ChartCanvas extends Component<Props, any>
 {
   private drawer: ChartDrawer
 
   render() {
+    const {data} = this.props
+    const style = {opacity: data? 1 : 0}
     return (
-      <div className="module-chart">
+      <div className="module-chart" style={style}>
         <svg ref="svg"></svg>
       </div>
     )
@@ -32,13 +30,20 @@ export default class ChartCanvas extends Component<Props, State>
       React.findDOMNode(this.refs['svg'])
     )
     .onClick(value => this.props.onClick(value))
-    .update(this.props.data)
+
+    const {data} = this.props
+    if (data) {
+      this.drawer.update(this.props.data)
+    }
   }
 
   componentWillUnmount() {
   }
 
   componentDidUpdate() {
-    this.drawer.update(this.props.data)
+    const {data} = this.props
+    if (data) {
+      this.drawer.update(this.props.data)
+    }
   }
 }

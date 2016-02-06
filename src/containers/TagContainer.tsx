@@ -103,7 +103,7 @@ export default class TagContainer extends Component<Props, any>
   private get chartData(): ChartData {
     const {displayed} = this.props.tag
     return match<Tag, ChartData>(displayed).
-      caseOfNone(none => TagConst.rootChart).
+      caseOfNone(none => null).
       caseOfElse(tag => ChartDataFactory.createByTagList(displayed.children)).
     end()
   }
