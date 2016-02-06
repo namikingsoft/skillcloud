@@ -17,20 +17,29 @@ import {clone} from 'lodash'
 import match from 'match-case'
 
 interface Props {
-  displayed: Tag
+  tag: {
+    displayed: Tag,
+  }
+  zoom: {
+    percent: number,
+  }
   params: {[index: string]: string}
   displayTag: (tag: Tag)=>Object
 }
 
 @connect(
-  state => clone(state.tag),
+  state => new Object({
+    tag: clone(state.tag),
+    zoom: clone(state.zoom),
+  }),
   dispatch => bindActionCreators(Action, dispatch)
 )
 
 export default class TagContainer extends Component<Props, any>
 {
   render() {
-    const {displayed, params} = this.props
+    const {params} = this.props
+    const {displayed} = this.props.tag
     const data: ChartData = displayed?
       ChartDataFactory.createByTagList(displayed.children) : null
     return (
@@ -38,6 +47,7 @@ export default class TagContainer extends Component<Props, any>
         <TagCloudCanvas
           cloud={TagConst.rootCloud}
           mode={params['mode']}
+          zoomper={this.props.zoom.percent}
           onRide={node => this.display(node)}
           onDown={node => this.display(null)} />
         <ChartCanvas
@@ -55,7 +65,8 @@ export default class TagContainer extends Component<Props, any>
   }
 
   private get title() {
-    const {displayed, params} = this.props
+    const {params} = this.props
+    const {displayed} = this.props.tag
     return match<Tag, string>(displayed).
       caseOfNone(none =>
         match<string, string>(params['mode']).
@@ -69,7 +80,8 @@ export default class TagContainer extends Component<Props, any>
   }
 
   private get comment() {
-    const {displayed, params} = this.props
+    const {params} = this.props
+    const {displayed} = this.props.tag
     return match<Tag, string>(displayed).
       caseOfNone(none =>
         match<string, string>(params['mode']).
@@ -89,7 +101,7 @@ export default class TagContainer extends Component<Props, any>
   }
 
   private get chartData(): ChartData {
-    const {displayed} = this.props
+    const {displayed} = this.props.tag
     return match<Tag, ChartData>(displayed).
       caseOfNone(none => TagConst.rootChart).
       caseOfElse(tag => ChartDataFactory.createByTagList(displayed.children)).

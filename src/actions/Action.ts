@@ -29,3 +29,7 @@ export function moveCrossHair(x: number, y: number, timeout: number) {
 export function opacityCrossHair(opacity: number, timeout: number) {
   return {type: ActionType.OPACITY_CROSSHAIR, opacity, timeout}
 }
+
+export function changeZoom(percent: number) {
+  return {type: ActionType.CHANGE_ZOOM, percent}
+}

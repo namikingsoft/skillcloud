@@ -6,4 +6,5 @@ export enum ActionType {
   FLASH_BACKGROUND,
   MOVE_CROSSHAIR,
   OPACITY_CROSSHAIR,
+  CHANGE_ZOOM,
 }

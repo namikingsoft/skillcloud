@@ -16,15 +16,23 @@ import {clone} from 'lodash'
 import match from 'match-case'
 
 interface Props {
-  selected: Skill
-  displayed: Skill
+  skill: {
+    selected: Skill,
+    displayed: Skill,
+  }
+  zoom: {
+    percent: number,
+  }
   selectSkill: (skill: Skill)=>Object
   displaySkill: (skill: Skill)=>Object
   params: {[index: string]: string}
 }
 
 @connect(
-  state => clone(state.skill),
+  state => new Object({
+    skill: clone(state.skill),
+    zoom: clone(state.zoom),
+  }),
   dispatch => bindActionCreators(Action, dispatch)
 )
 
@@ -36,6 +44,7 @@ export default class SkillContainer extends Component<Props, any>
         <SkillCloudCanvas
           cloud={SkillConst.rootCloud}
           selected={this.selectedNode}
+          zoomper={this.props.zoom.percent}
           onRide={skill => this.ride(skill)}
           onDown={skill => this.ride(null)} />
         <ChartCanvas
@@ -85,7 +94,7 @@ export default class SkillContainer extends Component<Props, any>
   }
 
   private get title(): string {
-    const {selected, displayed} = this.props
+    const {selected, displayed} = this.props.skill
     return match<Skill, string>(displayed).
       caseOfNone(
         match<Skill, string>(selected).
@@ -98,7 +107,7 @@ export default class SkillContainer extends Component<Props, any>
   }
 
   private get comment(): string {
-    const {selected, displayed} = this.props
+    const {selected, displayed} = this.props.skill
     return match<Skill, string>(displayed).
       caseOfNone(
         match<Skill, string>(selected).
@@ -111,12 +120,12 @@ export default class SkillContainer extends Component<Props, any>
   }
 
   private get selectedNode(): SkillNode {
-    const {selected} = this.props
+    const {selected} = this.props.skill
     return SkillConst.rootCloud.findNodeBySkill(selected)
   }
 
   private get chartData(): ChartData {
-    const {selected, displayed} = this.props
+    const {selected, displayed} = this.props.skill
     return match<Skill, ChartData>(displayed).
       caseOfNone(skill =>
         match<Skill, ChartData>(selected).

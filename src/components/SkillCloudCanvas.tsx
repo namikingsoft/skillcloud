@@ -15,6 +15,7 @@ const color = d3.scale.category10()
 interface Props {
   cloud: SkillCloud
   selected: SkillNode
+  zoomper: number
   onRide: (skill: Skill)=>void
   onDown: (skill: Skill)=>void
 }
@@ -54,6 +55,9 @@ export default class SkillCloudCanvas extends Component<Props, any>
         this.draw(cloud.filter(selected))
       }
     }
+    if (this.props.zoomper !== prevProps.zoomper) {
+      this.translate()
+    }
   }
 
   private init(): SkillCloudCanvas {
@@ -80,23 +84,42 @@ export default class SkillCloudCanvas extends Component<Props, any>
     return this
   }
 
+  private viewX: number
+  private viewY: number
+  private viewWidth: number
+  private viewHeight: number
   private resize(): SkillCloudCanvas {
     const box = this.svg.node().getBoundingClientRect()
-    let viewX = 0
-    let viewY = 0
-    let viewWidth = box.width
-    let viewHeight = box.height
+    this.viewX = 0
+    this.viewY = 0
+    this.viewWidth = box.width
+    this.viewHeight = box.height
     const drag = d3.behavior.drag().on('drag', () => {
-      viewX -= d3.event.dx
-      viewY -= d3.event.dy
-      this.svg.attr('viewBox', `${viewX} ${viewY} ${box.width} ${box.height}`)
+      this.viewX -= d3.event.dx
+      this.viewY -= d3.event.dy
+      this.translate()
     })
     this.svg
     .call(drag)
-    .attr('viewBox', `${viewX} ${viewY} ${box.width} ${box.height}`)
+    this.translate()
     this.layout.resize(box.width, box.height)
 
     return this
+  }
+  private translate(): void {
+    const {zoomper} = this.props
+    const scale = 100 / zoomper
+    const box = this.svg.node().getBoundingClientRect()
+    let viewWidthPre = this.viewWidth
+    let viewHeightPre = this.viewHeight
+    this.viewWidth = box.width * scale
+    this.viewHeight = box.height * scale
+    this.viewX += (viewWidthPre - this.viewWidth) / 2
+    this.viewY += (viewHeightPre - this.viewHeight) / 2
+    this.svg.attr(
+      'viewBox',
+      `${this.viewX} ${this.viewY} ${this.viewWidth} ${this.viewHeight}`
+    )
   }
 
   private draw(cloud: SkillCloud): SkillCloudCanvas {

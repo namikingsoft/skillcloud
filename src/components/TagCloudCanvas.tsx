@@ -11,6 +11,7 @@ const color = d3.scale.category20()
 interface Props {
   cloud: TagCloud
   mode: string
+  zoomper: number
   onRide: (node: TagNode)=>void
   onDown: (node: TagNode)=>void
 }
@@ -40,11 +41,14 @@ export default class TagCloudCanvas extends Component<Props, any>
     window.removeEventListener('resize', this.resizeEvent)
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: Props) {
     const {cloud, mode} = this.props
     if (mode !== this.preMode) {
       this.draw(cloud.nodes, mode)
       this.preMode = mode
+    }
+    if (this.props.zoomper !== prevProps.zoomper) {
+      this.translate()
     }
   }
 
@@ -64,23 +68,42 @@ export default class TagCloudCanvas extends Component<Props, any>
     return this
   }
 
+  private viewX: number
+  private viewY: number
+  private viewWidth: number
+  private viewHeight: number
   private resize(): TagCloudCanvas {
     const box = this.svg.node().getBoundingClientRect()
-    let viewX = 0
-    let viewY = 0
-    let viewWidth = box.width
-    let viewHeight = box.height
+    this.viewX = 0
+    this.viewY = 0
+    this.viewWidth = box.width
+    this.viewHeight = box.height
     const drag = d3.behavior.drag().on('drag', () => {
-      viewX -= d3.event.dx
-      viewY -= d3.event.dy
-      this.svg.attr('translate', `${viewX} ${viewY}`)
+      this.viewX -= d3.event.dx
+      this.viewY -= d3.event.dy
+      this.translate()
     })
     this.svg
     .call(drag)
-    .attr('viewBox', `${viewX} ${viewY} ${box.width} ${box.height}`)
+    this.translate()
     this.layout.resize(box.width, box.height)
 
     return this
+  }
+  private translate(): void {
+    const {zoomper} = this.props
+    const scale = 100 / zoomper
+    const box = this.svg.node().getBoundingClientRect()
+    let viewWidthPre = this.viewWidth
+    let viewHeightPre = this.viewHeight
+    this.viewWidth = box.width * scale
+    this.viewHeight = box.height * scale
+    this.viewX += (viewWidthPre - this.viewWidth) / 2
+    this.viewY += (viewHeightPre - this.viewHeight) / 2
+    this.svg.attr(
+      'viewBox',
+      `${this.viewX} ${this.viewY} ${this.viewWidth} ${this.viewHeight}`
+    )
   }
 
   private draw(nodes: List<TagNode>, mode: string): TagCloudCanvas {
