@@ -11,7 +11,11 @@ interface Props {
   onClick?: Function
 }
 
-export default class ChartCanvas extends Component<Props, any>
+interface State {
+  isDisplay?: boolean
+}
+
+export default class ChartCanvas extends Component<Props, State>
 {
   private drawer: ChartDrawer
 

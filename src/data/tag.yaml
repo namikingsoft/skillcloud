@@ -4,32 +4,61 @@ experience: 12
 interest: 12
 comment: タグ
 children:
-- name: Javascript
+- name: 開発実装
   experience: 12
   interest: 12
   comment: コメント
   children:
-  - name: Javascript View
+  - name: 開発言語
+    experience: 12
+    interest: 12
+    comment: |
+      業務実績では、Javascript、PHPが多いです。
+
+      個人趣味での開発では、関数型言語のHaskellやScalaでの開発に着手しています。
+    children:
+    - name: PHP
+      experience: 75
+      interest: 22
+    - name: Ruby
+      experience: 45
+      interest: 32
+    - name: Javascript
+      experience: 100
+      interest: 100
+    - name: Java
+      experience: 40
+      interest: 40
+    - name: Scala
+      experience: 22
+      interest: 75
+    - name: Haskell
+      experience: 22
+      interest: 80
+  - name: JS View
     experience: 12
     interest: 12
     comment: |
       最近開発するSPAでは、React.jsを使うことが多いです。
-      フロントエンド界隈は、変化が激しくて大変ですが、
-      表現の手段が増えていき、楽しいです。
+
+      WebGLを用いたグラフィカルな表現にも興味があります。
     children:
     - name: jQuery
-      experience: 40
-      interest: 24
+      experience: 65
+      interest: 22
     - name: React
-      experience: 32
-      interest: 52
+      experience: 40
+      interest: 70
     - name: D3.js
-      experience: 54
-      interest: 50
+      experience: 65
+      interest: 40
     - name: Canvas
-      experience: 34
-      interest: 30
-  - name: Framework
+      experience: 35
+      interest: 22
+    - name: WebGL
+      experience: 22
+      interest: 80
+  - name: JSフレームワーク
     experience: 12
     interest: 12
     comment: |
@@ -38,17 +67,17 @@ children:
       とても勉強になりました。
     children:
     - name: Redux
-      experience: 32
-      interest: 50
+      experience: 50
+      interest: 85
     - name: AngularJS
-      experience: 34
-      interest: 24
+      experience: 40
+      interest: 22
     - name: Backbone.js
-      experience: 32
-      interest: 24
+      experience: 22
+      interest: 22
     - name: Knockout.js
-      experience: 24
-      interest: 20
+      experience: 22
+      interest: 22
   - name: AltJS
     experience: 12
     interest: 12
@@ -57,14 +86,14 @@ children:
       個人的には、書いていて気持ちいいCoffeeScriptも好きです。
     children:
     - name: TypeScript
-      experience: 60
-      interest: 50
+      experience: 80
+      interest: 80
     - name: CoffeeScript
-      experience: 44
-      interest: 40
-    - name: ECMAScript6~
-      experience: 42
-      interest: 54
+      experience: 60
+      interest: 35
+    - name: ECMAScript
+      experience: 40
+      interest: 60
   - name: Task runner (Asset Pipeline)
     experience: 12
     interest: 12
@@ -73,7 +102,7 @@ children:
       細かいタスクを組みたい場合はgulpを使ったります。
     children:
     - name: Grunt
-      experience: 24
+      experience: 22
       interest: 16
     - name: gulp
       experience: 36
@@ -94,14 +123,14 @@ children:
       BEMなどのまどろっこしい命名規約もスマートに書けるので、気に入っています。
     children:
     - name: Jade
-      experience: 20
-      interest: 20
+      experience: 22
+      interest: 22
     - name: Sass
-      experience: 14
-      interest: 32
+      experience: 22
+      interest: 22
     - name: Stylus
       experience: 50
-      interest: 44
+      interest: 40
   - name: CSS Structure
     experience: 12
     interest: 12
@@ -132,65 +161,44 @@ children:
     comment: |
       マイクロフレームワークが好みで、
       言語的に気持ちよく書ける、Railsも好きです。
-      最近では、関数型言語に魅せられて、Scalatraを使ってみたりしています。。
+      最近では、関数型言語の練習として、Scalatraを使ってみたりしています。。
     children:
-    - name: Synfony2
-      experience: 24
-      interest: 22
-    - name: CakePHP2
+    - name: Synfony
       experience: 32
-      interest: 16
-    - name: ZendFramework1
-      experience: 34
-      interest: 14
+      interest: 22
+    - name: CakePHP
+      experience: 32
+      interest: 22
+    - name: Slim
+      experience: 40
+      interest: 22
     - name: Express4
-      experience: 36
+      experience: 40
       interest: 20
     - name: Scalatra
-      experience: 18
-      interest: 44
+      experience: 22
+      interest: 50
     - name: Rails
-      experience: 24
+      experience: 50
       interest: 36
-  - name: IDE/Editor
+  - name: 開発手法
     experience: 12
     interest: 12
     comment: |
-      有志のプラグインが多い点、
-      Linuxであれば、どのマシン環境でもクラウドの設定ファイルから
-      自分なりの環境をすぐに構築できる点から、
-      主にVimを使ってコーディングしています。
+      DDDに関しては、FatControllerやスマートUIにならないように、
+      業務知識をオブジェクトに落としこむ努力をしてきました。
+
+      それをチーム内や顧客と共有することを、今後の課題としています。
     children:
-    - name: Eclipse
-      experience: 35
-      interest: 32
-    - name: Vim
+    - name: ドメイン駆動開発
+      experience: 50
+      interest: 80
+    - name: 振舞駆動開発
       experience: 40
-      interest: 45
-    - name: Xcode
-      experience: 24
+      interest: 40
+    - name: チケット駆動開発
+      experience: 32
       interest: 32
-    - name: Sublime Text
-      experience: 12
-      interest: 44
-  - name: スマホアプリ開発
-    experience: 12
-    interest: 12
-    comment: |
-      昔、趣味でAndroidの勝手アプリを作っていたりしていました。
-      業務としては、Titanium Mobileを用いてのアプリ開発と保守経験があります。
-      最近になり、SwiftやKotlinのようなモダン言語の影響で、
-      何か良いネタはないかと、探っているところです。
-    children:
-    - name: Titanium Mobile
-      experience: 38
-      interest: 14
-    - name: Swift
-      experience: 12
-      interest: 44
-    - name: Kotlin
-      experience: 12
-      interest: 44
   - name: IoT開発
     experience: 12
     interest: 12
@@ -198,58 +206,42 @@ children:
       業務経験ではなく、個人の趣味になりますが、
       ArduinoNano+RaspberryPi+MEANスタックを用いて、Bluetoothラジコンを作ったり、
       リモートから家電を操作できるIoTリモコンを作ろうと頑張った時期があります。
-      ソフト開発と比べて、なかなか上手くは行かないことが多いですが、
-      今後も非常に興味がある分野です。
     children:
     - name: Arduino
-      experience: 24
-      interest: 42
+      experience: 22
+      interest: 32
     - name: RaspberryPi
-      experience: 20
+      experience: 22
       interest: 44
     - name: 電子工作
-      experience: 18
+      experience: 22
       interest: 36
-- name: Infrastructure
+- name: インフラ構築
   experience: 12
   interest: 12
   comment: コメント
   children:
-  - name: Infrastructure
-    experience: 12
-    interest: 12
-    comment: |
-      Dockerについては、最近積極的に取り組んでおり、
-      開発環境からCI環境、本番環境まで、一貫して活用した実績があります。
-      Swarmを用いたコンテナのクラスタリングなどに興味があります。
-    children:
-    - name: AWS
-      experience: 24
-      interest: 44
-    - name: Vagrant
-      experience: 40
-      interest: 32
-    - name: Docker
-      experience: 44
-      interest: 64
   - name: Provisioning
     experience: 12
     interest: 12
     comment: |
       開発環境用のプロビジョニング自動化については、進んで取り組んできました。
-      最近では、Dockerなどのイミュータブルインフラが出てきたので、
+      最近では、dockerなどのイミュータブルインフラが出てきたので、
       冪等性についてはあまり意識せず、シェルスクリプトで書く事が多いです。
     children:
+    - name: docker
+      experience: 75
+      interest: 75
     - name: Shell
-      experience: 36
+      experience: 50
       interest: 40
     - name: Chef
-      experience: 30
-      interest: 18
+      experience: 22
+      interest: 22
     - name: Ansible
-      experience: 40
-      interest: 32
-- name: Database
+      experience: 30
+      interest: 22
+- name: データベース
   experience: 12
   interest: 12
   comment: コメント
@@ -263,13 +255,13 @@ children:
     children:
     - name: MySQL
       experience: 40
-      interest: 34
+      interest: 22
     - name: PostgreSQL
-      experience: 20
-      interest: 16
+      experience: 22
+      interest: 22
     - name: SQLite
-      experience: 24
-      interest: 26
+      experience: 22
+      interest: 22
   - name: NoSQL
     experience: 12
     interest: 12
@@ -280,40 +272,11 @@ children:
       クエリ数が多い時になかなかスピードが出ずに苦労したこともありました。
     children:
     - name: MongoDB
-      experience: 36
-      interest: 44
+      experience: 40
+      interest: 50
     - name: Redis
-      experience: 20
-      interest: 36
+      experience: 22
+      interest: 40
     - name: Memcache
-      experience: 20
-      interest: 18
-- name: Management
-  experience: 12
-  interest: 12
-  comment: コメント
-  children:
-  - name: Management Tools
-    experience: 12
-    interest: 12
-    comment: |
-      Redmine(Alminium),GitLab,Jenkinsを利用して、
-      プロジェクト管理＆CIビルド環境の構築をやっていました。
-      最近では、TAIGAのようなアジャイル特化されたかんばんツールでの
-      プロジェクト管理に興味があります。
-    children:
-    - name: Jenkins
-      experience: 46
-      interest: 42
-    - name: GitLab
-      experience: 36
-      interest: 44
-    - name: Redmine
-      experience: 24
-      interest: 16
-    - name: TravisCI
-      experience: 16
-      interest: 34
-    - name: CircleCI
-      experience: 12
-      interest: 36
+      experience: 22
+      interest: 22

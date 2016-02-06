@@ -31,7 +31,7 @@ export default class SkillNode
       caseOf(0, 14).
       caseOf(1, 20).
       caseOf(2, 16).
-      caseOf(3, 11).
+      caseOf(3, 13).
       caseOfElse(12).
     end()
   }
@@ -57,9 +57,9 @@ export default class SkillNode
 
   radius(isActive: boolean = false): number {
     return match<SkillNode,number>(this).
-      caseOf(n => n.isRoot, v => 100).
-      caseOf(n => isActive && n.isGrandChild, v => 60).
-      caseOf(n => isActive, v => 100).
+      caseOf(n => n.isRoot, v => 210).
+      caseOf(n => isActive && n.isGrandChild, v => 1.15 * v.skill.experience).
+      caseOf(n => isActive, v => 1.45 * v.skill.experience).
       caseOfElse(5).
     end()
   }

@@ -38,10 +38,10 @@ export default class Navigation extends Component<any, any>
             <dd>アプリ開発</dd>
           </dl>
         </Link>
-        <Link to={encodeURI('/cloud/skill/趣味・特技')} activeClassName="active">
+        <Link to={encodeURI('/cloud/skill/マネジメント')} activeClassName="active">
           <dl>
             <dt>06</dt>
-            <dd>趣味・特技</dd>
+            <dd>マネジメント</dd>
           </dl>
         </Link>
         <Link to="/cloud/tag/experience" activeClassName="active">

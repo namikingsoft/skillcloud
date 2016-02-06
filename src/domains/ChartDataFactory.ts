@@ -11,8 +11,8 @@ export default class ChartDataFactory
     return new ChartData(
       List.of<ChartDatum>(
         new ChartDatum({
-          key: '経験',
-          color: '#f00',
+          key: 'スキル経験値グラフ',
+          color: '#fff',
           values: skills
             .map<ChartValue>(skill => {
               return new ChartValue({
@@ -23,10 +23,12 @@ export default class ChartDataFactory
             })
             .sortBy(row => -row.value)
             .toList()
-        }),
+        })
+        /* @todo for simple
+        ,
         new ChartDatum({
           key: '興味',
-          color: '#0f0',
+          color: '#aaa',
           values: skills
             .map<ChartValue>(skill => {
               return new ChartValue({
@@ -37,6 +39,7 @@ export default class ChartDataFactory
             })
             .toList()
         })
+        */
       )
     )
   }
@@ -46,7 +49,7 @@ export default class ChartDataFactory
       List.of<ChartDatum>(
         new ChartDatum({
           key: '経験',
-          color: '#f00',
+          color: '#fff',
           values: tags
             .map<ChartValue>(tag => {
               return new ChartValue({
@@ -60,7 +63,7 @@ export default class ChartDataFactory
         }),
         new ChartDatum({
           key: '興味',
-          color: '#0f0',
+          color: '#999',
           values: tags
             .map<ChartValue>(tag => {
               return new ChartValue({
