@@ -4,279 +4,274 @@ experience: 12
 interest: 12
 comment: タグ
 children:
-- name: 開発実装
+- name: 開発言語
   experience: 12
   interest: 12
-  comment: コメント
+  comment: |
+    業務実績では、Javascript、PHPが多いです。
+
+    個人趣味での開発では、関数型言語のHaskellやScalaでの開発に着手しています。
   children:
-  - name: 開発言語
-    experience: 12
-    interest: 12
-    comment: |
-      業務実績では、Javascript、PHPが多いです。
-
-      個人趣味での開発では、関数型言語のHaskellやScalaでの開発に着手しています。
-    children:
-    - name: PHP
-      experience: 75
-      interest: 22
-    - name: Ruby
-      experience: 45
-      interest: 32
-    - name: Javascript
-      experience: 100
-      interest: 100
-    - name: Java
-      experience: 40
-      interest: 40
-    - name: Scala
-      experience: 22
-      interest: 75
-    - name: Haskell
-      experience: 22
-      interest: 80
-  - name: JS View
-    experience: 12
-    interest: 12
-    comment: |
-      最近開発するSPAでは、React.jsを使うことが多いです。
-
-      WebGLを用いたグラフィカルな表現にも興味があります。
-    children:
-    - name: jQuery
-      experience: 65
-      interest: 22
-    - name: React
-      experience: 40
-      interest: 70
-    - name: D3.js
-      experience: 65
-      interest: 40
-    - name: Canvas
-      experience: 35
-      interest: 22
-    - name: WebGL
-      experience: 22
-      interest: 80
-  - name: JSフレームワーク
-    experience: 12
-    interest: 12
-    comment: |
-      最近の私用な開発では、Fluxフレームワークを用いています。
-      Reduxのexamplesには、モダンな開発のノウハウが詰まっていて、
-      とても勉強になりました。
-    children:
-    - name: Redux
-      experience: 50
-      interest: 85
-    - name: AngularJS
-      experience: 40
-      interest: 22
-    - name: Backbone.js
-      experience: 22
-      interest: 22
-    - name: Knockout.js
-      experience: 22
-      interest: 22
-  - name: AltJS
-    experience: 12
-    interest: 12
-    comment: |
-      最近では、静的型付け言語でES6とも互換性のあるTypeScript一択なのですが、
-      個人的には、書いていて気持ちいいCoffeeScriptも好きです。
-    children:
-    - name: TypeScript
-      experience: 80
-      interest: 80
-    - name: CoffeeScript
-      experience: 60
-      interest: 35
-    - name: ECMAScript
-      experience: 40
-      interest: 60
-  - name: Task runner (Asset Pipeline)
-    experience: 12
-    interest: 12
-    comment: |
-      最近では、お手軽で多機能なwebpackを使うことが多いですが、
-      細かいタスクを組みたい場合はgulpを使ったります。
-    children:
-    - name: Grunt
-      experience: 22
-      interest: 16
-    - name: gulp
-      experience: 36
-      interest: 36
-    - name: webpack
-      experience: 44
-      interest: 40
-- name: HTML/CSS
+  - name: PHP
+    experience: 75
+    interest: 22
+  - name: Ruby
+    experience: 45
+    interest: 32
+  - name: Javascript
+    experience: 100
+    interest: 80
+  - name: Java
+    experience: 40
+    interest: 40
+  - name: Scala
+    experience: 22
+    interest: 75
+  - name: Haskell
+    experience: 22
+    interest: 80
+- name: JSビュー
   experience: 12
   interest: 12
-  comment: コメント
-  children:
-  - name: Preprocessor
-    experience: 12
-    interest: 12
-    comment: |
-      node.jsとの親和性の高くシンプルに書けるStylusを使うことが多いです。
-      BEMなどのまどろっこしい命名規約もスマートに書けるので、気に入っています。
-    children:
-    - name: Jade
-      experience: 22
-      interest: 22
-    - name: Sass
-      experience: 22
-      interest: 22
-    - name: Stylus
-      experience: 50
-      interest: 40
-  - name: CSS Structure
-    experience: 12
-    interest: 12
-    comment: |
-      最近はディレクトリ整理にSMACSS、命名規約にBEMなど、
-      複数の設計技法を組み合わせるやり方を最近意識しています。
+  comment: |
+    最近開発するSPAでは、React.jsを使うことが多いです。
 
-      CSSは自由度が高く、サイト構造によって一変するので、
-      定石が作りにくく、なかなか難しいです。
-    children:
-    - name: BEM
-      experience: 32
-      interest: 34
-    - name: OOCSS
-      experience: 30
-      interest: 38
-    - name: SMACSS
-      experience: 32
-      interest: 36
-- name: BackEnd
+    WebGLを用いたグラフィカルな表現にも興味があり、
+    Webサイト上にも適応すべく、学習を進めています。
+  children:
+  - name: jQuery
+    experience: 65
+    interest: 22
+  - name: React
+    experience: 40
+    interest: 60
+  - name: D3.js
+    experience: 65
+    interest: 40
+  - name: Canvas
+    experience: 35
+    interest: 22
+  - name: WebGL
+    experience: 22
+    interest: 75
+- name: JSフレームワーク
   experience: 12
   interest: 12
-  comment: コメント
+  comment: |
+    最近の私用な開発では、Fluxフレームワークを用いています。
+    Reduxのexamplesには、モダンな開発のノウハウが詰まっていて、
+    とても勉強になりました。
   children:
-  - name: Webフレームワーク
+  - name: Flux
+    experience: 40
+    interest: 85
+  - name: AngularJS
+    experience: 40
+    interest: 22
+  - name: Backbone.js
+    experience: 22
+    interest: 22
+  - name: Knockout.js
+    experience: 22
+    interest: 22
+- name: AltJS
+  experience: 12
+  interest: 12
+  comment: |
+    最近では、静的型付け言語でES6とも互換性のあるTypeScript一択なのですが、
+    個人的には、書いていて気持ちいいCoffeeScriptも好きです。
+  children:
+  - name: TypeScript
+    experience: 80
+    interest: 100
+  - name: CoffeeScript
+    experience: 60
+    interest: 35
+  - name: ECMAScript
+    experience: 40
+    interest: 45
+- name: Task runner
+  experience: 12
+  interest: 12
+  comment: |
+    最近では、お手軽で多機能なwebpackを使うことが多いですが、
+    細かいタスクを組みたい場合はgulpを使ったります。
+  children:
+  - name: Grunt
+    experience: 22
+    interest: 16
+  - name: gulp
+    experience: 36
+    interest: 36
+  - name: webpack
+    experience: 44
+    interest: 40
+- name: プリプロセッサ
+  experience: 12
+  interest: 12
+  comment: |
+    node.jsとの親和性の高くシンプルに書けるStylusを使うことが多いです。
+    BEMなどのまどろっこしい命名規約もスマートに書けるので、気に入っています。
+  children:
+  - name: Jade
+    experience: 22
+    interest: 22
+  - name: Sass
+    experience: 22
+    interest: 22
+  - name: Stylus
+    experience: 50
+    interest: 40
+- name: CSS設計
+  experience: 12
+  interest: 12
+  comment: |
+    最近はディレクトリ整理にSMACSS、命名規約にBEMなど、
+    複数の設計技法を組み合わせるやり方を最近意識しています。
+
+    CSSは自由度が高く、サイト構造によって一変するので、
+    定石が作りにくく、なかなか難しいです。
+  children:
+  - name: BEM
     experience: 32
-    interest: 12
-    comment: |
-      マイクロフレームワークが好みで、
-      言語的に気持ちよく書ける、Railsも好きです。
-      最近では、関数型言語の練習として、Scalatraを使ってみたりしています。。
-    children:
-    - name: Synfony
-      experience: 32
-      interest: 22
-    - name: CakePHP
-      experience: 32
-      interest: 22
-    - name: Slim
-      experience: 40
-      interest: 22
-    - name: Express4
-      experience: 40
-      interest: 20
-    - name: Scalatra
-      experience: 22
-      interest: 50
-    - name: Rails
-      experience: 50
-      interest: 36
-  - name: 開発手法
-    experience: 12
-    interest: 12
-    comment: |
-      DDDに関しては、FatControllerやスマートUIにならないように、
-      業務知識をオブジェクトに落としこむ努力をしてきました。
+    interest: 34
+  - name: OOCSS
+    experience: 30
+    interest: 38
+  - name: SMACSS
+    experience: 32
+    interest: 36
+- name: Webフレームワーク
+  experience: 32
+  interest: 12
+  comment: |
+    マイクロフレームワークが好みで、
+    言語的に気持ちよく書ける、Railsも好きです。
+    最近では、関数型言語の練習として、Scalatraを使ってみたりしています。
+  children:
+  - name: Synfony
+    experience: 32
+    interest: 22
+  - name: CakePHP
+    experience: 32
+    interest: 22
+  - name: Slim
+    experience: 40
+    interest: 22
+  - name: Express4
+    experience: 40
+    interest: 20
+  - name: Scalatra
+    experience: 22
+    interest: 45
+  - name: Rails
+    experience: 50
+    interest: 36
+- name: 開発手法
+  experience: 12
+  interest: 12
+  comment: |
+    DDDに関しては、FatControllerやスマートUIにならないように、
+    業務知識をオブジェクトに落としこむ努力をしてきました。
 
-      それをチーム内や顧客と共有することを、今後の課題としています。
-    children:
-    - name: ドメイン駆動開発
-      experience: 50
-      interest: 80
-    - name: 振舞駆動開発
-      experience: 40
-      interest: 40
-    - name: チケット駆動開発
-      experience: 32
-      interest: 32
-  - name: IoT開発
-    experience: 12
-    interest: 12
-    comment: |
-      業務経験ではなく、個人の趣味になりますが、
-      ArduinoNano+RaspberryPi+MEANスタックを用いて、Bluetoothラジコンを作ったり、
-      リモートから家電を操作できるIoTリモコンを作ろうと頑張った時期があります。
-    children:
-    - name: Arduino
-      experience: 22
-      interest: 32
-    - name: RaspberryPi
-      experience: 22
-      interest: 44
-    - name: 電子工作
-      experience: 22
-      interest: 36
-- name: インフラ構築
+    それをチーム内や顧客と共有することを、今後の課題としています。
+  children:
+  - name: ドメイン駆動開発
+    experience: 50
+    interest: 80
+  - name: 振舞駆動開発
+    experience: 40
+    interest: 40
+  - name: チケット駆動開発
+    experience: 32
+    interest: 32
+- name: IoT開発
   experience: 12
   interest: 12
-  comment: コメント
+  comment: |
+    業務経験ではなく、個人の趣味になりますが、
+    ArduinoNano+RaspberryPi+MEANスタックを用いて、Bluetoothラジコンを作ったり、
+    リモートから家電を操作できるIoTリモコンを作ろうと頑張った時期があります。
   children:
-  - name: Provisioning
-    experience: 12
-    interest: 12
-    comment: |
-      開発環境用のプロビジョニング自動化については、進んで取り組んできました。
-      最近では、dockerなどのイミュータブルインフラが出てきたので、
-      冪等性についてはあまり意識せず、シェルスクリプトで書く事が多いです。
-    children:
-    - name: docker
-      experience: 75
-      interest: 75
-    - name: Shell
-      experience: 50
-      interest: 40
-    - name: Chef
-      experience: 22
-      interest: 22
-    - name: Ansible
-      experience: 30
-      interest: 22
-- name: データベース
+  - name: Arduino
+    experience: 22
+    interest: 32
+  - name: RaspberryPi
+    experience: 22
+    interest: 44
+  - name: 電子工作
+    experience: 22
+    interest: 36
+- name: プロビジョニング
   experience: 12
   interest: 12
-  comment: コメント
+  comment: |
+    開発環境用のプロビジョニング自動化については、進んで取り組んできました。
+    最近では、dockerなどのイミュータブルインフラが出てきたので、
+    冪等性についてはあまり意識せず、シェルスクリプトで書く事が多いです。
   children:
-  - name: SQL
-    experience: 12
-    interest: 12
-    comment: |
-      主にMySQLを利用したアプリケーションを組むことが多いです。
-      SQLのチューニングを担当することもあります。
-    children:
-    - name: MySQL
-      experience: 40
-      interest: 22
-    - name: PostgreSQL
-      experience: 22
-      interest: 22
-    - name: SQLite
-      experience: 22
-      interest: 22
-  - name: NoSQL
-    experience: 12
-    interest: 12
-    comment: |
-      JavaScriptと親和性の高いのMongoDBをよく使います。
-      Expressと連携して、MEANスタックを組んだことがありますが、
-      シングルスレッドのイベント駆動のためか、
-      クエリ数が多い時になかなかスピードが出ずに苦労したこともありました。
-    children:
-    - name: MongoDB
-      experience: 40
-      interest: 50
-    - name: Redis
-      experience: 22
-      interest: 40
-    - name: Memcache
-      experience: 22
-      interest: 22
+  - name: docker
+    experience: 65
+    interest: 80
+  - name: Shell
+    experience: 60
+    interest: 40
+  - name: Chef
+    experience: 22
+    interest: 22
+  - name: Ansible
+    experience: 30
+    interest: 22
+- name: クラウド環境
+  experience: 12
+  interest: 12
+  comment: |
+    業務ではオンプレミスな環境が多いので、PaaS,IaaSに触れる機会が少ないですが、
+
+    個人で、AWS、DigitalOceanなどを用いてのOSSや開発環境構築などの
+    検証環境として使ったり、
+    Terraformを用いてのクラウド環境のオーケストレーションを実践しています。
+  children:
+  - name: AWS
+    experience: 22
+    interest: 40
+  - name: DigitalOcean
+    experience: 22
+    interest: 22
+  - name: Terraform
+    experience: 22
+    interest: 40
+- name: RDB
+  experience: 12
+  interest: 12
+  comment: |
+    主にMySQLを利用したアプリケーションを組むことが多いです。
+    SQLのチューニングを担当することもあります。
+  children:
+  - name: MySQL
+    experience: 60
+    interest: 22
+  - name: PostgreSQL
+    experience: 22
+    interest: 22
+  - name: SQLite
+    experience: 22
+    interest: 22
+- name: NoSQL
+  experience: 12
+  interest: 12
+  comment: |
+    JavaScriptと親和性の高いのMongoDBをよく使います。
+    Expressと連携して、MEANスタックを組んだことがありますが、
+    シングルスレッドのイベント駆動のためか、
+    クエリ数が多い時になかなかスピードが出ずに苦労したこともありました。
+  children:
+  - name: MongoDB
+    experience: 50
+    interest: 40
+  - name: Redis
+    experience: 22
+    interest: 40
+  - name: Memcache
+    experience: 22
+    interest: 22

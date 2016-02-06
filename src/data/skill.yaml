@@ -150,9 +150,11 @@ children:
     experience: 45
     interest: 42
     comment: |
-      業務ではオンプレミスな環境が多いので、クラウドに触れる機会が少ないですが、
-      個人で、さくらのVPSやAWS、DigitalOceanを用いてのOSSや開発環境構築などの
-      検証環境として使っています。
+      業務ではオンプレミスな環境が多いので、PaaS,IaaSに触れる機会が少ないですが、
+
+      個人で、AWS、DigitalOceanなどを用いてのOSSや開発環境構築などの
+      検証環境として使ったり、
+      Terraformを用いてのクラウド環境のオーケストレーションを実践しています。
     children:
       - name: AWS
         experience: 65
