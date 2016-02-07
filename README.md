@@ -7,18 +7,18 @@ http://blog.namiking.net/skillcloud/
 Build
 -----------------------------
 
-### Run Server
+#### Run Server
 ```sh
 npm start
 open http://localhost:1234
 ```
 
-### Build
+#### Build
 ```sh
 npm run build
 ```
 
-### Deploy
+#### Deploy
 ```sh
 npm run deploy
 ```
@@ -27,12 +27,12 @@ npm run deploy
 Test
 -----------------------------
 
-### Test Watch
+#### Test Watch
 ```sh
 npm test
 ```
 
-### Test Single
+#### Test Single
 ```sh
 npm run test:single
 ```
