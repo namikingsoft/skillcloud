@@ -9,6 +9,9 @@ Get Started
 -----------------------------
 
 ```sh
+git clone https://github.com/namikingsoft/skillcloud.git
+cd skillcloud
+
 git clone -b gh-pages https://github.com/namikingsoft/skillcloud.git public
 npm install
 
