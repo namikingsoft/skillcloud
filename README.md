@@ -4,7 +4,7 @@ This is visializing skill like cloud.
 http://blog.namiking.net/skillcloud/
 
 
-Build
+Build Scripts
 -----------------------------
 
 #### Run Server
@@ -22,10 +22,6 @@ npm run build
 ```sh
 npm run deploy
 ```
-
-
-Test
------------------------------
 
 #### Test Watch
 ```sh
