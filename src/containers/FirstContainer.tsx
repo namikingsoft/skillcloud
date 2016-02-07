@@ -58,9 +58,9 @@ export default class First extends Component<Props, State>
           </div>
           <div className="module-profile__link">
             <ul>
-              <li><i className="fa fa-github"></i> GitHub</li>
-              <li><i className="fa fa-twitter"></i> Twitter</li>
-              <li><i className="fa fa-home"></i> Blog</li>
+              <li><a href="https://github.com/namikingsoft"><i className="fa fa-github"></i> GitHub</a></li>
+              <li><a href="https://github.com/namikingsoft"><i className="fa fa-twitter"></i> Twitter</a></li>
+              <li><a href="http://blog.namiking.net"><i className="fa fa-home"></i> Blog</a></li>
             </ul>
           </div>
           <div className="module-profile__overview">
@@ -74,7 +74,7 @@ export default class First extends Component<Props, State>
             </p>
           </div>
           <div className="module-profile__forkme">
-            <a href="#">
+            <a href="https://github.com/namikingsoft/skillcloud">
               Fork me on GitHub
             </a>
           </div>
