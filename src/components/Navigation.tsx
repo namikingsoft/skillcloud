@@ -3,6 +3,10 @@ import * as React from 'react'
 import {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 
+namespace Index {
+  export const TOPPAGE = -1
+}
+
 export default class Navigation extends Component<any, any>
 {
   render() {
@@ -75,7 +79,7 @@ export default class Navigation extends Component<any, any>
 
   back() {
     const backIndex = this.currentIndex() - 1
-    if (backIndex > 0) {
+    if (backIndex > Index.TOPPAGE) {
       this.toIndex(backIndex)
     } else {
       this.toTop()
@@ -107,6 +111,6 @@ export default class Navigation extends Component<any, any>
         return i
       }
     }
-    return -1
+    return Index.TOPPAGE
   }
 }
