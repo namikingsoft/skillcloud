@@ -1,8 +1,5 @@
-node_modules
-bower_components
-typings
-public
-static/js
-static/css
-static/fonts
-npm-debug.log
+/node_modules
+/bower_components
+/typings
+/public
+/npm-debug.log

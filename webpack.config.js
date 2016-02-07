@@ -10,7 +10,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: "./dest",
+    path: "./public",
     publicPath: '/',
   },
   module: {
@@ -46,7 +46,7 @@ module.exports = {
     modulesDirectories: ['src', 'node_modules', 'bower_components'],
   },
   devServer: {
-    contentBase: "./dest",
+    contentBase: "./public",
     port: 1234,
     hot: true,
     inline: true,
