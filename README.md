@@ -32,14 +32,14 @@ npm run build
 npm run deploy
 ```
 
-#### Test Watch
+#### Test
 ```sh
 npm test
 ```
 
-#### Test Single
+#### Test Watch
 ```sh
-npm run test:single
+npm run test:watch
 ```
 
 [travis-badge]: https://travis-ci.org/namikingsoft/skillcloud.svg?branch=master
