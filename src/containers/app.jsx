@@ -1,4 +1,3 @@
-import Index from 'containers/Index'
 import CloudBase from 'containers/CloudBase'
 import FirstContainer from 'containers/FirstContainer'
 import SkillContainer from 'containers/SkillContainer'
@@ -21,7 +20,7 @@ export default class App extends Component
             <Route path="/cloud/skill/:action" component={SkillContainer} />
             <Route path="/cloud/tag/:mode" component={TagContainer} />
           </Route>
-          <Route path="*" component={Index} />
+          <Route path="*" component={FirstContainer} />
         </Router>
       </div>
     );
