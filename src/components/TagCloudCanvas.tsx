@@ -125,8 +125,7 @@ export default class TagCloudCanvas extends Component<Props, any>
       .transition()
       .duration(200)
       .style("fill-opacity", 1)
-      const {onRide} = this.props
-      onRide(d)
+      this.ride(d)
     })
     .on('mouseout', d => {
       this.svg.selectAll(`g.group${d.group} circle`)
@@ -136,7 +135,7 @@ export default class TagCloudCanvas extends Component<Props, any>
       const {onDown} = this.props
       onDown(d)
     })
-    .on('mousedown', d => this.props.onRide(d))
+    .on('mousedown', d => this.ride(d))
     //.on('mouseup', d => this.props.onDown(d))
 
     g.append("circle")
@@ -168,5 +167,14 @@ export default class TagCloudCanvas extends Component<Props, any>
 
   private resizeEvent = e => {
     this.resize()
+  }
+
+  private ride(node: TagNode) {
+    if (d3.event.buttons > 0) {
+      // do nothing while draging
+      return
+    }
+    const {onRide} = this.props;
+    onRide(node)
   }
 }

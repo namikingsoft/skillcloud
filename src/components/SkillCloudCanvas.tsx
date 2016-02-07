@@ -192,6 +192,10 @@ export default class SkillCloudCanvas extends Component<Props, any>
   }
 
   private ride(node: SkillNode) {
+    if (d3.event.buttons > 0) {
+      // do nothing while draging
+      return
+    }
     const {onRide} = this.props;
     onRide(node.skill)
   }

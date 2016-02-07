@@ -92,21 +92,28 @@ export default class First extends Component<Props, State>
     } = this.props
 
     new Promise((resolve, reject) => {
-      moveCrossHair(940, 576, 0)
+      moveBackground(150, 100)
+      moveCrossHair(window.innerWidth, 0, 0)
       setTimeout(resolve, 500)
     }).
     then(() => new Promise((resolve, reject) => {
-      opacityCrossHair(0.35, 200)
       moveBackground(150, 100)
+      opacityCrossHair(0.35, 200)
       setTimeout(resolve, 200)
     })).
     then(() => new Promise((resolve, reject) => {
-      moveCrossHair(475, 310, 500)
-      setTimeout(resolve, 500)
+      moveBackground(150, 100)
+      moveCrossHair(0, 0, 750)
+      setTimeout(resolve, 750)
     })).
     then(() => new Promise((resolve, reject) => {
-      moveCrossHair(window.innerWidth-108, 105, 1000)
       moveBackground(150, 100)
+      moveCrossHair(0, window.innerHeight, 750)
+      setTimeout(resolve, 750)
+    })).
+    then(() => new Promise((resolve, reject) => {
+      moveBackground(150, 100)
+      moveCrossHair(window.innerWidth-108, 105, 1000)
       setTimeout(resolve, 1100)
     })).
     then(() => new Promise((resolve, reject) => {
