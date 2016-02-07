@@ -36,6 +36,7 @@ module.exports = function(config) {
             exclude: /(node_modules|bower_components)/,
           },
           { test: /\.ya?ml/, loader: 'json!yaml' },
+          { test: /\.png$/, loader: 'url?minetype=image/png' },
         ],
       },
       resolve: {

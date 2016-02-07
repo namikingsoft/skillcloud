@@ -50,7 +50,7 @@ describe("SkillNode", function() {
 
   describe("classes", () => {
     it("should be return node's class name", () => {
-      assert.equal(this.node.classes, "node root active grandchild")
+      assert.equal(this.node.classes, "node root grandchild")
     })
   })
 })

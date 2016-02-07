@@ -34,16 +34,20 @@ describe("ChartDataFactory", function() {
       })
     })
     it("should be include two data", () => {
-      assert.equal(this.data.list.get(0).key, "経験")
-      assert.equal(this.data.list.get(1).key, "興味")
+      // @todo form simple
+      //assert.equal(this.data.list.get(0).key, "経験")
+      //assert.equal(this.data.list.get(1).key, "興味")
+      assert.equal(this.data.list.get(0).key, "スキル経験値グラフ")
     })
-    it("should be include skill's values", () => {
+    it("should be include skill's values sort experience desc", () => {
+      // sort experience desc
       const experiences = this.data.list.get(0).values
-      assert.equal(experiences.get(0).source, this.skills.get(0))
-      assert.equal(experiences.get(1).source, this.skills.get(1))
-      const interests = this.data.list.get(1).values
-      assert.equal(interests.get(0).source, this.skills.get(0))
-      assert.equal(interests.get(1).source, this.skills.get(1))
+      assert.equal(experiences.get(1).source, this.skills.get(0))
+      assert.equal(experiences.get(0).source, this.skills.get(1))
+      // @todo form simple
+      //const interests = this.data.list.get(1).values
+      //assert.equal(interests.get(0).source, this.skills.get(0))
+      //assert.equal(interests.get(1).source, this.skills.get(1))
     })
   })
 
@@ -75,10 +79,11 @@ describe("ChartDataFactory", function() {
       assert.equal(this.data.list.get(0).key, "経験")
       assert.equal(this.data.list.get(1).key, "興味")
     })
-    it("should be include tag's values", () => {
+    it("should be include tag's values sort by experience desc", () => {
+      // sort experience desc
       const experiences = this.data.list.get(0).values
-      assert.equal(experiences.get(0).source, this.tags.get(0))
-      assert.equal(experiences.get(1).source, this.tags.get(1))
+      assert.equal(experiences.get(1).source, this.tags.get(0))
+      assert.equal(experiences.get(0).source, this.tags.get(1))
       const interests = this.data.list.get(1).values
       assert.equal(interests.get(0).source, this.tags.get(0))
       assert.equal(interests.get(1).source, this.tags.get(1))
