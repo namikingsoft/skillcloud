@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "tsd install && gulp deploy:clone",
+    "postinstall": "tsd install",
     "build": "webpack",
     "deploy": "npm run build && gulp deploy",
     "start": "webpack-dev-server",

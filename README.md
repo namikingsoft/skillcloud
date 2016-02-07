@@ -8,7 +8,9 @@ Get Started
 -----------------------------
 
 ```sh
+git clone -b gh-pages https://github.com/namikingsoft/skillcloud.git public
 npm install
+
 npm start
 open http://localhost:1234
 ```
