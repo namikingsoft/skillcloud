@@ -4,14 +4,17 @@ This is visializing skill of namikingsoft like cloud.
 http://blog.namiking.net/skillcloud/
 
 
-Build Scripts
+Get Started
 -----------------------------
 
-#### Run Server
 ```sh
+npm install
 npm start
 open http://localhost:1234
 ```
+
+Development
+-----------------------------
 
 #### Build
 ```sh
