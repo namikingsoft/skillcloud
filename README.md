@@ -1,6 +1,6 @@
 Skill Cloud
 =============================
-This is visializing skill like cloud.  
+This is visializing skill of namikingsoft like cloud.  
 http://blog.namiking.net/skillcloud/
 
 
