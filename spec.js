@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "478327eaef8521307c37"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d791671a895e22f3f33a"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -40003,6 +40003,7 @@
 						"name": "RDB",
 						"experience": 100,
 						"interest": 40,
+						"comment": "MySQLを中心としたRDBを用いたWeb開発の実績があります。\n",
 						"children": [
 							{
 								"name": "MySQL",
@@ -40025,6 +40026,7 @@
 						"name": "NoSQL",
 						"experience": 75,
 						"interest": 40,
+						"comment": "MEANスタックなWebサービスの実装として、MongoDBを使っていました。\n\nスキーマレスで集計処理がそこそこ速いため、\n中間データが必要なバッチ処理などに重宝していました。\n",
 						"children": [
 							{
 								"name": "mongodb",
@@ -40047,6 +40049,7 @@
 						"name": "設計/チューニング",
 						"experience": 50,
 						"interest": 40,
+						"comment": "データベース論理/物理設計や、\nWebサイト表示高速化のためのテーブル構造見直し、\nEXPLAINなどを用いたSQLチューニングを行ってきました。\n",
 						"children": [
 							{
 								"name": "MySQL",
