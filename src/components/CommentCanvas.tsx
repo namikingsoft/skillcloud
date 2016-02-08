@@ -1,5 +1,6 @@
 import * as React from 'react'
 import {Component, PropTypes} from 'react'
+import match from 'match-case'
 
 interface Props {
   title: string
@@ -51,7 +52,7 @@ export default class CommentCanvas extends Component<Props, State>
     }
   }
 
-  private nl2br(text: string) {
+  private nl2br(text: string = "") {
     return text.split(/\n\n/).map(line => {
       return React.createElement('p', null, line)
     })
