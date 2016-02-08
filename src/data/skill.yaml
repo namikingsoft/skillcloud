@@ -177,6 +177,8 @@ children:
     - name: RDB
       experience: 100
       interest: 40
+      comment: |
+        MySQLを中心としたRDBを用いたWeb開発の実績があります。
       children:
         - name: MySQL
           experience: 100
@@ -190,6 +192,11 @@ children:
     - name: NoSQL
       experience: 75
       interest: 40
+      comment: |
+        MEANスタックなWebサービスの実装として、MongoDBを使っていました。
+
+        スキーマレスで集計処理がそこそこ速いため、
+        中間データが必要なバッチ処理などに重宝していました。
       children:
         - name: mongodb
           experience: 90
@@ -208,6 +215,10 @@ children:
     - name: 設計/チューニング
       experience: 50
       interest: 40
+      comment: |
+        データベース論理/物理設計や、
+        Webサイト表示高速化のためのテーブル構造見直し、
+        EXPLAINなどを用いたSQLチューニングを行ってきました。
       children:
         - name: MySQL
           experience: 80
