@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "364f3358a1708e8c5a67"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "478327eaef8521307c37"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -22870,7 +22870,7 @@
 	            var movementY = _this.prevY !== undefined ? e.pageY - _this.prevY : 0;
 	            _this.prevX = e.pageX;
 	            _this.prevY = e.pageY;
-	            if (_this.isClicked(e)) {
+	            if (_this.isMousePress(e)) {
 	                _this.dx += movementX;
 	                _this.dy += movementY;
 	                var dist = Math.sqrt(_this.dx * _this.dx + _this.dy * _this.dy);
@@ -22934,8 +22934,13 @@
 	        }, 250);
 	    };
 	
-	    Background.prototype.isClicked = function isClicked(e) {
-	        return e.buttons || e.which;
+	    Background.prototype.isMousePress = function isMousePress(e) {
+	        var ua = window.navigator.userAgent.toLowerCase();
+	        if (ua.match(/(firefox|msie)/)) {
+	            return e.button || e.buttons;
+	        } else {
+	            return e.button || e.buttons || e.which;
+	        }
 	    };
 	
 	    return Background;
@@ -46024,7 +46029,9 @@
 	        }
 	    };
 	
-	    CommentCanvas.prototype.nl2br = function nl2br(text) {
+	    CommentCanvas.prototype.nl2br = function nl2br() {
+	        var text = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
+	
 	        return text.split(/\n\n/).map(function (line) {
 	            return React.createElement('p', null, line);
 	        });
