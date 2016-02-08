@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9275f4e7ce9e4eb4a2dd"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "364f3358a1708e8c5a67"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -39867,7 +39867,7 @@
 						"name": "環境構築/Pipeline",
 						"experience": 60,
 						"interest": 44,
-						"comment": "開発環境構築の自動化やアセットパイプライン構築も進んで行い、\n新規参入の環境構築コストを減らしてきました。\n\nこの辺りの作業は要塞を堅固にしている感覚があり、組んでいて楽しいです。\n",
+						"comment": "開発環境構築の自動化やアセットパイプライン構築も進んで行い、\n新規参入者の環境構築コストを減らしてきました。\n\nこの辺りの作業は要塞を堅固にしている感覚があり、組んでいて楽しいです。\n",
 						"children": [
 							{
 								"name": "Gulp",
@@ -40066,7 +40066,7 @@
 				"name": "アプリ開発",
 				"experience": 45,
 				"interest": 42,
-				"comment": "業務経験はWeb系ほどありませんが、\nTitanium Mobileを用いたiOS/Android対応のアプリ開発/運用の実績があります。\n\n趣味で、iOS/Androidの開発を行うこともあります。\n最近では、Swift/Kotlinを用いた開発に興味があります。\n",
+				"comment": "業務経験はWeb系ほどありませんが、\nTitanium Mobileを用いたiOS/Android対応のアプリ開発/運用の実績があります。\n\n最近では、飲食店現場の業務アプリケーションの実装にSwiftで着手しています。\n",
 				"children": [
 					{
 						"name": "Android",
