@@ -67,7 +67,7 @@ children:
     interest: 44
     comment: |
       開発環境構築の自動化やアセットパイプライン構築も進んで行い、
-      新規参入の環境構築コストを減らしてきました。
+      新規参入者の環境構築コストを減らしてきました。
 
       この辺りの作業は要塞を堅固にしている感覚があり、組んでいて楽しいです。
     children:
@@ -222,8 +222,7 @@ children:
     業務経験はWeb系ほどありませんが、
     Titanium Mobileを用いたiOS/Android対応のアプリ開発/運用の実績があります。
 
-    趣味で、iOS/Androidの開発を行うこともあります。
-    最近では、Swift/Kotlinを用いた開発に興味があります。
+    最近では、飲食店現場の業務アプリケーションの実装にSwiftで着手しています。
   children:
   - name: Android
     experience: 65
