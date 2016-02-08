@@ -119,8 +119,11 @@ export default class Handle extends Component<Props, State>
   }
 
   private wheel = e => {
-    // cancel bounce scroll @todo cannot swipe page back
-    //e.preventDefault()
+    // cancel bounce scroll when safari for wheel page moving
+    const ua = window.navigator.userAgent.toLowerCase()
+    if (!ua.match(/chrome/) && ua.match(/safari/)) {
+      e.preventDefault()
+    }
 
     if (this.isLockWheel) return
 
