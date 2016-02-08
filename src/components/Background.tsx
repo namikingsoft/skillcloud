@@ -51,7 +51,7 @@ export default class Background extends Component<Props, State>
     const movementY = (this.prevY!==undefined) ? e.pageY - this.prevY : 0
     this.prevX = e.pageX
     this.prevY = e.pageY
-    if (this.isClicked(e)) {
+    if (this.isMousePress(e)) {
       this.dx += movementX
       this.dy += movementY
       const dist = Math.sqrt(this.dx*this.dx + this.dy*this.dy)
@@ -90,7 +90,12 @@ export default class Background extends Component<Props, State>
     }), 250)
   }
 
-  private isClicked(e) {
-    return e.buttons || e.which
+  private isMousePress(e) {
+    const ua = window.navigator.userAgent.toLowerCase()
+    if (ua.match(/(firefox|msie)/)) {
+      return e.button || e.buttons
+    } else {
+      return e.button || e.buttons || e.which
+    }
   }
 }
