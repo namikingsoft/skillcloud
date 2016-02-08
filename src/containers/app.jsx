@@ -12,7 +12,7 @@ export default class App extends Component
   render() {
     return (
       <div className="layout-app">
-        <Router history={createHashHistory({queryKey: false})}>
+        <Router history={createHashHistory()}>
           <Route component={CloudBase}>
             <Route path="/" component={FirstContainer} />
             <Route path="/cloud" component={SkillContainer} />
