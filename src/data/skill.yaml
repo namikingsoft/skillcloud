@@ -13,7 +13,7 @@ children:
   comment: |
     主にJavascript周りのフロントエンド開発で評価をいただくことが多いです。
 
-    業務期間が長いので、開発環境構築、バックエンド開発、デザインなど、まんべんなく経験があります。
+    業務期間が長いので、開発環境構築、サーバーサイド開発、デザインなど、まんべんなく経験があります。
   children:
   - name: フロントエンド
     experience: 100
@@ -39,7 +39,7 @@ children:
       - name: Canvas
         experience: 60
         interest: 24
-  - name: バックエンド
+  - name: サーバーサイド
     experience: 70
     interest: 50
     comment: |
