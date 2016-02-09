@@ -28,6 +28,10 @@ export default class PleaseScroll extends Component<Props, State>
   }
 
   componentDidMount() {
+    if ('ontouchstart' in window) {
+      // @todo do not show on touch device
+      return
+    }
     const timeByShow = this.props.timeByShow || 1500
     setTimeout(() => this.setState({opacity: 1}), timeByShow)
     this.setState({opacity: 0})
