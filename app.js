@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1c6459d933c5319d5bbb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "29c7e199383c4a4d75a4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -70336,7 +70336,7 @@
 				"name": "Web系開発",
 				"experience": 100,
 				"interest": 50,
-				"comment": "主にJavascript周りのフロントエンド開発で評価をいただくことが多いです。\n\n業務期間が長いので、開発環境構築、バックエンド開発、デザインなど、まんべんなく経験があります。\n",
+				"comment": "主にJavascript周りのフロントエンド開発で評価をいただくことが多いです。\n\n業務期間が長いので、開発環境構築、サーバーサイド開発、デザインなど、まんべんなく経験があります。\n",
 				"children": [
 					{
 						"name": "フロントエンド",
@@ -70372,7 +70372,7 @@
 						]
 					},
 					{
-						"name": "バックエンド",
+						"name": "サーバーサイド",
 						"experience": 70,
 						"interest": 50,
 						"comment": "様々なフレームワークを利用して、WebアプリケーションやAPI実装などを経験してきました。\n\n最近では、フルスタックよりも、ドメインモデル設計(DDD)などにも導入しやすいマイクロフレームワークを好んで使います。\n",
