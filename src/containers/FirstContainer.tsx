@@ -1,4 +1,5 @@
 import CrossHair from 'components/CrossHair'
+import PleaseScroll from 'components/PleaseScroll'
 import CommentCanvas from 'components/CommentCanvas'
 import * as Action from 'actions/Action'
 import * as React from 'react'
@@ -79,6 +80,10 @@ export default class First extends Component<Props, State>
             </a>
           </div>
         </div>
+        <PleaseScroll className="module-profile__please-scroll" timeByShow={3850}>
+          <i className="fa fa-arrow-circle-o-down"></i>
+          Scroll to Next
+        </PleaseScroll>
       </div>
     );
   }
