@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d7e75fa5b67b9081f0ed"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "1c6459d933c5319d5bbb"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -46007,6 +46007,10 @@
 	    PleaseScroll.prototype.componentDidMount = function componentDidMount() {
 	        var _this = this;
 	
+	        if ('ontouchstart' in window) {
+	            // @todo do not show on touch device
+	            return;
+	        }
 	        var timeByShow = this.props.timeByShow || 1500;
 	        setTimeout(function () {
 	            return _this.setState({ opacity: 1 });
