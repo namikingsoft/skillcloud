@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "23fc8856c112b8da9c0c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "fa550bffc6ef3c193946"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -77,33 +77,47 @@
 /******/ 		};
 /******/ 		for(var name in __webpack_require__) {
 /******/ 			if(Object.prototype.hasOwnProperty.call(__webpack_require__, name)) {
-/******/ 				fn[name] = __webpack_require__[name];
+/******/ 				Object.defineProperty(fn, name, (function(name) {
+/******/ 					return {
+/******/ 						configurable: true,
+/******/ 						enumerable: true,
+/******/ 						get: function() {
+/******/ 							return __webpack_require__[name];
+/******/ 						},
+/******/ 						set: function(value) {
+/******/ 							__webpack_require__[name] = value;
+/******/ 						}
+/******/ 					};
+/******/ 				}(name)));
 /******/ 			}
 /******/ 		}
-/******/ 		fn.e = function(chunkId, callback) {
-/******/ 			if(hotStatus === "ready")
-/******/ 				hotSetStatus("prepare");
-/******/ 			hotChunksLoading++;
-/******/ 			__webpack_require__.e(chunkId, function() {
-/******/ 				try {
-/******/ 					callback.call(null, fn);
-/******/ 				} finally {
-/******/ 					finishChunkLoading();
-/******/ 				}
+/******/ 		Object.defineProperty(fn, "e", {
+/******/ 			enumerable: true,
+/******/ 			value: function(chunkId, callback) {
+/******/ 				if(hotStatus === "ready")
+/******/ 					hotSetStatus("prepare");
+/******/ 				hotChunksLoading++;
+/******/ 				__webpack_require__.e(chunkId, function() {
+/******/ 					try {
+/******/ 						callback.call(null, fn);
+/******/ 					} finally {
+/******/ 						finishChunkLoading();
+/******/ 					}
 /******/ 	
-/******/ 				function finishChunkLoading() {
-/******/ 					hotChunksLoading--;
-/******/ 					if(hotStatus === "prepare") {
-/******/ 						if(!hotWaitingFilesMap[chunkId]) {
-/******/ 							hotEnsureUpdateChunk(chunkId);
-/******/ 						}
-/******/ 						if(hotChunksLoading === 0 && hotWaitingFiles === 0) {
-/******/ 							hotUpdateDownloaded();
+/******/ 					function finishChunkLoading() {
+/******/ 						hotChunksLoading--;
+/******/ 						if(hotStatus === "prepare") {
+/******/ 							if(!hotWaitingFilesMap[chunkId]) {
+/******/ 								hotEnsureUpdateChunk(chunkId);
+/******/ 							}
+/******/ 							if(hotChunksLoading === 0 && hotWaitingFiles === 0) {
+/******/ 								hotUpdateDownloaded();
+/******/ 							}
 /******/ 						}
 /******/ 					}
-/******/ 				}
-/******/ 			});
-/******/ 		};
+/******/ 				});
+/******/ 			}
+/******/ 		});
 /******/ 		return fn;
 /******/ 	}
 /******/ 	
@@ -564,7 +578,7 @@
 	
 	var _containersApp2 = _interopRequireDefault(_containersApp);
 	
-	var _storeConfigureStore = __webpack_require__(301);
+	var _storeConfigureStore = __webpack_require__(300);
 	
 	var _storeConfigureStore2 = _interopRequireDefault(_storeConfigureStore);
 	
@@ -578,7 +592,7 @@
 	  }
 	), document.body);
 	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(298); if (makeExportsHot(module, __webpack_require__(66))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "app.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(297); if (makeExportsHot(module, __webpack_require__(66))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "app.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)(module)))
 
 /***/ },
@@ -22520,8 +22534,6 @@
 	 * This source code is licensed under the BSD-style license found in the
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule invariant
 	 */
 	
 	'use strict';
@@ -22555,9 +22567,9 @@
 	      var args = [a, b, c, d, e, f];
 	      var argIndex = 0;
 	      error = new Error(
-	        'Invariant Violation: ' +
 	        format.replace(/%s/g, function() { return args[argIndex++]; })
 	      );
+	      error.name = 'Invariant Violation';
 	    }
 	
 	    error.framesToPop = 1; // we don't care about invariant's own frame
@@ -22589,19 +22601,19 @@
 	
 	var _containersCloudBase2 = _interopRequireDefault(_containersCloudBase);
 	
-	var _containersFirstContainer = __webpack_require__(261);
+	var _containersFirstContainer = __webpack_require__(260);
 	
 	var _containersFirstContainer2 = _interopRequireDefault(_containersFirstContainer);
 	
-	var _containersSkillContainer = __webpack_require__(264);
+	var _containersSkillContainer = __webpack_require__(263);
 	
 	var _containersSkillContainer2 = _interopRequireDefault(_containersSkillContainer);
 	
-	var _containersTagContainer = __webpack_require__(287);
+	var _containersTagContainer = __webpack_require__(286);
 	
 	var _containersTagContainer2 = _interopRequireDefault(_containersTagContainer);
 	
-	var _containersNotFound = __webpack_require__(297);
+	var _containersNotFound = __webpack_require__(296);
 	
 	var _containersNotFound2 = _interopRequireDefault(_containersNotFound);
 	
@@ -22651,7 +22663,7 @@
 	exports['default'] = App;
 	module.exports = exports['default'];
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(298); if (makeExportsHot(module, __webpack_require__(66))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "App.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(297); if (makeExportsHot(module, __webpack_require__(66))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "App.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)(module)))
 
 /***/ },
@@ -22678,19 +22690,19 @@
 	
 	var _componentsHeader2 = _interopRequireDefault(_componentsHeader);
 	
-	var _componentsNavigation = __webpack_require__(243);
+	var _componentsNavigation = __webpack_require__(242);
 	
 	var _componentsNavigation2 = _interopRequireDefault(_componentsNavigation);
 	
-	var _componentsZoomSlider = __webpack_require__(257);
+	var _componentsZoomSlider = __webpack_require__(256);
 	
 	var _componentsZoomSlider2 = _interopRequireDefault(_componentsZoomSlider);
 	
-	var _componentsCopyright = __webpack_require__(258);
+	var _componentsCopyright = __webpack_require__(257);
 	
 	var _componentsCopyright2 = _interopRequireDefault(_componentsCopyright);
 	
-	var _actionsAction = __webpack_require__(259);
+	var _actionsAction = __webpack_require__(258);
 	
 	var Action = _interopRequireWildcard(_actionsAction);
 	
@@ -35429,13 +35441,13 @@
 	
 	exports.Router = _Router3['default'];
 	
-	var _Link2 = __webpack_require__(231);
+	var _Link2 = __webpack_require__(230);
 	
 	var _Link3 = _interopRequireDefault(_Link2);
 	
 	exports.Link = _Link3['default'];
 	
-	var _IndexLink2 = __webpack_require__(232);
+	var _IndexLink2 = __webpack_require__(231);
 	
 	var _IndexLink3 = _interopRequireDefault(_IndexLink2);
 	
@@ -35443,25 +35455,25 @@
 	
 	/* components (configuration) */
 	
-	var _IndexRedirect2 = __webpack_require__(233);
+	var _IndexRedirect2 = __webpack_require__(232);
 	
 	var _IndexRedirect3 = _interopRequireDefault(_IndexRedirect2);
 	
 	exports.IndexRedirect = _IndexRedirect3['default'];
 	
-	var _IndexRoute2 = __webpack_require__(235);
+	var _IndexRoute2 = __webpack_require__(234);
 	
 	var _IndexRoute3 = _interopRequireDefault(_IndexRoute2);
 	
 	exports.IndexRoute = _IndexRoute3['default'];
 	
-	var _Redirect2 = __webpack_require__(234);
+	var _Redirect2 = __webpack_require__(233);
 	
 	var _Redirect3 = _interopRequireDefault(_Redirect2);
 	
 	exports.Redirect = _Redirect3['default'];
 	
-	var _Route2 = __webpack_require__(236);
+	var _Route2 = __webpack_require__(235);
 	
 	var _Route3 = _interopRequireDefault(_Route2);
 	
@@ -35469,19 +35481,19 @@
 	
 	/* mixins */
 	
-	var _History2 = __webpack_require__(237);
+	var _History2 = __webpack_require__(236);
 	
 	var _History3 = _interopRequireDefault(_History2);
 	
 	exports.History = _History3['default'];
 	
-	var _Lifecycle2 = __webpack_require__(238);
+	var _Lifecycle2 = __webpack_require__(237);
 	
 	var _Lifecycle3 = _interopRequireDefault(_Lifecycle2);
 	
 	exports.Lifecycle = _Lifecycle3['default'];
 	
-	var _RouteContext2 = __webpack_require__(239);
+	var _RouteContext2 = __webpack_require__(238);
 	
 	var _RouteContext3 = _interopRequireDefault(_RouteContext2);
 	
@@ -35489,29 +35501,29 @@
 	
 	/* utils */
 	
-	var _useRoutes2 = __webpack_require__(218);
+	var _useRoutes2 = __webpack_require__(219);
 	
 	var _useRoutes3 = _interopRequireDefault(_useRoutes2);
 	
 	exports.useRoutes = _useRoutes3['default'];
 	
-	var _RouteUtils = __webpack_require__(213);
+	var _RouteUtils = __webpack_require__(214);
 	
 	exports.createRoutes = _RouteUtils.createRoutes;
 	
-	var _RoutingContext2 = __webpack_require__(214);
+	var _RoutingContext2 = __webpack_require__(215);
 	
 	var _RoutingContext3 = _interopRequireDefault(_RoutingContext2);
 	
 	exports.RoutingContext = _RoutingContext3['default'];
 	
-	var _PropTypes2 = __webpack_require__(230);
+	var _PropTypes2 = __webpack_require__(229);
 	
 	var _PropTypes3 = _interopRequireDefault(_PropTypes2);
 	
 	exports.PropTypes = _PropTypes3['default'];
 	
-	var _match2 = __webpack_require__(240);
+	var _match2 = __webpack_require__(239);
 	
 	var _match3 = _interopRequireDefault(_match2);
 	
@@ -35530,8 +35542,6 @@
 	exports.__esModule = true;
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -35553,17 +35563,17 @@
 	
 	var _historyLibCreateHashHistory2 = _interopRequireDefault(_historyLibCreateHashHistory);
 	
-	var _RouteUtils = __webpack_require__(213);
+	var _RouteUtils = __webpack_require__(214);
 	
-	var _RoutingContext = __webpack_require__(214);
+	var _RoutingContext = __webpack_require__(215);
 	
 	var _RoutingContext2 = _interopRequireDefault(_RoutingContext);
 	
-	var _useRoutes = __webpack_require__(218);
+	var _useRoutes = __webpack_require__(219);
 	
 	var _useRoutes2 = _interopRequireDefault(_useRoutes);
 	
-	var _PropTypes = __webpack_require__(230);
+	var _PropTypes = __webpack_require__(229);
 	
 	var _React$PropTypes = _react2['default'].PropTypes;
 	var func = _React$PropTypes.func;
@@ -35577,28 +35587,6 @@
 	
 	var Router = (function (_Component) {
 	  _inherits(Router, _Component);
-	
-	  _createClass(Router, null, [{
-	    key: 'propTypes',
-	    value: {
-	      history: object,
-	      children: _PropTypes.routes,
-	      routes: _PropTypes.routes, // alias for children
-	      RoutingContext: func.isRequired,
-	      createElement: func,
-	      onError: func,
-	      onUpdate: func,
-	      parseQueryString: func,
-	      stringifyQuery: func
-	    },
-	    enumerable: true
-	  }, {
-	    key: 'defaultProps',
-	    value: {
-	      RoutingContext: _RoutingContext2['default']
-	    },
-	    enumerable: true
-	  }]);
 	
 	  function Router(props, context) {
 	    _classCallCheck(this, Router);
@@ -35655,6 +35643,8 @@
 	
 	  Router.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
 	    process.env.NODE_ENV !== 'production' ? _warning2['default'](nextProps.history === this.props.history, 'You cannot change <Router history>; it will be ignored') : undefined;
+	
+	    process.env.NODE_ENV !== 'production' ? _warning2['default']((nextProps.routes || nextProps.children) === (this.props.routes || this.props.children), 'You cannot change <Router routes>; it will be ignored') : undefined;
 	  };
 	
 	  Router.prototype.componentWillUnmount = function componentWillUnmount() {
@@ -35693,6 +35683,22 @@
 	
 	  return Router;
 	})(_react.Component);
+	
+	Router.propTypes = {
+	  history: object,
+	  children: _PropTypes.routes,
+	  routes: _PropTypes.routes, // alias for children
+	  RoutingContext: func.isRequired,
+	  createElement: func,
+	  onError: func,
+	  onUpdate: func,
+	  parseQueryString: func,
+	  stringifyQuery: func
+	};
+	
+	Router.defaultProps = {
+	  RoutingContext: _RoutingContext2['default']
+	};
 	
 	exports['default'] = Router;
 	module.exports = exports['default'];
@@ -35769,7 +35775,7 @@
 /* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	exports.__esModule = true;
 	
@@ -35796,6 +35802,10 @@
 	var _createDOMHistory = __webpack_require__(203);
 	
 	var _createDOMHistory2 = _interopRequireDefault(_createDOMHistory);
+	
+	var _parsePath = __webpack_require__(210);
+	
+	var _parsePath2 = _interopRequireDefault(_parsePath);
 	
 	function isAbsolutePath(path) {
 	  return typeof path === 'string' && path.charAt(0) === '/';
@@ -35829,7 +35839,7 @@
 	function createHashHistory() {
 	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	
-	  _invariant2['default'](_ExecutionEnvironment.canUseDOM, 'Hash history needs a DOM');
+	  !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Hash history needs a DOM') : _invariant2['default'](false) : undefined;
 	
 	  var queryKey = options.queryKey;
 	
@@ -35855,7 +35865,9 @@
 	      key = state = null;
 	    }
 	
-	    return history.createLocation(path, state, undefined, key);
+	    var location = _parsePath2['default'](path);
+	
+	    return history.createLocation(_extends({}, location, { state: state }), undefined, key);
 	  }
 	
 	  function startHashChangeListener(_ref) {
@@ -35887,24 +35899,25 @@
 	
 	    var path = (basename || '') + pathname + search;
 	
-	    if (queryKey) path = addQueryStringValueToPath(path, queryKey, key);
-	
-	    if (path === _DOMUtils.getHashPath()) {
-	      _warning2['default'](false, 'You cannot %s the same path using hash history', action);
+	    if (queryKey) {
+	      path = addQueryStringValueToPath(path, queryKey, key);
+	      _DOMStateStorage.saveState(key, state);
 	    } else {
-	      if (queryKey) {
-	        _DOMStateStorage.saveState(key, state);
-	      } else {
-	        // Drop key and state.
-	        location.key = location.state = null;
-	      }
+	      // Drop key and state.
+	      location.key = location.state = null;
+	    }
 	
-	      if (action === _Actions.PUSH) {
+	    var currentHash = _DOMUtils.getHashPath();
+	
+	    if (action === _Actions.PUSH) {
+	      if (currentHash !== path) {
 	        window.location.hash = path;
 	      } else {
-	        // REPLACE
-	        _DOMUtils.replaceHashPath(path);
+	        process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'You cannot PUSH the same path using hash history') : undefined;
 	      }
+	    } else if (currentHash !== path) {
+	      // REPLACE
+	      _DOMUtils.replaceHashPath(path);
 	    }
 	  }
 	
@@ -35941,22 +35954,22 @@
 	    };
 	  }
 	
-	  function pushState(state, path) {
-	    _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped');
+	  function push(location) {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || location.state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
 	
-	    history.pushState(state, path);
+	    history.push(location);
 	  }
 	
-	  function replaceState(state, path) {
-	    _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped');
+	  function replace(location) {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || location.state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
 	
-	    history.replaceState(state, path);
+	    history.replace(location);
 	  }
 	
 	  var goIsSupportedWithoutReload = _DOMUtils.supportsGoWithoutReloadUsingHash();
 	
 	  function go(n) {
-	    _warning2['default'](goIsSupportedWithoutReload, 'Hash history go(n) causes a full page reload in this browser');
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](goIsSupportedWithoutReload, 'Hash history go(n) causes a full page reload in this browser') : undefined;
 	
 	    history.go(n);
 	  }
@@ -35979,20 +35992,38 @@
 	    if (--listenerCount === 0) stopHashChangeListener();
 	  }
 	
+	  // deprecated
+	  function pushState(state, path) {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+	
+	    history.pushState(state, path);
+	  }
+	
+	  // deprecated
+	  function replaceState(state, path) {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+	
+	    history.replaceState(state, path);
+	  }
+	
 	  return _extends({}, history, {
 	    listenBefore: listenBefore,
 	    listen: listen,
-	    pushState: pushState,
-	    replaceState: replaceState,
+	    push: push,
+	    replace: replace,
 	    go: go,
 	    createHref: createHref,
-	    registerTransitionHook: registerTransitionHook,
-	    unregisterTransitionHook: unregisterTransitionHook
+	
+	    registerTransitionHook: registerTransitionHook, // deprecated - warning is in createHistory
+	    unregisterTransitionHook: unregisterTransitionHook, // deprecated - warning is in createHistory
+	    pushState: pushState, // deprecated - warning is in createHistory
+	    replaceState: replaceState // deprecated - warning is in createHistory
 	  });
 	}
 	
 	exports['default'] = createHashHistory;
 	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
 /* 197 */
@@ -36072,8 +36103,6 @@
 	 * This source code is licensed under the BSD-style license found in the
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule invariant
 	 */
 	
 	'use strict';
@@ -36107,9 +36136,9 @@
 	      var args = [a, b, c, d, e, f];
 	      var argIndex = 0;
 	      error = new Error(
-	        'Invariant Violation: ' +
 	        format.replace(/%s/g, function() { return args[argIndex++]; })
 	      );
+	      error.name = 'Invariant Violation';
 	    }
 	
 	    error.framesToPop = 1; // we don't care about invariant's own frame
@@ -36223,7 +36252,7 @@
 	}
 	
 	/**
-	 * Returns true if the HTML5 history API is supported. Taken from modernizr.
+	 * Returns true if the HTML5 history API is supported. Taken from Modernizr.
 	 *
 	 * https://github.com/Modernizr/Modernizr/blob/master/LICENSE
 	 * https://github.com/Modernizr/Modernizr/blob/master/feature-detects/history.js
@@ -36233,6 +36262,11 @@
 	function supportsHistory() {
 	  var ua = navigator.userAgent;
 	  if ((ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) && ua.indexOf('Mobile Safari') !== -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Windows Phone') === -1) {
+	    return false;
+	  }
+	  // FIXME: Work around our browser history not working correctly on Chrome
+	  // iOS: https://github.com/rackt/react-router/issues/2565
+	  if (ua.indexOf('CriOS') !== -1) {
 	    return false;
 	  }
 	  return window.history && 'pushState' in window.history;
@@ -36251,7 +36285,7 @@
 /* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/*eslint-disable no-empty */
+	/* WEBPACK VAR INJECTION */(function(process) {/*eslint-disable no-empty */
 	'use strict';
 	
 	exports.__esModule = true;
@@ -36266,6 +36300,7 @@
 	
 	var KeyPrefix = '@@History/';
 	var QuotaExceededError = 'QuotaExceededError';
+	var SecurityError = 'SecurityError';
 	
 	function createKey(key) {
 	  return KeyPrefix + key;
@@ -36275,9 +36310,17 @@
 	  try {
 	    window.sessionStorage.setItem(createKey(key), JSON.stringify(state));
 	  } catch (error) {
-	    if (error.name === QuotaExceededError || window.sessionStorage.length === 0) {
-	      // Probably in Safari "private mode" where sessionStorage quota is 0. #42
-	      _warning2['default'](false, '[history] Unable to save state; sessionStorage is not available in Safari private mode');
+	    if (error.name === SecurityError) {
+	      // Blocking cookies in Chrome/Firefox/Safari throws SecurityError on any
+	      // attempt to access window.sessionStorage.
+	      process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '[history] Unable to save state; sessionStorage is not available due to security settings') : undefined;
+	
+	      return;
+	    }
+	
+	    if (error.name === QuotaExceededError && window.sessionStorage.length === 0) {
+	      // Safari "private mode" throws QuotaExceededError.
+	      process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '[history] Unable to save state; sessionStorage is not available in Safari private mode') : undefined;
 	
 	      return;
 	    }
@@ -36287,7 +36330,18 @@
 	}
 	
 	function readState(key) {
-	  var json = window.sessionStorage.getItem(createKey(key));
+	  var json = undefined;
+	  try {
+	    json = window.sessionStorage.getItem(createKey(key));
+	  } catch (error) {
+	    if (error.name === SecurityError) {
+	      // Blocking cookies in Chrome/Firefox/Safari throws SecurityError on any
+	      // attempt to access window.sessionStorage.
+	      process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '[history] Unable to read state; sessionStorage is not available due to security settings') : undefined;
+	
+	      return null;
+	    }
+	  }
 	
 	  if (json) {
 	    try {
@@ -36299,12 +36353,13 @@
 	
 	  return null;
 	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
 /* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	exports.__esModule = true;
 	
@@ -36332,7 +36387,7 @@
 	  }));
 	
 	  function listen(listener) {
-	    _invariant2['default'](_ExecutionEnvironment.canUseDOM, 'DOM history needs a DOM');
+	    !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'DOM history needs a DOM') : _invariant2['default'](false) : undefined;
 	
 	    return history.listen(listener);
 	  }
@@ -36344,11 +36399,13 @@
 	
 	exports['default'] = createDOMHistory;
 	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
 /* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
+	//import warning from 'warning'
 	'use strict';
 	
 	exports.__esModule = true;
@@ -36369,11 +36426,15 @@
 	
 	var _createLocation3 = _interopRequireDefault(_createLocation2);
 	
-	var _runTransitionHook = __webpack_require__(211);
+	var _runTransitionHook = __webpack_require__(212);
 	
 	var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
 	
-	var _deprecate = __webpack_require__(212);
+	var _parsePath = __webpack_require__(210);
+	
+	var _parsePath2 = _interopRequireDefault(_parsePath);
+	
+	var _deprecate = __webpack_require__(213);
 	
 	var _deprecate2 = _interopRequireDefault(_deprecate);
 	
@@ -36491,6 +36552,14 @@
 	      if (pendingLocation !== nextLocation) return; // Transition was interrupted.
 	
 	      if (ok) {
+	        // treat PUSH to current path like REPLACE to be consistent with browsers
+	        if (nextLocation.action === _Actions.PUSH) {
+	          var prevPath = createPath(location);
+	          var nextPath = createPath(nextLocation);
+	
+	          if (nextPath === prevPath) nextLocation.action = _Actions.REPLACE;
+	        }
+	
 	        if (finishTransition(nextLocation) !== false) updateLocation(nextLocation);
 	      } else if (location && nextLocation.action === _Actions.POP) {
 	        var prevIndex = allKeys.indexOf(location.key);
@@ -36501,12 +36570,12 @@
 	    });
 	  }
 	
-	  function pushState(state, path) {
-	    transitionTo(createLocation(path, state, _Actions.PUSH, createKey()));
+	  function push(location) {
+	    transitionTo(createLocation(location, _Actions.PUSH, createKey()));
 	  }
 	
-	  function replaceState(state, path) {
-	    transitionTo(createLocation(path, state, _Actions.REPLACE, createKey()));
+	  function replace(location) {
+	    transitionTo(createLocation(location, _Actions.REPLACE, createKey()));
 	  }
 	
 	  function goBack() {
@@ -36521,12 +36590,12 @@
 	    return createRandomKey(keyLength);
 	  }
 	
-	  function createPath(path) {
-	    if (path == null || typeof path === 'string') return path;
+	  function createPath(location) {
+	    if (location == null || typeof location === 'string') return location;
 	
-	    var pathname = path.pathname;
-	    var search = path.search;
-	    var hash = path.hash;
+	    var pathname = location.pathname;
+	    var search = location.search;
+	    var hash = location.hash;
 	
 	    var result = pathname;
 	
@@ -36537,14 +36606,29 @@
 	    return result;
 	  }
 	
-	  function createHref(path) {
-	    return createPath(path);
+	  function createHref(location) {
+	    return createPath(location);
 	  }
 	
-	  function createLocation(path, state, action) {
-	    var key = arguments.length <= 3 || arguments[3] === undefined ? createKey() : arguments[3];
+	  function createLocation(location, action) {
+	    var key = arguments.length <= 2 || arguments[2] === undefined ? createKey() : arguments[2];
 	
-	    return _createLocation3['default'](path, state, action, key);
+	    if (typeof action === 'object') {
+	      //warning(
+	      //  false,
+	      //  'The state (2nd) argument to history.createLocation is deprecated; use a ' +
+	      //  'location descriptor instead'
+	      //)
+	
+	      if (typeof location === 'string') location = _parsePath2['default'](location);
+	
+	      location = _extends({}, location, { state: action });
+	
+	      action = key;
+	      key = arguments[3] || createKey();
+	    }
+	
+	    return _createLocation3['default'](location, action, key);
 	  }
 	
 	  // deprecated
@@ -36574,12 +36658,26 @@
 	    });
 	  }
 	
+	  // deprecated
+	  function pushState(state, path) {
+	    if (typeof path === 'string') path = _parsePath2['default'](path);
+	
+	    push(_extends({ state: state }, path));
+	  }
+	
+	  // deprecated
+	  function replaceState(state, path) {
+	    if (typeof path === 'string') path = _parsePath2['default'](path);
+	
+	    replace(_extends({ state: state }, path));
+	  }
+	
 	  return {
 	    listenBefore: listenBefore,
 	    listen: listen,
 	    transitionTo: transitionTo,
-	    pushState: pushState,
-	    replaceState: replaceState,
+	    push: push,
+	    replace: replace,
 	    go: go,
 	    goBack: goBack,
 	    goForward: goForward,
@@ -36590,7 +36688,9 @@
 	
 	    setState: _deprecate2['default'](setState, 'setState is deprecated; use location.key to save state instead'),
 	    registerTransitionHook: _deprecate2['default'](registerTransitionHook, 'registerTransitionHook is deprecated; use listenBefore instead'),
-	    unregisterTransitionHook: _deprecate2['default'](unregisterTransitionHook, 'unregisterTransitionHook is deprecated; use the callback returned from listenBefore instead')
+	    unregisterTransitionHook: _deprecate2['default'](unregisterTransitionHook, 'unregisterTransitionHook is deprecated; use the callback returned from listenBefore instead'),
+	    pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
+	    replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
 	  };
 	}
 	
@@ -36773,9 +36873,12 @@
 /* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
+	//import warning from 'warning'
 	'use strict';
 	
 	exports.__esModule = true;
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -36786,16 +36889,31 @@
 	var _parsePath2 = _interopRequireDefault(_parsePath);
 	
 	function createLocation() {
-	  var path = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
-	  var state = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-	  var action = arguments.length <= 2 || arguments[2] === undefined ? _Actions.POP : arguments[2];
-	  var key = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
+	  var location = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
+	  var action = arguments.length <= 1 || arguments[1] === undefined ? _Actions.POP : arguments[1];
+	  var key = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 	
-	  if (typeof path === 'string') path = _parsePath2['default'](path);
+	  var _fourthArg = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
 	
-	  var pathname = path.pathname || '/';
-	  var search = path.search || '';
-	  var hash = path.hash || '';
+	  if (typeof location === 'string') location = _parsePath2['default'](location);
+	
+	  if (typeof action === 'object') {
+	    //warning(
+	    //  false,
+	    //  'The state (2nd) argument to createLocation is deprecated; use a ' +
+	    //  'location descriptor instead'
+	    //)
+	
+	    location = _extends({}, location, { state: action });
+	
+	    action = key || _Actions.POP;
+	    key = _fourthArg;
+	  }
+	
+	  var pathname = location.pathname || '/';
+	  var search = location.search || '';
+	  var hash = location.hash || '';
+	  var state = location.state || null;
 	
 	  return {
 	    pathname: pathname,
@@ -36814,7 +36932,7 @@
 /* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	exports.__esModule = true;
 	
@@ -36824,20 +36942,16 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	function extractPath(string) {
-	  var match = string.match(/^https?:\/\/[^\/]*/);
+	var _extractPath = __webpack_require__(211);
 	
-	  if (match == null) return string;
-	
-	  _warning2['default'](false, 'A path must be pathname + search + hash only, not a fully qualified URL like "%s"', string);
-	
-	  return string.substring(match[0].length);
-	}
+	var _extractPath2 = _interopRequireDefault(_extractPath);
 	
 	function parsePath(path) {
-	  var pathname = extractPath(path);
+	  var pathname = _extractPath2['default'](path);
 	  var search = '';
 	  var hash = '';
+	
+	  process.env.NODE_ENV !== 'production' ? _warning2['default'](path === pathname, 'A path must be pathname + search + hash only, not a fully qualified URL like "%s"', path) : undefined;
 	
 	  var hashIndex = pathname.indexOf('#');
 	  if (hashIndex !== -1) {
@@ -36862,12 +36976,31 @@
 	
 	exports['default'] = parsePath;
 	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
 /* 211 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	function extractPath(string) {
+	  var match = string.match(/^https?:\/\/[^\/]*/);
+	
+	  if (match == null) return string;
+	
+	  return string.substring(match[0].length);
+	}
+	
+	exports["default"] = extractPath;
+	module.exports = exports["default"];
+
+/***/ },
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	exports.__esModule = true;
 	
@@ -36885,39 +37018,36 @@
 	    // call the callback with the return value.
 	    callback(result);
 	  } else {
-	    _warning2['default'](result === undefined, 'You should not "return" in a transition hook with a callback argument; call the callback instead');
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](result === undefined, 'You should not "return" in a transition hook with a callback argument; call the callback instead') : undefined;
 	  }
 	}
 	
 	exports['default'] = runTransitionHook;
 	module.exports = exports['default'];
-
-/***/ },
-/* 212 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _warning = __webpack_require__(197);
-	
-	var _warning2 = _interopRequireDefault(_warning);
-	
-	function deprecate(fn, message) {
-	  return function () {
-	    _warning2['default'](false, '[history] ' + message);
-	    return fn.apply(this, arguments);
-	  };
-	}
-	
-	exports['default'] = deprecate;
-	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
 /* 213 */
+/***/ function(module, exports) {
+
+	//import warning from 'warning'
+	
+	"use strict";
+	
+	exports.__esModule = true;
+	function deprecate(fn) {
+	  return fn;
+	  //return function () {
+	  //  warning(false, '[history] ' + message)
+	  //  return fn.apply(this, arguments)
+	  //}
+	}
+	
+	exports["default"] = deprecate;
+	module.exports = exports["default"];
+
+/***/ },
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -37037,14 +37167,14 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 214 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	exports.__esModule = true;
 	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -37052,7 +37182,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _invariant = __webpack_require__(215);
+	var _invariant = __webpack_require__(216);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -37060,9 +37190,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RouteUtils = __webpack_require__(213);
+	var _RouteUtils = __webpack_require__(214);
 	
-	var _getRouteParams = __webpack_require__(216);
+	var _getRouteParams = __webpack_require__(217);
 	
 	var _getRouteParams2 = _interopRequireDefault(_getRouteParams);
 	
@@ -37136,8 +37266,16 @@
 	          var elements = {};
 	
 	          for (var key in components) {
-	            if (components.hasOwnProperty(key)) elements[key] = _this.createElement(components[key], props);
-	          }return elements;
+	            if (components.hasOwnProperty(key)) {
+	              // Pass through the key as a prop to createElement to allow
+	              // custom createElement functions to know which named component
+	              // they're rendering, for e.g. matching up to fetched data.
+	              elements[key] = _this.createElement(components[key], _extends({
+	                key: key }, props));
+	            }
+	          }
+	
+	          return elements;
 	        }
 	
 	        return _this.createElement(components, props);
@@ -37149,41 +37287,33 @@
 	    return element;
 	  };
 	
-	  _createClass(RoutingContext, null, [{
-	    key: 'propTypes',
-	    value: {
-	      history: object.isRequired,
-	      createElement: func.isRequired,
-	      location: object.isRequired,
-	      routes: array.isRequired,
-	      params: object.isRequired,
-	      components: array.isRequired
-	    },
-	    enumerable: true
-	  }, {
-	    key: 'defaultProps',
-	    value: {
-	      createElement: _react2['default'].createElement
-	    },
-	    enumerable: true
-	  }, {
-	    key: 'childContextTypes',
-	    value: {
-	      history: object.isRequired,
-	      location: object.isRequired
-	    },
-	    enumerable: true
-	  }]);
-	
 	  return RoutingContext;
 	})(_react.Component);
+	
+	RoutingContext.propTypes = {
+	  history: object.isRequired,
+	  createElement: func.isRequired,
+	  location: object.isRequired,
+	  routes: array.isRequired,
+	  params: object.isRequired,
+	  components: array.isRequired
+	};
+	
+	RoutingContext.defaultProps = {
+	  createElement: _react2['default'].createElement
+	};
+	
+	RoutingContext.childContextTypes = {
+	  history: object.isRequired,
+	  location: object.isRequired
+	};
 	
 	exports['default'] = RoutingContext;
 	module.exports = exports['default'];
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 215 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -37193,8 +37323,6 @@
 	 * This source code is licensed under the BSD-style license found in the
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule invariant
 	 */
 	
 	'use strict';
@@ -37228,9 +37356,9 @@
 	      var args = [a, b, c, d, e, f];
 	      var argIndex = 0;
 	      error = new Error(
-	        'Invariant Violation: ' +
 	        format.replace(/%s/g, function() { return args[argIndex++]; })
 	      );
+	      error.name = 'Invariant Violation';
 	    }
 	
 	    error.framesToPop = 1; // we don't care about invariant's own frame
@@ -37243,14 +37371,14 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _PatternUtils = __webpack_require__(217);
+	var _PatternUtils = __webpack_require__(218);
 	
 	/**
 	 * Extracts an object of params the given route cares about from
@@ -37272,7 +37400,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -37286,7 +37414,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _invariant = __webpack_require__(215);
+	var _invariant = __webpack_require__(216);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -37505,7 +37633,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -37524,25 +37652,25 @@
 	
 	var _historyLibActions = __webpack_require__(199);
 	
-	var _historyLibUseQueries = __webpack_require__(219);
+	var _historyLibUseQueries = __webpack_require__(220);
 	
 	var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
 	
-	var _computeChangedRoutes2 = __webpack_require__(224);
+	var _computeChangedRoutes2 = __webpack_require__(223);
 	
 	var _computeChangedRoutes3 = _interopRequireDefault(_computeChangedRoutes2);
 	
-	var _TransitionUtils = __webpack_require__(225);
+	var _TransitionUtils = __webpack_require__(224);
 	
-	var _isActive2 = __webpack_require__(227);
+	var _isActive2 = __webpack_require__(226);
 	
 	var _isActive3 = _interopRequireDefault(_isActive2);
 	
-	var _getComponents = __webpack_require__(228);
+	var _getComponents = __webpack_require__(227);
 	
 	var _getComponents2 = _interopRequireDefault(_getComponents);
 	
-	var _matchRoutes = __webpack_require__(229);
+	var _matchRoutes = __webpack_require__(228);
 	
 	var _matchRoutes2 = _interopRequireDefault(_matchRoutes);
 	
@@ -37802,10 +37930,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	exports.__esModule = true;
 	
@@ -37815,11 +37943,13 @@
 	
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
-	var _qs = __webpack_require__(220);
+	var _warning = __webpack_require__(197);
 	
-	var _qs2 = _interopRequireDefault(_qs);
+	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _runTransitionHook = __webpack_require__(211);
+	var _queryString = __webpack_require__(221);
+	
+	var _runTransitionHook = __webpack_require__(212);
 	
 	var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
 	
@@ -37827,12 +37957,22 @@
 	
 	var _parsePath2 = _interopRequireDefault(_parsePath);
 	
+	var _deprecate = __webpack_require__(213);
+	
+	var _deprecate2 = _interopRequireDefault(_deprecate);
+	
+	var SEARCH_BASE_KEY = '$searchBase';
+	
 	function defaultStringifyQuery(query) {
-	  return _qs2['default'].stringify(query, { arrayFormat: 'brackets' });
+	  return _queryString.stringify(query).replace(/%20/g, '+');
 	}
 	
-	function defaultParseQueryString(queryString) {
-	  return _qs2['default'].parse(queryString);
+	var defaultParseQueryString = _queryString.parse;
+	
+	function isNestedObject(object) {
+	  for (var p in object) {
+	    if (object.hasOwnProperty(p) && typeof object[p] === 'object' && !Array.isArray(object[p]) && object[p] !== null) return true;
+	  }return false;
 	}
 	
 	/**
@@ -37854,22 +37994,42 @@
 	    if (typeof parseQueryString !== 'function') parseQueryString = defaultParseQueryString;
 	
 	    function addQuery(location) {
-	      if (location.query == null) location.query = parseQueryString(location.search.substring(1));
+	      if (location.query == null) {
+	        var search = location.search;
+	
+	        location.query = parseQueryString(search.substring(1));
+	        location[SEARCH_BASE_KEY] = { search: search, searchBase: '' };
+	      }
+	
+	      // TODO: Instead of all the book-keeping here, this should just strip the
+	      // stringified query from the search.
 	
 	      return location;
 	    }
 	
-	    function appendQuery(path, query) {
+	    function appendQuery(location, query) {
+	      var _extends2;
+	
 	      var queryString = undefined;
-	      if (!query || (queryString = stringifyQuery(query)) === '') return path;
+	      if (!query || (queryString = stringifyQuery(query)) === '') return location;
 	
-	      if (typeof path === 'string') path = _parsePath2['default'](path);
+	      process.env.NODE_ENV !== 'production' ? _warning2['default'](stringifyQuery !== defaultStringifyQuery || !isNestedObject(query), 'useQueries does not stringify nested query objects by default; ' + 'use a custom stringifyQuery function') : undefined;
 	
-	      var search = path.search + (path.search ? '&' : '?') + queryString;
+	      if (typeof location === 'string') location = _parsePath2['default'](location);
 	
-	      return _extends({}, path, {
+	      var searchBaseSpec = location[SEARCH_BASE_KEY];
+	      var searchBase = undefined;
+	      if (searchBaseSpec && location.search === searchBaseSpec.search) {
+	        searchBase = searchBaseSpec.searchBase;
+	      } else {
+	        searchBase = location.search || '';
+	      }
+	
+	      var search = searchBase + (searchBase ? '&' : '?') + queryString;
+	
+	      return _extends({}, location, (_extends2 = {
 	        search: search
-	      });
+	      }, _extends2[SEARCH_BASE_KEY] = { search: search, searchBase: searchBase }, _extends2));
 	    }
 	
 	    // Override all read methods with query-aware versions.
@@ -37886,186 +38046,136 @@
 	    }
 	
 	    // Override all write methods with query-aware versions.
-	    function pushState(state, path, query) {
-	      return history.pushState(state, appendQuery(path, query));
+	    function push(location) {
+	      history.push(appendQuery(location, location.query));
 	    }
 	
-	    function replaceState(state, path, query) {
-	      return history.replaceState(state, appendQuery(path, query));
+	    function replace(location) {
+	      history.replace(appendQuery(location, location.query));
 	    }
 	
-	    function createPath(path, query) {
-	      return history.createPath(appendQuery(path, query));
+	    function createPath(location, query) {
+	      //warning(
+	      //  !query,
+	      //  'the query argument to createPath is deprecated; use a location descriptor instead'
+	      //)
+	      return history.createPath(appendQuery(location, query || location.query));
 	    }
 	
-	    function createHref(path, query) {
-	      return history.createHref(appendQuery(path, query));
+	    function createHref(location, query) {
+	      //warning(
+	      //  !query,
+	      //  'the query argument to createHref is deprecated; use a location descriptor instead'
+	      //)
+	      return history.createHref(appendQuery(location, query || location.query));
 	    }
 	
 	    function createLocation() {
 	      return addQuery(history.createLocation.apply(history, arguments));
 	    }
 	
+	    // deprecated
+	    function pushState(state, path, query) {
+	      if (typeof path === 'string') path = _parsePath2['default'](path);
+	
+	      push(_extends({ state: state }, path, { query: query }));
+	    }
+	
+	    // deprecated
+	    function replaceState(state, path, query) {
+	      if (typeof path === 'string') path = _parsePath2['default'](path);
+	
+	      replace(_extends({ state: state }, path, { query: query }));
+	    }
+	
 	    return _extends({}, history, {
 	      listenBefore: listenBefore,
 	      listen: listen,
-	      pushState: pushState,
-	      replaceState: replaceState,
+	      push: push,
+	      replace: replace,
 	      createPath: createPath,
 	      createHref: createHref,
-	      createLocation: createLocation
+	      createLocation: createLocation,
+	
+	      pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
+	      replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
 	    });
 	  };
 	}
 	
 	exports['default'] = useQueries;
 	module.exports = exports['default'];
-
-/***/ },
-/* 220 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// Load modules
-	
-	var Stringify = __webpack_require__(221);
-	var Parse = __webpack_require__(223);
-	
-	
-	// Declare internals
-	
-	var internals = {};
-	
-	
-	module.exports = {
-	    stringify: Stringify,
-	    parse: Parse
-	};
-
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
 /* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// Load modules
+	'use strict';
+	var strictUriEncode = __webpack_require__(222);
 	
-	var Utils = __webpack_require__(222);
-	
-	
-	// Declare internals
-	
-	var internals = {
-	    delimiter: '&',
-	    arrayPrefixGenerators: {
-	        brackets: function (prefix, key) {
-	
-	            return prefix + '[]';
-	        },
-	        indices: function (prefix, key) {
-	
-	            return prefix + '[' + key + ']';
-	        },
-	        repeat: function (prefix, key) {
-	
-	            return prefix;
-	        }
-	    },
-	    strictNullHandling: false
+	exports.extract = function (str) {
+		return str.split('?')[1] || '';
 	};
 	
+	exports.parse = function (str) {
+		if (typeof str !== 'string') {
+			return {};
+		}
 	
-	internals.stringify = function (obj, prefix, generateArrayPrefix, strictNullHandling, filter) {
+		str = str.trim().replace(/^(\?|#|&)/, '');
 	
-	    if (typeof filter === 'function') {
-	        obj = filter(prefix, obj);
-	    }
-	    else if (Utils.isBuffer(obj)) {
-	        obj = obj.toString();
-	    }
-	    else if (obj instanceof Date) {
-	        obj = obj.toISOString();
-	    }
-	    else if (obj === null) {
-	        if (strictNullHandling) {
-	            return Utils.encode(prefix);
-	        }
+		if (!str) {
+			return {};
+		}
 	
-	        obj = '';
-	    }
+		return str.split('&').reduce(function (ret, param) {
+			var parts = param.replace(/\+/g, ' ').split('=');
+			// Firefox (pre 40) decodes `%3D` to `=`
+			// https://github.com/sindresorhus/query-string/pull/37
+			var key = parts.shift();
+			var val = parts.length > 0 ? parts.join('=') : undefined;
 	
-	    if (typeof obj === 'string' ||
-	        typeof obj === 'number' ||
-	        typeof obj === 'boolean') {
+			key = decodeURIComponent(key);
 	
-	        return [Utils.encode(prefix) + '=' + Utils.encode(obj)];
-	    }
+			// missing `=` should be `null`:
+			// http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
+			val = val === undefined ? null : decodeURIComponent(val);
 	
-	    var values = [];
+			if (!ret.hasOwnProperty(key)) {
+				ret[key] = val;
+			} else if (Array.isArray(ret[key])) {
+				ret[key].push(val);
+			} else {
+				ret[key] = [ret[key], val];
+			}
 	
-	    if (typeof obj === 'undefined') {
-	        return values;
-	    }
-	
-	    var objKeys = Array.isArray(filter) ? filter : Object.keys(obj);
-	    for (var i = 0, il = objKeys.length; i < il; ++i) {
-	        var key = objKeys[i];
-	
-	        if (Array.isArray(obj)) {
-	            values = values.concat(internals.stringify(obj[key], generateArrayPrefix(prefix, key), generateArrayPrefix, strictNullHandling, filter));
-	        }
-	        else {
-	            values = values.concat(internals.stringify(obj[key], prefix + '[' + key + ']', generateArrayPrefix, strictNullHandling, filter));
-	        }
-	    }
-	
-	    return values;
+			return ret;
+		}, {});
 	};
 	
+	exports.stringify = function (obj) {
+		return obj ? Object.keys(obj).sort().map(function (key) {
+			var val = obj[key];
 	
-	module.exports = function (obj, options) {
+			if (val === undefined) {
+				return '';
+			}
 	
-	    options = options || {};
-	    var delimiter = typeof options.delimiter === 'undefined' ? internals.delimiter : options.delimiter;
-	    var strictNullHandling = typeof options.strictNullHandling === 'boolean' ? options.strictNullHandling : internals.strictNullHandling;
-	    var objKeys;
-	    var filter;
-	    if (typeof options.filter === 'function') {
-	        filter = options.filter;
-	        obj = filter('', obj);
-	    }
-	    else if (Array.isArray(options.filter)) {
-	        objKeys = filter = options.filter;
-	    }
+			if (val === null) {
+				return key;
+			}
 	
-	    var keys = [];
+			if (Array.isArray(val)) {
+				return val.sort().map(function (val2) {
+					return strictUriEncode(key) + '=' + strictUriEncode(val2);
+				}).join('&');
+			}
 	
-	    if (typeof obj !== 'object' ||
-	        obj === null) {
-	
-	        return '';
-	    }
-	
-	    var arrayFormat;
-	    if (options.arrayFormat in internals.arrayPrefixGenerators) {
-	        arrayFormat = options.arrayFormat;
-	    }
-	    else if ('indices' in options) {
-	        arrayFormat = options.indices ? 'indices' : 'repeat';
-	    }
-	    else {
-	        arrayFormat = 'indices';
-	    }
-	
-	    var generateArrayPrefix = internals.arrayPrefixGenerators[arrayFormat];
-	
-	    if (!objKeys) {
-	        objKeys = Object.keys(obj);
-	    }
-	    for (var i = 0, il = objKeys.length; i < il; ++i) {
-	        var key = objKeys[i];
-	        keys = keys.concat(internals.stringify(obj[key], key, generateArrayPrefix, strictNullHandling, filter));
-	    }
-	
-	    return keys.join(delimiter);
+			return strictUriEncode(key) + '=' + strictUriEncode(val);
+		}).filter(function (x) {
+			return x.length > 0;
+		}).join('&') : '';
 	};
 
 
@@ -38073,195 +38183,11 @@
 /* 222 */
 /***/ function(module, exports) {
 
-	// Load modules
-	
-	
-	// Declare internals
-	
-	var internals = {};
-	internals.hexTable = new Array(256);
-	for (var h = 0; h < 256; ++h) {
-	    internals.hexTable[h] = '%' + ((h < 16 ? '0' : '') + h.toString(16)).toUpperCase();
-	}
-	
-	
-	exports.arrayToObject = function (source, options) {
-	
-	    var obj = options.plainObjects ? Object.create(null) : {};
-	    for (var i = 0, il = source.length; i < il; ++i) {
-	        if (typeof source[i] !== 'undefined') {
-	
-	            obj[i] = source[i];
-	        }
-	    }
-	
-	    return obj;
-	};
-	
-	
-	exports.merge = function (target, source, options) {
-	
-	    if (!source) {
-	        return target;
-	    }
-	
-	    if (typeof source !== 'object') {
-	        if (Array.isArray(target)) {
-	            target.push(source);
-	        }
-	        else if (typeof target === 'object') {
-	            target[source] = true;
-	        }
-	        else {
-	            target = [target, source];
-	        }
-	
-	        return target;
-	    }
-	
-	    if (typeof target !== 'object') {
-	        target = [target].concat(source);
-	        return target;
-	    }
-	
-	    if (Array.isArray(target) &&
-	        !Array.isArray(source)) {
-	
-	        target = exports.arrayToObject(target, options);
-	    }
-	
-	    var keys = Object.keys(source);
-	    for (var k = 0, kl = keys.length; k < kl; ++k) {
-	        var key = keys[k];
-	        var value = source[key];
-	
-	        if (!Object.prototype.hasOwnProperty.call(target, key)) {
-	            target[key] = value;
-	        }
-	        else {
-	            target[key] = exports.merge(target[key], value, options);
-	        }
-	    }
-	
-	    return target;
-	};
-	
-	
-	exports.decode = function (str) {
-	
-	    try {
-	        return decodeURIComponent(str.replace(/\+/g, ' '));
-	    } catch (e) {
-	        return str;
-	    }
-	};
-	
-	exports.encode = function (str) {
-	
-	    // This code was originally written by Brian White (mscdex) for the io.js core querystring library.
-	    // It has been adapted here for stricter adherence to RFC 3986
-	    if (str.length === 0) {
-	        return str;
-	    }
-	
-	    if (typeof str !== 'string') {
-	        str = '' + str;
-	    }
-	
-	    var out = '';
-	    for (var i = 0, il = str.length; i < il; ++i) {
-	        var c = str.charCodeAt(i);
-	
-	        if (c === 0x2D || // -
-	            c === 0x2E || // .
-	            c === 0x5F || // _
-	            c === 0x7E || // ~
-	            (c >= 0x30 && c <= 0x39) || // 0-9
-	            (c >= 0x41 && c <= 0x5A) || // a-z
-	            (c >= 0x61 && c <= 0x7A)) { // A-Z
-	
-	            out += str[i];
-	            continue;
-	        }
-	
-	        if (c < 0x80) {
-	            out += internals.hexTable[c];
-	            continue;
-	        }
-	
-	        if (c < 0x800) {
-	            out += internals.hexTable[0xC0 | (c >> 6)] + internals.hexTable[0x80 | (c & 0x3F)];
-	            continue;
-	        }
-	
-	        if (c < 0xD800 || c >= 0xE000) {
-	            out += internals.hexTable[0xE0 | (c >> 12)] + internals.hexTable[0x80 | ((c >> 6) & 0x3F)] + internals.hexTable[0x80 | (c & 0x3F)];
-	            continue;
-	        }
-	
-	        ++i;
-	        c = 0x10000 + (((c & 0x3FF) << 10) | (str.charCodeAt(i) & 0x3FF));
-	        out += internals.hexTable[0xF0 | (c >> 18)] + internals.hexTable[0x80 | ((c >> 12) & 0x3F)] + internals.hexTable[0x80 | ((c >> 6) & 0x3F)] + internals.hexTable[0x80 | (c & 0x3F)];
-	    }
-	
-	    return out;
-	};
-	
-	exports.compact = function (obj, refs) {
-	
-	    if (typeof obj !== 'object' ||
-	        obj === null) {
-	
-	        return obj;
-	    }
-	
-	    refs = refs || [];
-	    var lookup = refs.indexOf(obj);
-	    if (lookup !== -1) {
-	        return refs[lookup];
-	    }
-	
-	    refs.push(obj);
-	
-	    if (Array.isArray(obj)) {
-	        var compacted = [];
-	
-	        for (var i = 0, il = obj.length; i < il; ++i) {
-	            if (typeof obj[i] !== 'undefined') {
-	                compacted.push(obj[i]);
-	            }
-	        }
-	
-	        return compacted;
-	    }
-	
-	    var keys = Object.keys(obj);
-	    for (i = 0, il = keys.length; i < il; ++i) {
-	        var key = keys[i];
-	        obj[key] = exports.compact(obj[key], refs);
-	    }
-	
-	    return obj;
-	};
-	
-	
-	exports.isRegExp = function (obj) {
-	
-	    return Object.prototype.toString.call(obj) === '[object RegExp]';
-	};
-	
-	
-	exports.isBuffer = function (obj) {
-	
-	    if (obj === null ||
-	        typeof obj === 'undefined') {
-	
-	        return false;
-	    }
-	
-	    return !!(obj.constructor &&
-	              obj.constructor.isBuffer &&
-	              obj.constructor.isBuffer(obj));
+	'use strict';
+	module.exports = function (str) {
+		return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
+			return '%' + c.charCodeAt(0).toString(16).toUpperCase();
+		});
 	};
 
 
@@ -38269,203 +38195,11 @@
 /* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// Load modules
-	
-	var Utils = __webpack_require__(222);
-	
-	
-	// Declare internals
-	
-	var internals = {
-	    delimiter: '&',
-	    depth: 5,
-	    arrayLimit: 20,
-	    parameterLimit: 1000,
-	    strictNullHandling: false,
-	    plainObjects: false,
-	    allowPrototypes: false
-	};
-	
-	
-	internals.parseValues = function (str, options) {
-	
-	    var obj = {};
-	    var parts = str.split(options.delimiter, options.parameterLimit === Infinity ? undefined : options.parameterLimit);
-	
-	    for (var i = 0, il = parts.length; i < il; ++i) {
-	        var part = parts[i];
-	        var pos = part.indexOf(']=') === -1 ? part.indexOf('=') : part.indexOf(']=') + 1;
-	
-	        if (pos === -1) {
-	            obj[Utils.decode(part)] = '';
-	
-	            if (options.strictNullHandling) {
-	                obj[Utils.decode(part)] = null;
-	            }
-	        }
-	        else {
-	            var key = Utils.decode(part.slice(0, pos));
-	            var val = Utils.decode(part.slice(pos + 1));
-	
-	            if (!Object.prototype.hasOwnProperty.call(obj, key)) {
-	                obj[key] = val;
-	            }
-	            else {
-	                obj[key] = [].concat(obj[key]).concat(val);
-	            }
-	        }
-	    }
-	
-	    return obj;
-	};
-	
-	
-	internals.parseObject = function (chain, val, options) {
-	
-	    if (!chain.length) {
-	        return val;
-	    }
-	
-	    var root = chain.shift();
-	
-	    var obj;
-	    if (root === '[]') {
-	        obj = [];
-	        obj = obj.concat(internals.parseObject(chain, val, options));
-	    }
-	    else {
-	        obj = options.plainObjects ? Object.create(null) : {};
-	        var cleanRoot = root[0] === '[' && root[root.length - 1] === ']' ? root.slice(1, root.length - 1) : root;
-	        var index = parseInt(cleanRoot, 10);
-	        var indexString = '' + index;
-	        if (!isNaN(index) &&
-	            root !== cleanRoot &&
-	            indexString === cleanRoot &&
-	            index >= 0 &&
-	            (options.parseArrays &&
-	             index <= options.arrayLimit)) {
-	
-	            obj = [];
-	            obj[index] = internals.parseObject(chain, val, options);
-	        }
-	        else {
-	            obj[cleanRoot] = internals.parseObject(chain, val, options);
-	        }
-	    }
-	
-	    return obj;
-	};
-	
-	
-	internals.parseKeys = function (key, val, options) {
-	
-	    if (!key) {
-	        return;
-	    }
-	
-	    // Transform dot notation to bracket notation
-	
-	    if (options.allowDots) {
-	        key = key.replace(/\.([^\.\[]+)/g, '[$1]');
-	    }
-	
-	    // The regex chunks
-	
-	    var parent = /^([^\[\]]*)/;
-	    var child = /(\[[^\[\]]*\])/g;
-	
-	    // Get the parent
-	
-	    var segment = parent.exec(key);
-	
-	    // Stash the parent if it exists
-	
-	    var keys = [];
-	    if (segment[1]) {
-	        // If we aren't using plain objects, optionally prefix keys
-	        // that would overwrite object prototype properties
-	        if (!options.plainObjects &&
-	            Object.prototype.hasOwnProperty(segment[1])) {
-	
-	            if (!options.allowPrototypes) {
-	                return;
-	            }
-	        }
-	
-	        keys.push(segment[1]);
-	    }
-	
-	    // Loop through children appending to the array until we hit depth
-	
-	    var i = 0;
-	    while ((segment = child.exec(key)) !== null && i < options.depth) {
-	
-	        ++i;
-	        if (!options.plainObjects &&
-	            Object.prototype.hasOwnProperty(segment[1].replace(/\[|\]/g, ''))) {
-	
-	            if (!options.allowPrototypes) {
-	                continue;
-	            }
-	        }
-	        keys.push(segment[1]);
-	    }
-	
-	    // If there's a remainder, just add whatever is left
-	
-	    if (segment) {
-	        keys.push('[' + key.slice(segment.index) + ']');
-	    }
-	
-	    return internals.parseObject(keys, val, options);
-	};
-	
-	
-	module.exports = function (str, options) {
-	
-	    options = options || {};
-	    options.delimiter = typeof options.delimiter === 'string' || Utils.isRegExp(options.delimiter) ? options.delimiter : internals.delimiter;
-	    options.depth = typeof options.depth === 'number' ? options.depth : internals.depth;
-	    options.arrayLimit = typeof options.arrayLimit === 'number' ? options.arrayLimit : internals.arrayLimit;
-	    options.parseArrays = options.parseArrays !== false;
-	    options.allowDots = options.allowDots !== false;
-	    options.plainObjects = typeof options.plainObjects === 'boolean' ? options.plainObjects : internals.plainObjects;
-	    options.allowPrototypes = typeof options.allowPrototypes === 'boolean' ? options.allowPrototypes : internals.allowPrototypes;
-	    options.parameterLimit = typeof options.parameterLimit === 'number' ? options.parameterLimit : internals.parameterLimit;
-	    options.strictNullHandling = typeof options.strictNullHandling === 'boolean' ? options.strictNullHandling : internals.strictNullHandling;
-	
-	    if (str === '' ||
-	        str === null ||
-	        typeof str === 'undefined') {
-	
-	        return options.plainObjects ? Object.create(null) : {};
-	    }
-	
-	    var tempObj = typeof str === 'string' ? internals.parseValues(str, options) : str;
-	    var obj = options.plainObjects ? Object.create(null) : {};
-	
-	    // Iterate over the keys and setup the new object
-	
-	    var keys = Object.keys(tempObj);
-	    for (var i = 0, il = keys.length; i < il; ++i) {
-	        var key = keys[i];
-	        var newObj = internals.parseKeys(key, tempObj[key], options);
-	        obj = Utils.merge(obj, newObj, options);
-	    }
-	
-	    return Utils.compact(obj);
-	};
-
-
-/***/ },
-/* 224 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _PatternUtils = __webpack_require__(217);
+	var _PatternUtils = __webpack_require__(218);
 	
 	function routeParamsChanged(route, prevState, nextState) {
 	  if (!route.path) return false;
@@ -38519,7 +38253,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 225 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38528,7 +38262,7 @@
 	exports.runEnterHooks = runEnterHooks;
 	exports.runLeaveHooks = runLeaveHooks;
 	
-	var _AsyncUtils = __webpack_require__(226);
+	var _AsyncUtils = __webpack_require__(225);
 	
 	function createEnterHook(hook, route) {
 	  return function (a, b, callback) {
@@ -38596,7 +38330,7 @@
 	}
 
 /***/ },
-/* 226 */
+/* 225 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -38659,14 +38393,14 @@
 	}
 
 /***/ },
-/* 227 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _PatternUtils = __webpack_require__(217);
+	var _PatternUtils = __webpack_require__(218);
 	
 	function deepEqual(a, b) {
 	  if (a == b) return true;
@@ -38787,14 +38521,14 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 228 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _AsyncUtils = __webpack_require__(226);
+	var _AsyncUtils = __webpack_require__(225);
 	
 	function getComponentsForRoute(location, route, callback) {
 	  if (route.component || route.components) {
@@ -38825,7 +38559,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 229 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -38838,11 +38572,11 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _AsyncUtils = __webpack_require__(226);
+	var _AsyncUtils = __webpack_require__(225);
 	
-	var _PatternUtils = __webpack_require__(217);
+	var _PatternUtils = __webpack_require__(218);
 	
-	var _RouteUtils = __webpack_require__(213);
+	var _RouteUtils = __webpack_require__(214);
 	
 	function getChildRoutes(route, location, callback) {
 	  if (route.childRoutes) {
@@ -39019,7 +38753,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 230 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39077,7 +38811,7 @@
 	};
 
 /***/ },
-/* 231 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39085,8 +38819,6 @@
 	exports.__esModule = true;
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -39219,43 +38951,35 @@
 	    return _react2['default'].createElement('a', props);
 	  };
 	
-	  _createClass(Link, null, [{
-	    key: 'contextTypes',
-	    value: {
-	      history: object
-	    },
-	    enumerable: true
-	  }, {
-	    key: 'propTypes',
-	    value: {
-	      to: string.isRequired,
-	      query: object,
-	      hash: string,
-	      state: object,
-	      activeStyle: object,
-	      activeClassName: string,
-	      onlyActiveOnIndex: bool.isRequired,
-	      onClick: func
-	    },
-	    enumerable: true
-	  }, {
-	    key: 'defaultProps',
-	    value: {
-	      onlyActiveOnIndex: false,
-	      className: '',
-	      style: {}
-	    },
-	    enumerable: true
-	  }]);
-	
 	  return Link;
 	})(_react.Component);
+	
+	Link.contextTypes = {
+	  history: object
+	};
+	
+	Link.propTypes = {
+	  to: string.isRequired,
+	  query: object,
+	  hash: string,
+	  state: object,
+	  activeStyle: object,
+	  activeClassName: string,
+	  onlyActiveOnIndex: bool.isRequired,
+	  onClick: func
+	};
+	
+	Link.defaultProps = {
+	  onlyActiveOnIndex: false,
+	  className: '',
+	  style: {}
+	};
 	
 	exports['default'] = Link;
 	module.exports = exports['default'];
 
 /***/ },
-/* 232 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39274,7 +38998,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Link = __webpack_require__(231);
+	var _Link = __webpack_require__(230);
 	
 	var _Link2 = _interopRequireDefault(_Link);
 	
@@ -39302,14 +39026,12 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 233 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	exports.__esModule = true;
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -39321,7 +39043,7 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _invariant = __webpack_require__(215);
+	var _invariant = __webpack_require__(216);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -39329,11 +39051,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Redirect = __webpack_require__(234);
+	var _Redirect = __webpack_require__(233);
 	
 	var _Redirect2 = _interopRequireDefault(_Redirect);
 	
-	var _PropTypes = __webpack_require__(230);
+	var _PropTypes = __webpack_require__(229);
 	
 	var _React$PropTypes = _react2['default'].PropTypes;
 	var string = _React$PropTypes.string;
@@ -39352,49 +39074,43 @@
 	    _Component.apply(this, arguments);
 	  }
 	
-	  IndexRedirect.createRouteFromReactElement = function createRouteFromReactElement(element, parentRoute) {
-	    /* istanbul ignore else: sanity check */
-	    if (parentRoute) {
-	      parentRoute.indexRoute = _Redirect2['default'].createRouteFromReactElement(element);
-	    } else {
-	      process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'An <IndexRedirect> does not make sense at the root of your route config') : undefined;
-	    }
-	  };
-	
 	  /* istanbul ignore next: sanity check */
 	
 	  IndexRedirect.prototype.render = function render() {
 	     true ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<IndexRedirect> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
 	  };
 	
-	  _createClass(IndexRedirect, null, [{
-	    key: 'propTypes',
-	    value: {
-	      to: string.isRequired,
-	      query: object,
-	      state: object,
-	      onEnter: _PropTypes.falsy,
-	      children: _PropTypes.falsy
-	    },
-	    enumerable: true
-	  }]);
-	
 	  return IndexRedirect;
 	})(_react.Component);
+	
+	IndexRedirect.propTypes = {
+	  to: string.isRequired,
+	  query: object,
+	  state: object,
+	  onEnter: _PropTypes.falsy,
+	  children: _PropTypes.falsy
+	};
+	
+	IndexRedirect.createRouteFromReactElement = function (element, parentRoute) {
+	  /* istanbul ignore else: sanity check */
+	  if (parentRoute) {
+	    parentRoute.indexRoute = _Redirect2['default'].createRouteFromReactElement(element);
+	  } else {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'An <IndexRedirect> does not make sense at the root of your route config') : undefined;
+	  }
+	};
 	
 	exports['default'] = IndexRedirect;
 	module.exports = exports['default'];
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 234 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	exports.__esModule = true;
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -39402,7 +39118,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _invariant = __webpack_require__(215);
+	var _invariant = __webpack_require__(216);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -39410,11 +39126,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RouteUtils = __webpack_require__(213);
+	var _RouteUtils = __webpack_require__(214);
 	
-	var _PatternUtils = __webpack_require__(217);
+	var _PatternUtils = __webpack_require__(218);
 	
-	var _PropTypes = __webpack_require__(230);
+	var _PropTypes = __webpack_require__(229);
 	
 	var _React$PropTypes = _react2['default'].PropTypes;
 	var string = _React$PropTypes.string;
@@ -39437,83 +39153,77 @@
 	    _Component.apply(this, arguments);
 	  }
 	
-	  Redirect.createRouteFromReactElement = function createRouteFromReactElement(element) {
-	    var route = _RouteUtils.createRouteFromReactElement(element);
-	
-	    if (route.from) route.path = route.from;
-	
-	    route.onEnter = function (nextState, replaceState) {
-	      var location = nextState.location;
-	      var params = nextState.params;
-	
-	      var pathname = undefined;
-	      if (route.to.charAt(0) === '/') {
-	        pathname = _PatternUtils.formatPattern(route.to, params);
-	      } else if (!route.to) {
-	        pathname = location.pathname;
-	      } else {
-	        var routeIndex = nextState.routes.indexOf(route);
-	        var parentPattern = Redirect.getRoutePattern(nextState.routes, routeIndex - 1);
-	        var pattern = parentPattern.replace(/\/*$/, '/') + route.to;
-	        pathname = _PatternUtils.formatPattern(pattern, params);
-	      }
-	
-	      replaceState(route.state || location.state, pathname, route.query || location.query);
-	    };
-	
-	    return route;
-	  };
-	
-	  Redirect.getRoutePattern = function getRoutePattern(routes, routeIndex) {
-	    var parentPattern = '';
-	
-	    for (var i = routeIndex; i >= 0; i--) {
-	      var route = routes[i];
-	      var pattern = route.path || '';
-	      parentPattern = pattern.replace(/\/*$/, '/') + parentPattern;
-	
-	      if (pattern.indexOf('/') === 0) break;
-	    }
-	
-	    return '/' + parentPattern;
-	  };
-	
 	  /* istanbul ignore next: sanity check */
 	
 	  Redirect.prototype.render = function render() {
 	     true ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<Redirect> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
 	  };
 	
-	  _createClass(Redirect, null, [{
-	    key: 'propTypes',
-	    value: {
-	      path: string,
-	      from: string, // Alias for path
-	      to: string.isRequired,
-	      query: object,
-	      state: object,
-	      onEnter: _PropTypes.falsy,
-	      children: _PropTypes.falsy
-	    },
-	    enumerable: true
-	  }]);
-	
 	  return Redirect;
 	})(_react.Component);
+	
+	Redirect.createRouteFromReactElement = function (element) {
+	  var route = _RouteUtils.createRouteFromReactElement(element);
+	
+	  if (route.from) route.path = route.from;
+	
+	  route.onEnter = function (nextState, replaceState) {
+	    var location = nextState.location;
+	    var params = nextState.params;
+	
+	    var pathname = undefined;
+	    if (route.to.charAt(0) === '/') {
+	      pathname = _PatternUtils.formatPattern(route.to, params);
+	    } else if (!route.to) {
+	      pathname = location.pathname;
+	    } else {
+	      var routeIndex = nextState.routes.indexOf(route);
+	      var parentPattern = Redirect.getRoutePattern(nextState.routes, routeIndex - 1);
+	      var pattern = parentPattern.replace(/\/*$/, '/') + route.to;
+	      pathname = _PatternUtils.formatPattern(pattern, params);
+	    }
+	
+	    replaceState(route.state || location.state, pathname, route.query || location.query);
+	  };
+	
+	  return route;
+	};
+	
+	Redirect.getRoutePattern = function (routes, routeIndex) {
+	  var parentPattern = '';
+	
+	  for (var i = routeIndex; i >= 0; i--) {
+	    var route = routes[i];
+	    var pattern = route.path || '';
+	    parentPattern = pattern.replace(/\/*$/, '/') + parentPattern;
+	
+	    if (pattern.indexOf('/') === 0) break;
+	  }
+	
+	  return '/' + parentPattern;
+	};
+	
+	Redirect.propTypes = {
+	  path: string,
+	  from: string, // Alias for path
+	  to: string.isRequired,
+	  query: object,
+	  state: object,
+	  onEnter: _PropTypes.falsy,
+	  children: _PropTypes.falsy
+	};
 	
 	exports['default'] = Redirect;
 	module.exports = exports['default'];
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 235 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	exports.__esModule = true;
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -39525,7 +39235,7 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _invariant = __webpack_require__(215);
+	var _invariant = __webpack_require__(216);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -39533,9 +39243,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RouteUtils = __webpack_require__(213);
+	var _RouteUtils = __webpack_require__(214);
 	
-	var _PropTypes = __webpack_require__(230);
+	var _PropTypes = __webpack_require__(229);
 	
 	var func = _react2['default'].PropTypes.func;
 	
@@ -39553,49 +39263,43 @@
 	    _Component.apply(this, arguments);
 	  }
 	
-	  IndexRoute.createRouteFromReactElement = function createRouteFromReactElement(element, parentRoute) {
-	    /* istanbul ignore else: sanity check */
-	    if (parentRoute) {
-	      parentRoute.indexRoute = _RouteUtils.createRouteFromReactElement(element);
-	    } else {
-	      process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'An <IndexRoute> does not make sense at the root of your route config') : undefined;
-	    }
-	  };
-	
 	  /* istanbul ignore next: sanity check */
 	
 	  IndexRoute.prototype.render = function render() {
 	     true ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<IndexRoute> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
 	  };
 	
-	  _createClass(IndexRoute, null, [{
-	    key: 'propTypes',
-	    value: {
-	      path: _PropTypes.falsy,
-	      component: _PropTypes.component,
-	      components: _PropTypes.components,
-	      getComponent: func,
-	      getComponents: func
-	    },
-	    enumerable: true
-	  }]);
-	
 	  return IndexRoute;
 	})(_react.Component);
+	
+	IndexRoute.propTypes = {
+	  path: _PropTypes.falsy,
+	  component: _PropTypes.component,
+	  components: _PropTypes.components,
+	  getComponent: func,
+	  getComponents: func
+	};
+	
+	IndexRoute.createRouteFromReactElement = function (element, parentRoute) {
+	  /* istanbul ignore else: sanity check */
+	  if (parentRoute) {
+	    parentRoute.indexRoute = _RouteUtils.createRouteFromReactElement(element);
+	  } else {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'An <IndexRoute> does not make sense at the root of your route config') : undefined;
+	  }
+	};
 	
 	exports['default'] = IndexRoute;
 	module.exports = exports['default'];
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 236 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	exports.__esModule = true;
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -39603,7 +39307,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _invariant = __webpack_require__(215);
+	var _invariant = __webpack_require__(216);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -39611,9 +39315,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RouteUtils = __webpack_require__(213);
+	var _RouteUtils = __webpack_require__(214);
 	
-	var _PropTypes = __webpack_require__(230);
+	var _PropTypes = __webpack_require__(229);
 	
 	var _React$PropTypes = _react2['default'].PropTypes;
 	var string = _React$PropTypes.string;
@@ -39645,38 +39349,32 @@
 	     true ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<Route> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
 	  };
 	
-	  _createClass(Route, null, [{
-	    key: 'createRouteFromReactElement',
-	    value: _RouteUtils.createRouteFromReactElement,
-	    enumerable: true
-	  }, {
-	    key: 'propTypes',
-	    value: {
-	      path: string,
-	      component: _PropTypes.component,
-	      components: _PropTypes.components,
-	      getComponent: func,
-	      getComponents: func
-	    },
-	    enumerable: true
-	  }]);
-	
 	  return Route;
 	})(_react.Component);
+	
+	Route.createRouteFromReactElement = _RouteUtils.createRouteFromReactElement;
+	
+	Route.propTypes = {
+	  path: string,
+	  component: _PropTypes.component,
+	  components: _PropTypes.components,
+	  getComponent: func,
+	  getComponents: func
+	};
 	
 	exports['default'] = Route;
 	module.exports = exports['default'];
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 237 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _PropTypes = __webpack_require__(230);
+	var _PropTypes = __webpack_require__(229);
 	
 	/**
 	 * A mixin that adds the "history" instance variable to components.
@@ -39697,7 +39395,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 238 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -39710,7 +39408,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _invariant = __webpack_require__(215);
+	var _invariant = __webpack_require__(216);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -39767,7 +39465,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 239 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39810,7 +39508,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 240 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -39821,21 +39519,21 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _invariant = __webpack_require__(215);
+	var _invariant = __webpack_require__(216);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _historyLibCreateMemoryHistory = __webpack_require__(241);
+	var _historyLibCreateMemoryHistory = __webpack_require__(240);
 	
 	var _historyLibCreateMemoryHistory2 = _interopRequireDefault(_historyLibCreateMemoryHistory);
 	
-	var _historyLibUseBasename = __webpack_require__(242);
+	var _historyLibUseBasename = __webpack_require__(241);
 	
 	var _historyLibUseBasename2 = _interopRequireDefault(_historyLibUseBasename);
 	
-	var _RouteUtils = __webpack_require__(213);
+	var _RouteUtils = __webpack_require__(214);
 	
-	var _useRoutes = __webpack_require__(218);
+	var _useRoutes = __webpack_require__(219);
 	
 	var _useRoutes2 = _interopRequireDefault(_useRoutes);
 	
@@ -39879,16 +39577,20 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 241 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	exports.__esModule = true;
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _warning = __webpack_require__(197);
+	
+	var _warning2 = _interopRequireDefault(_warning);
 	
 	var _invariant = __webpack_require__(198);
 	
@@ -39899,6 +39601,10 @@
 	var _createHistory = __webpack_require__(204);
 	
 	var _createHistory2 = _interopRequireDefault(_createHistory);
+	
+	var _parsePath = __webpack_require__(210);
+	
+	var _parsePath2 = _interopRequireDefault(_parsePath);
 	
 	function createStateStorage(entries) {
 	  return entries.filter(function (entry) {
@@ -39942,13 +39648,13 @@
 	
 	    if (typeof entry === 'object' && entry) return _extends({}, entry, { key: key });
 	
-	    _invariant2['default'](false, 'Unable to create history entry from %s', entry);
+	     true ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Unable to create history entry from %s', entry) : _invariant2['default'](false) : undefined;
 	  });
 	
 	  if (current == null) {
 	    current = entries.length - 1;
 	  } else {
-	    _invariant2['default'](current >= 0 && current < entries.length, 'Current index must be >= 0 and < %s, was %s', entries.length, current);
+	    !(current >= 0 && current < entries.length) ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Current index must be >= 0 and < %s, was %s', entries.length, current) : _invariant2['default'](false) : undefined;
 	  }
 	
 	  var storage = createStateStorage(entries);
@@ -39979,7 +39685,9 @@
 	      entry.key = key;
 	    }
 	
-	    return history.createLocation(path, state, undefined, key);
+	    var location = _parsePath2['default'](path);
+	
+	    return history.createLocation(_extends({}, location, { state: state }), undefined, key);
 	  }
 	
 	  function canGo(n) {
@@ -39989,7 +39697,10 @@
 	
 	  function go(n) {
 	    if (n) {
-	      _invariant2['default'](canGo(n), 'Cannot go(%s) there is not enough history', n);
+	      if (!canGo(n)) {
+	        process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'Cannot go(%s) there is not enough history', n) : undefined;
+	        return;
+	      }
 	
 	      current += n;
 	
@@ -40024,9 +39735,10 @@
 	
 	exports['default'] = createMemoryHistory;
 	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 242 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40041,13 +39753,21 @@
 	
 	var _ExecutionEnvironment = __webpack_require__(200);
 	
-	var _runTransitionHook = __webpack_require__(211);
+	var _runTransitionHook = __webpack_require__(212);
 	
 	var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
+	
+	var _extractPath = __webpack_require__(211);
+	
+	var _extractPath2 = _interopRequireDefault(_extractPath);
 	
 	var _parsePath = __webpack_require__(210);
 	
 	var _parsePath2 = _interopRequireDefault(_parsePath);
+	
+	var _deprecate = __webpack_require__(213);
+	
+	var _deprecate2 = _interopRequireDefault(_deprecate);
 	
 	function useBasename(createHistory) {
 	  return function () {
@@ -40063,7 +39783,7 @@
 	    if (basename == null && _ExecutionEnvironment.canUseDOM) {
 	      var base = document.getElementsByTagName('base')[0];
 	
-	      if (base) basename = base.href;
+	      if (base) basename = _extractPath2['default'](base.href);
 	    }
 	
 	    function addBasename(location) {
@@ -40081,17 +39801,17 @@
 	      return location;
 	    }
 	
-	    function prependBasename(path) {
-	      if (!basename) return path;
+	    function prependBasename(location) {
+	      if (!basename) return location;
 	
-	      if (typeof path === 'string') path = _parsePath2['default'](path);
+	      if (typeof location === 'string') location = _parsePath2['default'](location);
 	
-	      var pname = path.pathname;
+	      var pname = location.pathname;
 	      var normalizedBasename = basename.slice(-1) === '/' ? basename : basename + '/';
 	      var normalizedPathname = pname.charAt(0) === '/' ? pname.slice(1) : pname;
 	      var pathname = normalizedBasename + normalizedPathname;
 	
-	      return _extends({}, path, {
+	      return _extends({}, location, {
 	        pathname: pathname
 	      });
 	    }
@@ -40110,34 +39830,51 @@
 	    }
 	
 	    // Override all write methods with basename-aware versions.
-	    function pushState(state, path) {
-	      history.pushState(state, prependBasename(path));
+	    function push(location) {
+	      history.push(prependBasename(location));
 	    }
 	
-	    function replaceState(state, path) {
-	      history.replaceState(state, prependBasename(path));
+	    function replace(location) {
+	      history.replace(prependBasename(location));
 	    }
 	
-	    function createPath(path) {
-	      return history.createPath(prependBasename(path));
+	    function createPath(location) {
+	      return history.createPath(prependBasename(location));
 	    }
 	
-	    function createHref(path) {
-	      return history.createHref(prependBasename(path));
+	    function createHref(location) {
+	      return history.createHref(prependBasename(location));
 	    }
 	
 	    function createLocation() {
 	      return addBasename(history.createLocation.apply(history, arguments));
 	    }
 	
+	    // deprecated
+	    function pushState(state, path) {
+	      if (typeof path === 'string') path = _parsePath2['default'](path);
+	
+	      push(_extends({ state: state }, path));
+	    }
+	
+	    // deprecated
+	    function replaceState(state, path) {
+	      if (typeof path === 'string') path = _parsePath2['default'](path);
+	
+	      replace(_extends({ state: state }, path));
+	    }
+	
 	    return _extends({}, history, {
 	      listenBefore: listenBefore,
 	      listen: listen,
-	      pushState: pushState,
-	      replaceState: replaceState,
+	      push: push,
+	      replace: replace,
 	      createPath: createPath,
 	      createHref: createHref,
-	      createLocation: createLocation
+	      createLocation: createLocation,
+	
+	      pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
+	      replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
 	    });
 	  };
 	}
@@ -40146,7 +39883,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 243 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40161,7 +39898,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _componentsHandle = __webpack_require__(244);
+	var _componentsHandle = __webpack_require__(243);
 	
 	var _componentsHandle2 = _interopRequireDefault(_componentsHandle);
 	
@@ -40250,7 +39987,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 244 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40269,7 +40006,7 @@
 	
 	var React = _interopRequireWildcard(_react);
 	
-	var _matchCase = __webpack_require__(245);
+	var _matchCase = __webpack_require__(244);
 	
 	var _matchCase2 = _interopRequireDefault(_matchCase);
 	
@@ -40440,76 +40177,76 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 245 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var API_1 = __webpack_require__(246);
+	var MatchAPI_1 = __webpack_require__(245);
 	function match(value) {
-	    return new API_1.default(value);
+	    return new MatchAPI_1.default(value);
 	}
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.default = match;
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 246 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Matcher_1 = __webpack_require__(247);
-	var CaseFactory_1 = __webpack_require__(249);
-	var API = (function () {
-	    function API(value, matcher) {
+	var Matcher_1 = __webpack_require__(246);
+	var CaseFactory_1 = __webpack_require__(248);
+	var MatchAPI = (function () {
+	    function MatchAPI(value, matcher) {
 	        this.value = value;
 	        this.matcher = matcher;
 	        if (this.matcher === undefined) {
 	            this.matcher = new Matcher_1.default();
 	        }
 	    }
-	    API.prototype.caseOf = function () {
+	    MatchAPI.prototype.caseOf = function () {
 	        var args = [];
 	        for (var _i = 0; _i < arguments.length; _i++) {
 	            args[_i - 0] = arguments[_i];
 	        }
-	        return new API(this.value, this.matcher.addCase((function (v) { return v.length === 1 ?
+	        return new MatchAPI(this.value, this.matcher.addCase((function (v) { return v.length === 1 ?
 	            CaseFactory_1.default.create(args[0]) :
 	            CaseFactory_1.default.create({ when: args[0], then: args[1] }); })(args)));
 	    };
-	    API.prototype.caseOfNone = function () {
+	    MatchAPI.prototype.caseOfNone = function () {
 	        var args = [];
 	        for (var _i = 0; _i < arguments.length; _i++) {
 	            args[_i - 0] = arguments[_i];
 	        }
-	        return new API(this.value, this.matcher.addCase((function (v) { return v[0].then ?
+	        return new MatchAPI(this.value, this.matcher.addCase((function (v) { return v[0].then ?
 	            CaseFactory_1.default.createNone(args[0]) :
 	            CaseFactory_1.default.createNone({ then: args[0] }); })(args)));
 	    };
-	    API.prototype.caseOfElse = function () {
+	    MatchAPI.prototype.caseOfElse = function () {
 	        var args = [];
 	        for (var _i = 0; _i < arguments.length; _i++) {
 	            args[_i - 0] = arguments[_i];
 	        }
-	        return new API(this.value, this.matcher.addCase((function (v) { return v[0].then ?
+	        return new MatchAPI(this.value, this.matcher.addCase((function (v) { return v[0].then ?
 	            CaseFactory_1.default.createElse(args[0]) :
 	            CaseFactory_1.default.createElse({ then: args[0] }); })(args)));
 	    };
-	    API.prototype.end = function () {
+	    MatchAPI.prototype.end = function () {
 	        return this.matcher.match(this.value);
 	    };
-	    API.prototype.get = function (value) {
+	    MatchAPI.prototype.get = function (value) {
 	        if (value === void 0) { value = this.value; }
 	        return this.matcher.match(value);
 	    };
-	    return API;
+	    return MatchAPI;
 	})();
 	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.default = API;
-	//# sourceMappingURL=API.js.map
+	exports.default = MatchAPI;
+	//# sourceMappingURL=MatchAPI.js.map
 
 /***/ },
-/* 247 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var immutable_1 = __webpack_require__(248);
+	var immutable_1 = __webpack_require__(247);
 	var Matcher = (function () {
 	    function Matcher(cases) {
 	        this.cases = cases;
@@ -40531,7 +40268,7 @@
 	//# sourceMappingURL=Matcher.js.map
 
 /***/ },
-/* 248 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -40542,10 +40279,11 @@
 	 *  LICENSE file in the root directory of this source tree. An additional grant
 	 *  of patent rights can be found in the PATENTS file in the same directory.
 	 */
+	
 	(function (global, factory) {
 	   true ? module.exports = factory() :
 	  typeof define === 'function' && define.amd ? define(factory) :
-	  global.Immutable = factory()
+	  global.Immutable = factory();
 	}(this, function () { 'use strict';var SLICE$0 = Array.prototype.slice;
 	
 	  function createClass(ctor, superClass) {
@@ -40553,99 +40291,6 @@
 	      ctor.prototype = Object.create(superClass.prototype);
 	    }
 	    ctor.prototype.constructor = ctor;
-	  }
-	
-	  // Used for setting prototype methods that IE8 chokes on.
-	  var DELETE = 'delete';
-	
-	  // Constants describing the size of trie nodes.
-	  var SHIFT = 5; // Resulted in best performance after ______?
-	  var SIZE = 1 << SHIFT;
-	  var MASK = SIZE - 1;
-	
-	  // A consistent shared value representing "not set" which equals nothing other
-	  // than itself, and nothing that could be provided externally.
-	  var NOT_SET = {};
-	
-	  // Boolean references, Rough equivalent of `bool &`.
-	  var CHANGE_LENGTH = { value: false };
-	  var DID_ALTER = { value: false };
-	
-	  function MakeRef(ref) {
-	    ref.value = false;
-	    return ref;
-	  }
-	
-	  function SetRef(ref) {
-	    ref && (ref.value = true);
-	  }
-	
-	  // A function which returns a value representing an "owner" for transient writes
-	  // to tries. The return value will only ever equal itself, and will not equal
-	  // the return of any subsequent call of this function.
-	  function OwnerID() {}
-	
-	  // http://jsperf.com/copy-array-inline
-	  function arrCopy(arr, offset) {
-	    offset = offset || 0;
-	    var len = Math.max(0, arr.length - offset);
-	    var newArr = new Array(len);
-	    for (var ii = 0; ii < len; ii++) {
-	      newArr[ii] = arr[ii + offset];
-	    }
-	    return newArr;
-	  }
-	
-	  function ensureSize(iter) {
-	    if (iter.size === undefined) {
-	      iter.size = iter.__iterate(returnTrue);
-	    }
-	    return iter.size;
-	  }
-	
-	  function wrapIndex(iter, index) {
-	    // This implements "is array index" which the ECMAString spec defines as:
-	    //     A String property name P is an array index if and only if
-	    //     ToString(ToUint32(P)) is equal to P and ToUint32(P) is not equal
-	    //     to 2^32−1.
-	    // However note that we're currently calling ToNumber() instead of ToUint32()
-	    // which should be improved in the future, as floating point numbers should
-	    // not be accepted as an array index.
-	    if (typeof index !== 'number') {
-	      var numIndex = +index;
-	      if ('' + numIndex !== index) {
-	        return NaN;
-	      }
-	      index = numIndex;
-	    }
-	    return index < 0 ? ensureSize(iter) + index : index;
-	  }
-	
-	  function returnTrue() {
-	    return true;
-	  }
-	
-	  function wholeSlice(begin, end, size) {
-	    return (begin === 0 || (size !== undefined && begin <= -size)) &&
-	      (end === undefined || (size !== undefined && end >= size));
-	  }
-	
-	  function resolveBegin(begin, size) {
-	    return resolveIndex(begin, size, 0);
-	  }
-	
-	  function resolveEnd(end, size) {
-	    return resolveIndex(end, size, size);
-	  }
-	
-	  function resolveIndex(index, size, defaultIndex) {
-	    return index === undefined ?
-	      defaultIndex :
-	      index < 0 ?
-	        Math.max(0, size + index) :
-	        size === undefined ?
-	          index :
-	          Math.min(size, index);
 	  }
 	
 	  function Iterable(value) {
@@ -40708,6 +40353,99 @@
 	  var IS_INDEXED_SENTINEL = '@@__IMMUTABLE_INDEXED__@@';
 	  var IS_ORDERED_SENTINEL = '@@__IMMUTABLE_ORDERED__@@';
 	
+	  // Used for setting prototype methods that IE8 chokes on.
+	  var DELETE = 'delete';
+	
+	  // Constants describing the size of trie nodes.
+	  var SHIFT = 5; // Resulted in best performance after ______?
+	  var SIZE = 1 << SHIFT;
+	  var MASK = SIZE - 1;
+	
+	  // A consistent shared value representing "not set" which equals nothing other
+	  // than itself, and nothing that could be provided externally.
+	  var NOT_SET = {};
+	
+	  // Boolean references, Rough equivalent of `bool &`.
+	  var CHANGE_LENGTH = { value: false };
+	  var DID_ALTER = { value: false };
+	
+	  function MakeRef(ref) {
+	    ref.value = false;
+	    return ref;
+	  }
+	
+	  function SetRef(ref) {
+	    ref && (ref.value = true);
+	  }
+	
+	  // A function which returns a value representing an "owner" for transient writes
+	  // to tries. The return value will only ever equal itself, and will not equal
+	  // the return of any subsequent call of this function.
+	  function OwnerID() {}
+	
+	  // http://jsperf.com/copy-array-inline
+	  function arrCopy(arr, offset) {
+	    offset = offset || 0;
+	    var len = Math.max(0, arr.length - offset);
+	    var newArr = new Array(len);
+	    for (var ii = 0; ii < len; ii++) {
+	      newArr[ii] = arr[ii + offset];
+	    }
+	    return newArr;
+	  }
+	
+	  function ensureSize(iter) {
+	    if (iter.size === undefined) {
+	      iter.size = iter.__iterate(returnTrue);
+	    }
+	    return iter.size;
+	  }
+	
+	  function wrapIndex(iter, index) {
+	    // This implements "is array index" which the ECMAString spec defines as:
+	    //
+	    //     A String property name P is an array index if and only if
+	    //     ToString(ToUint32(P)) is equal to P and ToUint32(P) is not equal
+	    //     to 2^32−1.
+	    //
+	    // http://www.ecma-international.org/ecma-262/6.0/#sec-array-exotic-objects
+	    if (typeof index !== 'number') {
+	      var uint32Index = index >>> 0; // N >>> 0 is shorthand for ToUint32
+	      if ('' + uint32Index !== index || uint32Index === 4294967295) {
+	        return NaN;
+	      }
+	      index = uint32Index;
+	    }
+	    return index < 0 ? ensureSize(iter) + index : index;
+	  }
+	
+	  function returnTrue() {
+	    return true;
+	  }
+	
+	  function wholeSlice(begin, end, size) {
+	    return (begin === 0 || (size !== undefined && begin <= -size)) &&
+	      (end === undefined || (size !== undefined && end >= size));
+	  }
+	
+	  function resolveBegin(begin, size) {
+	    return resolveIndex(begin, size, 0);
+	  }
+	
+	  function resolveEnd(end, size) {
+	    return resolveIndex(end, size, size);
+	  }
+	
+	  function resolveIndex(index, size, defaultIndex) {
+	    return index === undefined ?
+	      defaultIndex :
+	      index < 0 ?
+	        Math.max(0, size + index) :
+	        size === undefined ?
+	          index :
+	          Math.min(size, index);
+	  }
+	
 	  /* global Symbol */
 	
 	  var ITERATE_KEYS = 0;
@@ -40720,22 +40458,22 @@
 	  var ITERATOR_SYMBOL = REAL_ITERATOR_SYMBOL || FAUX_ITERATOR_SYMBOL;
 	
 	
-	  function src_Iterator__Iterator(next) {
+	  function Iterator(next) {
 	      this.next = next;
 	    }
 	
-	    src_Iterator__Iterator.prototype.toString = function() {
+	    Iterator.prototype.toString = function() {
 	      return '[Iterator]';
 	    };
 	
 	
-	  src_Iterator__Iterator.KEYS = ITERATE_KEYS;
-	  src_Iterator__Iterator.VALUES = ITERATE_VALUES;
-	  src_Iterator__Iterator.ENTRIES = ITERATE_ENTRIES;
+	  Iterator.KEYS = ITERATE_KEYS;
+	  Iterator.VALUES = ITERATE_VALUES;
+	  Iterator.ENTRIES = ITERATE_ENTRIES;
 	
-	  src_Iterator__Iterator.prototype.inspect =
-	  src_Iterator__Iterator.prototype.toSource = function () { return this.toString(); }
-	  src_Iterator__Iterator.prototype[ITERATOR_SYMBOL] = function () {
+	  Iterator.prototype.inspect =
+	  Iterator.prototype.toSource = function () { return this.toString(); }
+	  Iterator.prototype[ITERATOR_SYMBOL] = function () {
 	    return this;
 	  };
 	
@@ -40893,8 +40631,6 @@
 	
 	
 	
-	  // #pragma Root Sequences
-	
 	  createClass(ArraySeq, IndexedSeq);
 	    function ArraySeq(array) {
 	      this._array = array;
@@ -40920,7 +40656,7 @@
 	      var array = this._array;
 	      var maxIndex = array.length - 1;
 	      var ii = 0;
-	      return new src_Iterator__Iterator(function() 
+	      return new Iterator(function() 
 	        {return ii > maxIndex ?
 	          iteratorDone() :
 	          iteratorValue(type, ii, array[reverse ? maxIndex - ii++ : ii++])}
@@ -40966,7 +40702,7 @@
 	      var keys = this._keys;
 	      var maxIndex = keys.length - 1;
 	      var ii = 0;
-	      return new src_Iterator__Iterator(function()  {
+	      return new Iterator(function()  {
 	        var key = keys[reverse ? maxIndex - ii : ii];
 	        return ii++ > maxIndex ?
 	          iteratorDone() :
@@ -41008,10 +40744,10 @@
 	      var iterable = this._iterable;
 	      var iterator = getIterator(iterable);
 	      if (!isIterator(iterator)) {
-	        return new src_Iterator__Iterator(iteratorDone);
+	        return new Iterator(iteratorDone);
 	      }
 	      var iterations = 0;
-	      return new src_Iterator__Iterator(function()  {
+	      return new Iterator(function()  {
 	        var step = iterator.next();
 	        return step.done ? step : iteratorValue(type, iterations++, step.value);
 	      });
@@ -41055,7 +40791,7 @@
 	      var iterator = this._iterator;
 	      var cache = this._iteratorCache;
 	      var iterations = 0;
-	      return new src_Iterator__Iterator(function()  {
+	      return new Iterator(function()  {
 	        if (iterations >= cache.length) {
 	          var step = iterator.next();
 	          if (step.done) {
@@ -41148,7 +40884,7 @@
 	    if (cache) {
 	      var maxIndex = cache.length - 1;
 	      var ii = 0;
-	      return new src_Iterator__Iterator(function()  {
+	      return new Iterator(function()  {
 	        var entry = cache[reverse ? maxIndex - ii : ii];
 	        return ii++ > maxIndex ?
 	          iteratorDone() :
@@ -41158,22 +40894,35 @@
 	    return seq.__iteratorUncached(type, reverse);
 	  }
 	
-	  createClass(Collection, Iterable);
-	    function Collection() {
-	      throw TypeError('Abstract');
+	  function fromJS(json, converter) {
+	    return converter ?
+	      fromJSWith(converter, json, '', {'': json}) :
+	      fromJSDefault(json);
+	  }
+	
+	  function fromJSWith(converter, json, key, parentJSON) {
+	    if (Array.isArray(json)) {
+	      return converter.call(parentJSON, key, IndexedSeq(json).map(function(v, k)  {return fromJSWith(converter, v, k, json)}));
 	    }
+	    if (isPlainObj(json)) {
+	      return converter.call(parentJSON, key, KeyedSeq(json).map(function(v, k)  {return fromJSWith(converter, v, k, json)}));
+	    }
+	    return json;
+	  }
 	
+	  function fromJSDefault(json) {
+	    if (Array.isArray(json)) {
+	      return IndexedSeq(json).map(fromJSDefault).toList();
+	    }
+	    if (isPlainObj(json)) {
+	      return KeyedSeq(json).map(fromJSDefault).toMap();
+	    }
+	    return json;
+	  }
 	
-	  createClass(KeyedCollection, Collection);function KeyedCollection() {}
-	
-	  createClass(IndexedCollection, Collection);function IndexedCollection() {}
-	
-	  createClass(SetCollection, Collection);function SetCollection() {}
-	
-	
-	  Collection.Keyed = KeyedCollection;
-	  Collection.Indexed = IndexedCollection;
-	  Collection.Set = SetCollection;
+	  function isPlainObj(value) {
+	    return value && (value.constructor === Object || value.constructor === undefined);
+	  }
 	
 	  /**
 	   * An extension of the "same-value" algorithm as [described for use by ES6 Map
@@ -41255,37 +41004,278 @@
 	    return false;
 	  }
 	
-	  function fromJS(json, converter) {
-	    return converter ?
-	      fromJSWith(converter, json, '', {'': json}) :
-	      fromJSDefault(json);
+	  function deepEqual(a, b) {
+	    if (a === b) {
+	      return true;
+	    }
+	
+	    if (
+	      !isIterable(b) ||
+	      a.size !== undefined && b.size !== undefined && a.size !== b.size ||
+	      a.__hash !== undefined && b.__hash !== undefined && a.__hash !== b.__hash ||
+	      isKeyed(a) !== isKeyed(b) ||
+	      isIndexed(a) !== isIndexed(b) ||
+	      isOrdered(a) !== isOrdered(b)
+	    ) {
+	      return false;
+	    }
+	
+	    if (a.size === 0 && b.size === 0) {
+	      return true;
+	    }
+	
+	    var notAssociative = !isAssociative(a);
+	
+	    if (isOrdered(a)) {
+	      var entries = a.entries();
+	      return b.every(function(v, k)  {
+	        var entry = entries.next().value;
+	        return entry && is(entry[1], v) && (notAssociative || is(entry[0], k));
+	      }) && entries.next().done;
+	    }
+	
+	    var flipped = false;
+	
+	    if (a.size === undefined) {
+	      if (b.size === undefined) {
+	        if (typeof a.cacheResult === 'function') {
+	          a.cacheResult();
+	        }
+	      } else {
+	        flipped = true;
+	        var _ = a;
+	        a = b;
+	        b = _;
+	      }
+	    }
+	
+	    var allEqual = true;
+	    var bSize = b.__iterate(function(v, k)  {
+	      if (notAssociative ? !a.has(v) :
+	          flipped ? !is(v, a.get(k, NOT_SET)) : !is(a.get(k, NOT_SET), v)) {
+	        allEqual = false;
+	        return false;
+	      }
+	    });
+	
+	    return allEqual && a.size === bSize;
 	  }
 	
-	  function fromJSWith(converter, json, key, parentJSON) {
-	    if (Array.isArray(json)) {
-	      return converter.call(parentJSON, key, IndexedSeq(json).map(function(v, k)  {return fromJSWith(converter, v, k, json)}));
+	  createClass(Repeat, IndexedSeq);
+	
+	    function Repeat(value, times) {
+	      if (!(this instanceof Repeat)) {
+	        return new Repeat(value, times);
+	      }
+	      this._value = value;
+	      this.size = times === undefined ? Infinity : Math.max(0, times);
+	      if (this.size === 0) {
+	        if (EMPTY_REPEAT) {
+	          return EMPTY_REPEAT;
+	        }
+	        EMPTY_REPEAT = this;
+	      }
 	    }
-	    if (isPlainObj(json)) {
-	      return converter.call(parentJSON, key, KeyedSeq(json).map(function(v, k)  {return fromJSWith(converter, v, k, json)}));
-	    }
-	    return json;
+	
+	    Repeat.prototype.toString = function() {
+	      if (this.size === 0) {
+	        return 'Repeat []';
+	      }
+	      return 'Repeat [ ' + this._value + ' ' + this.size + ' times ]';
+	    };
+	
+	    Repeat.prototype.get = function(index, notSetValue) {
+	      return this.has(index) ? this._value : notSetValue;
+	    };
+	
+	    Repeat.prototype.includes = function(searchValue) {
+	      return is(this._value, searchValue);
+	    };
+	
+	    Repeat.prototype.slice = function(begin, end) {
+	      var size = this.size;
+	      return wholeSlice(begin, end, size) ? this :
+	        new Repeat(this._value, resolveEnd(end, size) - resolveBegin(begin, size));
+	    };
+	
+	    Repeat.prototype.reverse = function() {
+	      return this;
+	    };
+	
+	    Repeat.prototype.indexOf = function(searchValue) {
+	      if (is(this._value, searchValue)) {
+	        return 0;
+	      }
+	      return -1;
+	    };
+	
+	    Repeat.prototype.lastIndexOf = function(searchValue) {
+	      if (is(this._value, searchValue)) {
+	        return this.size;
+	      }
+	      return -1;
+	    };
+	
+	    Repeat.prototype.__iterate = function(fn, reverse) {
+	      for (var ii = 0; ii < this.size; ii++) {
+	        if (fn(this._value, ii, this) === false) {
+	          return ii + 1;
+	        }
+	      }
+	      return ii;
+	    };
+	
+	    Repeat.prototype.__iterator = function(type, reverse) {var this$0 = this;
+	      var ii = 0;
+	      return new Iterator(function() 
+	        {return ii < this$0.size ? iteratorValue(type, ii++, this$0._value) : iteratorDone()}
+	      );
+	    };
+	
+	    Repeat.prototype.equals = function(other) {
+	      return other instanceof Repeat ?
+	        is(this._value, other._value) :
+	        deepEqual(other);
+	    };
+	
+	
+	  var EMPTY_REPEAT;
+	
+	  function invariant(condition, error) {
+	    if (!condition) throw new Error(error);
 	  }
 	
-	  function fromJSDefault(json) {
-	    if (Array.isArray(json)) {
-	      return IndexedSeq(json).map(fromJSDefault).toList();
-	    }
-	    if (isPlainObj(json)) {
-	      return KeyedSeq(json).map(fromJSDefault).toMap();
-	    }
-	    return json;
-	  }
+	  createClass(Range, IndexedSeq);
 	
-	  function isPlainObj(value) {
-	    return value && (value.constructor === Object || value.constructor === undefined);
-	  }
+	    function Range(start, end, step) {
+	      if (!(this instanceof Range)) {
+	        return new Range(start, end, step);
+	      }
+	      invariant(step !== 0, 'Cannot step a Range by 0');
+	      start = start || 0;
+	      if (end === undefined) {
+	        end = Infinity;
+	      }
+	      step = step === undefined ? 1 : Math.abs(step);
+	      if (end < start) {
+	        step = -step;
+	      }
+	      this._start = start;
+	      this._end = end;
+	      this._step = step;
+	      this.size = Math.max(0, Math.ceil((end - start) / step - 1) + 1);
+	      if (this.size === 0) {
+	        if (EMPTY_RANGE) {
+	          return EMPTY_RANGE;
+	        }
+	        EMPTY_RANGE = this;
+	      }
+	    }
 	
-	  var src_Math__imul =
+	    Range.prototype.toString = function() {
+	      if (this.size === 0) {
+	        return 'Range []';
+	      }
+	      return 'Range [ ' +
+	        this._start + '...' + this._end +
+	        (this._step > 1 ? ' by ' + this._step : '') +
+	      ' ]';
+	    };
+	
+	    Range.prototype.get = function(index, notSetValue) {
+	      return this.has(index) ?
+	        this._start + wrapIndex(this, index) * this._step :
+	        notSetValue;
+	    };
+	
+	    Range.prototype.includes = function(searchValue) {
+	      var possibleIndex = (searchValue - this._start) / this._step;
+	      return possibleIndex >= 0 &&
+	        possibleIndex < this.size &&
+	        possibleIndex === Math.floor(possibleIndex);
+	    };
+	
+	    Range.prototype.slice = function(begin, end) {
+	      if (wholeSlice(begin, end, this.size)) {
+	        return this;
+	      }
+	      begin = resolveBegin(begin, this.size);
+	      end = resolveEnd(end, this.size);
+	      if (end <= begin) {
+	        return new Range(0, 0);
+	      }
+	      return new Range(this.get(begin, this._end), this.get(end, this._end), this._step);
+	    };
+	
+	    Range.prototype.indexOf = function(searchValue) {
+	      var offsetValue = searchValue - this._start;
+	      if (offsetValue % this._step === 0) {
+	        var index = offsetValue / this._step;
+	        if (index >= 0 && index < this.size) {
+	          return index
+	        }
+	      }
+	      return -1;
+	    };
+	
+	    Range.prototype.lastIndexOf = function(searchValue) {
+	      return this.indexOf(searchValue);
+	    };
+	
+	    Range.prototype.__iterate = function(fn, reverse) {
+	      var maxIndex = this.size - 1;
+	      var step = this._step;
+	      var value = reverse ? this._start + maxIndex * step : this._start;
+	      for (var ii = 0; ii <= maxIndex; ii++) {
+	        if (fn(value, ii, this) === false) {
+	          return ii + 1;
+	        }
+	        value += reverse ? -step : step;
+	      }
+	      return ii;
+	    };
+	
+	    Range.prototype.__iterator = function(type, reverse) {
+	      var maxIndex = this.size - 1;
+	      var step = this._step;
+	      var value = reverse ? this._start + maxIndex * step : this._start;
+	      var ii = 0;
+	      return new Iterator(function()  {
+	        var v = value;
+	        value += reverse ? -step : step;
+	        return ii > maxIndex ? iteratorDone() : iteratorValue(type, ii++, v);
+	      });
+	    };
+	
+	    Range.prototype.equals = function(other) {
+	      return other instanceof Range ?
+	        this._start === other._start &&
+	        this._end === other._end &&
+	        this._step === other._step :
+	        deepEqual(this, other);
+	    };
+	
+	
+	  var EMPTY_RANGE;
+	
+	  createClass(Collection, Iterable);
+	    function Collection() {
+	      throw TypeError('Abstract');
+	    }
+	
+	
+	  createClass(KeyedCollection, Collection);function KeyedCollection() {}
+	
+	  createClass(IndexedCollection, Collection);function IndexedCollection() {}
+	
+	  createClass(SetCollection, Collection);function SetCollection() {}
+	
+	
+	  Collection.Keyed = KeyedCollection;
+	  Collection.Indexed = IndexedCollection;
+	  Collection.Set = SetCollection;
+	
+	  var imul =
 	    typeof Math.imul === 'function' && Math.imul(0xffffffff, 2) === -2 ?
 	    Math.imul :
 	    function imul(a, b) {
@@ -41336,7 +41326,13 @@
 	    if (typeof o.hashCode === 'function') {
 	      return o.hashCode();
 	    }
-	    return hashJSObj(o);
+	    if (type === 'object') {
+	      return hashJSObj(o);
+	    }
+	    if (typeof o.toString === 'function') {
+	      return hashString(o.toString());
+	    }
+	    throw new Error('Value type ' + type + ' cannot be hashed.');
 	  }
 	
 	  function cachedHashString(string) {
@@ -41478,10 +41474,6 @@
 	  var STRING_HASH_CACHE_SIZE = 0;
 	  var stringHashCache = {};
 	
-	  function invariant(condition, error) {
-	    if (!condition) throw new Error(error);
-	  }
-	
 	  function assertNotInfinite(size) {
 	    invariant(
 	      size !== Infinity,
@@ -41489,841 +41481,11 @@
 	    );
 	  }
 	
-	  createClass(ToKeyedSequence, KeyedSeq);
-	    function ToKeyedSequence(indexed, useKeys) {
-	      this._iter = indexed;
-	      this._useKeys = useKeys;
-	      this.size = indexed.size;
-	    }
-	
-	    ToKeyedSequence.prototype.get = function(key, notSetValue) {
-	      return this._iter.get(key, notSetValue);
-	    };
-	
-	    ToKeyedSequence.prototype.has = function(key) {
-	      return this._iter.has(key);
-	    };
-	
-	    ToKeyedSequence.prototype.valueSeq = function() {
-	      return this._iter.valueSeq();
-	    };
-	
-	    ToKeyedSequence.prototype.reverse = function() {var this$0 = this;
-	      var reversedSequence = reverseFactory(this, true);
-	      if (!this._useKeys) {
-	        reversedSequence.valueSeq = function()  {return this$0._iter.toSeq().reverse()};
-	      }
-	      return reversedSequence;
-	    };
-	
-	    ToKeyedSequence.prototype.map = function(mapper, context) {var this$0 = this;
-	      var mappedSequence = mapFactory(this, mapper, context);
-	      if (!this._useKeys) {
-	        mappedSequence.valueSeq = function()  {return this$0._iter.toSeq().map(mapper, context)};
-	      }
-	      return mappedSequence;
-	    };
-	
-	    ToKeyedSequence.prototype.__iterate = function(fn, reverse) {var this$0 = this;
-	      var ii;
-	      return this._iter.__iterate(
-	        this._useKeys ?
-	          function(v, k)  {return fn(v, k, this$0)} :
-	          ((ii = reverse ? resolveSize(this) : 0),
-	            function(v ) {return fn(v, reverse ? --ii : ii++, this$0)}),
-	        reverse
-	      );
-	    };
-	
-	    ToKeyedSequence.prototype.__iterator = function(type, reverse) {
-	      if (this._useKeys) {
-	        return this._iter.__iterator(type, reverse);
-	      }
-	      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
-	      var ii = reverse ? resolveSize(this) : 0;
-	      return new src_Iterator__Iterator(function()  {
-	        var step = iterator.next();
-	        return step.done ? step :
-	          iteratorValue(type, reverse ? --ii : ii++, step.value, step);
-	      });
-	    };
-	
-	  ToKeyedSequence.prototype[IS_ORDERED_SENTINEL] = true;
-	
-	
-	  createClass(ToIndexedSequence, IndexedSeq);
-	    function ToIndexedSequence(iter) {
-	      this._iter = iter;
-	      this.size = iter.size;
-	    }
-	
-	    ToIndexedSequence.prototype.includes = function(value) {
-	      return this._iter.includes(value);
-	    };
-	
-	    ToIndexedSequence.prototype.__iterate = function(fn, reverse) {var this$0 = this;
-	      var iterations = 0;
-	      return this._iter.__iterate(function(v ) {return fn(v, iterations++, this$0)}, reverse);
-	    };
-	
-	    ToIndexedSequence.prototype.__iterator = function(type, reverse) {
-	      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
-	      var iterations = 0;
-	      return new src_Iterator__Iterator(function()  {
-	        var step = iterator.next();
-	        return step.done ? step :
-	          iteratorValue(type, iterations++, step.value, step)
-	      });
-	    };
-	
-	
-	
-	  createClass(ToSetSequence, SetSeq);
-	    function ToSetSequence(iter) {
-	      this._iter = iter;
-	      this.size = iter.size;
-	    }
-	
-	    ToSetSequence.prototype.has = function(key) {
-	      return this._iter.includes(key);
-	    };
-	
-	    ToSetSequence.prototype.__iterate = function(fn, reverse) {var this$0 = this;
-	      return this._iter.__iterate(function(v ) {return fn(v, v, this$0)}, reverse);
-	    };
-	
-	    ToSetSequence.prototype.__iterator = function(type, reverse) {
-	      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
-	      return new src_Iterator__Iterator(function()  {
-	        var step = iterator.next();
-	        return step.done ? step :
-	          iteratorValue(type, step.value, step.value, step);
-	      });
-	    };
-	
-	
-	
-	  createClass(FromEntriesSequence, KeyedSeq);
-	    function FromEntriesSequence(entries) {
-	      this._iter = entries;
-	      this.size = entries.size;
-	    }
-	
-	    FromEntriesSequence.prototype.entrySeq = function() {
-	      return this._iter.toSeq();
-	    };
-	
-	    FromEntriesSequence.prototype.__iterate = function(fn, reverse) {var this$0 = this;
-	      return this._iter.__iterate(function(entry ) {
-	        // Check if entry exists first so array access doesn't throw for holes
-	        // in the parent iteration.
-	        if (entry) {
-	          validateEntry(entry);
-	          var indexedIterable = isIterable(entry);
-	          return fn(
-	            indexedIterable ? entry.get(1) : entry[1],
-	            indexedIterable ? entry.get(0) : entry[0],
-	            this$0
-	          );
-	        }
-	      }, reverse);
-	    };
-	
-	    FromEntriesSequence.prototype.__iterator = function(type, reverse) {
-	      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
-	      return new src_Iterator__Iterator(function()  {
-	        while (true) {
-	          var step = iterator.next();
-	          if (step.done) {
-	            return step;
-	          }
-	          var entry = step.value;
-	          // Check if entry exists first so array access doesn't throw for holes
-	          // in the parent iteration.
-	          if (entry) {
-	            validateEntry(entry);
-	            var indexedIterable = isIterable(entry);
-	            return iteratorValue(
-	              type,
-	              indexedIterable ? entry.get(0) : entry[0],
-	              indexedIterable ? entry.get(1) : entry[1],
-	              step
-	            );
-	          }
-	        }
-	      });
-	    };
-	
-	
-	  ToIndexedSequence.prototype.cacheResult =
-	  ToKeyedSequence.prototype.cacheResult =
-	  ToSetSequence.prototype.cacheResult =
-	  FromEntriesSequence.prototype.cacheResult =
-	    cacheResultThrough;
-	
-	
-	  function flipFactory(iterable) {
-	    var flipSequence = makeSequence(iterable);
-	    flipSequence._iter = iterable;
-	    flipSequence.size = iterable.size;
-	    flipSequence.flip = function()  {return iterable};
-	    flipSequence.reverse = function () {
-	      var reversedSequence = iterable.reverse.apply(this); // super.reverse()
-	      reversedSequence.flip = function()  {return iterable.reverse()};
-	      return reversedSequence;
-	    };
-	    flipSequence.has = function(key ) {return iterable.includes(key)};
-	    flipSequence.includes = function(key ) {return iterable.has(key)};
-	    flipSequence.cacheResult = cacheResultThrough;
-	    flipSequence.__iterateUncached = function (fn, reverse) {var this$0 = this;
-	      return iterable.__iterate(function(v, k)  {return fn(k, v, this$0) !== false}, reverse);
-	    }
-	    flipSequence.__iteratorUncached = function(type, reverse) {
-	      if (type === ITERATE_ENTRIES) {
-	        var iterator = iterable.__iterator(type, reverse);
-	        return new src_Iterator__Iterator(function()  {
-	          var step = iterator.next();
-	          if (!step.done) {
-	            var k = step.value[0];
-	            step.value[0] = step.value[1];
-	            step.value[1] = k;
-	          }
-	          return step;
-	        });
-	      }
-	      return iterable.__iterator(
-	        type === ITERATE_VALUES ? ITERATE_KEYS : ITERATE_VALUES,
-	        reverse
-	      );
-	    }
-	    return flipSequence;
-	  }
-	
-	
-	  function mapFactory(iterable, mapper, context) {
-	    var mappedSequence = makeSequence(iterable);
-	    mappedSequence.size = iterable.size;
-	    mappedSequence.has = function(key ) {return iterable.has(key)};
-	    mappedSequence.get = function(key, notSetValue)  {
-	      var v = iterable.get(key, NOT_SET);
-	      return v === NOT_SET ?
-	        notSetValue :
-	        mapper.call(context, v, key, iterable);
-	    };
-	    mappedSequence.__iterateUncached = function (fn, reverse) {var this$0 = this;
-	      return iterable.__iterate(
-	        function(v, k, c)  {return fn(mapper.call(context, v, k, c), k, this$0) !== false},
-	        reverse
-	      );
-	    }
-	    mappedSequence.__iteratorUncached = function (type, reverse) {
-	      var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
-	      return new src_Iterator__Iterator(function()  {
-	        var step = iterator.next();
-	        if (step.done) {
-	          return step;
-	        }
-	        var entry = step.value;
-	        var key = entry[0];
-	        return iteratorValue(
-	          type,
-	          key,
-	          mapper.call(context, entry[1], key, iterable),
-	          step
-	        );
-	      });
-	    }
-	    return mappedSequence;
-	  }
-	
-	
-	  function reverseFactory(iterable, useKeys) {
-	    var reversedSequence = makeSequence(iterable);
-	    reversedSequence._iter = iterable;
-	    reversedSequence.size = iterable.size;
-	    reversedSequence.reverse = function()  {return iterable};
-	    if (iterable.flip) {
-	      reversedSequence.flip = function () {
-	        var flipSequence = flipFactory(iterable);
-	        flipSequence.reverse = function()  {return iterable.flip()};
-	        return flipSequence;
-	      };
-	    }
-	    reversedSequence.get = function(key, notSetValue) 
-	      {return iterable.get(useKeys ? key : -1 - key, notSetValue)};
-	    reversedSequence.has = function(key )
-	      {return iterable.has(useKeys ? key : -1 - key)};
-	    reversedSequence.includes = function(value ) {return iterable.includes(value)};
-	    reversedSequence.cacheResult = cacheResultThrough;
-	    reversedSequence.__iterate = function (fn, reverse) {var this$0 = this;
-	      return iterable.__iterate(function(v, k)  {return fn(v, k, this$0)}, !reverse);
-	    };
-	    reversedSequence.__iterator =
-	      function(type, reverse)  {return iterable.__iterator(type, !reverse)};
-	    return reversedSequence;
-	  }
-	
-	
-	  function filterFactory(iterable, predicate, context, useKeys) {
-	    var filterSequence = makeSequence(iterable);
-	    if (useKeys) {
-	      filterSequence.has = function(key ) {
-	        var v = iterable.get(key, NOT_SET);
-	        return v !== NOT_SET && !!predicate.call(context, v, key, iterable);
-	      };
-	      filterSequence.get = function(key, notSetValue)  {
-	        var v = iterable.get(key, NOT_SET);
-	        return v !== NOT_SET && predicate.call(context, v, key, iterable) ?
-	          v : notSetValue;
-	      };
-	    }
-	    filterSequence.__iterateUncached = function (fn, reverse) {var this$0 = this;
-	      var iterations = 0;
-	      iterable.__iterate(function(v, k, c)  {
-	        if (predicate.call(context, v, k, c)) {
-	          iterations++;
-	          return fn(v, useKeys ? k : iterations - 1, this$0);
-	        }
-	      }, reverse);
-	      return iterations;
-	    };
-	    filterSequence.__iteratorUncached = function (type, reverse) {
-	      var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
-	      var iterations = 0;
-	      return new src_Iterator__Iterator(function()  {
-	        while (true) {
-	          var step = iterator.next();
-	          if (step.done) {
-	            return step;
-	          }
-	          var entry = step.value;
-	          var key = entry[0];
-	          var value = entry[1];
-	          if (predicate.call(context, value, key, iterable)) {
-	            return iteratorValue(type, useKeys ? key : iterations++, value, step);
-	          }
-	        }
-	      });
-	    }
-	    return filterSequence;
-	  }
-	
-	
-	  function countByFactory(iterable, grouper, context) {
-	    var groups = src_Map__Map().asMutable();
-	    iterable.__iterate(function(v, k)  {
-	      groups.update(
-	        grouper.call(context, v, k, iterable),
-	        0,
-	        function(a ) {return a + 1}
-	      );
-	    });
-	    return groups.asImmutable();
-	  }
-	
-	
-	  function groupByFactory(iterable, grouper, context) {
-	    var isKeyedIter = isKeyed(iterable);
-	    var groups = (isOrdered(iterable) ? OrderedMap() : src_Map__Map()).asMutable();
-	    iterable.__iterate(function(v, k)  {
-	      groups.update(
-	        grouper.call(context, v, k, iterable),
-	        function(a ) {return (a = a || [], a.push(isKeyedIter ? [k, v] : v), a)}
-	      );
-	    });
-	    var coerce = iterableClass(iterable);
-	    return groups.map(function(arr ) {return reify(iterable, coerce(arr))});
-	  }
-	
-	
-	  function sliceFactory(iterable, begin, end, useKeys) {
-	    var originalSize = iterable.size;
-	
-	    // Sanitize begin & end using this shorthand for ToInt32(argument)
-	    // http://www.ecma-international.org/ecma-262/6.0/#sec-toint32
-	    if (begin !== undefined) {
-	      begin = begin | 0;
-	    }
-	    if (end !== undefined) {
-	      end = end | 0;
-	    }
-	
-	    if (wholeSlice(begin, end, originalSize)) {
-	      return iterable;
-	    }
-	
-	    var resolvedBegin = resolveBegin(begin, originalSize);
-	    var resolvedEnd = resolveEnd(end, originalSize);
-	
-	    // begin or end will be NaN if they were provided as negative numbers and
-	    // this iterable's size is unknown. In that case, cache first so there is
-	    // a known size and these do not resolve to NaN.
-	    if (resolvedBegin !== resolvedBegin || resolvedEnd !== resolvedEnd) {
-	      return sliceFactory(iterable.toSeq().cacheResult(), begin, end, useKeys);
-	    }
-	
-	    // Note: resolvedEnd is undefined when the original sequence's length is
-	    // unknown and this slice did not supply an end and should contain all
-	    // elements after resolvedBegin.
-	    // In that case, resolvedSize will be NaN and sliceSize will remain undefined.
-	    var resolvedSize = resolvedEnd - resolvedBegin;
-	    var sliceSize;
-	    if (resolvedSize === resolvedSize) {
-	      sliceSize = resolvedSize < 0 ? 0 : resolvedSize;
-	    }
-	
-	    var sliceSeq = makeSequence(iterable);
-	
-	    // If iterable.size is undefined, the size of the realized sliceSeq is
-	    // unknown at this point unless the number of items to slice is 0
-	    sliceSeq.size = sliceSize === 0 ? sliceSize : iterable.size && sliceSize || undefined;
-	
-	    if (!useKeys && isSeq(iterable) && sliceSize >= 0) {
-	      sliceSeq.get = function (index, notSetValue) {
-	        index = wrapIndex(this, index);
-	        return index >= 0 && index < sliceSize ?
-	          iterable.get(index + resolvedBegin, notSetValue) :
-	          notSetValue;
-	      }
-	    }
-	
-	    sliceSeq.__iterateUncached = function(fn, reverse) {var this$0 = this;
-	      if (sliceSize === 0) {
-	        return 0;
-	      }
-	      if (reverse) {
-	        return this.cacheResult().__iterate(fn, reverse);
-	      }
-	      var skipped = 0;
-	      var isSkipping = true;
-	      var iterations = 0;
-	      iterable.__iterate(function(v, k)  {
-	        if (!(isSkipping && (isSkipping = skipped++ < resolvedBegin))) {
-	          iterations++;
-	          return fn(v, useKeys ? k : iterations - 1, this$0) !== false &&
-	                 iterations !== sliceSize;
-	        }
-	      });
-	      return iterations;
-	    };
-	
-	    sliceSeq.__iteratorUncached = function(type, reverse) {
-	      if (sliceSize !== 0 && reverse) {
-	        return this.cacheResult().__iterator(type, reverse);
-	      }
-	      // Don't bother instantiating parent iterator if taking 0.
-	      var iterator = sliceSize !== 0 && iterable.__iterator(type, reverse);
-	      var skipped = 0;
-	      var iterations = 0;
-	      return new src_Iterator__Iterator(function()  {
-	        while (skipped++ < resolvedBegin) {
-	          iterator.next();
-	        }
-	        if (++iterations > sliceSize) {
-	          return iteratorDone();
-	        }
-	        var step = iterator.next();
-	        if (useKeys || type === ITERATE_VALUES) {
-	          return step;
-	        } else if (type === ITERATE_KEYS) {
-	          return iteratorValue(type, iterations - 1, undefined, step);
-	        } else {
-	          return iteratorValue(type, iterations - 1, step.value[1], step);
-	        }
-	      });
-	    }
-	
-	    return sliceSeq;
-	  }
-	
-	
-	  function takeWhileFactory(iterable, predicate, context) {
-	    var takeSequence = makeSequence(iterable);
-	    takeSequence.__iterateUncached = function(fn, reverse) {var this$0 = this;
-	      if (reverse) {
-	        return this.cacheResult().__iterate(fn, reverse);
-	      }
-	      var iterations = 0;
-	      iterable.__iterate(function(v, k, c) 
-	        {return predicate.call(context, v, k, c) && ++iterations && fn(v, k, this$0)}
-	      );
-	      return iterations;
-	    };
-	    takeSequence.__iteratorUncached = function(type, reverse) {var this$0 = this;
-	      if (reverse) {
-	        return this.cacheResult().__iterator(type, reverse);
-	      }
-	      var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
-	      var iterating = true;
-	      return new src_Iterator__Iterator(function()  {
-	        if (!iterating) {
-	          return iteratorDone();
-	        }
-	        var step = iterator.next();
-	        if (step.done) {
-	          return step;
-	        }
-	        var entry = step.value;
-	        var k = entry[0];
-	        var v = entry[1];
-	        if (!predicate.call(context, v, k, this$0)) {
-	          iterating = false;
-	          return iteratorDone();
-	        }
-	        return type === ITERATE_ENTRIES ? step :
-	          iteratorValue(type, k, v, step);
-	      });
-	    };
-	    return takeSequence;
-	  }
-	
-	
-	  function skipWhileFactory(iterable, predicate, context, useKeys) {
-	    var skipSequence = makeSequence(iterable);
-	    skipSequence.__iterateUncached = function (fn, reverse) {var this$0 = this;
-	      if (reverse) {
-	        return this.cacheResult().__iterate(fn, reverse);
-	      }
-	      var isSkipping = true;
-	      var iterations = 0;
-	      iterable.__iterate(function(v, k, c)  {
-	        if (!(isSkipping && (isSkipping = predicate.call(context, v, k, c)))) {
-	          iterations++;
-	          return fn(v, useKeys ? k : iterations - 1, this$0);
-	        }
-	      });
-	      return iterations;
-	    };
-	    skipSequence.__iteratorUncached = function(type, reverse) {var this$0 = this;
-	      if (reverse) {
-	        return this.cacheResult().__iterator(type, reverse);
-	      }
-	      var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
-	      var skipping = true;
-	      var iterations = 0;
-	      return new src_Iterator__Iterator(function()  {
-	        var step, k, v;
-	        do {
-	          step = iterator.next();
-	          if (step.done) {
-	            if (useKeys || type === ITERATE_VALUES) {
-	              return step;
-	            } else if (type === ITERATE_KEYS) {
-	              return iteratorValue(type, iterations++, undefined, step);
-	            } else {
-	              return iteratorValue(type, iterations++, step.value[1], step);
-	            }
-	          }
-	          var entry = step.value;
-	          k = entry[0];
-	          v = entry[1];
-	          skipping && (skipping = predicate.call(context, v, k, this$0));
-	        } while (skipping);
-	        return type === ITERATE_ENTRIES ? step :
-	          iteratorValue(type, k, v, step);
-	      });
-	    };
-	    return skipSequence;
-	  }
-	
-	
-	  function concatFactory(iterable, values) {
-	    var isKeyedIterable = isKeyed(iterable);
-	    var iters = [iterable].concat(values).map(function(v ) {
-	      if (!isIterable(v)) {
-	        v = isKeyedIterable ?
-	          keyedSeqFromValue(v) :
-	          indexedSeqFromValue(Array.isArray(v) ? v : [v]);
-	      } else if (isKeyedIterable) {
-	        v = KeyedIterable(v);
-	      }
-	      return v;
-	    }).filter(function(v ) {return v.size !== 0});
-	
-	    if (iters.length === 0) {
-	      return iterable;
-	    }
-	
-	    if (iters.length === 1) {
-	      var singleton = iters[0];
-	      if (singleton === iterable ||
-	          isKeyedIterable && isKeyed(singleton) ||
-	          isIndexed(iterable) && isIndexed(singleton)) {
-	        return singleton;
-	      }
-	    }
-	
-	    var concatSeq = new ArraySeq(iters);
-	    if (isKeyedIterable) {
-	      concatSeq = concatSeq.toKeyedSeq();
-	    } else if (!isIndexed(iterable)) {
-	      concatSeq = concatSeq.toSetSeq();
-	    }
-	    concatSeq = concatSeq.flatten(true);
-	    concatSeq.size = iters.reduce(
-	      function(sum, seq)  {
-	        if (sum !== undefined) {
-	          var size = seq.size;
-	          if (size !== undefined) {
-	            return sum + size;
-	          }
-	        }
-	      },
-	      0
-	    );
-	    return concatSeq;
-	  }
-	
-	
-	  function flattenFactory(iterable, depth, useKeys) {
-	    var flatSequence = makeSequence(iterable);
-	    flatSequence.__iterateUncached = function(fn, reverse) {
-	      var iterations = 0;
-	      var stopped = false;
-	      function flatDeep(iter, currentDepth) {var this$0 = this;
-	        iter.__iterate(function(v, k)  {
-	          if ((!depth || currentDepth < depth) && isIterable(v)) {
-	            flatDeep(v, currentDepth + 1);
-	          } else if (fn(v, useKeys ? k : iterations++, this$0) === false) {
-	            stopped = true;
-	          }
-	          return !stopped;
-	        }, reverse);
-	      }
-	      flatDeep(iterable, 0);
-	      return iterations;
-	    }
-	    flatSequence.__iteratorUncached = function(type, reverse) {
-	      var iterator = iterable.__iterator(type, reverse);
-	      var stack = [];
-	      var iterations = 0;
-	      return new src_Iterator__Iterator(function()  {
-	        while (iterator) {
-	          var step = iterator.next();
-	          if (step.done !== false) {
-	            iterator = stack.pop();
-	            continue;
-	          }
-	          var v = step.value;
-	          if (type === ITERATE_ENTRIES) {
-	            v = v[1];
-	          }
-	          if ((!depth || stack.length < depth) && isIterable(v)) {
-	            stack.push(iterator);
-	            iterator = v.__iterator(type, reverse);
-	          } else {
-	            return useKeys ? step : iteratorValue(type, iterations++, v, step);
-	          }
-	        }
-	        return iteratorDone();
-	      });
-	    }
-	    return flatSequence;
-	  }
-	
-	
-	  function flatMapFactory(iterable, mapper, context) {
-	    var coerce = iterableClass(iterable);
-	    return iterable.toSeq().map(
-	      function(v, k)  {return coerce(mapper.call(context, v, k, iterable))}
-	    ).flatten(true);
-	  }
-	
-	
-	  function interposeFactory(iterable, separator) {
-	    var interposedSequence = makeSequence(iterable);
-	    interposedSequence.size = iterable.size && iterable.size * 2 -1;
-	    interposedSequence.__iterateUncached = function(fn, reverse) {var this$0 = this;
-	      var iterations = 0;
-	      iterable.__iterate(function(v, k) 
-	        {return (!iterations || fn(separator, iterations++, this$0) !== false) &&
-	        fn(v, iterations++, this$0) !== false},
-	        reverse
-	      );
-	      return iterations;
-	    };
-	    interposedSequence.__iteratorUncached = function(type, reverse) {
-	      var iterator = iterable.__iterator(ITERATE_VALUES, reverse);
-	      var iterations = 0;
-	      var step;
-	      return new src_Iterator__Iterator(function()  {
-	        if (!step || iterations % 2) {
-	          step = iterator.next();
-	          if (step.done) {
-	            return step;
-	          }
-	        }
-	        return iterations % 2 ?
-	          iteratorValue(type, iterations++, separator) :
-	          iteratorValue(type, iterations++, step.value, step);
-	      });
-	    };
-	    return interposedSequence;
-	  }
-	
-	
-	  function sortFactory(iterable, comparator, mapper) {
-	    if (!comparator) {
-	      comparator = defaultComparator;
-	    }
-	    var isKeyedIterable = isKeyed(iterable);
-	    var index = 0;
-	    var entries = iterable.toSeq().map(
-	      function(v, k)  {return [k, v, index++, mapper ? mapper(v, k, iterable) : v]}
-	    ).toArray();
-	    entries.sort(function(a, b)  {return comparator(a[3], b[3]) || a[2] - b[2]}).forEach(
-	      isKeyedIterable ?
-	      function(v, i)  { entries[i].length = 2; } :
-	      function(v, i)  { entries[i] = v[1]; }
-	    );
-	    return isKeyedIterable ? KeyedSeq(entries) :
-	      isIndexed(iterable) ? IndexedSeq(entries) :
-	      SetSeq(entries);
-	  }
-	
-	
-	  function maxFactory(iterable, comparator, mapper) {
-	    if (!comparator) {
-	      comparator = defaultComparator;
-	    }
-	    if (mapper) {
-	      var entry = iterable.toSeq()
-	        .map(function(v, k)  {return [v, mapper(v, k, iterable)]})
-	        .reduce(function(a, b)  {return maxCompare(comparator, a[1], b[1]) ? b : a});
-	      return entry && entry[0];
-	    } else {
-	      return iterable.reduce(function(a, b)  {return maxCompare(comparator, a, b) ? b : a});
-	    }
-	  }
-	
-	  function maxCompare(comparator, a, b) {
-	    var comp = comparator(b, a);
-	    // b is considered the new max if the comparator declares them equal, but
-	    // they are not equal and b is in fact a nullish value.
-	    return (comp === 0 && b !== a && (b === undefined || b === null || b !== b)) || comp > 0;
-	  }
-	
-	
-	  function zipWithFactory(keyIter, zipper, iters) {
-	    var zipSequence = makeSequence(keyIter);
-	    zipSequence.size = new ArraySeq(iters).map(function(i ) {return i.size}).min();
-	    // Note: this a generic base implementation of __iterate in terms of
-	    // __iterator which may be more generically useful in the future.
-	    zipSequence.__iterate = function(fn, reverse) {
-	      /* generic:
-	      var iterator = this.__iterator(ITERATE_ENTRIES, reverse);
-	      var step;
-	      var iterations = 0;
-	      while (!(step = iterator.next()).done) {
-	        iterations++;
-	        if (fn(step.value[1], step.value[0], this) === false) {
-	          break;
-	        }
-	      }
-	      return iterations;
-	      */
-	      // indexed:
-	      var iterator = this.__iterator(ITERATE_VALUES, reverse);
-	      var step;
-	      var iterations = 0;
-	      while (!(step = iterator.next()).done) {
-	        if (fn(step.value, iterations++, this) === false) {
-	          break;
-	        }
-	      }
-	      return iterations;
-	    };
-	    zipSequence.__iteratorUncached = function(type, reverse) {
-	      var iterators = iters.map(function(i )
-	        {return (i = Iterable(i), getIterator(reverse ? i.reverse() : i))}
-	      );
-	      var iterations = 0;
-	      var isDone = false;
-	      return new src_Iterator__Iterator(function()  {
-	        var steps;
-	        if (!isDone) {
-	          steps = iterators.map(function(i ) {return i.next()});
-	          isDone = steps.some(function(s ) {return s.done});
-	        }
-	        if (isDone) {
-	          return iteratorDone();
-	        }
-	        return iteratorValue(
-	          type,
-	          iterations++,
-	          zipper.apply(null, steps.map(function(s ) {return s.value}))
-	        );
-	      });
-	    };
-	    return zipSequence
-	  }
-	
-	
-	  // #pragma Helper Functions
-	
-	  function reify(iter, seq) {
-	    return isSeq(iter) ? seq : iter.constructor(seq);
-	  }
-	
-	  function validateEntry(entry) {
-	    if (entry !== Object(entry)) {
-	      throw new TypeError('Expected [K, V] tuple: ' + entry);
-	    }
-	  }
-	
-	  function resolveSize(iter) {
-	    assertNotInfinite(iter.size);
-	    return ensureSize(iter);
-	  }
-	
-	  function iterableClass(iterable) {
-	    return isKeyed(iterable) ? KeyedIterable :
-	      isIndexed(iterable) ? IndexedIterable :
-	      SetIterable;
-	  }
-	
-	  function makeSequence(iterable) {
-	    return Object.create(
-	      (
-	        isKeyed(iterable) ? KeyedSeq :
-	        isIndexed(iterable) ? IndexedSeq :
-	        SetSeq
-	      ).prototype
-	    );
-	  }
-	
-	  function cacheResultThrough() {
-	    if (this._iter.cacheResult) {
-	      this._iter.cacheResult();
-	      this.size = this._iter.size;
-	      return this;
-	    } else {
-	      return Seq.prototype.cacheResult.call(this);
-	    }
-	  }
-	
-	  function defaultComparator(a, b) {
-	    return a > b ? 1 : a < b ? -1 : 0;
-	  }
-	
-	  function forceIterator(keyPath) {
-	    var iter = getIterator(keyPath);
-	    if (!iter) {
-	      // Array might not be iterable in this environment, so we need a fallback
-	      // to our wrapped type.
-	      if (!isArrayLike(keyPath)) {
-	        throw new TypeError('Expected iterable or array-like: ' + keyPath);
-	      }
-	      iter = getIterator(Iterable(keyPath));
-	    }
-	    return iter;
-	  }
-	
-	  createClass(src_Map__Map, KeyedCollection);
+	  createClass(Map, KeyedCollection);
 	
 	    // @pragma Construction
 	
-	    function src_Map__Map(value) {
+	    function Map(value) {
 	      return value === null || value === undefined ? emptyMap() :
 	        isMap(value) && !isOrdered(value) ? value :
 	        emptyMap().withMutations(function(map ) {
@@ -42333,13 +41495,13 @@
 	        });
 	    }
 	
-	    src_Map__Map.prototype.toString = function() {
+	    Map.prototype.toString = function() {
 	      return this.__toString('Map {', '}');
 	    };
 	
 	    // @pragma Access
 	
-	    src_Map__Map.prototype.get = function(k, notSetValue) {
+	    Map.prototype.get = function(k, notSetValue) {
 	      return this._root ?
 	        this._root.get(0, undefined, k, notSetValue) :
 	        notSetValue;
@@ -42347,29 +41509,29 @@
 	
 	    // @pragma Modification
 	
-	    src_Map__Map.prototype.set = function(k, v) {
+	    Map.prototype.set = function(k, v) {
 	      return updateMap(this, k, v);
 	    };
 	
-	    src_Map__Map.prototype.setIn = function(keyPath, v) {
+	    Map.prototype.setIn = function(keyPath, v) {
 	      return this.updateIn(keyPath, NOT_SET, function()  {return v});
 	    };
 	
-	    src_Map__Map.prototype.remove = function(k) {
+	    Map.prototype.remove = function(k) {
 	      return updateMap(this, k, NOT_SET);
 	    };
 	
-	    src_Map__Map.prototype.deleteIn = function(keyPath) {
+	    Map.prototype.deleteIn = function(keyPath) {
 	      return this.updateIn(keyPath, function()  {return NOT_SET});
 	    };
 	
-	    src_Map__Map.prototype.update = function(k, notSetValue, updater) {
+	    Map.prototype.update = function(k, notSetValue, updater) {
 	      return arguments.length === 1 ?
 	        k(this) :
 	        this.updateIn([k], notSetValue, updater);
 	    };
 	
-	    src_Map__Map.prototype.updateIn = function(keyPath, notSetValue, updater) {
+	    Map.prototype.updateIn = function(keyPath, notSetValue, updater) {
 	      if (!updater) {
 	        updater = notSetValue;
 	        notSetValue = undefined;
@@ -42383,7 +41545,7 @@
 	      return updatedValue === NOT_SET ? undefined : updatedValue;
 	    };
 	
-	    src_Map__Map.prototype.clear = function() {
+	    Map.prototype.clear = function() {
 	      if (this.size === 0) {
 	        return this;
 	      }
@@ -42399,15 +41561,15 @@
 	
 	    // @pragma Composition
 	
-	    src_Map__Map.prototype.merge = function(/*...iters*/) {
+	    Map.prototype.merge = function(/*...iters*/) {
 	      return mergeIntoMapWith(this, undefined, arguments);
 	    };
 	
-	    src_Map__Map.prototype.mergeWith = function(merger) {var iters = SLICE$0.call(arguments, 1);
+	    Map.prototype.mergeWith = function(merger) {var iters = SLICE$0.call(arguments, 1);
 	      return mergeIntoMapWith(this, merger, iters);
 	    };
 	
-	    src_Map__Map.prototype.mergeIn = function(keyPath) {var iters = SLICE$0.call(arguments, 1);
+	    Map.prototype.mergeIn = function(keyPath) {var iters = SLICE$0.call(arguments, 1);
 	      return this.updateIn(
 	        keyPath,
 	        emptyMap(),
@@ -42417,15 +41579,15 @@
 	      );
 	    };
 	
-	    src_Map__Map.prototype.mergeDeep = function(/*...iters*/) {
-	      return mergeIntoMapWith(this, deepMerger(undefined), arguments);
+	    Map.prototype.mergeDeep = function(/*...iters*/) {
+	      return mergeIntoMapWith(this, deepMerger, arguments);
 	    };
 	
-	    src_Map__Map.prototype.mergeDeepWith = function(merger) {var iters = SLICE$0.call(arguments, 1);
-	      return mergeIntoMapWith(this, deepMerger(merger), iters);
+	    Map.prototype.mergeDeepWith = function(merger) {var iters = SLICE$0.call(arguments, 1);
+	      return mergeIntoMapWith(this, deepMergerWith(merger), iters);
 	    };
 	
-	    src_Map__Map.prototype.mergeDeepIn = function(keyPath) {var iters = SLICE$0.call(arguments, 1);
+	    Map.prototype.mergeDeepIn = function(keyPath) {var iters = SLICE$0.call(arguments, 1);
 	      return this.updateIn(
 	        keyPath,
 	        emptyMap(),
@@ -42435,41 +41597,41 @@
 	      );
 	    };
 	
-	    src_Map__Map.prototype.sort = function(comparator) {
+	    Map.prototype.sort = function(comparator) {
 	      // Late binding
 	      return OrderedMap(sortFactory(this, comparator));
 	    };
 	
-	    src_Map__Map.prototype.sortBy = function(mapper, comparator) {
+	    Map.prototype.sortBy = function(mapper, comparator) {
 	      // Late binding
 	      return OrderedMap(sortFactory(this, comparator, mapper));
 	    };
 	
 	    // @pragma Mutability
 	
-	    src_Map__Map.prototype.withMutations = function(fn) {
+	    Map.prototype.withMutations = function(fn) {
 	      var mutable = this.asMutable();
 	      fn(mutable);
 	      return mutable.wasAltered() ? mutable.__ensureOwner(this.__ownerID) : this;
 	    };
 	
-	    src_Map__Map.prototype.asMutable = function() {
+	    Map.prototype.asMutable = function() {
 	      return this.__ownerID ? this : this.__ensureOwner(new OwnerID());
 	    };
 	
-	    src_Map__Map.prototype.asImmutable = function() {
+	    Map.prototype.asImmutable = function() {
 	      return this.__ensureOwner();
 	    };
 	
-	    src_Map__Map.prototype.wasAltered = function() {
+	    Map.prototype.wasAltered = function() {
 	      return this.__altered;
 	    };
 	
-	    src_Map__Map.prototype.__iterator = function(type, reverse) {
+	    Map.prototype.__iterator = function(type, reverse) {
 	      return new MapIterator(this, type, reverse);
 	    };
 	
-	    src_Map__Map.prototype.__iterate = function(fn, reverse) {var this$0 = this;
+	    Map.prototype.__iterate = function(fn, reverse) {var this$0 = this;
 	      var iterations = 0;
 	      this._root && this._root.iterate(function(entry ) {
 	        iterations++;
@@ -42478,7 +41640,7 @@
 	      return iterations;
 	    };
 	
-	    src_Map__Map.prototype.__ensureOwner = function(ownerID) {
+	    Map.prototype.__ensureOwner = function(ownerID) {
 	      if (ownerID === this.__ownerID) {
 	        return this;
 	      }
@@ -42495,11 +41657,11 @@
 	    return !!(maybeMap && maybeMap[IS_MAP_SENTINEL]);
 	  }
 	
-	  src_Map__Map.isMap = isMap;
+	  Map.isMap = isMap;
 	
 	  var IS_MAP_SENTINEL = '@@__IMMUTABLE_MAP__@@';
 	
-	  var MapPrototype = src_Map__Map.prototype;
+	  var MapPrototype = Map.prototype;
 	  MapPrototype[IS_MAP_SENTINEL] = true;
 	  MapPrototype[DELETE] = MapPrototype.remove;
 	  MapPrototype.removeIn = MapPrototype.deleteIn;
@@ -42843,7 +42005,7 @@
 	    return fn(this.entry);
 	  }
 	
-	  createClass(MapIterator, src_Iterator__Iterator);
+	  createClass(MapIterator, Iterator);
 	
 	    function MapIterator(map, type, reverse) {
 	      this._type = type;
@@ -43022,11 +42184,20 @@
 	    return mergeIntoCollectionWith(map, merger, iters);
 	  }
 	
-	  function deepMerger(merger) {
-	    return function(existing, value, key) 
-	      {return existing && existing.mergeDeepWith && isIterable(value) ?
-	        existing.mergeDeepWith(merger, value) :
-	        merger ? merger(existing, value, key) : value};
+	  function deepMerger(existing, value, key) {
+	    return existing && existing.mergeDeep && isIterable(value) ?
+	      existing.mergeDeep(value) :
+	      is(existing, value) ? existing : value;
+	  }
+	
+	  function deepMergerWith(merger) {
+	    return function(existing, value, key)  {
+	      if (existing && existing.mergeDeepWith && isIterable(value)) {
+	        return existing.mergeDeepWith(merger, value);
+	      }
+	      var nextValue = merger(existing, value, key);
+	      return is(existing, nextValue) ? existing : nextValue;
+	    };
 	  }
 	
 	  function mergeIntoCollectionWith(collection, merger, iters) {
@@ -43193,6 +42364,10 @@
 	        this.splice(index, 1);
 	    };
 	
+	    List.prototype.insert = function(index, value) {
+	      return this.splice(index, 0, value);
+	    };
+	
 	    List.prototype.clear = function() {
 	      if (this.size === 0) {
 	        return this;
@@ -43248,11 +42423,11 @@
 	    };
 	
 	    List.prototype.mergeDeep = function(/*...iters*/) {
-	      return mergeIntoListWith(this, deepMerger(undefined), arguments);
+	      return mergeIntoListWith(this, deepMerger, arguments);
 	    };
 	
 	    List.prototype.mergeDeepWith = function(merger) {var iters = SLICE$0.call(arguments, 1);
-	      return mergeIntoListWith(this, deepMerger(merger), iters);
+	      return mergeIntoListWith(this, deepMergerWith(merger), iters);
 	    };
 	
 	    List.prototype.setSize = function(size) {
@@ -43276,7 +42451,7 @@
 	    List.prototype.__iterator = function(type, reverse) {
 	      var index = 0;
 	      var values = iterateList(this, reverse);
-	      return new src_Iterator__Iterator(function()  {
+	      return new Iterator(function()  {
 	        var value = values();
 	        return value === DONE ?
 	          iteratorDone() :
@@ -43724,7 +42899,7 @@
 	    return size < SIZE ? 0 : (((size - 1) >>> SHIFT) << SHIFT);
 	  }
 	
-	  createClass(OrderedMap, src_Map__Map);
+	  createClass(OrderedMap, Map);
 	
 	    // @pragma Construction
 	
@@ -43874,6 +43049,1225 @@
 	      return omap;
 	    }
 	    return makeOrderedMap(newMap, newList);
+	  }
+	
+	  createClass(ToKeyedSequence, KeyedSeq);
+	    function ToKeyedSequence(indexed, useKeys) {
+	      this._iter = indexed;
+	      this._useKeys = useKeys;
+	      this.size = indexed.size;
+	    }
+	
+	    ToKeyedSequence.prototype.get = function(key, notSetValue) {
+	      return this._iter.get(key, notSetValue);
+	    };
+	
+	    ToKeyedSequence.prototype.has = function(key) {
+	      return this._iter.has(key);
+	    };
+	
+	    ToKeyedSequence.prototype.valueSeq = function() {
+	      return this._iter.valueSeq();
+	    };
+	
+	    ToKeyedSequence.prototype.reverse = function() {var this$0 = this;
+	      var reversedSequence = reverseFactory(this, true);
+	      if (!this._useKeys) {
+	        reversedSequence.valueSeq = function()  {return this$0._iter.toSeq().reverse()};
+	      }
+	      return reversedSequence;
+	    };
+	
+	    ToKeyedSequence.prototype.map = function(mapper, context) {var this$0 = this;
+	      var mappedSequence = mapFactory(this, mapper, context);
+	      if (!this._useKeys) {
+	        mappedSequence.valueSeq = function()  {return this$0._iter.toSeq().map(mapper, context)};
+	      }
+	      return mappedSequence;
+	    };
+	
+	    ToKeyedSequence.prototype.__iterate = function(fn, reverse) {var this$0 = this;
+	      var ii;
+	      return this._iter.__iterate(
+	        this._useKeys ?
+	          function(v, k)  {return fn(v, k, this$0)} :
+	          ((ii = reverse ? resolveSize(this) : 0),
+	            function(v ) {return fn(v, reverse ? --ii : ii++, this$0)}),
+	        reverse
+	      );
+	    };
+	
+	    ToKeyedSequence.prototype.__iterator = function(type, reverse) {
+	      if (this._useKeys) {
+	        return this._iter.__iterator(type, reverse);
+	      }
+	      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
+	      var ii = reverse ? resolveSize(this) : 0;
+	      return new Iterator(function()  {
+	        var step = iterator.next();
+	        return step.done ? step :
+	          iteratorValue(type, reverse ? --ii : ii++, step.value, step);
+	      });
+	    };
+	
+	  ToKeyedSequence.prototype[IS_ORDERED_SENTINEL] = true;
+	
+	
+	  createClass(ToIndexedSequence, IndexedSeq);
+	    function ToIndexedSequence(iter) {
+	      this._iter = iter;
+	      this.size = iter.size;
+	    }
+	
+	    ToIndexedSequence.prototype.includes = function(value) {
+	      return this._iter.includes(value);
+	    };
+	
+	    ToIndexedSequence.prototype.__iterate = function(fn, reverse) {var this$0 = this;
+	      var iterations = 0;
+	      return this._iter.__iterate(function(v ) {return fn(v, iterations++, this$0)}, reverse);
+	    };
+	
+	    ToIndexedSequence.prototype.__iterator = function(type, reverse) {
+	      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
+	      var iterations = 0;
+	      return new Iterator(function()  {
+	        var step = iterator.next();
+	        return step.done ? step :
+	          iteratorValue(type, iterations++, step.value, step)
+	      });
+	    };
+	
+	
+	
+	  createClass(ToSetSequence, SetSeq);
+	    function ToSetSequence(iter) {
+	      this._iter = iter;
+	      this.size = iter.size;
+	    }
+	
+	    ToSetSequence.prototype.has = function(key) {
+	      return this._iter.includes(key);
+	    };
+	
+	    ToSetSequence.prototype.__iterate = function(fn, reverse) {var this$0 = this;
+	      return this._iter.__iterate(function(v ) {return fn(v, v, this$0)}, reverse);
+	    };
+	
+	    ToSetSequence.prototype.__iterator = function(type, reverse) {
+	      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
+	      return new Iterator(function()  {
+	        var step = iterator.next();
+	        return step.done ? step :
+	          iteratorValue(type, step.value, step.value, step);
+	      });
+	    };
+	
+	
+	
+	  createClass(FromEntriesSequence, KeyedSeq);
+	    function FromEntriesSequence(entries) {
+	      this._iter = entries;
+	      this.size = entries.size;
+	    }
+	
+	    FromEntriesSequence.prototype.entrySeq = function() {
+	      return this._iter.toSeq();
+	    };
+	
+	    FromEntriesSequence.prototype.__iterate = function(fn, reverse) {var this$0 = this;
+	      return this._iter.__iterate(function(entry ) {
+	        // Check if entry exists first so array access doesn't throw for holes
+	        // in the parent iteration.
+	        if (entry) {
+	          validateEntry(entry);
+	          var indexedIterable = isIterable(entry);
+	          return fn(
+	            indexedIterable ? entry.get(1) : entry[1],
+	            indexedIterable ? entry.get(0) : entry[0],
+	            this$0
+	          );
+	        }
+	      }, reverse);
+	    };
+	
+	    FromEntriesSequence.prototype.__iterator = function(type, reverse) {
+	      var iterator = this._iter.__iterator(ITERATE_VALUES, reverse);
+	      return new Iterator(function()  {
+	        while (true) {
+	          var step = iterator.next();
+	          if (step.done) {
+	            return step;
+	          }
+	          var entry = step.value;
+	          // Check if entry exists first so array access doesn't throw for holes
+	          // in the parent iteration.
+	          if (entry) {
+	            validateEntry(entry);
+	            var indexedIterable = isIterable(entry);
+	            return iteratorValue(
+	              type,
+	              indexedIterable ? entry.get(0) : entry[0],
+	              indexedIterable ? entry.get(1) : entry[1],
+	              step
+	            );
+	          }
+	        }
+	      });
+	    };
+	
+	
+	  ToIndexedSequence.prototype.cacheResult =
+	  ToKeyedSequence.prototype.cacheResult =
+	  ToSetSequence.prototype.cacheResult =
+	  FromEntriesSequence.prototype.cacheResult =
+	    cacheResultThrough;
+	
+	
+	  function flipFactory(iterable) {
+	    var flipSequence = makeSequence(iterable);
+	    flipSequence._iter = iterable;
+	    flipSequence.size = iterable.size;
+	    flipSequence.flip = function()  {return iterable};
+	    flipSequence.reverse = function () {
+	      var reversedSequence = iterable.reverse.apply(this); // super.reverse()
+	      reversedSequence.flip = function()  {return iterable.reverse()};
+	      return reversedSequence;
+	    };
+	    flipSequence.has = function(key ) {return iterable.includes(key)};
+	    flipSequence.includes = function(key ) {return iterable.has(key)};
+	    flipSequence.cacheResult = cacheResultThrough;
+	    flipSequence.__iterateUncached = function (fn, reverse) {var this$0 = this;
+	      return iterable.__iterate(function(v, k)  {return fn(k, v, this$0) !== false}, reverse);
+	    }
+	    flipSequence.__iteratorUncached = function(type, reverse) {
+	      if (type === ITERATE_ENTRIES) {
+	        var iterator = iterable.__iterator(type, reverse);
+	        return new Iterator(function()  {
+	          var step = iterator.next();
+	          if (!step.done) {
+	            var k = step.value[0];
+	            step.value[0] = step.value[1];
+	            step.value[1] = k;
+	          }
+	          return step;
+	        });
+	      }
+	      return iterable.__iterator(
+	        type === ITERATE_VALUES ? ITERATE_KEYS : ITERATE_VALUES,
+	        reverse
+	      );
+	    }
+	    return flipSequence;
+	  }
+	
+	
+	  function mapFactory(iterable, mapper, context) {
+	    var mappedSequence = makeSequence(iterable);
+	    mappedSequence.size = iterable.size;
+	    mappedSequence.has = function(key ) {return iterable.has(key)};
+	    mappedSequence.get = function(key, notSetValue)  {
+	      var v = iterable.get(key, NOT_SET);
+	      return v === NOT_SET ?
+	        notSetValue :
+	        mapper.call(context, v, key, iterable);
+	    };
+	    mappedSequence.__iterateUncached = function (fn, reverse) {var this$0 = this;
+	      return iterable.__iterate(
+	        function(v, k, c)  {return fn(mapper.call(context, v, k, c), k, this$0) !== false},
+	        reverse
+	      );
+	    }
+	    mappedSequence.__iteratorUncached = function (type, reverse) {
+	      var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
+	      return new Iterator(function()  {
+	        var step = iterator.next();
+	        if (step.done) {
+	          return step;
+	        }
+	        var entry = step.value;
+	        var key = entry[0];
+	        return iteratorValue(
+	          type,
+	          key,
+	          mapper.call(context, entry[1], key, iterable),
+	          step
+	        );
+	      });
+	    }
+	    return mappedSequence;
+	  }
+	
+	
+	  function reverseFactory(iterable, useKeys) {
+	    var reversedSequence = makeSequence(iterable);
+	    reversedSequence._iter = iterable;
+	    reversedSequence.size = iterable.size;
+	    reversedSequence.reverse = function()  {return iterable};
+	    if (iterable.flip) {
+	      reversedSequence.flip = function () {
+	        var flipSequence = flipFactory(iterable);
+	        flipSequence.reverse = function()  {return iterable.flip()};
+	        return flipSequence;
+	      };
+	    }
+	    reversedSequence.get = function(key, notSetValue) 
+	      {return iterable.get(useKeys ? key : -1 - key, notSetValue)};
+	    reversedSequence.has = function(key )
+	      {return iterable.has(useKeys ? key : -1 - key)};
+	    reversedSequence.includes = function(value ) {return iterable.includes(value)};
+	    reversedSequence.cacheResult = cacheResultThrough;
+	    reversedSequence.__iterate = function (fn, reverse) {var this$0 = this;
+	      return iterable.__iterate(function(v, k)  {return fn(v, k, this$0)}, !reverse);
+	    };
+	    reversedSequence.__iterator =
+	      function(type, reverse)  {return iterable.__iterator(type, !reverse)};
+	    return reversedSequence;
+	  }
+	
+	
+	  function filterFactory(iterable, predicate, context, useKeys) {
+	    var filterSequence = makeSequence(iterable);
+	    if (useKeys) {
+	      filterSequence.has = function(key ) {
+	        var v = iterable.get(key, NOT_SET);
+	        return v !== NOT_SET && !!predicate.call(context, v, key, iterable);
+	      };
+	      filterSequence.get = function(key, notSetValue)  {
+	        var v = iterable.get(key, NOT_SET);
+	        return v !== NOT_SET && predicate.call(context, v, key, iterable) ?
+	          v : notSetValue;
+	      };
+	    }
+	    filterSequence.__iterateUncached = function (fn, reverse) {var this$0 = this;
+	      var iterations = 0;
+	      iterable.__iterate(function(v, k, c)  {
+	        if (predicate.call(context, v, k, c)) {
+	          iterations++;
+	          return fn(v, useKeys ? k : iterations - 1, this$0);
+	        }
+	      }, reverse);
+	      return iterations;
+	    };
+	    filterSequence.__iteratorUncached = function (type, reverse) {
+	      var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
+	      var iterations = 0;
+	      return new Iterator(function()  {
+	        while (true) {
+	          var step = iterator.next();
+	          if (step.done) {
+	            return step;
+	          }
+	          var entry = step.value;
+	          var key = entry[0];
+	          var value = entry[1];
+	          if (predicate.call(context, value, key, iterable)) {
+	            return iteratorValue(type, useKeys ? key : iterations++, value, step);
+	          }
+	        }
+	      });
+	    }
+	    return filterSequence;
+	  }
+	
+	
+	  function countByFactory(iterable, grouper, context) {
+	    var groups = Map().asMutable();
+	    iterable.__iterate(function(v, k)  {
+	      groups.update(
+	        grouper.call(context, v, k, iterable),
+	        0,
+	        function(a ) {return a + 1}
+	      );
+	    });
+	    return groups.asImmutable();
+	  }
+	
+	
+	  function groupByFactory(iterable, grouper, context) {
+	    var isKeyedIter = isKeyed(iterable);
+	    var groups = (isOrdered(iterable) ? OrderedMap() : Map()).asMutable();
+	    iterable.__iterate(function(v, k)  {
+	      groups.update(
+	        grouper.call(context, v, k, iterable),
+	        function(a ) {return (a = a || [], a.push(isKeyedIter ? [k, v] : v), a)}
+	      );
+	    });
+	    var coerce = iterableClass(iterable);
+	    return groups.map(function(arr ) {return reify(iterable, coerce(arr))});
+	  }
+	
+	
+	  function sliceFactory(iterable, begin, end, useKeys) {
+	    var originalSize = iterable.size;
+	
+	    // Sanitize begin & end using this shorthand for ToInt32(argument)
+	    // http://www.ecma-international.org/ecma-262/6.0/#sec-toint32
+	    if (begin !== undefined) {
+	      begin = begin | 0;
+	    }
+	    if (end !== undefined) {
+	      end = end | 0;
+	    }
+	
+	    if (wholeSlice(begin, end, originalSize)) {
+	      return iterable;
+	    }
+	
+	    var resolvedBegin = resolveBegin(begin, originalSize);
+	    var resolvedEnd = resolveEnd(end, originalSize);
+	
+	    // begin or end will be NaN if they were provided as negative numbers and
+	    // this iterable's size is unknown. In that case, cache first so there is
+	    // a known size and these do not resolve to NaN.
+	    if (resolvedBegin !== resolvedBegin || resolvedEnd !== resolvedEnd) {
+	      return sliceFactory(iterable.toSeq().cacheResult(), begin, end, useKeys);
+	    }
+	
+	    // Note: resolvedEnd is undefined when the original sequence's length is
+	    // unknown and this slice did not supply an end and should contain all
+	    // elements after resolvedBegin.
+	    // In that case, resolvedSize will be NaN and sliceSize will remain undefined.
+	    var resolvedSize = resolvedEnd - resolvedBegin;
+	    var sliceSize;
+	    if (resolvedSize === resolvedSize) {
+	      sliceSize = resolvedSize < 0 ? 0 : resolvedSize;
+	    }
+	
+	    var sliceSeq = makeSequence(iterable);
+	
+	    // If iterable.size is undefined, the size of the realized sliceSeq is
+	    // unknown at this point unless the number of items to slice is 0
+	    sliceSeq.size = sliceSize === 0 ? sliceSize : iterable.size && sliceSize || undefined;
+	
+	    if (!useKeys && isSeq(iterable) && sliceSize >= 0) {
+	      sliceSeq.get = function (index, notSetValue) {
+	        index = wrapIndex(this, index);
+	        return index >= 0 && index < sliceSize ?
+	          iterable.get(index + resolvedBegin, notSetValue) :
+	          notSetValue;
+	      }
+	    }
+	
+	    sliceSeq.__iterateUncached = function(fn, reverse) {var this$0 = this;
+	      if (sliceSize === 0) {
+	        return 0;
+	      }
+	      if (reverse) {
+	        return this.cacheResult().__iterate(fn, reverse);
+	      }
+	      var skipped = 0;
+	      var isSkipping = true;
+	      var iterations = 0;
+	      iterable.__iterate(function(v, k)  {
+	        if (!(isSkipping && (isSkipping = skipped++ < resolvedBegin))) {
+	          iterations++;
+	          return fn(v, useKeys ? k : iterations - 1, this$0) !== false &&
+	                 iterations !== sliceSize;
+	        }
+	      });
+	      return iterations;
+	    };
+	
+	    sliceSeq.__iteratorUncached = function(type, reverse) {
+	      if (sliceSize !== 0 && reverse) {
+	        return this.cacheResult().__iterator(type, reverse);
+	      }
+	      // Don't bother instantiating parent iterator if taking 0.
+	      var iterator = sliceSize !== 0 && iterable.__iterator(type, reverse);
+	      var skipped = 0;
+	      var iterations = 0;
+	      return new Iterator(function()  {
+	        while (skipped++ < resolvedBegin) {
+	          iterator.next();
+	        }
+	        if (++iterations > sliceSize) {
+	          return iteratorDone();
+	        }
+	        var step = iterator.next();
+	        if (useKeys || type === ITERATE_VALUES) {
+	          return step;
+	        } else if (type === ITERATE_KEYS) {
+	          return iteratorValue(type, iterations - 1, undefined, step);
+	        } else {
+	          return iteratorValue(type, iterations - 1, step.value[1], step);
+	        }
+	      });
+	    }
+	
+	    return sliceSeq;
+	  }
+	
+	
+	  function takeWhileFactory(iterable, predicate, context) {
+	    var takeSequence = makeSequence(iterable);
+	    takeSequence.__iterateUncached = function(fn, reverse) {var this$0 = this;
+	      if (reverse) {
+	        return this.cacheResult().__iterate(fn, reverse);
+	      }
+	      var iterations = 0;
+	      iterable.__iterate(function(v, k, c) 
+	        {return predicate.call(context, v, k, c) && ++iterations && fn(v, k, this$0)}
+	      );
+	      return iterations;
+	    };
+	    takeSequence.__iteratorUncached = function(type, reverse) {var this$0 = this;
+	      if (reverse) {
+	        return this.cacheResult().__iterator(type, reverse);
+	      }
+	      var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
+	      var iterating = true;
+	      return new Iterator(function()  {
+	        if (!iterating) {
+	          return iteratorDone();
+	        }
+	        var step = iterator.next();
+	        if (step.done) {
+	          return step;
+	        }
+	        var entry = step.value;
+	        var k = entry[0];
+	        var v = entry[1];
+	        if (!predicate.call(context, v, k, this$0)) {
+	          iterating = false;
+	          return iteratorDone();
+	        }
+	        return type === ITERATE_ENTRIES ? step :
+	          iteratorValue(type, k, v, step);
+	      });
+	    };
+	    return takeSequence;
+	  }
+	
+	
+	  function skipWhileFactory(iterable, predicate, context, useKeys) {
+	    var skipSequence = makeSequence(iterable);
+	    skipSequence.__iterateUncached = function (fn, reverse) {var this$0 = this;
+	      if (reverse) {
+	        return this.cacheResult().__iterate(fn, reverse);
+	      }
+	      var isSkipping = true;
+	      var iterations = 0;
+	      iterable.__iterate(function(v, k, c)  {
+	        if (!(isSkipping && (isSkipping = predicate.call(context, v, k, c)))) {
+	          iterations++;
+	          return fn(v, useKeys ? k : iterations - 1, this$0);
+	        }
+	      });
+	      return iterations;
+	    };
+	    skipSequence.__iteratorUncached = function(type, reverse) {var this$0 = this;
+	      if (reverse) {
+	        return this.cacheResult().__iterator(type, reverse);
+	      }
+	      var iterator = iterable.__iterator(ITERATE_ENTRIES, reverse);
+	      var skipping = true;
+	      var iterations = 0;
+	      return new Iterator(function()  {
+	        var step, k, v;
+	        do {
+	          step = iterator.next();
+	          if (step.done) {
+	            if (useKeys || type === ITERATE_VALUES) {
+	              return step;
+	            } else if (type === ITERATE_KEYS) {
+	              return iteratorValue(type, iterations++, undefined, step);
+	            } else {
+	              return iteratorValue(type, iterations++, step.value[1], step);
+	            }
+	          }
+	          var entry = step.value;
+	          k = entry[0];
+	          v = entry[1];
+	          skipping && (skipping = predicate.call(context, v, k, this$0));
+	        } while (skipping);
+	        return type === ITERATE_ENTRIES ? step :
+	          iteratorValue(type, k, v, step);
+	      });
+	    };
+	    return skipSequence;
+	  }
+	
+	
+	  function concatFactory(iterable, values) {
+	    var isKeyedIterable = isKeyed(iterable);
+	    var iters = [iterable].concat(values).map(function(v ) {
+	      if (!isIterable(v)) {
+	        v = isKeyedIterable ?
+	          keyedSeqFromValue(v) :
+	          indexedSeqFromValue(Array.isArray(v) ? v : [v]);
+	      } else if (isKeyedIterable) {
+	        v = KeyedIterable(v);
+	      }
+	      return v;
+	    }).filter(function(v ) {return v.size !== 0});
+	
+	    if (iters.length === 0) {
+	      return iterable;
+	    }
+	
+	    if (iters.length === 1) {
+	      var singleton = iters[0];
+	      if (singleton === iterable ||
+	          isKeyedIterable && isKeyed(singleton) ||
+	          isIndexed(iterable) && isIndexed(singleton)) {
+	        return singleton;
+	      }
+	    }
+	
+	    var concatSeq = new ArraySeq(iters);
+	    if (isKeyedIterable) {
+	      concatSeq = concatSeq.toKeyedSeq();
+	    } else if (!isIndexed(iterable)) {
+	      concatSeq = concatSeq.toSetSeq();
+	    }
+	    concatSeq = concatSeq.flatten(true);
+	    concatSeq.size = iters.reduce(
+	      function(sum, seq)  {
+	        if (sum !== undefined) {
+	          var size = seq.size;
+	          if (size !== undefined) {
+	            return sum + size;
+	          }
+	        }
+	      },
+	      0
+	    );
+	    return concatSeq;
+	  }
+	
+	
+	  function flattenFactory(iterable, depth, useKeys) {
+	    var flatSequence = makeSequence(iterable);
+	    flatSequence.__iterateUncached = function(fn, reverse) {
+	      var iterations = 0;
+	      var stopped = false;
+	      function flatDeep(iter, currentDepth) {var this$0 = this;
+	        iter.__iterate(function(v, k)  {
+	          if ((!depth || currentDepth < depth) && isIterable(v)) {
+	            flatDeep(v, currentDepth + 1);
+	          } else if (fn(v, useKeys ? k : iterations++, this$0) === false) {
+	            stopped = true;
+	          }
+	          return !stopped;
+	        }, reverse);
+	      }
+	      flatDeep(iterable, 0);
+	      return iterations;
+	    }
+	    flatSequence.__iteratorUncached = function(type, reverse) {
+	      var iterator = iterable.__iterator(type, reverse);
+	      var stack = [];
+	      var iterations = 0;
+	      return new Iterator(function()  {
+	        while (iterator) {
+	          var step = iterator.next();
+	          if (step.done !== false) {
+	            iterator = stack.pop();
+	            continue;
+	          }
+	          var v = step.value;
+	          if (type === ITERATE_ENTRIES) {
+	            v = v[1];
+	          }
+	          if ((!depth || stack.length < depth) && isIterable(v)) {
+	            stack.push(iterator);
+	            iterator = v.__iterator(type, reverse);
+	          } else {
+	            return useKeys ? step : iteratorValue(type, iterations++, v, step);
+	          }
+	        }
+	        return iteratorDone();
+	      });
+	    }
+	    return flatSequence;
+	  }
+	
+	
+	  function flatMapFactory(iterable, mapper, context) {
+	    var coerce = iterableClass(iterable);
+	    return iterable.toSeq().map(
+	      function(v, k)  {return coerce(mapper.call(context, v, k, iterable))}
+	    ).flatten(true);
+	  }
+	
+	
+	  function interposeFactory(iterable, separator) {
+	    var interposedSequence = makeSequence(iterable);
+	    interposedSequence.size = iterable.size && iterable.size * 2 -1;
+	    interposedSequence.__iterateUncached = function(fn, reverse) {var this$0 = this;
+	      var iterations = 0;
+	      iterable.__iterate(function(v, k) 
+	        {return (!iterations || fn(separator, iterations++, this$0) !== false) &&
+	        fn(v, iterations++, this$0) !== false},
+	        reverse
+	      );
+	      return iterations;
+	    };
+	    interposedSequence.__iteratorUncached = function(type, reverse) {
+	      var iterator = iterable.__iterator(ITERATE_VALUES, reverse);
+	      var iterations = 0;
+	      var step;
+	      return new Iterator(function()  {
+	        if (!step || iterations % 2) {
+	          step = iterator.next();
+	          if (step.done) {
+	            return step;
+	          }
+	        }
+	        return iterations % 2 ?
+	          iteratorValue(type, iterations++, separator) :
+	          iteratorValue(type, iterations++, step.value, step);
+	      });
+	    };
+	    return interposedSequence;
+	  }
+	
+	
+	  function sortFactory(iterable, comparator, mapper) {
+	    if (!comparator) {
+	      comparator = defaultComparator;
+	    }
+	    var isKeyedIterable = isKeyed(iterable);
+	    var index = 0;
+	    var entries = iterable.toSeq().map(
+	      function(v, k)  {return [k, v, index++, mapper ? mapper(v, k, iterable) : v]}
+	    ).toArray();
+	    entries.sort(function(a, b)  {return comparator(a[3], b[3]) || a[2] - b[2]}).forEach(
+	      isKeyedIterable ?
+	      function(v, i)  { entries[i].length = 2; } :
+	      function(v, i)  { entries[i] = v[1]; }
+	    );
+	    return isKeyedIterable ? KeyedSeq(entries) :
+	      isIndexed(iterable) ? IndexedSeq(entries) :
+	      SetSeq(entries);
+	  }
+	
+	
+	  function maxFactory(iterable, comparator, mapper) {
+	    if (!comparator) {
+	      comparator = defaultComparator;
+	    }
+	    if (mapper) {
+	      var entry = iterable.toSeq()
+	        .map(function(v, k)  {return [v, mapper(v, k, iterable)]})
+	        .reduce(function(a, b)  {return maxCompare(comparator, a[1], b[1]) ? b : a});
+	      return entry && entry[0];
+	    } else {
+	      return iterable.reduce(function(a, b)  {return maxCompare(comparator, a, b) ? b : a});
+	    }
+	  }
+	
+	  function maxCompare(comparator, a, b) {
+	    var comp = comparator(b, a);
+	    // b is considered the new max if the comparator declares them equal, but
+	    // they are not equal and b is in fact a nullish value.
+	    return (comp === 0 && b !== a && (b === undefined || b === null || b !== b)) || comp > 0;
+	  }
+	
+	
+	  function zipWithFactory(keyIter, zipper, iters) {
+	    var zipSequence = makeSequence(keyIter);
+	    zipSequence.size = new ArraySeq(iters).map(function(i ) {return i.size}).min();
+	    // Note: this a generic base implementation of __iterate in terms of
+	    // __iterator which may be more generically useful in the future.
+	    zipSequence.__iterate = function(fn, reverse) {
+	      /* generic:
+	      var iterator = this.__iterator(ITERATE_ENTRIES, reverse);
+	      var step;
+	      var iterations = 0;
+	      while (!(step = iterator.next()).done) {
+	        iterations++;
+	        if (fn(step.value[1], step.value[0], this) === false) {
+	          break;
+	        }
+	      }
+	      return iterations;
+	      */
+	      // indexed:
+	      var iterator = this.__iterator(ITERATE_VALUES, reverse);
+	      var step;
+	      var iterations = 0;
+	      while (!(step = iterator.next()).done) {
+	        if (fn(step.value, iterations++, this) === false) {
+	          break;
+	        }
+	      }
+	      return iterations;
+	    };
+	    zipSequence.__iteratorUncached = function(type, reverse) {
+	      var iterators = iters.map(function(i )
+	        {return (i = Iterable(i), getIterator(reverse ? i.reverse() : i))}
+	      );
+	      var iterations = 0;
+	      var isDone = false;
+	      return new Iterator(function()  {
+	        var steps;
+	        if (!isDone) {
+	          steps = iterators.map(function(i ) {return i.next()});
+	          isDone = steps.some(function(s ) {return s.done});
+	        }
+	        if (isDone) {
+	          return iteratorDone();
+	        }
+	        return iteratorValue(
+	          type,
+	          iterations++,
+	          zipper.apply(null, steps.map(function(s ) {return s.value}))
+	        );
+	      });
+	    };
+	    return zipSequence
+	  }
+	
+	
+	  // #pragma Helper Functions
+	
+	  function reify(iter, seq) {
+	    return isSeq(iter) ? seq : iter.constructor(seq);
+	  }
+	
+	  function validateEntry(entry) {
+	    if (entry !== Object(entry)) {
+	      throw new TypeError('Expected [K, V] tuple: ' + entry);
+	    }
+	  }
+	
+	  function resolveSize(iter) {
+	    assertNotInfinite(iter.size);
+	    return ensureSize(iter);
+	  }
+	
+	  function iterableClass(iterable) {
+	    return isKeyed(iterable) ? KeyedIterable :
+	      isIndexed(iterable) ? IndexedIterable :
+	      SetIterable;
+	  }
+	
+	  function makeSequence(iterable) {
+	    return Object.create(
+	      (
+	        isKeyed(iterable) ? KeyedSeq :
+	        isIndexed(iterable) ? IndexedSeq :
+	        SetSeq
+	      ).prototype
+	    );
+	  }
+	
+	  function cacheResultThrough() {
+	    if (this._iter.cacheResult) {
+	      this._iter.cacheResult();
+	      this.size = this._iter.size;
+	      return this;
+	    } else {
+	      return Seq.prototype.cacheResult.call(this);
+	    }
+	  }
+	
+	  function defaultComparator(a, b) {
+	    return a > b ? 1 : a < b ? -1 : 0;
+	  }
+	
+	  function forceIterator(keyPath) {
+	    var iter = getIterator(keyPath);
+	    if (!iter) {
+	      // Array might not be iterable in this environment, so we need a fallback
+	      // to our wrapped type.
+	      if (!isArrayLike(keyPath)) {
+	        throw new TypeError('Expected iterable or array-like: ' + keyPath);
+	      }
+	      iter = getIterator(Iterable(keyPath));
+	    }
+	    return iter;
+	  }
+	
+	  createClass(Record, KeyedCollection);
+	
+	    function Record(defaultValues, name) {
+	      var hasInitialized;
+	
+	      var RecordType = function Record(values) {
+	        if (values instanceof RecordType) {
+	          return values;
+	        }
+	        if (!(this instanceof RecordType)) {
+	          return new RecordType(values);
+	        }
+	        if (!hasInitialized) {
+	          hasInitialized = true;
+	          var keys = Object.keys(defaultValues);
+	          setProps(RecordTypePrototype, keys);
+	          RecordTypePrototype.size = keys.length;
+	          RecordTypePrototype._name = name;
+	          RecordTypePrototype._keys = keys;
+	          RecordTypePrototype._defaultValues = defaultValues;
+	        }
+	        this._map = Map(values);
+	      };
+	
+	      var RecordTypePrototype = RecordType.prototype = Object.create(RecordPrototype);
+	      RecordTypePrototype.constructor = RecordType;
+	
+	      return RecordType;
+	    }
+	
+	    Record.prototype.toString = function() {
+	      return this.__toString(recordName(this) + ' {', '}');
+	    };
+	
+	    // @pragma Access
+	
+	    Record.prototype.has = function(k) {
+	      return this._defaultValues.hasOwnProperty(k);
+	    };
+	
+	    Record.prototype.get = function(k, notSetValue) {
+	      if (!this.has(k)) {
+	        return notSetValue;
+	      }
+	      var defaultVal = this._defaultValues[k];
+	      return this._map ? this._map.get(k, defaultVal) : defaultVal;
+	    };
+	
+	    // @pragma Modification
+	
+	    Record.prototype.clear = function() {
+	      if (this.__ownerID) {
+	        this._map && this._map.clear();
+	        return this;
+	      }
+	      var RecordType = this.constructor;
+	      return RecordType._empty || (RecordType._empty = makeRecord(this, emptyMap()));
+	    };
+	
+	    Record.prototype.set = function(k, v) {
+	      if (!this.has(k)) {
+	        throw new Error('Cannot set unknown key "' + k + '" on ' + recordName(this));
+	      }
+	      var newMap = this._map && this._map.set(k, v);
+	      if (this.__ownerID || newMap === this._map) {
+	        return this;
+	      }
+	      return makeRecord(this, newMap);
+	    };
+	
+	    Record.prototype.remove = function(k) {
+	      if (!this.has(k)) {
+	        return this;
+	      }
+	      var newMap = this._map && this._map.remove(k);
+	      if (this.__ownerID || newMap === this._map) {
+	        return this;
+	      }
+	      return makeRecord(this, newMap);
+	    };
+	
+	    Record.prototype.wasAltered = function() {
+	      return this._map.wasAltered();
+	    };
+	
+	    Record.prototype.__iterator = function(type, reverse) {var this$0 = this;
+	      return KeyedIterable(this._defaultValues).map(function(_, k)  {return this$0.get(k)}).__iterator(type, reverse);
+	    };
+	
+	    Record.prototype.__iterate = function(fn, reverse) {var this$0 = this;
+	      return KeyedIterable(this._defaultValues).map(function(_, k)  {return this$0.get(k)}).__iterate(fn, reverse);
+	    };
+	
+	    Record.prototype.__ensureOwner = function(ownerID) {
+	      if (ownerID === this.__ownerID) {
+	        return this;
+	      }
+	      var newMap = this._map && this._map.__ensureOwner(ownerID);
+	      if (!ownerID) {
+	        this.__ownerID = ownerID;
+	        this._map = newMap;
+	        return this;
+	      }
+	      return makeRecord(this, newMap, ownerID);
+	    };
+	
+	
+	  var RecordPrototype = Record.prototype;
+	  RecordPrototype[DELETE] = RecordPrototype.remove;
+	  RecordPrototype.deleteIn =
+	  RecordPrototype.removeIn = MapPrototype.removeIn;
+	  RecordPrototype.merge = MapPrototype.merge;
+	  RecordPrototype.mergeWith = MapPrototype.mergeWith;
+	  RecordPrototype.mergeIn = MapPrototype.mergeIn;
+	  RecordPrototype.mergeDeep = MapPrototype.mergeDeep;
+	  RecordPrototype.mergeDeepWith = MapPrototype.mergeDeepWith;
+	  RecordPrototype.mergeDeepIn = MapPrototype.mergeDeepIn;
+	  RecordPrototype.setIn = MapPrototype.setIn;
+	  RecordPrototype.update = MapPrototype.update;
+	  RecordPrototype.updateIn = MapPrototype.updateIn;
+	  RecordPrototype.withMutations = MapPrototype.withMutations;
+	  RecordPrototype.asMutable = MapPrototype.asMutable;
+	  RecordPrototype.asImmutable = MapPrototype.asImmutable;
+	
+	
+	  function makeRecord(likeRecord, map, ownerID) {
+	    var record = Object.create(Object.getPrototypeOf(likeRecord));
+	    record._map = map;
+	    record.__ownerID = ownerID;
+	    return record;
+	  }
+	
+	  function recordName(record) {
+	    return record._name || record.constructor.name || 'Record';
+	  }
+	
+	  function setProps(prototype, names) {
+	    try {
+	      names.forEach(setProp.bind(undefined, prototype));
+	    } catch (error) {
+	      // Object.defineProperty failed. Probably IE8.
+	    }
+	  }
+	
+	  function setProp(prototype, name) {
+	    Object.defineProperty(prototype, name, {
+	      get: function() {
+	        return this.get(name);
+	      },
+	      set: function(value) {
+	        invariant(this.__ownerID, 'Cannot set on an immutable record.');
+	        this.set(name, value);
+	      }
+	    });
+	  }
+	
+	  createClass(Set, SetCollection);
+	
+	    // @pragma Construction
+	
+	    function Set(value) {
+	      return value === null || value === undefined ? emptySet() :
+	        isSet(value) && !isOrdered(value) ? value :
+	        emptySet().withMutations(function(set ) {
+	          var iter = SetIterable(value);
+	          assertNotInfinite(iter.size);
+	          iter.forEach(function(v ) {return set.add(v)});
+	        });
+	    }
+	
+	    Set.of = function(/*...values*/) {
+	      return this(arguments);
+	    };
+	
+	    Set.fromKeys = function(value) {
+	      return this(KeyedIterable(value).keySeq());
+	    };
+	
+	    Set.prototype.toString = function() {
+	      return this.__toString('Set {', '}');
+	    };
+	
+	    // @pragma Access
+	
+	    Set.prototype.has = function(value) {
+	      return this._map.has(value);
+	    };
+	
+	    // @pragma Modification
+	
+	    Set.prototype.add = function(value) {
+	      return updateSet(this, this._map.set(value, true));
+	    };
+	
+	    Set.prototype.remove = function(value) {
+	      return updateSet(this, this._map.remove(value));
+	    };
+	
+	    Set.prototype.clear = function() {
+	      return updateSet(this, this._map.clear());
+	    };
+	
+	    // @pragma Composition
+	
+	    Set.prototype.union = function() {var iters = SLICE$0.call(arguments, 0);
+	      iters = iters.filter(function(x ) {return x.size !== 0});
+	      if (iters.length === 0) {
+	        return this;
+	      }
+	      if (this.size === 0 && !this.__ownerID && iters.length === 1) {
+	        return this.constructor(iters[0]);
+	      }
+	      return this.withMutations(function(set ) {
+	        for (var ii = 0; ii < iters.length; ii++) {
+	          SetIterable(iters[ii]).forEach(function(value ) {return set.add(value)});
+	        }
+	      });
+	    };
+	
+	    Set.prototype.intersect = function() {var iters = SLICE$0.call(arguments, 0);
+	      if (iters.length === 0) {
+	        return this;
+	      }
+	      iters = iters.map(function(iter ) {return SetIterable(iter)});
+	      var originalSet = this;
+	      return this.withMutations(function(set ) {
+	        originalSet.forEach(function(value ) {
+	          if (!iters.every(function(iter ) {return iter.includes(value)})) {
+	            set.remove(value);
+	          }
+	        });
+	      });
+	    };
+	
+	    Set.prototype.subtract = function() {var iters = SLICE$0.call(arguments, 0);
+	      if (iters.length === 0) {
+	        return this;
+	      }
+	      iters = iters.map(function(iter ) {return SetIterable(iter)});
+	      var originalSet = this;
+	      return this.withMutations(function(set ) {
+	        originalSet.forEach(function(value ) {
+	          if (iters.some(function(iter ) {return iter.includes(value)})) {
+	            set.remove(value);
+	          }
+	        });
+	      });
+	    };
+	
+	    Set.prototype.merge = function() {
+	      return this.union.apply(this, arguments);
+	    };
+	
+	    Set.prototype.mergeWith = function(merger) {var iters = SLICE$0.call(arguments, 1);
+	      return this.union.apply(this, iters);
+	    };
+	
+	    Set.prototype.sort = function(comparator) {
+	      // Late binding
+	      return OrderedSet(sortFactory(this, comparator));
+	    };
+	
+	    Set.prototype.sortBy = function(mapper, comparator) {
+	      // Late binding
+	      return OrderedSet(sortFactory(this, comparator, mapper));
+	    };
+	
+	    Set.prototype.wasAltered = function() {
+	      return this._map.wasAltered();
+	    };
+	
+	    Set.prototype.__iterate = function(fn, reverse) {var this$0 = this;
+	      return this._map.__iterate(function(_, k)  {return fn(k, k, this$0)}, reverse);
+	    };
+	
+	    Set.prototype.__iterator = function(type, reverse) {
+	      return this._map.map(function(_, k)  {return k}).__iterator(type, reverse);
+	    };
+	
+	    Set.prototype.__ensureOwner = function(ownerID) {
+	      if (ownerID === this.__ownerID) {
+	        return this;
+	      }
+	      var newMap = this._map.__ensureOwner(ownerID);
+	      if (!ownerID) {
+	        this.__ownerID = ownerID;
+	        this._map = newMap;
+	        return this;
+	      }
+	      return this.__make(newMap, ownerID);
+	    };
+	
+	
+	  function isSet(maybeSet) {
+	    return !!(maybeSet && maybeSet[IS_SET_SENTINEL]);
+	  }
+	
+	  Set.isSet = isSet;
+	
+	  var IS_SET_SENTINEL = '@@__IMMUTABLE_SET__@@';
+	
+	  var SetPrototype = Set.prototype;
+	  SetPrototype[IS_SET_SENTINEL] = true;
+	  SetPrototype[DELETE] = SetPrototype.remove;
+	  SetPrototype.mergeDeep = SetPrototype.merge;
+	  SetPrototype.mergeDeepWith = SetPrototype.mergeWith;
+	  SetPrototype.withMutations = MapPrototype.withMutations;
+	  SetPrototype.asMutable = MapPrototype.asMutable;
+	  SetPrototype.asImmutable = MapPrototype.asImmutable;
+	
+	  SetPrototype.__empty = emptySet;
+	  SetPrototype.__make = makeSet;
+	
+	  function updateSet(set, newMap) {
+	    if (set.__ownerID) {
+	      set.size = newMap.size;
+	      set._map = newMap;
+	      return set;
+	    }
+	    return newMap === set._map ? set :
+	      newMap.size === 0 ? set.__empty() :
+	      set.__make(newMap);
+	  }
+	
+	  function makeSet(map, ownerID) {
+	    var set = Object.create(SetPrototype);
+	    set.size = map ? map.size : 0;
+	    set._map = map;
+	    set.__ownerID = ownerID;
+	    return set;
+	  }
+	
+	  var EMPTY_SET;
+	  function emptySet() {
+	    return EMPTY_SET || (EMPTY_SET = makeSet(emptyMap()));
+	  }
+	
+	  createClass(OrderedSet, Set);
+	
+	    // @pragma Construction
+	
+	    function OrderedSet(value) {
+	      return value === null || value === undefined ? emptyOrderedSet() :
+	        isOrderedSet(value) ? value :
+	        emptyOrderedSet().withMutations(function(set ) {
+	          var iter = SetIterable(value);
+	          assertNotInfinite(iter.size);
+	          iter.forEach(function(v ) {return set.add(v)});
+	        });
+	    }
+	
+	    OrderedSet.of = function(/*...values*/) {
+	      return this(arguments);
+	    };
+	
+	    OrderedSet.fromKeys = function(value) {
+	      return this(KeyedIterable(value).keySeq());
+	    };
+	
+	    OrderedSet.prototype.toString = function() {
+	      return this.__toString('OrderedSet {', '}');
+	    };
+	
+	
+	  function isOrderedSet(maybeOrderedSet) {
+	    return isSet(maybeOrderedSet) && isOrdered(maybeOrderedSet);
+	  }
+	
+	  OrderedSet.isOrderedSet = isOrderedSet;
+	
+	  var OrderedSetPrototype = OrderedSet.prototype;
+	  OrderedSetPrototype[IS_ORDERED_SENTINEL] = true;
+	
+	  OrderedSetPrototype.__empty = emptyOrderedSet;
+	  OrderedSetPrototype.__make = makeOrderedSet;
+	
+	  function makeOrderedSet(map, ownerID) {
+	    var set = Object.create(OrderedSetPrototype);
+	    set.size = map ? map.size : 0;
+	    set._map = map;
+	    set.__ownerID = ownerID;
+	    return set;
+	  }
+	
+	  var EMPTY_ORDERED_SET;
+	  function emptyOrderedSet() {
+	    return EMPTY_ORDERED_SET || (EMPTY_ORDERED_SET = makeOrderedSet(emptyOrderedMap()));
 	  }
 	
 	  createClass(Stack, IndexedCollection);
@@ -44050,7 +44444,7 @@
 	      }
 	      var iterations = 0;
 	      var node = this._head;
-	      return new src_Iterator__Iterator(function()  {
+	      return new Iterator(function()  {
 	        if (node) {
 	          var value = node.value;
 	          node = node.next;
@@ -44092,645 +44486,6 @@
 	    return EMPTY_STACK || (EMPTY_STACK = makeStack(0));
 	  }
 	
-	  createClass(src_Set__Set, SetCollection);
-	
-	    // @pragma Construction
-	
-	    function src_Set__Set(value) {
-	      return value === null || value === undefined ? emptySet() :
-	        isSet(value) && !isOrdered(value) ? value :
-	        emptySet().withMutations(function(set ) {
-	          var iter = SetIterable(value);
-	          assertNotInfinite(iter.size);
-	          iter.forEach(function(v ) {return set.add(v)});
-	        });
-	    }
-	
-	    src_Set__Set.of = function(/*...values*/) {
-	      return this(arguments);
-	    };
-	
-	    src_Set__Set.fromKeys = function(value) {
-	      return this(KeyedIterable(value).keySeq());
-	    };
-	
-	    src_Set__Set.prototype.toString = function() {
-	      return this.__toString('Set {', '}');
-	    };
-	
-	    // @pragma Access
-	
-	    src_Set__Set.prototype.has = function(value) {
-	      return this._map.has(value);
-	    };
-	
-	    // @pragma Modification
-	
-	    src_Set__Set.prototype.add = function(value) {
-	      return updateSet(this, this._map.set(value, true));
-	    };
-	
-	    src_Set__Set.prototype.remove = function(value) {
-	      return updateSet(this, this._map.remove(value));
-	    };
-	
-	    src_Set__Set.prototype.clear = function() {
-	      return updateSet(this, this._map.clear());
-	    };
-	
-	    // @pragma Composition
-	
-	    src_Set__Set.prototype.union = function() {var iters = SLICE$0.call(arguments, 0);
-	      iters = iters.filter(function(x ) {return x.size !== 0});
-	      if (iters.length === 0) {
-	        return this;
-	      }
-	      if (this.size === 0 && !this.__ownerID && iters.length === 1) {
-	        return this.constructor(iters[0]);
-	      }
-	      return this.withMutations(function(set ) {
-	        for (var ii = 0; ii < iters.length; ii++) {
-	          SetIterable(iters[ii]).forEach(function(value ) {return set.add(value)});
-	        }
-	      });
-	    };
-	
-	    src_Set__Set.prototype.intersect = function() {var iters = SLICE$0.call(arguments, 0);
-	      if (iters.length === 0) {
-	        return this;
-	      }
-	      iters = iters.map(function(iter ) {return SetIterable(iter)});
-	      var originalSet = this;
-	      return this.withMutations(function(set ) {
-	        originalSet.forEach(function(value ) {
-	          if (!iters.every(function(iter ) {return iter.includes(value)})) {
-	            set.remove(value);
-	          }
-	        });
-	      });
-	    };
-	
-	    src_Set__Set.prototype.subtract = function() {var iters = SLICE$0.call(arguments, 0);
-	      if (iters.length === 0) {
-	        return this;
-	      }
-	      iters = iters.map(function(iter ) {return SetIterable(iter)});
-	      var originalSet = this;
-	      return this.withMutations(function(set ) {
-	        originalSet.forEach(function(value ) {
-	          if (iters.some(function(iter ) {return iter.includes(value)})) {
-	            set.remove(value);
-	          }
-	        });
-	      });
-	    };
-	
-	    src_Set__Set.prototype.merge = function() {
-	      return this.union.apply(this, arguments);
-	    };
-	
-	    src_Set__Set.prototype.mergeWith = function(merger) {var iters = SLICE$0.call(arguments, 1);
-	      return this.union.apply(this, iters);
-	    };
-	
-	    src_Set__Set.prototype.sort = function(comparator) {
-	      // Late binding
-	      return OrderedSet(sortFactory(this, comparator));
-	    };
-	
-	    src_Set__Set.prototype.sortBy = function(mapper, comparator) {
-	      // Late binding
-	      return OrderedSet(sortFactory(this, comparator, mapper));
-	    };
-	
-	    src_Set__Set.prototype.wasAltered = function() {
-	      return this._map.wasAltered();
-	    };
-	
-	    src_Set__Set.prototype.__iterate = function(fn, reverse) {var this$0 = this;
-	      return this._map.__iterate(function(_, k)  {return fn(k, k, this$0)}, reverse);
-	    };
-	
-	    src_Set__Set.prototype.__iterator = function(type, reverse) {
-	      return this._map.map(function(_, k)  {return k}).__iterator(type, reverse);
-	    };
-	
-	    src_Set__Set.prototype.__ensureOwner = function(ownerID) {
-	      if (ownerID === this.__ownerID) {
-	        return this;
-	      }
-	      var newMap = this._map.__ensureOwner(ownerID);
-	      if (!ownerID) {
-	        this.__ownerID = ownerID;
-	        this._map = newMap;
-	        return this;
-	      }
-	      return this.__make(newMap, ownerID);
-	    };
-	
-	
-	  function isSet(maybeSet) {
-	    return !!(maybeSet && maybeSet[IS_SET_SENTINEL]);
-	  }
-	
-	  src_Set__Set.isSet = isSet;
-	
-	  var IS_SET_SENTINEL = '@@__IMMUTABLE_SET__@@';
-	
-	  var SetPrototype = src_Set__Set.prototype;
-	  SetPrototype[IS_SET_SENTINEL] = true;
-	  SetPrototype[DELETE] = SetPrototype.remove;
-	  SetPrototype.mergeDeep = SetPrototype.merge;
-	  SetPrototype.mergeDeepWith = SetPrototype.mergeWith;
-	  SetPrototype.withMutations = MapPrototype.withMutations;
-	  SetPrototype.asMutable = MapPrototype.asMutable;
-	  SetPrototype.asImmutable = MapPrototype.asImmutable;
-	
-	  SetPrototype.__empty = emptySet;
-	  SetPrototype.__make = makeSet;
-	
-	  function updateSet(set, newMap) {
-	    if (set.__ownerID) {
-	      set.size = newMap.size;
-	      set._map = newMap;
-	      return set;
-	    }
-	    return newMap === set._map ? set :
-	      newMap.size === 0 ? set.__empty() :
-	      set.__make(newMap);
-	  }
-	
-	  function makeSet(map, ownerID) {
-	    var set = Object.create(SetPrototype);
-	    set.size = map ? map.size : 0;
-	    set._map = map;
-	    set.__ownerID = ownerID;
-	    return set;
-	  }
-	
-	  var EMPTY_SET;
-	  function emptySet() {
-	    return EMPTY_SET || (EMPTY_SET = makeSet(emptyMap()));
-	  }
-	
-	  createClass(OrderedSet, src_Set__Set);
-	
-	    // @pragma Construction
-	
-	    function OrderedSet(value) {
-	      return value === null || value === undefined ? emptyOrderedSet() :
-	        isOrderedSet(value) ? value :
-	        emptyOrderedSet().withMutations(function(set ) {
-	          var iter = SetIterable(value);
-	          assertNotInfinite(iter.size);
-	          iter.forEach(function(v ) {return set.add(v)});
-	        });
-	    }
-	
-	    OrderedSet.of = function(/*...values*/) {
-	      return this(arguments);
-	    };
-	
-	    OrderedSet.fromKeys = function(value) {
-	      return this(KeyedIterable(value).keySeq());
-	    };
-	
-	    OrderedSet.prototype.toString = function() {
-	      return this.__toString('OrderedSet {', '}');
-	    };
-	
-	
-	  function isOrderedSet(maybeOrderedSet) {
-	    return isSet(maybeOrderedSet) && isOrdered(maybeOrderedSet);
-	  }
-	
-	  OrderedSet.isOrderedSet = isOrderedSet;
-	
-	  var OrderedSetPrototype = OrderedSet.prototype;
-	  OrderedSetPrototype[IS_ORDERED_SENTINEL] = true;
-	
-	  OrderedSetPrototype.__empty = emptyOrderedSet;
-	  OrderedSetPrototype.__make = makeOrderedSet;
-	
-	  function makeOrderedSet(map, ownerID) {
-	    var set = Object.create(OrderedSetPrototype);
-	    set.size = map ? map.size : 0;
-	    set._map = map;
-	    set.__ownerID = ownerID;
-	    return set;
-	  }
-	
-	  var EMPTY_ORDERED_SET;
-	  function emptyOrderedSet() {
-	    return EMPTY_ORDERED_SET || (EMPTY_ORDERED_SET = makeOrderedSet(emptyOrderedMap()));
-	  }
-	
-	  createClass(Record, KeyedCollection);
-	
-	    function Record(defaultValues, name) {
-	      var hasInitialized;
-	
-	      var RecordType = function Record(values) {
-	        if (values instanceof RecordType) {
-	          return values;
-	        }
-	        if (!(this instanceof RecordType)) {
-	          return new RecordType(values);
-	        }
-	        if (!hasInitialized) {
-	          hasInitialized = true;
-	          var keys = Object.keys(defaultValues);
-	          setProps(RecordTypePrototype, keys);
-	          RecordTypePrototype.size = keys.length;
-	          RecordTypePrototype._name = name;
-	          RecordTypePrototype._keys = keys;
-	          RecordTypePrototype._defaultValues = defaultValues;
-	        }
-	        this._map = src_Map__Map(values);
-	      };
-	
-	      var RecordTypePrototype = RecordType.prototype = Object.create(RecordPrototype);
-	      RecordTypePrototype.constructor = RecordType;
-	
-	      return RecordType;
-	    }
-	
-	    Record.prototype.toString = function() {
-	      return this.__toString(recordName(this) + ' {', '}');
-	    };
-	
-	    // @pragma Access
-	
-	    Record.prototype.has = function(k) {
-	      return this._defaultValues.hasOwnProperty(k);
-	    };
-	
-	    Record.prototype.get = function(k, notSetValue) {
-	      if (!this.has(k)) {
-	        return notSetValue;
-	      }
-	      var defaultVal = this._defaultValues[k];
-	      return this._map ? this._map.get(k, defaultVal) : defaultVal;
-	    };
-	
-	    // @pragma Modification
-	
-	    Record.prototype.clear = function() {
-	      if (this.__ownerID) {
-	        this._map && this._map.clear();
-	        return this;
-	      }
-	      var RecordType = this.constructor;
-	      return RecordType._empty || (RecordType._empty = makeRecord(this, emptyMap()));
-	    };
-	
-	    Record.prototype.set = function(k, v) {
-	      if (!this.has(k)) {
-	        throw new Error('Cannot set unknown key "' + k + '" on ' + recordName(this));
-	      }
-	      var newMap = this._map && this._map.set(k, v);
-	      if (this.__ownerID || newMap === this._map) {
-	        return this;
-	      }
-	      return makeRecord(this, newMap);
-	    };
-	
-	    Record.prototype.remove = function(k) {
-	      if (!this.has(k)) {
-	        return this;
-	      }
-	      var newMap = this._map && this._map.remove(k);
-	      if (this.__ownerID || newMap === this._map) {
-	        return this;
-	      }
-	      return makeRecord(this, newMap);
-	    };
-	
-	    Record.prototype.wasAltered = function() {
-	      return this._map.wasAltered();
-	    };
-	
-	    Record.prototype.__iterator = function(type, reverse) {var this$0 = this;
-	      return KeyedIterable(this._defaultValues).map(function(_, k)  {return this$0.get(k)}).__iterator(type, reverse);
-	    };
-	
-	    Record.prototype.__iterate = function(fn, reverse) {var this$0 = this;
-	      return KeyedIterable(this._defaultValues).map(function(_, k)  {return this$0.get(k)}).__iterate(fn, reverse);
-	    };
-	
-	    Record.prototype.__ensureOwner = function(ownerID) {
-	      if (ownerID === this.__ownerID) {
-	        return this;
-	      }
-	      var newMap = this._map && this._map.__ensureOwner(ownerID);
-	      if (!ownerID) {
-	        this.__ownerID = ownerID;
-	        this._map = newMap;
-	        return this;
-	      }
-	      return makeRecord(this, newMap, ownerID);
-	    };
-	
-	
-	  var RecordPrototype = Record.prototype;
-	  RecordPrototype[DELETE] = RecordPrototype.remove;
-	  RecordPrototype.deleteIn =
-	  RecordPrototype.removeIn = MapPrototype.removeIn;
-	  RecordPrototype.merge = MapPrototype.merge;
-	  RecordPrototype.mergeWith = MapPrototype.mergeWith;
-	  RecordPrototype.mergeIn = MapPrototype.mergeIn;
-	  RecordPrototype.mergeDeep = MapPrototype.mergeDeep;
-	  RecordPrototype.mergeDeepWith = MapPrototype.mergeDeepWith;
-	  RecordPrototype.mergeDeepIn = MapPrototype.mergeDeepIn;
-	  RecordPrototype.setIn = MapPrototype.setIn;
-	  RecordPrototype.update = MapPrototype.update;
-	  RecordPrototype.updateIn = MapPrototype.updateIn;
-	  RecordPrototype.withMutations = MapPrototype.withMutations;
-	  RecordPrototype.asMutable = MapPrototype.asMutable;
-	  RecordPrototype.asImmutable = MapPrototype.asImmutable;
-	
-	
-	  function makeRecord(likeRecord, map, ownerID) {
-	    var record = Object.create(Object.getPrototypeOf(likeRecord));
-	    record._map = map;
-	    record.__ownerID = ownerID;
-	    return record;
-	  }
-	
-	  function recordName(record) {
-	    return record._name || record.constructor.name || 'Record';
-	  }
-	
-	  function setProps(prototype, names) {
-	    try {
-	      names.forEach(setProp.bind(undefined, prototype));
-	    } catch (error) {
-	      // Object.defineProperty failed. Probably IE8.
-	    }
-	  }
-	
-	  function setProp(prototype, name) {
-	    Object.defineProperty(prototype, name, {
-	      get: function() {
-	        return this.get(name);
-	      },
-	      set: function(value) {
-	        invariant(this.__ownerID, 'Cannot set on an immutable record.');
-	        this.set(name, value);
-	      }
-	    });
-	  }
-	
-	  function deepEqual(a, b) {
-	    if (a === b) {
-	      return true;
-	    }
-	
-	    if (
-	      !isIterable(b) ||
-	      a.size !== undefined && b.size !== undefined && a.size !== b.size ||
-	      a.__hash !== undefined && b.__hash !== undefined && a.__hash !== b.__hash ||
-	      isKeyed(a) !== isKeyed(b) ||
-	      isIndexed(a) !== isIndexed(b) ||
-	      isOrdered(a) !== isOrdered(b)
-	    ) {
-	      return false;
-	    }
-	
-	    if (a.size === 0 && b.size === 0) {
-	      return true;
-	    }
-	
-	    var notAssociative = !isAssociative(a);
-	
-	    if (isOrdered(a)) {
-	      var entries = a.entries();
-	      return b.every(function(v, k)  {
-	        var entry = entries.next().value;
-	        return entry && is(entry[1], v) && (notAssociative || is(entry[0], k));
-	      }) && entries.next().done;
-	    }
-	
-	    var flipped = false;
-	
-	    if (a.size === undefined) {
-	      if (b.size === undefined) {
-	        if (typeof a.cacheResult === 'function') {
-	          a.cacheResult();
-	        }
-	      } else {
-	        flipped = true;
-	        var _ = a;
-	        a = b;
-	        b = _;
-	      }
-	    }
-	
-	    var allEqual = true;
-	    var bSize = b.__iterate(function(v, k)  {
-	      if (notAssociative ? !a.has(v) :
-	          flipped ? !is(v, a.get(k, NOT_SET)) : !is(a.get(k, NOT_SET), v)) {
-	        allEqual = false;
-	        return false;
-	      }
-	    });
-	
-	    return allEqual && a.size === bSize;
-	  }
-	
-	  createClass(Range, IndexedSeq);
-	
-	    function Range(start, end, step) {
-	      if (!(this instanceof Range)) {
-	        return new Range(start, end, step);
-	      }
-	      invariant(step !== 0, 'Cannot step a Range by 0');
-	      start = start || 0;
-	      if (end === undefined) {
-	        end = Infinity;
-	      }
-	      step = step === undefined ? 1 : Math.abs(step);
-	      if (end < start) {
-	        step = -step;
-	      }
-	      this._start = start;
-	      this._end = end;
-	      this._step = step;
-	      this.size = Math.max(0, Math.ceil((end - start) / step - 1) + 1);
-	      if (this.size === 0) {
-	        if (EMPTY_RANGE) {
-	          return EMPTY_RANGE;
-	        }
-	        EMPTY_RANGE = this;
-	      }
-	    }
-	
-	    Range.prototype.toString = function() {
-	      if (this.size === 0) {
-	        return 'Range []';
-	      }
-	      return 'Range [ ' +
-	        this._start + '...' + this._end +
-	        (this._step > 1 ? ' by ' + this._step : '') +
-	      ' ]';
-	    };
-	
-	    Range.prototype.get = function(index, notSetValue) {
-	      return this.has(index) ?
-	        this._start + wrapIndex(this, index) * this._step :
-	        notSetValue;
-	    };
-	
-	    Range.prototype.includes = function(searchValue) {
-	      var possibleIndex = (searchValue - this._start) / this._step;
-	      return possibleIndex >= 0 &&
-	        possibleIndex < this.size &&
-	        possibleIndex === Math.floor(possibleIndex);
-	    };
-	
-	    Range.prototype.slice = function(begin, end) {
-	      if (wholeSlice(begin, end, this.size)) {
-	        return this;
-	      }
-	      begin = resolveBegin(begin, this.size);
-	      end = resolveEnd(end, this.size);
-	      if (end <= begin) {
-	        return new Range(0, 0);
-	      }
-	      return new Range(this.get(begin, this._end), this.get(end, this._end), this._step);
-	    };
-	
-	    Range.prototype.indexOf = function(searchValue) {
-	      var offsetValue = searchValue - this._start;
-	      if (offsetValue % this._step === 0) {
-	        var index = offsetValue / this._step;
-	        if (index >= 0 && index < this.size) {
-	          return index
-	        }
-	      }
-	      return -1;
-	    };
-	
-	    Range.prototype.lastIndexOf = function(searchValue) {
-	      return this.indexOf(searchValue);
-	    };
-	
-	    Range.prototype.__iterate = function(fn, reverse) {
-	      var maxIndex = this.size - 1;
-	      var step = this._step;
-	      var value = reverse ? this._start + maxIndex * step : this._start;
-	      for (var ii = 0; ii <= maxIndex; ii++) {
-	        if (fn(value, ii, this) === false) {
-	          return ii + 1;
-	        }
-	        value += reverse ? -step : step;
-	      }
-	      return ii;
-	    };
-	
-	    Range.prototype.__iterator = function(type, reverse) {
-	      var maxIndex = this.size - 1;
-	      var step = this._step;
-	      var value = reverse ? this._start + maxIndex * step : this._start;
-	      var ii = 0;
-	      return new src_Iterator__Iterator(function()  {
-	        var v = value;
-	        value += reverse ? -step : step;
-	        return ii > maxIndex ? iteratorDone() : iteratorValue(type, ii++, v);
-	      });
-	    };
-	
-	    Range.prototype.equals = function(other) {
-	      return other instanceof Range ?
-	        this._start === other._start &&
-	        this._end === other._end &&
-	        this._step === other._step :
-	        deepEqual(this, other);
-	    };
-	
-	
-	  var EMPTY_RANGE;
-	
-	  createClass(Repeat, IndexedSeq);
-	
-	    function Repeat(value, times) {
-	      if (!(this instanceof Repeat)) {
-	        return new Repeat(value, times);
-	      }
-	      this._value = value;
-	      this.size = times === undefined ? Infinity : Math.max(0, times);
-	      if (this.size === 0) {
-	        if (EMPTY_REPEAT) {
-	          return EMPTY_REPEAT;
-	        }
-	        EMPTY_REPEAT = this;
-	      }
-	    }
-	
-	    Repeat.prototype.toString = function() {
-	      if (this.size === 0) {
-	        return 'Repeat []';
-	      }
-	      return 'Repeat [ ' + this._value + ' ' + this.size + ' times ]';
-	    };
-	
-	    Repeat.prototype.get = function(index, notSetValue) {
-	      return this.has(index) ? this._value : notSetValue;
-	    };
-	
-	    Repeat.prototype.includes = function(searchValue) {
-	      return is(this._value, searchValue);
-	    };
-	
-	    Repeat.prototype.slice = function(begin, end) {
-	      var size = this.size;
-	      return wholeSlice(begin, end, size) ? this :
-	        new Repeat(this._value, resolveEnd(end, size) - resolveBegin(begin, size));
-	    };
-	
-	    Repeat.prototype.reverse = function() {
-	      return this;
-	    };
-	
-	    Repeat.prototype.indexOf = function(searchValue) {
-	      if (is(this._value, searchValue)) {
-	        return 0;
-	      }
-	      return -1;
-	    };
-	
-	    Repeat.prototype.lastIndexOf = function(searchValue) {
-	      if (is(this._value, searchValue)) {
-	        return this.size;
-	      }
-	      return -1;
-	    };
-	
-	    Repeat.prototype.__iterate = function(fn, reverse) {
-	      for (var ii = 0; ii < this.size; ii++) {
-	        if (fn(this._value, ii, this) === false) {
-	          return ii + 1;
-	        }
-	      }
-	      return ii;
-	    };
-	
-	    Repeat.prototype.__iterator = function(type, reverse) {var this$0 = this;
-	      var ii = 0;
-	      return new src_Iterator__Iterator(function() 
-	        {return ii < this$0.size ? iteratorValue(type, ii++, this$0._value) : iteratorDone()}
-	      );
-	    };
-	
-	    Repeat.prototype.equals = function(other) {
-	      return other instanceof Repeat ?
-	        is(this._value, other._value) :
-	        deepEqual(other);
-	    };
-	
-	
-	  var EMPTY_REPEAT;
-	
 	  /**
 	   * Contributes additional methods to a constructor
 	   */
@@ -44742,7 +44497,7 @@
 	    return ctor;
 	  }
 	
-	  Iterable.Iterator = src_Iterator__Iterator;
+	  Iterable.Iterator = Iterator;
 	
 	  mixin(Iterable, {
 	
@@ -44777,7 +44532,7 @@
 	
 	    toMap: function() {
 	      // Use Late Binding here to solve the circular dependency.
-	      return src_Map__Map(this.toKeyedSeq());
+	      return Map(this.toKeyedSeq());
 	    },
 	
 	    toObject: function() {
@@ -44799,7 +44554,7 @@
 	
 	    toSet: function() {
 	      // Use Late Binding here to solve the circular dependency.
-	      return src_Set__Set(isKeyed(this) ? this.valueSeq() : this);
+	      return Set(isKeyed(this) ? this.valueSeq() : this);
 	    },
 	
 	    toSetSeq: function() {
@@ -45264,7 +45019,11 @@
 	    },
 	
 	    lastIndexOf: function(searchValue) {
-	      return this.toSeq().reverse().indexOf(searchValue);
+	      var key = this.toKeyedSeq().reverse().keyOf(searchValue);
+	      return key === undefined ? -1 : key;
+	
+	      // var index =
+	      // return this.toSeq().reverse().indexOf(searchValue);
 	    },
 	
 	    reverse: function() {
@@ -45455,12 +45214,12 @@
 	  }
 	
 	  function murmurHashOfSize(size, h) {
-	    h = src_Math__imul(h, 0xCC9E2D51);
-	    h = src_Math__imul(h << 15 | h >>> -15, 0x1B873593);
-	    h = src_Math__imul(h << 13 | h >>> -13, 5);
+	    h = imul(h, 0xCC9E2D51);
+	    h = imul(h << 15 | h >>> -15, 0x1B873593);
+	    h = imul(h << 13 | h >>> -13, 5);
 	    h = (h + 0xE6546B64 | 0) ^ size;
-	    h = src_Math__imul(h ^ h >>> 16, 0x85EBCA6B);
-	    h = src_Math__imul(h ^ h >>> 13, 0xC2B2AE35);
+	    h = imul(h ^ h >>> 16, 0x85EBCA6B);
+	    h = imul(h ^ h >>> 13, 0xC2B2AE35);
 	    h = smi(h ^ h >>> 16);
 	    return h;
 	  }
@@ -45475,11 +45234,11 @@
 	
 	    Seq: Seq,
 	    Collection: Collection,
-	    Map: src_Map__Map,
+	    Map: Map,
 	    OrderedMap: OrderedMap,
 	    List: List,
 	    Stack: Stack,
-	    Set: src_Set__Set,
+	    Set: Set,
 	    OrderedSet: OrderedSet,
 	
 	    Record: Record,
@@ -45496,12 +45255,12 @@
 	}));
 
 /***/ },
-/* 249 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Case_1 = __webpack_require__(250);
-	var WhenFactory_1 = __webpack_require__(251);
-	var ThenFactory_1 = __webpack_require__(255);
+	var Case_1 = __webpack_require__(249);
+	var WhenFactory_1 = __webpack_require__(250);
+	var ThenFactory_1 = __webpack_require__(254);
 	var CaseFactory = (function () {
 	    function CaseFactory() {
 	    }
@@ -45530,7 +45289,7 @@
 	//# sourceMappingURL=CaseFactory.js.map
 
 /***/ },
-/* 250 */
+/* 249 */
 /***/ function(module, exports) {
 
 	var Case = (function () {
@@ -45558,12 +45317,12 @@
 	//# sourceMappingURL=Case.js.map
 
 /***/ },
-/* 251 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var When_1 = __webpack_require__(252);
-	var WhenNone_1 = __webpack_require__(253);
-	var WhenElse_1 = __webpack_require__(254);
+	var When_1 = __webpack_require__(251);
+	var WhenNone_1 = __webpack_require__(252);
+	var WhenElse_1 = __webpack_require__(253);
 	var WhenFactory = (function () {
 	    function WhenFactory() {
 	    }
@@ -45588,7 +45347,7 @@
 	//# sourceMappingURL=WhenFactory.js.map
 
 /***/ },
-/* 252 */
+/* 251 */
 /***/ function(module, exports) {
 
 	var When = (function () {
@@ -45605,7 +45364,7 @@
 	//# sourceMappingURL=When.js.map
 
 /***/ },
-/* 253 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __extends = (this && this.__extends) || function (d, b) {
@@ -45613,7 +45372,7 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var When_1 = __webpack_require__(252);
+	var When_1 = __webpack_require__(251);
 	var WhenNone = (function (_super) {
 	    __extends(WhenNone, _super);
 	    function WhenNone() {
@@ -45626,7 +45385,7 @@
 	//# sourceMappingURL=WhenNone.js.map
 
 /***/ },
-/* 254 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __extends = (this && this.__extends) || function (d, b) {
@@ -45634,7 +45393,7 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var When_1 = __webpack_require__(252);
+	var When_1 = __webpack_require__(251);
 	var WhenElse = (function (_super) {
 	    __extends(WhenElse, _super);
 	    function WhenElse() {
@@ -45647,10 +45406,10 @@
 	//# sourceMappingURL=WhenElse.js.map
 
 /***/ },
-/* 255 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Then_1 = __webpack_require__(256);
+	var Then_1 = __webpack_require__(255);
 	var ThenFactory = (function () {
 	    function ThenFactory() {
 	    }
@@ -45669,7 +45428,7 @@
 	//# sourceMappingURL=ThenFactory.js.map
 
 /***/ },
-/* 256 */
+/* 255 */
 /***/ function(module, exports) {
 
 	var Then = (function () {
@@ -45686,7 +45445,7 @@
 	//# sourceMappingURL=Then.js.map
 
 /***/ },
-/* 257 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45739,7 +45498,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 258 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45776,7 +45535,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 259 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45791,7 +45550,7 @@
 	exports.opacityCrossHair = opacityCrossHair;
 	exports.changeZoom = changeZoom;
 	
-	var _constantsActionConst = __webpack_require__(260);
+	var _constantsActionConst = __webpack_require__(259);
 	
 	function selectSkill(selected) {
 	    return { type: _constantsActionConst.ActionType.SELECT_SKILL, selected: selected };
@@ -45828,7 +45587,7 @@
 	}
 
 /***/ },
-/* 260 */
+/* 259 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -45848,7 +45607,7 @@
 	})(ActionType || (exports.ActionType = ActionType = {}));
 
 /***/ },
-/* 261 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45863,15 +45622,15 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _componentsPleaseScroll = __webpack_require__(262);
+	var _componentsPleaseScroll = __webpack_require__(261);
 	
 	var _componentsPleaseScroll2 = _interopRequireDefault(_componentsPleaseScroll);
 	
-	var _componentsCommentCanvas = __webpack_require__(263);
+	var _componentsCommentCanvas = __webpack_require__(262);
 	
 	var _componentsCommentCanvas2 = _interopRequireDefault(_componentsCommentCanvas);
 	
-	var _actionsAction = __webpack_require__(259);
+	var _actionsAction = __webpack_require__(258);
 	
 	var Action = _interopRequireWildcard(_actionsAction);
 	
@@ -45971,7 +45730,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 262 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46025,7 +45784,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 263 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46105,7 +45864,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 264 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -46122,27 +45881,27 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _domainsChartDataFactory = __webpack_require__(265);
+	var _domainsChartDataFactory = __webpack_require__(264);
 	
 	var _domainsChartDataFactory2 = _interopRequireDefault(_domainsChartDataFactory);
 	
-	var _componentsSkillCloudCanvas = __webpack_require__(269);
+	var _componentsSkillCloudCanvas = __webpack_require__(268);
 	
 	var _componentsSkillCloudCanvas2 = _interopRequireDefault(_componentsSkillCloudCanvas);
 	
-	var _componentsChartCanvas = __webpack_require__(272);
+	var _componentsChartCanvas = __webpack_require__(271);
 	
 	var _componentsChartCanvas2 = _interopRequireDefault(_componentsChartCanvas);
 	
-	var _componentsCommentCanvas = __webpack_require__(263);
+	var _componentsCommentCanvas = __webpack_require__(262);
 	
 	var _componentsCommentCanvas2 = _interopRequireDefault(_componentsCommentCanvas);
 	
-	var _constantsSkillConst = __webpack_require__(275);
+	var _constantsSkillConst = __webpack_require__(274);
 	
 	var SkillConst = _interopRequireWildcard(_constantsSkillConst);
 	
-	var _actionsAction = __webpack_require__(259);
+	var _actionsAction = __webpack_require__(258);
 	
 	var Action = _interopRequireWildcard(_actionsAction);
 	
@@ -46156,7 +45915,7 @@
 	
 	var _lodash = __webpack_require__(191);
 	
-	var _matchCase = __webpack_require__(245);
+	var _matchCase = __webpack_require__(244);
 	
 	var _matchCase2 = _interopRequireDefault(_matchCase);
 	
@@ -46296,7 +46055,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 265 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46307,19 +46066,19 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var _domainsChartData = __webpack_require__(266);
+	var _domainsChartData = __webpack_require__(265);
 	
 	var _domainsChartData2 = _interopRequireDefault(_domainsChartData);
 	
-	var _domainsChartDatum = __webpack_require__(267);
+	var _domainsChartDatum = __webpack_require__(266);
 	
 	var _domainsChartDatum2 = _interopRequireDefault(_domainsChartDatum);
 	
-	var _domainsChartValue = __webpack_require__(268);
+	var _domainsChartValue = __webpack_require__(267);
 	
 	var _domainsChartValue2 = _interopRequireDefault(_domainsChartValue);
 	
-	var _immutable = __webpack_require__(248);
+	var _immutable = __webpack_require__(247);
 	
 	var ChartDataFactory = (function () {
 	    function ChartDataFactory() {
@@ -46375,7 +46134,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 266 */
+/* 265 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -46414,7 +46173,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 267 */
+/* 266 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -46465,7 +46224,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 268 */
+/* 267 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -46507,7 +46266,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 269 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46522,7 +46281,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _componentsServiceSkillCloudLayout = __webpack_require__(270);
+	var _componentsServiceSkillCloudLayout = __webpack_require__(269);
 	
 	var _componentsServiceSkillCloudLayout2 = _interopRequireDefault(_componentsServiceSkillCloudLayout);
 	
@@ -46530,11 +46289,11 @@
 	
 	var React = _interopRequireWildcard(_react);
 	
-	var _matchCase = __webpack_require__(245);
+	var _matchCase = __webpack_require__(244);
 	
 	var _matchCase2 = _interopRequireDefault(_matchCase);
 	
-	var d3 = __webpack_require__(271);
+	var d3 = __webpack_require__(270);
 	var color = d3.scale.category10();
 	
 	var SkillCloudCanvas = (function (_Component) {
@@ -46760,7 +46519,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 270 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -46769,7 +46528,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var d3 = __webpack_require__(271);
+	var d3 = __webpack_require__(270);
 	var color = d3.scale.category20();
 	
 	var SkillCloudLayout = (function () {
@@ -46812,12 +46571,12 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 271 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
 	  var d3 = {
-	    version: "3.5.8"
+	    version: "3.5.15"
 	  };
 	  var d3_arraySlice = [].slice, d3_array = function(list) {
 	    return d3_arraySlice.call(list);
@@ -47037,20 +46796,20 @@
 	    while (i < n) pairs[i] = [ p0 = p1, p1 = array[++i] ];
 	    return pairs;
 	  };
-	  d3.zip = function() {
-	    if (!(n = arguments.length)) return [];
-	    for (var i = -1, m = d3.min(arguments, d3_zipLength), zips = new Array(m); ++i < m; ) {
-	      for (var j = -1, n, zip = zips[i] = new Array(n); ++j < n; ) {
-	        zip[j] = arguments[j][i];
+	  d3.transpose = function(matrix) {
+	    if (!(n = matrix.length)) return [];
+	    for (var i = -1, m = d3.min(matrix, d3_transposeLength), transpose = new Array(m); ++i < m; ) {
+	      for (var j = -1, n, row = transpose[i] = new Array(n); ++j < n; ) {
+	        row[j] = matrix[j][i];
 	      }
 	    }
-	    return zips;
+	    return transpose;
 	  };
-	  function d3_zipLength(d) {
+	  function d3_transposeLength(d) {
 	    return d.length;
 	  }
-	  d3.transpose = function(matrix) {
-	    return d3.zip.apply(d3, matrix);
+	  d3.zip = function() {
+	    return d3.transpose(arguments);
 	  };
 	  d3.keys = function(map) {
 	    var keys = [];
@@ -47622,7 +47381,7 @@
 	  function d3_selection_creator(name) {
 	    function create() {
 	      var document = this.ownerDocument, namespace = this.namespaceURI;
-	      return namespace ? document.createElementNS(namespace, name) : document.createElement(name);
+	      return namespace && namespace !== document.documentElement.namespaceURI ? document.createElementNS(namespace, name) : document.createElement(name);
 	    }
 	    function createNS() {
 	      return this.ownerDocument.createElementNS(name.space, name.local);
@@ -48021,7 +47780,7 @@
 	    }
 	    function dragstart(id, position, subject, move, end) {
 	      return function() {
-	        var that = this, target = d3.event.target, parent = that.parentNode, dispatch = event.of(that, arguments), dragged = 0, dragId = id(), dragName = ".drag" + (dragId == null ? "" : "-" + dragId), dragOffset, dragSubject = d3.select(subject(target)).on(move + dragName, moved).on(end + dragName, ended), dragRestore = d3_event_dragSuppress(target), position0 = position(parent, dragId);
+	        var that = this, target = d3.event.target.correspondingElement || d3.event.target, parent = that.parentNode, dispatch = event.of(that, arguments), dragged = 0, dragId = id(), dragName = ".drag" + (dragId == null ? "" : "-" + dragId), dragOffset, dragSubject = d3.select(subject(target)).on(move + dragName, moved).on(end + dragName, ended), dragRestore = d3_event_dragSuppress(target), position0 = position(parent, dragId);
 	        if (origin) {
 	          dragOffset = origin.apply(that, arguments);
 	          dragOffset = [ dragOffset.x - position0[0], dragOffset.y - position0[1] ];
@@ -48049,7 +47808,7 @@
 	        function ended() {
 	          if (!position(parent, dragId)) return;
 	          dragSubject.on(move + dragName, null).on(end + dragName, null);
-	          dragRestore(dragged && d3.event.target === target);
+	          dragRestore(dragged);
 	          dispatch({
 	            type: "dragend"
 	          });
@@ -48287,7 +48046,7 @@
 	      }), center0 = null;
 	    }
 	    function mousedowned() {
-	      var that = this, target = d3.event.target, dispatch = event.of(that, arguments), dragged = 0, subject = d3.select(d3_window(that)).on(mousemove, moved).on(mouseup, ended), location0 = location(d3.mouse(that)), dragRestore = d3_event_dragSuppress(that);
+	      var that = this, dispatch = event.of(that, arguments), dragged = 0, subject = d3.select(d3_window(that)).on(mousemove, moved).on(mouseup, ended), location0 = location(d3.mouse(that)), dragRestore = d3_event_dragSuppress(that);
 	      d3_selection_interrupt.call(that);
 	      zoomstarted(dispatch);
 	      function moved() {
@@ -48297,7 +48056,7 @@
 	      }
 	      function ended() {
 	        subject.on(mousemove, null).on(mouseup, null);
-	        dragRestore(dragged && d3.event.target === target);
+	        dragRestore(dragged);
 	        zoomended(dispatch);
 	      }
 	    }
@@ -52974,7 +52733,7 @@
 	          index: di,
 	          startAngle: x0,
 	          endAngle: x,
-	          value: (x - x0) / k
+	          value: groupSums[di]
 	        };
 	        x += padding;
 	      }
@@ -53184,7 +52943,7 @@
 	          alpha = x;
 	        } else {
 	          timer.c = null, timer.t = NaN, timer = null;
-	          event.start({
+	          event.end({
 	            type: "end",
 	            alpha: alpha = 0
 	          });
@@ -54382,7 +54141,9 @@
 	    return d3.rebind(scale, linear, "range", "rangeRound", "interpolate", "clamp");
 	  }
 	  function d3_scale_linearNice(domain, m) {
-	    return d3_scale_nice(domain, d3_scale_niceStep(d3_scale_linearTickRange(domain, m)[2]));
+	    d3_scale_nice(domain, d3_scale_niceStep(d3_scale_linearTickRange(domain, m)[2]));
+	    d3_scale_nice(domain, d3_scale_niceStep(d3_scale_linearTickRange(domain, m)[2]));
+	    return domain;
 	  }
 	  function d3_scale_linearTickRange(domain, m) {
 	    if (m == null) m = 10;
@@ -54484,10 +54245,11 @@
 	    scale.tickFormat = function(n, format) {
 	      if (!arguments.length) return d3_scale_logFormat;
 	      if (arguments.length < 2) format = d3_scale_logFormat; else if (typeof format !== "function") format = d3.format(format);
-	      var k = Math.max(.1, n / scale.ticks().length), f = positive ? (e = 1e-12, Math.ceil) : (e = -1e-12, 
-	      Math.floor), e;
+	      var k = Math.max(1, base * n / scale.ticks().length);
 	      return function(d) {
-	        return d / pow(f(log(d) + e)) <= k ? format(d) : "";
+	        var i = d / pow(Math.round(log(d)));
+	        if (i * base < base - .5) i *= base;
+	        return i <= k ? format(d) : "";
 	      };
 	    };
 	    scale.copy = function() {
@@ -55744,6 +55506,14 @@
 	          delete lock[cancelId];
 	        }
 	      }
+	      timer.c = tick;
+	      d3_timer(function() {
+	        if (timer.c && tick(elapsed || 1)) {
+	          timer.c = null;
+	          timer.t = NaN;
+	        }
+	        return 1;
+	      }, 0, time);
 	      lock.active = id;
 	      transition.event && transition.event.start.call(node, node.__data__, i);
 	      tweens = [];
@@ -55754,14 +55524,6 @@
 	      });
 	      ease = transition.ease;
 	      duration = transition.duration;
-	      timer.c = tick;
-	      d3_timer(function() {
-	        if (timer.c && tick(elapsed || 1)) {
-	          timer.c = null;
-	          timer.t = NaN;
-	        }
-	        return 1;
-	      }, 0, time);
 	    }
 	    function tick(elapsed) {
 	      var t = elapsed / duration, e = ease(t), n = tweens.length;
@@ -56363,11 +56125,11 @@
 	  d3.xml = d3_xhrType(function(request) {
 	    return request.responseXML;
 	  });
-	  if (true) !(__WEBPACK_AMD_DEFINE_FACTORY__ = (this.d3 = d3), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); else if (typeof module === "object" && module.exports) module.exports = d3; else this.d3 = d3;
+	  if (true) this.d3 = d3, !(__WEBPACK_AMD_DEFINE_FACTORY__ = (d3), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); else if (typeof module === "object" && module.exports) module.exports = d3; else this.d3 = d3;
 	}();
 
 /***/ },
-/* 272 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56382,7 +56144,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _componentsServiceChartDrawer = __webpack_require__(273);
+	var _componentsServiceChartDrawer = __webpack_require__(272);
 	
 	var _componentsServiceChartDrawer2 = _interopRequireDefault(_componentsServiceChartDrawer);
 	
@@ -56390,8 +56152,8 @@
 	
 	var React = _interopRequireWildcard(_react);
 	
-	var d3 = __webpack_require__(271);
-	var nv = __webpack_require__(274);
+	var d3 = __webpack_require__(270);
+	var nv = __webpack_require__(273);
 	
 	var ChartCanvas = (function (_Component) {
 	    _inherits(ChartCanvas, _Component);
@@ -56439,7 +56201,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 273 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56448,8 +56210,8 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var d3 = __webpack_require__(271);
-	var nv = __webpack_require__(274);
+	var d3 = __webpack_require__(270);
+	var nv = __webpack_require__(273);
 	
 	var ChartDrawer = (function () {
 	    function ChartDrawer(svgElement) {
@@ -56488,10 +56250,10 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 274 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* nvd3 version 1.8.1 (https://github.com/novus/nvd3) 2015-06-15 */
+	/* nvd3 version 1.8.2 (https://github.com/novus/nvd3) 2016-01-24 */
 	(function(){
 	
 	// set up main nv object
@@ -56677,26 +56439,21 @@
 	nv.interactiveGuideline = function() {
 	    "use strict";
 	
-	    var tooltip = nv.models.tooltip();
-	    tooltip.duration(0).hideDelay(0)._isInteractiveLayer(true).hidden(false);
+	    var margin = { left: 0, top: 0 } //Pass the chart's top and left magins. Used to calculate the mouseX/Y.
+	        ,   width = null
+	        ,   height = null
+	        ,   xScale = d3.scale.linear()
+	        ,   dispatch = d3.dispatch('elementMousemove', 'elementMouseout', 'elementClick', 'elementDblclick', 'elementMouseDown', 'elementMouseUp')
+	        ,   showGuideLine = true
+	        ,   svgContainer = null // Must pass the chart's svg, we'll use its mousemove event.
+	        ,   tooltip = nv.models.tooltip()
+	        ,   isMSIE = "ActiveXObject" in window // Checkt if IE by looking for activeX.
+	    ;
 	
-	    //Public settings
-	    var width = null;
-	    var height = null;
-	
-	    //Please pass in the bounding chart's top and left margins
-	    //This is important for calculating the correct mouseX/Y positions.
-	    var margin = {left: 0, top: 0}
-	        , xScale = d3.scale.linear()
-	        , dispatch = d3.dispatch('elementMousemove', 'elementMouseout', 'elementClick', 'elementDblclick')
-	        , showGuideLine = true;
-	    //Must pass in the bounding chart's <svg> container.
-	    //The mousemove event is attached to this container.
-	    var svgContainer = null;
-	
-	    // check if IE by looking for activeX
-	    var isMSIE = "ActiveXObject" in window;
-	
+	    tooltip
+	        .duration(0)
+	        .hideDelay(0)
+	        .hidden(false);
 	
 	    function layer(selection) {
 	        selection.each(function(data) {
@@ -56782,7 +56539,31 @@
 	                    tooltip.hidden(false);
 	                }
 	
-	                var pointXValue = xScale.invert(mouseX);
+	
+	                var scaleIsOrdinal = typeof xScale.rangeBands === 'function';
+	                var pointXValue = undefined;
+	
+	                // Ordinal scale has no invert method
+	                if (scaleIsOrdinal) {
+	                    var elementIndex = d3.bisect(xScale.range(), mouseX) - 1;
+	                    // Check if mouseX is in the range band
+	                    if (xScale.range()[elementIndex] + xScale.rangeBand() >= mouseX) {
+	                        pointXValue = xScale.domain()[d3.bisect(xScale.range(), mouseX) - 1];
+	                    }
+	                    else {
+	                        dispatch.elementMouseout({
+	                            mouseX: mouseX,
+	                            mouseY: mouseY
+	                        });
+	                        layer.renderGuideLine(null); //hide the guideline
+	                        tooltip.hidden(true);
+	                        return;
+	                    }
+	                }
+	                else {
+	                    pointXValue = xScale.invert(mouseX);
+	                }
+	
 	                dispatch.elementMousemove({
 	                    mouseX: mouseX,
 	                    mouseY: mouseY,
@@ -56806,12 +56587,32 @@
 	                        pointXValue: pointXValue
 	                    });
 	                }
+	
+	                // if user presses mouse down the layer, fire elementMouseDown
+	                if (d3.event.type === 'mousedown') {
+	                	dispatch.elementMouseDown({
+	                		mouseX: mouseX,
+	                		mouseY: mouseY,
+	                		pointXValue: pointXValue
+	                	});
+	                }
+	
+	                // if user presses mouse down the layer, fire elementMouseUp
+	                if (d3.event.type === 'mouseup') {
+	                	dispatch.elementMouseUp({
+	                		mouseX: mouseX,
+	                		mouseY: mouseY,
+	                		pointXValue: pointXValue
+	                	});
+	                }
 	            }
 	
 	            svgContainer
 	                .on("touchmove",mouseHandler)
 	                .on("mousemove",mouseHandler, true)
 	                .on("mouseout" ,mouseHandler,true)
+	                .on("mousedown" ,mouseHandler,true)
+	                .on("mouseup" ,mouseHandler,true)
 	                .on("dblclick" ,mouseHandler)
 	                .on("click", mouseHandler)
 	            ;
@@ -56963,439 +56764,343 @@
 	    });
 	    return indexToHighlight;
 	};
-	/* Tooltip rendering model for nvd3 charts.
-	 window.nv.models.tooltip is the updated,new way to render tooltips.
 	
-	 window.nv.tooltip.show is the old tooltip code.
-	 window.nv.tooltip.* also has various helper methods.
+	/* Model which can be instantiated to handle tooltip rendering.
+	 Example usage:
+	 var tip = nv.models.tooltip().gravity('w').distance(23)
+	 .data(myDataObject);
+	
+	 tip();    //just invoke the returned function to render tooltip.
 	 */
-	(function() {
+	nv.models.tooltip = function() {
 	    "use strict";
 	
-	    /* Model which can be instantiated to handle tooltip rendering.
-	     Example usage:
-	     var tip = nv.models.tooltip().gravity('w').distance(23)
-	     .data(myDataObject);
+	    /*
+	    Tooltip data. If data is given in the proper format, a consistent tooltip is generated.
+	    Example Format of data:
+	    {
+	        key: "Date",
+	        value: "August 2009",
+	        series: [
+	            {key: "Series 1", value: "Value 1", color: "#000"},
+	            {key: "Series 2", value: "Value 2", color: "#00f"}
+	        ]
+	    }
+	    */
+	    var id = "nvtooltip-" + Math.floor(Math.random() * 100000) // Generates a unique id when you create a new tooltip() object.
+	        ,   data = null
+	        ,   gravity = 'w'   // Can be 'n','s','e','w'. Determines how tooltip is positioned.
+	        ,   distance = 25 // Distance to offset tooltip from the mouse location.
+	        ,   snapDistance = 0   // Tolerance allowed before tooltip is moved from its current position (creates 'snapping' effect)
+	        ,   classes = null  // Attaches additional CSS classes to the tooltip DIV that is created.
+	        ,   chartContainer = null // Parent dom element of the SVG that holds the chart.
+	        ,   hidden = true  // Start off hidden, toggle with hide/show functions below.
+	        ,   hideDelay = 200  // Delay (in ms) before the tooltip hides after calling hide().
+	        ,   tooltip = null // d3 select of the tooltip div.
+	        ,   lastPosition = { left: null, top: null } // Last position the tooltip was in.
+	        ,   enabled = true  // True -> tooltips are rendered. False -> don't render tooltips.
+	        ,   duration = 100 // Tooltip movement duration, in ms.
+	        ,   headerEnabled = true // If is to show the tooltip header.
+	        ,   nvPointerEventsClass = "nv-pointer-events-none" // CSS class to specify whether element should not have mouse events.
+	    ;
 	
-	     tip();    //just invoke the returned function to render tooltip.
+	    /*
+	     Function that returns the position (relative to the viewport) the tooltip should be placed in.
+	     Should return: {
+	        left: <leftPos>,
+	        top: <topPos>
+	     }
 	     */
-	    nv.models.tooltip = function() {
-	
-	        /*
-	        Tooltip data. If data is given in the proper format, a consistent tooltip is generated.
-	        Example Format of data:
-	        {
-	            key: "Date",
-	            value: "August 2009",
-	            series: [
-	                {key: "Series 1", value: "Value 1", color: "#000"},
-	                {key: "Series 2", value: "Value 2", color: "#00f"}
-	            ]
-	        }
-	        */
-	        var data = null;
-	        var gravity = 'w'   //Can be 'n','s','e','w'. Determines how tooltip is positioned.
-	            ,   distance = 25   //Distance to offset tooltip from the mouse location.
-	            ,   snapDistance = 0   //Tolerance allowed before tooltip is moved from its current position (creates 'snapping' effect)
-	            ,   fixedTop = null //If not null, this fixes the top position of the tooltip.
-	            ,   classes = null  //Attaches additional CSS classes to the tooltip DIV that is created.
-	            ,   chartContainer = null   //Parent dom element of the SVG that holds the chart.
-	            ,   hidden = true  // start off hidden, toggle with hide/show functions below
-	            ,   hideDelay = 400  // delay before the tooltip hides after calling hide()
-	            ,   tooltip = null // d3 select of tooltipElem below
-	            ,   tooltipElem = null  //actual DOM element representing the tooltip.
-	            ,   position = {left: null, top: null}   //Relative position of the tooltip inside chartContainer.
-	            ,   offset = {left: 0, top: 0}   //Offset of tooltip against the pointer
-	            ,   enabled = true  //True -> tooltips are rendered. False -> don't render tooltips.
-	            ,   duration = 100 // duration for tooltip movement
-	            ,   headerEnabled = true
-	        ;
-	
-	        // set to true by interactive layer to adjust tooltip positions
-	        // eventually we should probably fix interactive layer to get the position better.
-	        // for now this is needed if you want to set chartContainer for normal tooltips, else it "fixes" it to broken
-	        var isInteractiveLayer = false;
-	
-	        //Generates a unique id when you create a new tooltip() object
-	        var id = "nvtooltip-" + Math.floor(Math.random() * 100000);
-	
-	        //CSS class to specify whether element should not have mouse events.
-	        var  nvPointerEventsClass = "nv-pointer-events-none";
-	
-	        //Format function for the tooltip values column
-	        var valueFormatter = function(d,i) {
-	            return d;
+	    var position = function() {
+	        return {
+	            left: d3.event !== null ? d3.event.clientX : 0,
+	            top: d3.event !== null ? d3.event.clientY : 0
 	        };
-	
-	        //Format function for the tooltip header value.
-	        var headerFormatter = function(d) {
-	            return d;
-	        };
-	
-	        var keyFormatter = function(d, i) {
-	            return d;
-	        };
-	
-	        //By default, the tooltip model renders a beautiful table inside a DIV.
-	        //You can override this function if a custom tooltip is desired.
-	        var contentGenerator = function(d) {
-	            if (d === null) {
-	                return '';
-	            }
-	
-	            var table = d3.select(document.createElement("table"));
-	            if (headerEnabled) {
-	                var theadEnter = table.selectAll("thead")
-	                    .data([d])
-	                    .enter().append("thead");
-	
-	                theadEnter.append("tr")
-	                    .append("td")
-	                    .attr("colspan", 3)
-	                    .append("strong")
-	                    .classed("x-value", true)
-	                    .html(headerFormatter(d.value));
-	            }
-	
-	            var tbodyEnter = table.selectAll("tbody")
-	                .data([d])
-	                .enter().append("tbody");
-	
-	            var trowEnter = tbodyEnter.selectAll("tr")
-	                    .data(function(p) { return p.series})
-	                    .enter()
-	                    .append("tr")
-	                    .classed("highlight", function(p) { return p.highlight});
-	
-	            trowEnter.append("td")
-	                .classed("legend-color-guide",true)
-	                .append("div")
-	                .style("background-color", function(p) { return p.color});
-	
-	            trowEnter.append("td")
-	                .classed("key",true)
-	                .html(function(p, i) {return keyFormatter(p.key, i)});
-	
-	            trowEnter.append("td")
-	                .classed("value",true)
-	                .html(function(p, i) { return valueFormatter(p.value, i) });
-	
-	
-	            trowEnter.selectAll("td").each(function(p) {
-	                if (p.highlight) {
-	                    var opacityScale = d3.scale.linear().domain([0,1]).range(["#fff",p.color]);
-	                    var opacity = 0.6;
-	                    d3.select(this)
-	                        .style("border-bottom-color", opacityScale(opacity))
-	                        .style("border-top-color", opacityScale(opacity))
-	                    ;
-	                }
-	            });
-	
-	            var html = table.node().outerHTML;
-	            if (d.footer !== undefined)
-	                html += "<div class='footer'>" + d.footer + "</div>";
-	            return html;
-	
-	        };
-	
-	        var dataSeriesExists = function(d) {
-	            if (d && d.series) {
-	                if (d.series instanceof Array) {
-	                    return !!d.series.length;
-	                }
-	                // if object, it's okay just convert to array of the object
-	                if (d.series instanceof Object) {
-	                    d.series = [d.series];
-	                    return true;
-	                }
-	            }
-	            return false;
-	        };
-	
-	        var calcTooltipPosition = function(pos) {
-	            if (!tooltipElem) return;
-	
-	            nv.dom.read(function() {
-	                var height = parseInt(tooltipElem.offsetHeight, 10),
-	                    width = parseInt(tooltipElem.offsetWidth, 10),
-	                    windowWidth = nv.utils.windowSize().width,
-	                    windowHeight = nv.utils.windowSize().height,
-	                    scrollTop = window.pageYOffset,
-	                    scrollLeft = window.pageXOffset,
-	                    left, top;
-	
-	                windowHeight = window.innerWidth >= document.body.scrollWidth ? windowHeight : windowHeight - 16;
-	                windowWidth = window.innerHeight >= document.body.scrollHeight ? windowWidth : windowWidth - 16;
-	
-	
-	                //Helper functions to find the total offsets of a given DOM element.
-	                //Looks up the entire ancestry of an element, up to the first relatively positioned element.
-	                var tooltipTop = function ( Elem ) {
-	                    var offsetTop = top;
-	                    do {
-	                        if( !isNaN( Elem.offsetTop ) ) {
-	                            offsetTop += (Elem.offsetTop);
-	                        }
-	                        Elem = Elem.offsetParent;
-	                    } while( Elem );
-	                    return offsetTop;
-	                };
-	                var tooltipLeft = function ( Elem ) {
-	                    var offsetLeft = left;
-	                    do {
-	                        if( !isNaN( Elem.offsetLeft ) ) {
-	                            offsetLeft += (Elem.offsetLeft);
-	                        }
-	                        Elem = Elem.offsetParent;
-	                    } while( Elem );
-	                    return offsetLeft;
-	                };
-	
-	                // calculate position based on gravity
-	                var tLeft, tTop;
-	                switch (gravity) {
-	                    case 'e':
-	                        left = pos[0] - width - distance;
-	                        top = pos[1] - (height / 2);
-	                        tLeft = tooltipLeft(tooltipElem);
-	                        tTop = tooltipTop(tooltipElem);
-	                        if (tLeft < scrollLeft) left = pos[0] + distance > scrollLeft ? pos[0] + distance : scrollLeft - tLeft + left;
-	                        if (tTop < scrollTop) top = scrollTop - tTop + top;
-	                        if (tTop + height > scrollTop + windowHeight) top = scrollTop + windowHeight - tTop + top - height;
-	                        break;
-	                    case 'w':
-	                        left = pos[0] + distance;
-	                        top = pos[1] - (height / 2);
-	                        tLeft = tooltipLeft(tooltipElem);
-	                        tTop = tooltipTop(tooltipElem);
-	                        if (tLeft + width > windowWidth) left = pos[0] - width - distance;
-	                        if (tTop < scrollTop) top = scrollTop + 5;
-	                        if (tTop + height > scrollTop + windowHeight) top = scrollTop + windowHeight - tTop + top - height;
-	                        break;
-	                    case 'n':
-	                        left = pos[0] - (width / 2) - 5;
-	                        top = pos[1] + distance;
-	                        tLeft = tooltipLeft(tooltipElem);
-	                        tTop = tooltipTop(tooltipElem);
-	                        if (tLeft < scrollLeft) left = scrollLeft + 5;
-	                        if (tLeft + width > windowWidth) left = left - width/2 + 5;
-	                        if (tTop + height > scrollTop + windowHeight) top = scrollTop + windowHeight - tTop + top - height;
-	                        break;
-	                    case 's':
-	                        left = pos[0] - (width / 2);
-	                        top = pos[1] - height - distance;
-	                        tLeft = tooltipLeft(tooltipElem);
-	                        tTop = tooltipTop(tooltipElem);
-	                        if (tLeft < scrollLeft) left = scrollLeft + 5;
-	                        if (tLeft + width > windowWidth) left = left - width/2 + 5;
-	                        if (scrollTop > tTop) top = scrollTop;
-	                        break;
-	                    case 'none':
-	                        left = pos[0];
-	                        top = pos[1] - distance;
-	                        tLeft = tooltipLeft(tooltipElem);
-	                        tTop = tooltipTop(tooltipElem);
-	                        break;
-	                }
-	                
-	                // adjust tooltip offsets
-	                left -= offset.left;
-	                top -= offset.top;
-	
-	                // using tooltip.style('transform') returns values un-usable for tween
-	                var box = tooltipElem.getBoundingClientRect();
-	                var scrollTop  = window.pageYOffset || document.documentElement.scrollTop;
-	                var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-	                var old_translate = 'translate(' + (box.left + scrollLeft) + 'px, ' + (box.top + scrollTop) + 'px)';
-	                var new_translate = 'translate(' + left + 'px, ' + top + 'px)';
-	                var translateInterpolator = d3.interpolateString(old_translate, new_translate);
-	
-	                var is_hidden = tooltip.style('opacity') < 0.1;
-	
-	                // delay hiding a bit to avoid flickering
-	                if (hidden) {
-	                    tooltip
-	                        .transition()
-	                        .delay(hideDelay)
-	                        .duration(0)
-	                        .style('opacity', 0);
-	                } else {
-	                    tooltip
-	                        .interrupt() // cancel running transitions
-	                        .transition()
-	                        .duration(is_hidden ? 0 : duration)
-	                        // using tween since some versions of d3 can't auto-tween a translate on a div
-	                        .styleTween('transform', function (d) {
-	                            return translateInterpolator;
-	                        }, 'important')
-	                        // Safari has its own `-webkit-transform` and does not support `transform` 
-	                        // transform tooltip without transition only in Safari
-	                        .style('-webkit-transform', new_translate)
-	                        .style('opacity', 1);
-	                }
-	
-	
-	
-	            });
-	        };
-	
-	        //In situations where the chart is in a 'viewBox', re-position the tooltip based on how far chart is zoomed.
-	        function convertViewBoxRatio() {
-	            if (chartContainer) {
-	                var svg = d3.select(chartContainer);
-	                if (svg.node().tagName !== "svg") {
-	                    svg = svg.select("svg");
-	                }
-	                var viewBox = (svg.node()) ? svg.attr('viewBox') : null;
-	                if (viewBox) {
-	                    viewBox = viewBox.split(' ');
-	                    var ratio = parseInt(svg.style('width'), 10) / viewBox[2];
-	
-	                    position.left = position.left * ratio;
-	                    position.top  = position.top * ratio;
-	                }
-	            }
-	        }
-	
-	        //Creates new tooltip container, or uses existing one on DOM.
-	        function initTooltip() {
-	            if (!tooltip) {
-	                var body;
-	                if (chartContainer) {
-	                    body = chartContainer;
-	                } else {
-	                    body = document.body;
-	                }
-	                //Create new tooltip div if it doesn't exist on DOM.
-	                tooltip = d3.select(body).append("div")
-	                    .attr("class", "nvtooltip " + (classes ? classes : "xy-tooltip"))
-	                    .attr("id", id);
-	                tooltip.style("top", 0).style("left", 0);
-	                tooltip.style('opacity', 0);
-	                tooltip.selectAll("div, table, td, tr").classed(nvPointerEventsClass, true);
-	                tooltip.classed(nvPointerEventsClass, true);
-	                tooltipElem = tooltip.node();
-	            }
-	        }
-	
-	        //Draw the tooltip onto the DOM.
-	        function nvtooltip() {
-	            if (!enabled) return;
-	            if (!dataSeriesExists(data)) return;
-	
-	            convertViewBoxRatio();
-	
-	            var left = position.left;
-	            var top = (fixedTop !== null) ? fixedTop : position.top;
-	
-	            nv.dom.write(function () {
-	                initTooltip();
-	                // generate data and set it into tooltip
-	                // Bonus - If you override contentGenerator and return falsey you can use something like
-	                //         React or Knockout to bind the data for your tooltip
-	                var newContent = contentGenerator(data);
-	                if (newContent) {
-	                    tooltipElem.innerHTML = newContent;
-	                }
-	
-	                if (chartContainer && isInteractiveLayer) {
-	                    nv.dom.read(function() {
-	                        var svgComp = chartContainer.getElementsByTagName("svg")[0];
-	                        var svgOffset = {left:0,top:0};
-	                        if (svgComp) {
-	                            var svgBound = svgComp.getBoundingClientRect();
-	                            var chartBound = chartContainer.getBoundingClientRect();
-	                            var svgBoundTop = svgBound.top;
-	
-	                            //Defensive code. Sometimes, svgBoundTop can be a really negative
-	                            //  number, like -134254. That's a bug.
-	                            //  If such a number is found, use zero instead. FireFox bug only
-	                            if (svgBoundTop < 0) {
-	                                var containerBound = chartContainer.getBoundingClientRect();
-	                                svgBoundTop = (Math.abs(svgBoundTop) > containerBound.height) ? 0 : svgBoundTop;
-	                            }
-	                            svgOffset.top = Math.abs(svgBoundTop - chartBound.top);
-	                            svgOffset.left = Math.abs(svgBound.left - chartBound.left);
-	                        }
-	                        //If the parent container is an overflow <div> with scrollbars, subtract the scroll offsets.
-	                        //You need to also add any offset between the <svg> element and its containing <div>
-	                        //Finally, add any offset of the containing <div> on the whole page.
-	                        left += chartContainer.offsetLeft + svgOffset.left - 2*chartContainer.scrollLeft;
-	                        top += chartContainer.offsetTop + svgOffset.top - 2*chartContainer.scrollTop;
-	
-	                        if (snapDistance && snapDistance > 0) {
-	                            top = Math.floor(top/snapDistance) * snapDistance;
-	                        }
-	                        calcTooltipPosition([left,top]);
-	                    });
-	                } else {
-	                    calcTooltipPosition([left,top]);
-	                }
-	            });
-	
-	            return nvtooltip;
-	        }
-	
-	        nvtooltip.nvPointerEventsClass = nvPointerEventsClass;
-	        nvtooltip.options = nv.utils.optionsFunc.bind(nvtooltip);
-	
-	        nvtooltip._options = Object.create({}, {
-	            // simple read/write options
-	            duration: {get: function(){return duration;}, set: function(_){duration=_;}},
-	            gravity: {get: function(){return gravity;}, set: function(_){gravity=_;}},
-	            distance: {get: function(){return distance;}, set: function(_){distance=_;}},
-	            snapDistance: {get: function(){return snapDistance;}, set: function(_){snapDistance=_;}},
-	            classes: {get: function(){return classes;}, set: function(_){classes=_;}},
-	            chartContainer: {get: function(){return chartContainer;}, set: function(_){chartContainer=_;}},
-	            fixedTop: {get: function(){return fixedTop;}, set: function(_){fixedTop=_;}},
-	            enabled: {get: function(){return enabled;}, set: function(_){enabled=_;}},
-	            hideDelay: {get: function(){return hideDelay;}, set: function(_){hideDelay=_;}},
-	            contentGenerator: {get: function(){return contentGenerator;}, set: function(_){contentGenerator=_;}},
-	            valueFormatter: {get: function(){return valueFormatter;}, set: function(_){valueFormatter=_;}},
-	            headerFormatter: {get: function(){return headerFormatter;}, set: function(_){headerFormatter=_;}},
-	            keyFormatter: {get: function(){return keyFormatter;}, set: function(_){keyFormatter=_;}},
-	            headerEnabled:   {get: function(){return headerEnabled;}, set: function(_){headerEnabled=_;}},
-	
-	            // internal use only, set by interactive layer to adjust position.
-	            _isInteractiveLayer: {get: function(){return isInteractiveLayer;}, set: function(_){isInteractiveLayer=!!_;}},
-	
-	            // options with extra logic
-	            position: {get: function(){return position;}, set: function(_){
-	                position.left = _.left !== undefined ? _.left : position.left;
-	                position.top  = _.top  !== undefined ? _.top  : position.top;
-	            }},
-	            offset: {get: function(){return offset;}, set: function(_){
-	                offset.left = _.left !== undefined ? _.left : offset.left;
-	                offset.top  = _.top  !== undefined ? _.top  : offset.top;
-	            }},
-	            hidden: {get: function(){return hidden;}, set: function(_){
-	                if (hidden != _) {
-	                    hidden = !!_;
-	                    nvtooltip();
-	                }
-	            }},
-	            data: {get: function(){return data;}, set: function(_){
-	                // if showing a single data point, adjust data format with that
-	                if (_.point) {
-	                    _.value = _.point.x;
-	                    _.series = _.series || {};
-	                    _.series.value = _.point.y;
-	                    _.series.color = _.point.color || _.series.color;
-	                }
-	                data = _;
-	            }},
-	
-	            // read only properties
-	            tooltipElem: {get: function(){return tooltipElem;}, set: function(_){}},
-	            id: {get: function(){return id;}, set: function(_){}}
-	        });
-	
-	        nv.utils.initOptions(nvtooltip);
-	        return nvtooltip;
 	    };
 	
-	})();
+	    // Format function for the tooltip values column.
+	    var valueFormatter = function(d, i) {
+	        return d;
+	    };
+	
+	    // Format function for the tooltip header value.
+	    var headerFormatter = function(d) {
+	        return d;
+	    };
+	
+	    var keyFormatter = function(d, i) {
+	        return d;
+	    };
+	
+	    // By default, the tooltip model renders a beautiful table inside a DIV.
+	    // You can override this function if a custom tooltip is desired.
+	    var contentGenerator = function(d) {
+	        if (d === null) {
+	            return '';
+	        }
+	
+	        var table = d3.select(document.createElement("table"));
+	        if (headerEnabled) {
+	            var theadEnter = table.selectAll("thead")
+	                .data([d])
+	                .enter().append("thead");
+	
+	            theadEnter.append("tr")
+	                .append("td")
+	                .attr("colspan", 3)
+	                .append("strong")
+	                .classed("x-value", true)
+	                .html(headerFormatter(d.value));
+	        }
+	
+	        var tbodyEnter = table.selectAll("tbody")
+	            .data([d])
+	            .enter().append("tbody");
+	
+	        var trowEnter = tbodyEnter.selectAll("tr")
+	                .data(function(p) { return p.series})
+	                .enter()
+	                .append("tr")
+	                .classed("highlight", function(p) { return p.highlight});
+	
+	        trowEnter.append("td")
+	            .classed("legend-color-guide",true)
+	            .append("div")
+	            .style("background-color", function(p) { return p.color});
+	
+	        trowEnter.append("td")
+	            .classed("key",true)
+	            .classed("total",function(p) { return !!p.total})
+	            .html(function(p, i) { return keyFormatter(p.key, i)});
+	
+	        trowEnter.append("td")
+	            .classed("value",true)
+	            .html(function(p, i) { return valueFormatter(p.value, i) });
+	
+	        trowEnter.selectAll("td").each(function(p) {
+	            if (p.highlight) {
+	                var opacityScale = d3.scale.linear().domain([0,1]).range(["#fff",p.color]);
+	                var opacity = 0.6;
+	                d3.select(this)
+	                    .style("border-bottom-color", opacityScale(opacity))
+	                    .style("border-top-color", opacityScale(opacity))
+	                ;
+	            }
+	        });
+	
+	        var html = table.node().outerHTML;
+	        if (d.footer !== undefined)
+	            html += "<div class='footer'>" + d.footer + "</div>";
+	        return html;
+	
+	    };
+	
+	    var dataSeriesExists = function(d) {
+	        if (d && d.series) {
+	            if (d.series instanceof Array) {
+	                return !!d.series.length;
+	            }
+	            // if object, it's okay just convert to array of the object
+	            if (d.series instanceof Object) {
+	                d.series = [d.series];
+	                return true;
+	            }
+	        }
+	        return false;
+	    };
+	
+	    // Calculates the gravity offset of the tooltip. Parameter is position of tooltip
+	    // relative to the viewport.
+	    var calcGravityOffset = function(pos) {
+	        var height = tooltip.node().offsetHeight,
+	            width = tooltip.node().offsetWidth,
+	            clientWidth = document.documentElement.clientWidth, // Don't want scrollbars.
+	            clientHeight = document.documentElement.clientHeight, // Don't want scrollbars.
+	            left, top, tmp;
+	
+	        // calculate position based on gravity
+	        switch (gravity) {
+	            case 'e':
+	                left = - width - distance;
+	                top = - (height / 2);
+	                if(pos.left + left < 0) left = distance;
+	                if((tmp = pos.top + top) < 0) top -= tmp;
+	                if((tmp = pos.top + top + height) > clientHeight) top -= tmp - clientHeight;
+	                break;
+	            case 'w':
+	                left = distance;
+	                top = - (height / 2);
+	                if (pos.left + left + width > clientWidth) left = - width - distance;
+	                if ((tmp = pos.top + top) < 0) top -= tmp;
+	                if ((tmp = pos.top + top + height) > clientHeight) top -= tmp - clientHeight;
+	                break;
+	            case 'n':
+	                left = - (width / 2) - 5; // - 5 is an approximation of the mouse's height.
+	                top = distance;
+	                if (pos.top + top + height > clientHeight) top = - height - distance;
+	                if ((tmp = pos.left + left) < 0) left -= tmp;
+	                if ((tmp = pos.left + left + width) > clientWidth) left -= tmp - clientWidth;
+	                break;
+	            case 's':
+	                left = - (width / 2);
+	                top = - height - distance;
+	                if (pos.top + top < 0) top = distance;
+	                if ((tmp = pos.left + left) < 0) left -= tmp;
+	                if ((tmp = pos.left + left + width) > clientWidth) left -= tmp - clientWidth;
+	                break;
+	            case 'center':
+	                left = - (width / 2);
+	                top = - (height / 2);
+	                break;
+	            default:
+	                left = 0;
+	                top = 0;
+	                break;
+	        }
+	
+	        return { 'left': left, 'top': top };
+	    };
+	
+	    /*
+	     Positions the tooltip in the correct place, as given by the position() function.
+	     */
+	    var positionTooltip = function() {
+	        nv.dom.read(function() {
+	            var pos = position(),
+	                gravityOffset = calcGravityOffset(pos),
+	                left = pos.left + gravityOffset.left,
+	                top = pos.top + gravityOffset.top;
+	
+	            // delay hiding a bit to avoid flickering
+	            if (hidden) {
+	                tooltip
+	                    .interrupt()
+	                    .transition()
+	                    .delay(hideDelay)
+	                    .duration(0)
+	                    .style('opacity', 0);
+	            } else {
+	                // using tooltip.style('transform') returns values un-usable for tween
+	                var old_translate = 'translate(' + lastPosition.left + 'px, ' + lastPosition.top + 'px)';
+	                var new_translate = 'translate(' + left + 'px, ' + top + 'px)';
+	                var translateInterpolator = d3.interpolateString(old_translate, new_translate);
+	                var is_hidden = tooltip.style('opacity') < 0.1;
+	
+	                tooltip
+	                    .interrupt() // cancel running transitions
+	                    .transition()
+	                    .duration(is_hidden ? 0 : duration)
+	                    // using tween since some versions of d3 can't auto-tween a translate on a div
+	                    .styleTween('transform', function (d) {
+	                        return translateInterpolator;
+	                    }, 'important')
+	                    // Safari has its own `-webkit-transform` and does not support `transform`
+	                    .styleTween('-webkit-transform', function (d) {
+	                        return translateInterpolator;
+	                    })
+	                    .style('-ms-transform', new_translate)
+	                    .style('opacity', 1);
+	            }
+	
+	            lastPosition.left = left;
+	            lastPosition.top = top;
+	        });
+	    };
+	
+	    // Creates new tooltip container, or uses existing one on DOM.
+	    function initTooltip() {
+	        if (!tooltip) {
+	            var container = chartContainer ? chartContainer : document.body;
+	
+	            // Create new tooltip div if it doesn't exist on DOM.
+	            tooltip = d3.select(container).append("div")
+	                .attr("class", "nvtooltip " + (classes ? classes : "xy-tooltip"))
+	                .attr("id", id);
+	            tooltip.style("top", 0).style("left", 0);
+	            tooltip.style('opacity', 0);
+	            tooltip.style('position', 'fixed');
+	            tooltip.selectAll("div, table, td, tr").classed(nvPointerEventsClass, true);
+	            tooltip.classed(nvPointerEventsClass, true);
+	        }
+	    }
+	
+	    // Draw the tooltip onto the DOM.
+	    function nvtooltip() {
+	        if (!enabled) return;
+	        if (!dataSeriesExists(data)) return;
+	
+	        nv.dom.write(function () {
+	            initTooltip();
+	            // Generate data and set it into tooltip.
+	            // Bonus - If you override contentGenerator and return falsey you can use something like
+	            //         React or Knockout to bind the data for your tooltip.
+	            var newContent = contentGenerator(data);
+	            if (newContent) {
+	                tooltip.node().innerHTML = newContent;
+	            }
+	
+	            positionTooltip();
+	        });
+	
+	        return nvtooltip;
+	    }
+	
+	    nvtooltip.nvPointerEventsClass = nvPointerEventsClass;
+	    nvtooltip.options = nv.utils.optionsFunc.bind(nvtooltip);
+	
+	    nvtooltip._options = Object.create({}, {
+	        // simple read/write options
+	        duration: {get: function(){return duration;}, set: function(_){duration=_;}},
+	        gravity: {get: function(){return gravity;}, set: function(_){gravity=_;}},
+	        distance: {get: function(){return distance;}, set: function(_){distance=_;}},
+	        snapDistance: {get: function(){return snapDistance;}, set: function(_){snapDistance=_;}},
+	        classes: {get: function(){return classes;}, set: function(_){classes=_;}},
+	        chartContainer: {get: function(){return chartContainer;}, set: function(_){chartContainer=_;}},
+	        enabled: {get: function(){return enabled;}, set: function(_){enabled=_;}},
+	        hideDelay: {get: function(){return hideDelay;}, set: function(_){hideDelay=_;}},
+	        contentGenerator: {get: function(){return contentGenerator;}, set: function(_){contentGenerator=_;}},
+	        valueFormatter: {get: function(){return valueFormatter;}, set: function(_){valueFormatter=_;}},
+	        headerFormatter: {get: function(){return headerFormatter;}, set: function(_){headerFormatter=_;}},
+	        keyFormatter: {get: function(){return keyFormatter;}, set: function(_){keyFormatter=_;}},
+	        headerEnabled: {get: function(){return headerEnabled;}, set: function(_){headerEnabled=_;}},
+	        position: {get: function(){return position;}, set: function(_){position=_;}},
+	
+	        // Deprecated options
+	        fixedTop: {get: function(){return null;}, set: function(_){
+	            // deprecated after 1.8.1
+	            nv.deprecated('fixedTop', 'feature removed after 1.8.1');
+	        }},
+	        offset: {get: function(){return {left: 0, top: 0};}, set: function(_){
+	            // deprecated after 1.8.1
+	            nv.deprecated('offset', 'use chart.tooltip.distance() instead');
+	        }},
+	
+	        // options with extra logic
+	        hidden: {get: function(){return hidden;}, set: function(_){
+	            if (hidden != _) {
+	                hidden = !!_;
+	                nvtooltip();
+	            }
+	        }},
+	        data: {get: function(){return data;}, set: function(_){
+	            // if showing a single data point, adjust data format with that
+	            if (_.point) {
+	                _.value = _.point.x;
+	                _.series = _.series || {};
+	                _.series.value = _.point.y;
+	                _.series.color = _.point.color || _.series.color;
+	            }
+	            data = _;
+	        }},
+	
+	        // read only properties
+	        node: {get: function(){return tooltip.node();}, set: function(_){}},
+	        id: {get: function(){return id;}, set: function(_){}}
+	    });
+	
+	    nv.utils.initOptions(nvtooltip);
+	    return nvtooltip;
+	};
 	
 	
 	/*
@@ -57996,14 +57701,14 @@
 	Calculate the available height for a chart.
 	*/
 	nv.utils.availableHeight = function(height, container, margin) {
-	    return nv.utils.sanitizeHeight(height, container) - margin.top - margin.bottom;
+	    return Math.max(0,nv.utils.sanitizeHeight(height, container) - margin.top - margin.bottom);
 	};
 	
 	/*
 	Calculate the available width for a chart.
 	*/
 	nv.utils.availableWidth = function(width, container, margin) {
-	    return nv.utils.sanitizeWidth(width, container) - margin.left - margin.right;
+	    return Math.max(0,nv.utils.sanitizeWidth(width, container) - margin.left - margin.right);
 	};
 	
 	/*
@@ -58014,8 +57719,8 @@
 	        margin = opt.margin(),
 	        noData = opt.noData(),
 	        data = (noData == null) ? ["No Data Available."] : [noData],
-	        height = nv.utils.availableHeight(opt.height(), container, margin),
-	        width = nv.utils.availableWidth(opt.width(), container, margin),
+	        height = nv.utils.availableHeight(null, container, margin),
+	        width = nv.utils.availableWidth(null, container, margin),
 	        x = margin.left + width/2,
 	        y = margin.top + height/2;
 	
@@ -58035,7 +57740,61 @@
 	        .text(function(t){ return t; });
 	};
 	
-	nv.models.axis = function() {
+	/*
+	 Wrap long labels.
+	 */
+	nv.utils.wrapTicks = function (text, width) {
+	    text.each(function() {
+	        var text = d3.select(this),
+	            words = text.text().split(/\s+/).reverse(),
+	            word,
+	            line = [],
+	            lineNumber = 0,
+	            lineHeight = 1.1,
+	            y = text.attr("y"),
+	            dy = parseFloat(text.attr("dy")),
+	            tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+	        while (word = words.pop()) {
+	            line.push(word);
+	            tspan.text(line.join(" "));
+	            if (tspan.node().getComputedTextLength() > width) {
+	                line.pop();
+	                tspan.text(line.join(" "));
+	                line = [word];
+	                tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+	            }
+	        }
+	    });
+	};
+	
+	/*
+	Check equality of 2 array
+	*/
+	nv.utils.arrayEquals = function (array1, array2) {
+	    if (array1 === array2)
+	        return true;
+	
+	    if (!array1 || !array2)
+	        return false;
+	
+	    // compare lengths - can save a lot of time 
+	    if (array1.length != array2.length)
+	        return false;
+	
+	    for (var i = 0,
+	        l = array1.length; i < l; i++) {
+	        // Check if we have nested arrays
+	        if (array1[i] instanceof Array && array2[i] instanceof Array) {
+	            // recurse into the nested arrays
+	            if (!nv.arrayEquals(array1[i], array2[i]))
+	                return false;
+	        } else if (array1[i] != array2[i]) {
+	            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+	            return false;
+	        }
+	    }
+	    return true;
+	};nv.models.axis = function() {
 	    "use strict";
 	
 	    //============================================================
@@ -58109,13 +57868,14 @@
 	            switch (axis.orient()) {
 	                case 'top':
 	                    axisLabel.enter().append('text').attr('class', 'nv-axislabel');
-	                    if (scale.range().length < 2) {
-	                        w = 0;
-	                    } else if (scale.range().length === 2) {
-	                        w = scale.range()[1];
-	                    } else {
-	                        w = scale.range()[scale.range().length-1]+(scale.range()[1]-scale.range()[0]);
-	                    }
+	                  w = 0;
+	                  if (scale.range().length === 1) {
+	                    w = isOrdinal ? scale.range()[0] * 2 + scale.rangeBand() : 0;
+	                  } else if (scale.range().length === 2) {
+	                    w = isOrdinal ? scale.range()[0] + scale.range()[1] + scale.rangeBand() : scale.range()[1];
+	                  } else if ( scale.range().length > 2){
+	                    w = scale.range()[scale.range().length-1]+(scale.range()[1]-scale.range()[0]);
+	                  };
 	                    axisLabel
 	                        .attr('text-anchor', 'middle')
 	                        .attr('y', 0)
@@ -58167,15 +57927,25 @@
 	                        xTicks
 	                            .attr('transform', rotateLabelsRule)
 	                            .style('text-anchor', rotateLabels%360 > 0 ? 'start' : 'end');
+	                    } else {
+	                        if (staggerLabels) {
+	                            xTicks
+	                                .attr('transform', function(d,i) {
+	                                    return 'translate(0,' + (i % 2 == 0 ? '0' : '12') + ')'
+	                                });
+	                        } else {
+	                            xTicks.attr('transform', "translate(0,0)");
+	                        }
 	                    }
 	                    axisLabel.enter().append('text').attr('class', 'nv-axislabel');
-	                    if (scale.range().length < 2) {
-	                        w = 0;
+	                    w = 0;
+	                    if (scale.range().length === 1) {
+	                        w = isOrdinal ? scale.range()[0] * 2 + scale.rangeBand() : 0;
 	                    } else if (scale.range().length === 2) {
-	                        w = scale.range()[1];
-	                    } else {
+	                        w = isOrdinal ? scale.range()[0] + scale.range()[1] + scale.rangeBand() : scale.range()[1];
+	                    } else if ( scale.range().length > 2){
 	                        w = scale.range()[scale.range().length-1]+(scale.range()[1]-scale.range()[0]);
-	                    }
+	                    };
 	                    axisLabel
 	                        .attr('text-anchor', 'middle')
 	                        .attr('y', xLabelMargin)
@@ -58207,11 +57977,6 @@
 	                                return 'translate(' + nv.utils.NaNtoZero((scale(d) + (isOrdinal ? scale.rangeBand() / 2 : 0))) + ',0)'
 	                            });
 	                    }
-	                    if (staggerLabels)
-	                        xTicks
-	                            .attr('transform', function(d,i) {
-	                                return 'translate(0,' + (i % 2 == 0 ? '0' : '12') + ')'
-	                            });
 	
 	                    break;
 	                case 'right':
@@ -58748,7 +58513,7 @@
 	        , x
 	        , y
 	        , noData = "No Data Available."
-	        , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'beforeUpdate', 'renderEnd')
+	        , dispatch = d3.dispatch('beforeUpdate', 'renderEnd')
 	        , duration = 250
 	        ;
 	
@@ -58761,7 +58526,7 @@
 	        .orient((rightAlignYAxis) ? 'right' : 'left')
 	        .tickFormat(d3.format(',.1f'))
 	    ;
-	    
+	
 	    tooltip.duration(0);
 	
 	    //============================================================
@@ -58792,7 +58557,7 @@
 	            chart.container = this;
 	
 	            // Display No Data message if there's nothing to show. (quartiles required at minimum)
-	            if (!data || !data.length || 
+	            if (!data || !data.length ||
 	                    !data.filter(function(d) { return d.values.hasOwnProperty("Q1") && d.values.hasOwnProperty("Q2") && d.values.hasOwnProperty("Q3"); }).length) {
 	                var noDataText = container.selectAll('.nv-noData').data([noData]);
 	
@@ -58912,7 +58677,7 @@
 	    });
 	
 	    boxplot.dispatch.on('elementMousemove.tooltip', function(evt) {
-	        tooltip.position({top: d3.event.pageY, left: d3.event.pageX})();
+	        tooltip();
 	    });
 	
 	    //============================================================
@@ -58934,7 +58699,6 @@
 	        staggerLabels: {get: function(){return staggerLabels;}, set: function(_){staggerLabels=_;}},
 	        showXAxis: {get: function(){return showXAxis;}, set: function(_){showXAxis=_;}},
 	        showYAxis: {get: function(){return showYAxis;}, set: function(_){showYAxis=_;}},
-	        tooltips:    {get: function(){return tooltips;}, set: function(_){tooltips=_;}},
 	        tooltipContent:    {get: function(){return tooltip;}, set: function(_){tooltip=_;}},
 	        noData:    {get: function(){return noData;}, set: function(_){noData=_;}},
 	
@@ -58967,6 +58731,7 @@
 	
 	    return chart;
 	}
+	
 	// Chart design based on the recommendations of Stephen Few. Implementation
 	// based on the work of Clint Ivy, Jamie Love, and Jason Davies.
 	// http://projects.instantcognition.com/protovis/bulletchart/
@@ -58982,7 +58747,7 @@
 	        , orient = 'left' // TODO top & bottom
 	        , reverse = false
 	        , ranges = function(d) { return d.ranges }
-	        , markers = function(d) { return d.markers ? d.markers : [0] }
+	        , markers = function(d) { return d.markers ? d.markers : [] }
 	        , measures = function(d) { return d.measures }
 	        , rangeLabels = function(d) { return d.rangeLabels ? d.rangeLabels : [] }
 	        , markerLabels = function(d) { return d.markerLabels ? d.markerLabels : []  }
@@ -59108,7 +58873,6 @@
 	              .enter()
 	              .append('path')
 	              .attr('class', 'nv-markerTriangle')
-	              .attr('transform', function(d) { return 'translate(' + x1(d.value) + ',' + (availableHeight / 2) + ')' })
 	              .attr('d', 'M0,' + h3 + 'L' + h3 + ',' + (-h3) + ' ' + (-h3) + ',' + (-h3) + 'Z')
 	              .on('mouseover', function(d) {
 	                dispatch.elementMouseover({
@@ -59133,6 +58897,10 @@
 	                      color: d3.select(this).style("fill")
 	                  })
 	              });
+	
+	            g.selectAll("path.nv-markerTriangle")
+	              .data(markerData)
+	              .attr('transform', function(d) { return 'translate(' + x1(d.value) + ',' + (availableHeight / 2) + ')' });
 	
 	            wrap.selectAll('.nv-range')
 	                .on('mouseover', function(d,i) {
@@ -59219,17 +58987,19 @@
 	        , reverse = false
 	        , margin = {top: 5, right: 40, bottom: 20, left: 120}
 	        , ranges = function(d) { return d.ranges }
-	        , markers = function(d) { return d.markers ? d.markers : [0] }
+	        , markers = function(d) { return d.markers ? d.markers : [] }
 	        , measures = function(d) { return d.measures }
 	        , width = null
 	        , height = 55
 	        , tickFormat = null
 		, ticks = null
 	        , noData = null
-	        , dispatch = d3.dispatch('tooltipShow', 'tooltipHide')
+	        , dispatch = d3.dispatch()
 	        ;
 	
-	    tooltip.duration(0).headerEnabled(false);
+	    tooltip
+	        .duration(0)
+	        .headerEnabled(false);
 	
 	    function chart(selection) {
 	        selection.each(function(d, i) {
@@ -59268,7 +59038,7 @@
 	
 	            // Compute the new x-scale.
 	            var x1 = d3.scale.linear()
-	                .domain([0, Math.max(rangez[0], markerz[0], measurez[0])])  // TODO: need to allow forceX and forceY, and xDomain, yDomain
+	                .domain([0, Math.max(rangez[0], (markerz[0] || 0), measurez[0])])  // TODO: need to allow forceX and forceY, and xDomain, yDomain
 	                .range(reverse ? [availableWidth, 0] : [0, availableWidth]);
 	
 	            // Retrieve the old x-scale, if this is an update.
@@ -59367,7 +59137,7 @@
 	    });
 	
 	    bullet.dispatch.on('elementMousemove.tooltip', function(evt) {
-	        tooltip.position({top: d3.event.pageY, left: d3.event.pageX})();
+	        tooltip();
 	    });
 	
 	    //============================================================
@@ -59390,18 +59160,6 @@
 	        tickFormat:    {get: function(){return tickFormat;}, set: function(_){tickFormat=_;}},
 	        ticks:    {get: function(){return ticks;}, set: function(_){ticks=_;}},
 	        noData:    {get: function(){return noData;}, set: function(_){noData=_;}},
-	
-	        // deprecated options
-	        tooltips:    {get: function(){return tooltip.enabled();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltips', 'use chart.tooltip.enabled() instead');
-	            tooltip.enabled(!!_);
-	        }},
-	        tooltipContent:    {get: function(){return tooltip.contentGenerator();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltipContent', 'use chart.tooltip.contentGenerator() instead');
-	            tooltip.contentGenerator(_);
-	        }},
 	
 	        // options that require extra logic in the setter
 	        margin: {get: function(){return margin;}, set: function(_){
@@ -59454,7 +59212,7 @@
 	        , yDomain
 	        , xRange
 	        , yRange
-	        , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'stateChange', 'changeState', 'renderEnd', 'chartClick', 'elementClick', 'elementDblClick', 'elementMouseover', 'elementMouseout', 'elementMousemove')
+	        , dispatch = d3.dispatch('stateChange', 'changeState', 'renderEnd', 'chartClick', 'elementClick', 'elementDblClick', 'elementMouseover', 'elementMouseout', 'elementMousemove')
 	        ;
 	
 	    //============================================================
@@ -59532,8 +59290,10 @@
 	                .data(function(d) { return d });
 	            ticks.exit().remove();
 	
+	            var tickGroups = ticks.enter().append('g');
+	
 	            // The colors are currently controlled by CSS.
-	            var tickGroups = ticks.enter().append('g')
+	            ticks
 	                .attr('class', function(d, i, j) { return (getOpen(d, i) > getClose(d, i) ? 'nv-tick negative' : 'nv-tick positive') + ' nv-tick-' + j + '-' + i});
 	
 	            var lines = tickGroups.append('line')
@@ -59560,14 +59320,14 @@
 	                    return open > close ? y(close) - y(open) : y(open) - y(close);
 	                });
 	
-	            container.selectAll('.nv-candlestick-lines').transition()
+	            ticks.select('.nv-candlestick-lines').transition()
 	                .attr('transform', function(d, i) { return 'translate(' + x(getX(d, i)) + ',0)'; })
 	                .attr('x1', 0)
 	                .attr('y1', function(d, i) { return y(getHigh(d, i)); })
 	                .attr('x2', 0)
 	                .attr('y2', function(d, i) { return y(getLow(d, i)); });
 	
-	            container.selectAll('.nv-candlestick-rects').transition()
+	            ticks.select('.nv-candlestick-rects').transition()
 	                .attr('transform', function(d, i) {
 	                    return 'translate(' + (x(getX(d, i)) - barWidth/2) + ','
 	                    + (y(getY(d, i)) - (getOpen(d, i) > getClose(d, i) ? (y(getClose(d, i)) - y(getOpen(d, i))) : 0))
@@ -60120,7 +59880,6 @@
 	
 	                var xValue = xAxis.tickFormat()(chart.x()(singlePoint,pointIndex), pointIndex);
 	                interactiveLayer.tooltip
-	                    .position({left: pointXLocation + margin.left, top: e.mouseY + margin.top})
 	                    .chartContainer(that.parentNode)
 	                    .valueFormatter(function(d,i) {
 	                        return yAxis.tickFormat()(d);
@@ -60184,7 +59943,7 @@
 	            color: evt.point.color
 	        };
 	        evt.point = point;
-	        tooltip.data(evt).position(evt.pos).hidden(false);
+	        tooltip.data(evt).hidden(false);
 	    });
 	
 	    lines.dispatch.on('elementMouseout.tooltip', function(evt) {
@@ -60258,18 +60017,6 @@
 	        showXAxis:    {get: function(){return showXAxis;}, set: function(_){showXAxis=_;}},
 	        showYAxis:    {get: function(){return showYAxis;}, set: function(_){showYAxis=_;}},
 	        noErrorCheck:    {get: function(){return noErrorCheck;}, set: function(_){noErrorCheck=_;}},
-	
-	        // deprecated options
-	        tooltips:    {get: function(){return tooltip.enabled();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltips', 'use chart.tooltip.enabled() instead');
-	            tooltip.enabled(!!_);
-	        }},
-	        tooltipContent:    {get: function(){return tooltip.contentGenerator();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltipContent', 'use chart.tooltip.contentGenerator() instead');
-	            tooltip.contentGenerator(_);
-	        }},
 	
 	        // options that require extra logic in the setter
 	        margin: {get: function(){return margin;}, set: function(_){
@@ -60441,10 +60188,13 @@
 	                    });
 	                })
 	                .on('click', function(d,i) {
+	                    var element = this;
 	                    dispatch.elementClick({
 	                        data: d,
 	                        index: i,
-	                        color: d3.select(this).style("fill")
+	                        color: d3.select(this).style("fill"),
+	                        event: d3.event,
+	                        element: element
 	                    });
 	                    d3.event.stopPropagation();
 	                })
@@ -60499,7 +60249,7 @@
 	                })
 	                .select('rect')
 	                .attr('height', function(d,i) {
-	                    return  Math.max(Math.abs(y(getY(d,i)) - y((yDomain && yDomain[0]) || 0)) || 1)
+	                    return  Math.max(Math.abs(y(getY(d,i)) - y(0)), 1)
 	                });
 	
 	
@@ -60569,6 +60319,7 @@
 	    var discretebar = nv.models.discreteBar()
 	        , xAxis = nv.models.axis()
 	        , yAxis = nv.models.axis()
+		, legend = nv.models.legend()
 	        , tooltip = nv.models.tooltip()
 	        ;
 	
@@ -60576,10 +60327,13 @@
 	        , width = null
 	        , height = null
 	        , color = nv.utils.getColor()
+		, showLegend = false
 	        , showXAxis = true
 	        , showYAxis = true
 	        , rightAlignYAxis = false
 	        , staggerLabels = false
+	        , wrapLabels = false
+	        , rotateLabels = 0
 	        , x
 	        , y
 	        , noData = null
@@ -60656,8 +60410,30 @@
 	                .append('line');
 	
 	            gEnter.append('g').attr('class', 'nv-barsWrap');
+		    gEnter.append('g').attr('class', 'nv-legendWrap');
 	
 	            g.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+		    
+	            if (showLegend) {
+	                legend.width(availableWidth);
+	
+	                g.select('.nv-legendWrap')
+	                    .datum(data)
+	                    .call(legend);
+	
+	                if ( margin.top != legend.height()) {
+	                    margin.top = legend.height();
+	                    availableHeight = nv.utils.availableHeight(height, container, margin);
+	                }
+	
+	                wrap.select('.nv-legendWrap')
+	                    .attr('transform', 'translate(0,' + (-margin.top) +')')
+	            }
+	            
+	            if (rightAlignYAxis) {
+	                g.select(".nv-y.nv-axis")
+	                    .attr("transform", "translate(" + availableWidth + ",0)");
+	            }	    
 	
 	            if (rightAlignYAxis) {
 	                g.select(".nv-y.nv-axis")
@@ -60701,6 +60477,18 @@
 	                        .selectAll('text')
 	                        .attr('transform', function(d,i,j) { return 'translate(0,' + (j % 2 == 0 ? '5' : '17') + ')' })
 	                }
+	
+	                if (rotateLabels) {
+	                    xTicks
+	                        .selectAll('.tick text')
+	                        .attr('transform', 'rotate(' + rotateLabels + ' 0,0)')
+	                        .style('text-anchor', rotateLabels > 0 ? 'start' : 'end');
+	                }
+	
+	                if (wrapLabels) {
+	                    g.selectAll('.tick text')
+	                        .call(nv.utils.wrapTicks, chart.xAxis.rangeBand())
+	                }
 	            }
 	
 	            if (showYAxis) {
@@ -60715,7 +60503,7 @@
 	            // Zero line
 	            g.select(".nv-zeroLine line")
 	                .attr("x1",0)
-	                .attr("x2",availableWidth)
+	                .attr("x2",(rightAlignYAxis) ? -availableWidth : availableWidth)
 	                .attr("y1", y(0))
 	                .attr("y2", y(0))
 	            ;
@@ -60743,7 +60531,7 @@
 	    });
 	
 	    discretebar.dispatch.on('elementMousemove.tooltip', function(evt) {
-	        tooltip.position({top: d3.event.pageY, left: d3.event.pageX})();
+	        tooltip();
 	    });
 	
 	    //============================================================
@@ -60752,6 +60540,7 @@
 	
 	    chart.dispatch = dispatch;
 	    chart.discretebar = discretebar;
+	    chart.legend = legend;
 	    chart.xAxis = xAxis;
 	    chart.yAxis = yAxis;
 	    chart.tooltip = tooltip;
@@ -60762,22 +60551,13 @@
 	        // simple options, just get/set the necessary values
 	        width:      {get: function(){return width;}, set: function(_){width=_;}},
 	        height:     {get: function(){return height;}, set: function(_){height=_;}},
+		showLegend: {get: function(){return showLegend;}, set: function(_){showLegend=_;}},
 	        staggerLabels: {get: function(){return staggerLabels;}, set: function(_){staggerLabels=_;}},
+	        rotateLabels:  {get: function(){return rotateLabels;}, set: function(_){rotateLabels=_;}},
+	        wrapLabels:  {get: function(){return wrapLabels;}, set: function(_){wrapLabels=!!_;}},
 	        showXAxis: {get: function(){return showXAxis;}, set: function(_){showXAxis=_;}},
 	        showYAxis: {get: function(){return showYAxis;}, set: function(_){showYAxis=_;}},
 	        noData:    {get: function(){return noData;}, set: function(_){noData=_;}},
-	
-	        // deprecated options
-	        tooltips:    {get: function(){return tooltip.enabled();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltips', 'use chart.tooltip.enabled() instead');
-	            tooltip.enabled(!!_);
-	        }},
-	        tooltipContent:    {get: function(){return tooltip.contentGenerator();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltipContent', 'use chart.tooltip.contentGenerator() instead');
-	            tooltip.contentGenerator(_);
-	        }},
 	
 	        // options that require extra logic in the setter
 	        margin: {get: function(){return margin;}, set: function(_){
@@ -60796,6 +60576,7 @@
 	        color:  {get: function(){return color;}, set: function(_){
 	            color = nv.utils.getColor(_);
 	            discretebar.color(color);
+		    legend.color(color);
 	        }},
 	        rightAlignYAxis: {get: function(){return rightAlignYAxis;}, set: function(_){
 	            rightAlignYAxis = _;
@@ -60980,6 +60761,7 @@
 	        , height = 20
 	        , getKey = function(d) { return d.key }
 	        , color = nv.utils.getColor()
+	        , maxKeyLength = 20 //default value for key lengths
 	        , align = true
 	        , padding = 28 //define how much space between legend items. - recommend 32 for furious version
 	        , rightAlign = true
@@ -61147,7 +60929,14 @@
 	
 	                var seriesWidths = [];
 	                series.each(function(d,i) {
-	                    var legendText = d3.select(this).select('text');
+	                    var legendText;
+	                    if (getKey(d).length > maxKeyLength) { 
+	                        var trimmedKey = getKey(d).substring(0, maxKeyLength);
+	                        legendText = d3.select(this).select('text').text(trimmedKey + "...");
+	                        d3.select(this).append("svg:title").text(getKey(d));
+	                    } else {
+	                        legendText = d3.select(this).select('text');
+	                    } 
 	                    var nodeTextLength;
 	                    try {
 	                        nodeTextLength = legendText.node().getComputedTextLength();
@@ -61284,6 +61073,7 @@
 	        key:        {get: function(){return getKey;}, set: function(_){getKey=_;}},
 	        align:      {get: function(){return align;}, set: function(_){align=_;}},
 	        rightAlign:    {get: function(){return rightAlign;}, set: function(_){rightAlign=_;}},
+	        maxKeyLength:  {get: function(){return maxKeyLength;}, set: function(_){maxKeyLength=_;}},
 	        padding:       {get: function(){return padding;}, set: function(_){padding=_;}},
 	        updateState:   {get: function(){return updateState;}, set: function(_){updateState=_;}},
 	        radioButtonMode:    {get: function(){return radioButtonMode;}, set: function(_){radioButtonMode=_;}},
@@ -61743,7 +61533,6 @@
 	
 	                var xValue = xAxis.tickFormat()(chart.x()(singlePoint,pointIndex));
 	                interactiveLayer.tooltip
-	                    .position({left: pointXLocation + margin.left, top: e.mouseY + margin.top})
 	                    .chartContainer(that.parentNode)
 	                    .valueFormatter(function(d,i) {
 	                        return yAxis.tickFormat()(d);
@@ -61827,7 +61616,7 @@
 	    });
 	
 	    bars.dispatch.on('elementMousemove.tooltip', function(evt) {
-	        tooltip.position({top: d3.event.pageY, left: d3.event.pageX})();
+	        tooltip();
 	    });
 	
 	    //============================================================
@@ -61854,18 +61643,6 @@
 	        showYAxis: {get: function(){return showYAxis;}, set: function(_){showYAxis=_;}},
 	        defaultState:    {get: function(){return defaultState;}, set: function(_){defaultState=_;}},
 	        noData:    {get: function(){return noData;}, set: function(_){noData=_;}},
-	
-	        // deprecated options
-	        tooltips:    {get: function(){return tooltip.enabled();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltips', 'use chart.tooltip.enabled() instead');
-	            tooltip.enabled(!!_);
-	        }},
-	        tooltipContent:    {get: function(){return tooltip.contentGenerator();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltipContent', 'use chart.tooltip.contentGenerator() instead');
-	            tooltip.contentGenerator(_);
-	        }},
 	
 	        // options that require extra logic in the setter
 	        margin: {get: function(){return margin;}, set: function(_){
@@ -61961,6 +61738,7 @@
 	        , height = 20
 	        , getKey = function(d) { return d.key }
 	        , color = nv.utils.getColor()
+	        , maxKeyLength = 20 //default value for key lengths
 	        , align = true
 	        , padding = 32 //define how much space between legend items. - recommend 32 for furious version
 	        , rightAlign = true
@@ -62018,7 +61796,6 @@
 	                    .attr('class','nv-legend-symbol')
 	                    .attr('rx', 3)
 	                    .attr('ry', 3);
-	
 	                seriesShape = series.select('.nv-legend-symbol');
 	
 	                seriesEnter.append('g')
@@ -62128,7 +61905,14 @@
 	
 	                var seriesWidths = [];
 	                series.each(function(d,i) {
-	                    var legendText = d3.select(this).select('text');
+	                    var legendText;
+	                    if (getKey(d).length > maxKeyLength) { 
+	                        var trimmedKey = getKey(d).substring(0, maxKeyLength);
+	                        legendText = d3.select(this).select('text').text(trimmedKey + "...");
+	                        d3.select(this).append("svg:title").text(getKey(d));
+	                    } else {
+	                        legendText = d3.select(this).select('text');
+	                    } 
 	                    var nodeTextLength;
 	                    try {
 	                        nodeTextLength = legendText.node().getComputedTextLength();
@@ -62297,6 +62081,7 @@
 	        height:     {get: function(){return height;}, set: function(_){height=_;}},
 	        key:        {get: function(){return getKey;}, set: function(_){getKey=_;}},
 	        align:      {get: function(){return align;}, set: function(_){align=_;}},
+	        maxKeyLength:   {get: function(){return maxKeyLength;}, set: function(_){maxKeyLength=_;}},
 	        rightAlign:    {get: function(){return rightAlign;}, set: function(_){rightAlign=_;}},
 	        padding:       {get: function(){return padding;}, set: function(_){padding=_;}},
 	        updateState:   {get: function(){return updateState;}, set: function(_){updateState=_;}},
@@ -62562,9 +62347,14 @@
 	        , legend = nv.models.legend()
 	        , interactiveLayer = nv.interactiveGuideline()
 	        , tooltip = nv.models.tooltip()
+	        , lines2 = nv.models.line()
+	        , x2Axis = nv.models.axis()
+	        , y2Axis = nv.models.axis()
+	        , brush = d3.svg.brush()
 	        ;
 	
 	    var margin = {top: 30, right: 20, bottom: 50, left: 60}
+	        , margin2 = {top: 0, right: 20, bottom: 20, left: 60}
 	        , color = nv.utils.defaultColor()
 	        , width = null
 	        , height = null
@@ -62575,17 +62365,39 @@
 	        , useInteractiveGuideline = false
 	        , x
 	        , y
+	        , x2
+	        , y2
+	        , focusEnable = false
+	        , focusShowAxisY = false
+	        , focusShowAxisX = true
+	        , focusHeight = 50
+	        , brushExtent = null
 	        , state = nv.utils.state()
 	        , defaultState = null
 	        , noData = null
-	        , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'stateChange', 'changeState', 'renderEnd')
+	        , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'brush', 'stateChange', 'changeState', 'renderEnd')
 	        , duration = 250
 	        ;
 	
 	    // set options on sub-objects for this chart
 	    xAxis.orient('bottom').tickPadding(7);
 	    yAxis.orient(rightAlignYAxis ? 'right' : 'left');
+	
+	    lines.clipEdge(true).duration(0);
+	    lines2.interactive(false);
+	    // We don't want any points emitted for the focus chart's scatter graph.
+	    lines2.pointActive(function(d) { return false; });
+	
+	    x2Axis.orient('bottom').tickPadding(5);
+	    y2Axis.orient(rightAlignYAxis ? 'right' : 'left');
+	
 	    tooltip.valueFormatter(function(d, i) {
+	        return yAxis.tickFormat()(d, i);
+	    }).headerFormatter(function(d, i) {
+	        return xAxis.tickFormat()(d, i);
+	    });
+	    
+	    interactiveLayer.tooltip.valueFormatter(function(d, i) {
 	        return yAxis.tickFormat()(d, i);
 	    }).headerFormatter(function(d, i) {
 	        return xAxis.tickFormat()(d, i);
@@ -62601,9 +62413,9 @@
 	    var stateGetter = function(data) {
 	        return function(){
 	            return {
-	                active: data.map(function(d) { return !d.disabled })
+	                active: data.map(function(d) { return !d.disabled; })
 	            };
-	        }
+	        };
 	    };
 	
 	    var stateSetter = function(data) {
@@ -62612,27 +62424,31 @@
 	                data.forEach(function(series,i) {
 	                    series.disabled = !state.active[i];
 	                });
-	        }
+	        };
 	    };
 	
 	    function chart(selection) {
 	        renderWatch.reset();
 	        renderWatch.models(lines);
+	        renderWatch.models(lines2);
 	        if (showXAxis) renderWatch.models(xAxis);
 	        if (showYAxis) renderWatch.models(yAxis);
 	
+	        if (focusShowAxisX) renderWatch.models(x2Axis);
+	        if (focusShowAxisY) renderWatch.models(y2Axis);
 	        selection.each(function(data) {
-	            var container = d3.select(this),
-	                that = this;
+	            var container = d3.select(this);
 	            nv.utils.initSVG(container);
 	            var availableWidth = nv.utils.availableWidth(width, container, margin),
-	                availableHeight = nv.utils.availableHeight(height, container, margin);
+	                availableHeight1 = nv.utils.availableHeight(height, container, margin) - (focusEnable ? focusHeight : 0),
+	                availableHeight2 = focusHeight - margin2.top - margin2.bottom;
 	
-	            chart.update = function() {
-	                if (duration === 0)
-	                    container.call(chart);
-	                else
-	                    container.transition().duration(duration).call(chart)
+	            chart.update = function() { 
+	                if( duration === 0 ) {
+	                    container.call( chart );
+	                } else {
+	                    container.transition().duration(duration).call(chart);
+	                }
 	            };
 	            chart.container = this;
 	
@@ -62641,8 +62457,8 @@
 	                .getter(stateGetter(data))
 	                .update();
 	
-	            // DEPRECATED set state.disableddisabled
-	            state.disabled = data.map(function(d) { return !!d.disabled });
+	            // DEPRECATED set state.disabled
+	            state.disabled = data.map(function(d) { return !!d.disabled; });
 	
 	            if (!defaultState) {
 	                var key;
@@ -62656,8 +62472,8 @@
 	            }
 	
 	            // Display noData message if there's nothing to show.
-	            if (!data || !data.length || !data.filter(function(d) { return d.values.length }).length) {
-	                nv.utils.noData(chart, container)
+	            if (!data || !data.length || !data.filter(function(d) { return d.values.length; }).length) {
+	                nv.utils.noData(chart, container);
 	                return chart;
 	            } else {
 	                container.selectAll('.nv-noData').remove();
@@ -62667,22 +62483,30 @@
 	            // Setup Scales
 	            x = lines.xScale();
 	            y = lines.yScale();
+	            x2 = lines2.xScale();
+	            y2 = lines2.yScale();
 	
 	            // Setup containers and skeleton of chart
 	            var wrap = container.selectAll('g.nv-wrap.nv-lineChart').data([data]);
 	            var gEnter = wrap.enter().append('g').attr('class', 'nvd3 nv-wrap nv-lineChart').append('g');
 	            var g = wrap.select('g');
 	
-	            gEnter.append("rect").style("opacity",0);
-	            gEnter.append('g').attr('class', 'nv-x nv-axis');
-	            gEnter.append('g').attr('class', 'nv-y nv-axis');
-	            gEnter.append('g').attr('class', 'nv-linesWrap');
 	            gEnter.append('g').attr('class', 'nv-legendWrap');
-	            gEnter.append('g').attr('class', 'nv-interactive');
 	
-	            g.select("rect")
-	                .attr("width",availableWidth)
-	                .attr("height",(availableHeight > 0) ? availableHeight : 0);
+	            var focusEnter = gEnter.append('g').attr('class', 'nv-focus');
+	            focusEnter.append('g').attr('class', 'nv-background').append('rect');
+	            focusEnter.append('g').attr('class', 'nv-x nv-axis');
+	            focusEnter.append('g').attr('class', 'nv-y nv-axis');
+	            focusEnter.append('g').attr('class', 'nv-linesWrap');
+	            focusEnter.append('g').attr('class', 'nv-interactive');
+	
+	            var contextEnter = gEnter.append('g').attr('class', 'nv-context');
+	            contextEnter.append('g').attr('class', 'nv-background').append('rect');
+	            contextEnter.append('g').attr('class', 'nv-x nv-axis');
+	            contextEnter.append('g').attr('class', 'nv-y nv-axis');
+	            contextEnter.append('g').attr('class', 'nv-linesWrap');
+	            contextEnter.append('g').attr('class', 'nv-brushBackground');
+	            contextEnter.append('g').attr('class', 'nv-x nv-brush');
 	
 	            // Legend
 	            if (showLegend) {
@@ -62694,11 +62518,11 @@
 	
 	                if ( margin.top != legend.height()) {
 	                    margin.top = legend.height();
-	                    availableHeight = nv.utils.availableHeight(height, container, margin);
+	                    availableHeight1 = nv.utils.availableHeight(height, container, margin) - (focusEnable ? focusHeight : 0);
 	                }
 	
 	                wrap.select('.nv-legendWrap')
-	                    .attr('transform', 'translate(0,' + (-margin.top) +')')
+	                    .attr('transform', 'translate(0,' + (-margin.top) +')');
 	            }
 	
 	            wrap.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
@@ -62712,47 +62536,163 @@
 	            if (useInteractiveGuideline) {
 	                interactiveLayer
 	                    .width(availableWidth)
-	                    .height(availableHeight)
+	                    .height(availableHeight1)
 	                    .margin({left:margin.left, top:margin.top})
 	                    .svgContainer(container)
 	                    .xScale(x);
 	                wrap.select(".nv-interactive").call(interactiveLayer);
 	            }
 	
+	            g.select('.nv-focus .nv-background rect')
+	                .attr('width', availableWidth)
+	                .attr('height', availableHeight1);
+	                
 	            lines
 	                .width(availableWidth)
-	                .height(availableHeight)
+	                .height(availableHeight1)
 	                .color(data.map(function(d,i) {
 	                    return d.color || color(d, i);
-	                }).filter(function(d,i) { return !data[i].disabled }));
 	
+	                }).filter(function(d,i) { return !data[i].disabled; }));
 	
 	            var linesWrap = g.select('.nv-linesWrap')
-	                .datum(data.filter(function(d) { return !d.disabled }));
+	                .datum(data.filter(function(d) { return !d.disabled; }));
 	
-	            linesWrap.call(lines);
 	
-	            // Setup Axes
+	            // Setup Main (Focus) Axes
 	            if (showXAxis) {
 	                xAxis
 	                    .scale(x)
 	                    ._ticks(nv.utils.calcTicksX(availableWidth/100, data) )
-	                    .tickSize(-availableHeight, 0);
+	                    .tickSize(-availableHeight1, 0);
 	
-	                g.select('.nv-x.nv-axis')
-	                    .attr('transform', 'translate(0,' + y.range()[0] + ')');
-	                g.select('.nv-x.nv-axis')
-	                    .call(xAxis);
 	            }
 	
 	            if (showYAxis) {
 	                yAxis
 	                    .scale(y)
-	                    ._ticks(nv.utils.calcTicksY(availableHeight/36, data) )
+	                    ._ticks( nv.utils.calcTicksY(availableHeight1/36, data) )
 	                    .tickSize( -availableWidth, 0);
+	            }
 	
-	                g.select('.nv-y.nv-axis')
-	                    .call(yAxis);
+	            //============================================================
+	            // Update Axes
+	            //============================================================
+	            function updateXAxis() {
+	              if(showXAxis) {
+	                g.select('.nv-focus .nv-x.nv-axis')
+	                  .transition()
+	                  .duration(duration)
+	                  .call(xAxis)
+	                ;
+	              }
+	            }
+	
+	            function updateYAxis() {
+	              if(showYAxis) {
+	                g.select('.nv-focus .nv-y.nv-axis')
+	                  .transition()
+	                  .duration(duration)
+	                  .call(yAxis)
+	                ;
+	              }
+	            }
+	            
+	            g.select('.nv-focus .nv-x.nv-axis')
+	                .attr('transform', 'translate(0,' + availableHeight1 + ')');
+	
+	            if( !focusEnable )
+	            {
+	                linesWrap.call(lines);
+	                updateXAxis();
+	                updateYAxis();
+	            }
+	            else
+	            {
+	                lines2
+	                    .defined(lines.defined())
+	                    .width(availableWidth)
+	                    .height(availableHeight2)
+	                    .color(data.map(function(d,i) {
+	                        return d.color || color(d, i);
+	                    }).filter(function(d,i) { return !data[i].disabled; }));
+	    
+	                g.select('.nv-context')
+	                    .attr('transform', 'translate(0,' + ( availableHeight1 + margin.bottom + margin2.top) + ')')
+	                    .style('display', focusEnable ? 'initial' : 'none')
+	                ;
+	    
+	                var contextLinesWrap = g.select('.nv-context .nv-linesWrap')
+	                    .datum(data.filter(function(d) { return !d.disabled; }))
+	                    ;
+	                    
+	                d3.transition(contextLinesWrap).call(lines2);
+	                
+	            
+	                // Setup Brush
+	                brush
+	                    .x(x2)
+	                    .on('brush', function() {
+	                        onBrush();
+	                    });
+	    
+	                if (brushExtent) brush.extent(brushExtent);
+	    
+	                var brushBG = g.select('.nv-brushBackground').selectAll('g')
+	                    .data([brushExtent || brush.extent()]);
+	        
+	                var brushBGenter = brushBG.enter()
+	                    .append('g');
+	    
+	                brushBGenter.append('rect')
+	                    .attr('class', 'left')
+	                    .attr('x', 0)
+	                    .attr('y', 0)
+	                    .attr('height', availableHeight2);
+	    
+	                brushBGenter.append('rect')
+	                    .attr('class', 'right')
+	                    .attr('x', 0)
+	                    .attr('y', 0)
+	                    .attr('height', availableHeight2);
+	    
+	                var gBrush = g.select('.nv-x.nv-brush')
+	                    .call(brush);
+	                gBrush.selectAll('rect')
+	                    .attr('height', availableHeight2);
+	                gBrush.selectAll('.resize').append('path').attr('d', resizePath);
+	    
+	                onBrush();
+	    
+	                g.select('.nv-context .nv-background rect')
+	                    .attr('width', availableWidth)
+	                    .attr('height', availableHeight2);
+	    
+	                // Setup Secondary (Context) Axes
+	                if (focusShowAxisX) {
+	                  x2Axis
+	                      .scale(x2)
+	                      ._ticks( nv.utils.calcTicksX(availableWidth/100, data) )
+	                      .tickSize(-availableHeight2, 0);
+	      
+	                  g.select('.nv-context .nv-x.nv-axis')
+	                      .attr('transform', 'translate(0,' + y2.range()[0] + ')');
+	                  d3.transition(g.select('.nv-context .nv-x.nv-axis'))
+	                      .call(x2Axis);
+	                }
+	    
+	                if (focusShowAxisY) {
+	                  y2Axis
+	                      .scale(y2)
+	                      ._ticks( nv.utils.calcTicksY(availableHeight2/36, data) )
+	                      .tickSize( -availableWidth, 0);
+	      
+	                  d3.transition(g.select('.nv-context .nv-y.nv-axis'))
+	                      .call(y2Axis);
+	                }
+	                
+	                g.select('.nv-context .nv-x.nv-axis')
+	                    .attr('transform', 'translate(0,' + y2.range()[0] + ')');
 	            }
 	
 	            //============================================================
@@ -62772,14 +62712,19 @@
 	                data
 	                    .filter(function(series, i) {
 	                        series.seriesIndex = i;
-	                        return !series.disabled;
+	                        return !series.disabled && !series.disableTooltip;
 	                    })
 	                    .forEach(function(series,i) {
-	                        pointIndex = nv.interactiveBisect(series.values, e.pointXValue, chart.x());
-	                        var point = series.values[pointIndex];
+	                        var extent = focusEnable ? (brush.empty() ? x2.domain() : brush.extent()) : x.domain();
+	                        var currentValues = series.values.filter(function(d,i) {
+	                            return lines.x()(d,i) >= extent[0] && lines.x()(d,i) <= extent[1];
+	                        });
+	
+	                        pointIndex = nv.interactiveBisect(currentValues, e.pointXValue, lines.x());
+	                        var point = currentValues[pointIndex];
 	                        var pointYValue = chart.y()(point, pointIndex);
-	                        if (pointYValue != null) {
-	                            lines.highlightPoint(i, pointIndex, true);
+	                        if (pointYValue !== null) {
+	                            lines.highlightPoint(series.seriesIndex, pointIndex, true);
 	                        }
 	                        if (point === undefined) return;
 	                        if (singlePoint === undefined) singlePoint = point;
@@ -62787,7 +62732,8 @@
 	                        allData.push({
 	                            key: series.key,
 	                            value: pointYValue,
-	                            color: color(series,series.seriesIndex)
+	                            color: color(series,series.seriesIndex),
+	                            data: point
 	                        });
 	                    });
 	                //Highlight the tooltip entry based on which point the mouse is closest to.
@@ -62795,20 +62741,18 @@
 	                    var yValue = chart.yScale().invert(e.mouseY);
 	                    var domainExtent = Math.abs(chart.yScale().domain()[0] - chart.yScale().domain()[1]);
 	                    var threshold = 0.03 * domainExtent;
-	                    var indexToHighlight = nv.nearestValueIndex(allData.map(function(d){return d.value}),yValue,threshold);
+	                    var indexToHighlight = nv.nearestValueIndex(allData.map(function(d){return d.value;}),yValue,threshold);
 	                    if (indexToHighlight !== null)
 	                        allData[indexToHighlight].highlight = true;
 	                }
 	
-	                var xValue = xAxis.tickFormat()(chart.x()(singlePoint,pointIndex));
 	                interactiveLayer.tooltip
-	                    .position({left: e.mouseX + margin.left, top: e.mouseY + margin.top})
-	                    .chartContainer(that.parentNode)
+	                    .chartContainer(chart.container.parentNode)
 	                    .valueFormatter(function(d,i) {
-	                        return d == null ? "N/A" : yAxis.tickFormat()(d);
+	                        return d === null ? "N/A" : yAxis.tickFormat()(d);
 	                    })
 	                    .data({
-	                        value: xValue,
+	                        value: chart.x()( singlePoint,pointIndex ),
 	                        index: pointIndex,
 	                        series: allData
 	                    })();
@@ -62857,22 +62801,103 @@
 	                chart.update();
 	            });
 	
+	            //============================================================
+	            // Functions
+	            //------------------------------------------------------------
+	    
+	            // Taken from crossfilter (http://square.github.com/crossfilter/)
+	            function resizePath(d) {
+	                var e = +(d == 'e'),
+	                    x = e ? 1 : -1,
+	                    y = availableHeight2 / 3;
+	                return 'M' + (0.5 * x) + ',' + y
+	                    + 'A6,6 0 0 ' + e + ' ' + (6.5 * x) + ',' + (y + 6)
+	                    + 'V' + (2 * y - 6)
+	                    + 'A6,6 0 0 ' + e + ' ' + (0.5 * x) + ',' + (2 * y)
+	                    + 'Z'
+	                    + 'M' + (2.5 * x) + ',' + (y + 8)
+	                    + 'V' + (2 * y - 8)
+	                    + 'M' + (4.5 * x) + ',' + (y + 8)
+	                    + 'V' + (2 * y - 8);
+	            }
+	    
+	    
+	            function updateBrushBG() {
+	                if (!brush.empty()) brush.extent(brushExtent);
+	                brushBG
+	                    .data([brush.empty() ? x2.domain() : brushExtent])
+	                    .each(function(d,i) {
+	                        var leftWidth = x2(d[0]) - x.range()[0],
+	                            rightWidth = availableWidth - x2(d[1]);
+	                        d3.select(this).select('.left')
+	                            .attr('width',  leftWidth < 0 ? 0 : leftWidth);
+	    
+	                        d3.select(this).select('.right')
+	                            .attr('x', x2(d[1]))
+	                            .attr('width', rightWidth < 0 ? 0 : rightWidth);
+	                    });
+	            }
+	    
+	    
+	            function onBrush() {
+	                brushExtent = brush.empty() ? null : brush.extent();
+	                var extent = brush.empty() ? x2.domain() : brush.extent();
+	    
+	                //The brush extent cannot be less than one.  If it is, don't update the line chart.
+	                if (Math.abs(extent[0] - extent[1]) <= 1) {
+	                    return;
+	                }
+	    
+	                dispatch.brush({extent: extent, brush: brush});
+	    
+	    
+	                updateBrushBG();
+	    
+	                // Update Main (Focus)
+	                var focusLinesWrap = g.select('.nv-focus .nv-linesWrap')
+	                    .datum(
+	                    data
+	                        .filter(function(d) { return !d.disabled; })
+	                        .map(function(d,i) {
+	                            return {
+	                                key: d.key,
+	                                area: d.area,
+	                                classed: d.classed,
+	                                values: d.values.filter(function(d,i) {
+	                                    return lines.x()(d,i) >= extent[0] && lines.x()(d,i) <= extent[1];
+	                                }),
+	                                disableTooltip: d.disableTooltip
+	                            };
+	                        })
+	                );
+	                focusLinesWrap.transition().duration(duration).call(lines);
+	    
+	    
+	                // Update Main (Focus) Axes
+	                updateXAxis();
+	                updateYAxis();
+	            }
+	
+	
 	        });
 	
 	        renderWatch.renderEnd('lineChart immediate');
 	        return chart;
 	    }
 	
+	
 	    //============================================================
 	    // Event Handling/Dispatching (out of chart's scope)
 	    //------------------------------------------------------------
 	
 	    lines.dispatch.on('elementMouseover.tooltip', function(evt) {
-	        tooltip.data(evt).position(evt.pos).hidden(false);
+	        if(!evt.series.disableTooltip){
+	            tooltip.data(evt).hidden(false);
+	        }
 	    });
 	
 	    lines.dispatch.on('elementMouseout.tooltip', function(evt) {
-	        tooltip.hidden(true)
+	        tooltip.hidden(true);
 	    });
 	
 	    //============================================================
@@ -62882,12 +62907,15 @@
 	    // expose chart's sub-components
 	    chart.dispatch = dispatch;
 	    chart.lines = lines;
+	    chart.lines2 = lines2;
 	    chart.legend = legend;
 	    chart.xAxis = xAxis;
+	    chart.x2Axis = x2Axis;
 	    chart.yAxis = yAxis;
+	    chart.y2Axis = y2Axis;
 	    chart.interactiveLayer = interactiveLayer;
 	    chart.tooltip = tooltip;
-	
+	    chart.state = state;
 	    chart.dispatch = dispatch;
 	    chart.options = nv.utils.optionsFunc.bind(chart);
 	
@@ -62898,20 +62926,13 @@
 	        showLegend: {get: function(){return showLegend;}, set: function(_){showLegend=_;}},
 	        showXAxis:      {get: function(){return showXAxis;}, set: function(_){showXAxis=_;}},
 	        showYAxis:    {get: function(){return showYAxis;}, set: function(_){showYAxis=_;}},
+	        focusEnable:    {get: function(){return focusEnable;}, set: function(_){focusEnable=_;}},
+	        focusHeight:     {get: function(){return height2;}, set: function(_){focusHeight=_;}},
+	        focusShowAxisX:    {get: function(){return focusShowAxisX;}, set: function(_){focusShowAxisX=_;}},
+	        focusShowAxisY:    {get: function(){return focusShowAxisY;}, set: function(_){focusShowAxisY=_;}},
+	        brushExtent: {get: function(){return brushExtent;}, set: function(_){brushExtent=_;}},
 	        defaultState:    {get: function(){return defaultState;}, set: function(_){defaultState=_;}},
 	        noData:    {get: function(){return noData;}, set: function(_){noData=_;}},
-	
-	        // deprecated options
-	        tooltips:    {get: function(){return tooltip.enabled();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltips', 'use chart.tooltip.enabled() instead');
-	            tooltip.enabled(!!_);
-	        }},
-	        tooltipContent:    {get: function(){return tooltip.contentGenerator();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltipContent', 'use chart.tooltip.contentGenerator() instead');
-	            tooltip.contentGenerator(_);
-	        }},
 	
 	        // options that require extra logic in the setter
 	        margin: {get: function(){return margin;}, set: function(_){
@@ -62925,12 +62946,40 @@
 	            renderWatch.reset(duration);
 	            lines.duration(duration);
 	            xAxis.duration(duration);
+	            x2Axis.duration(duration);
 	            yAxis.duration(duration);
+	            y2Axis.duration(duration);
+	        }},
+	        focusMargin: {get: function(){return margin2;}, set: function(_){
+	            margin2.top    = _.top    !== undefined ? _.top    : margin2.top;
+	            margin2.right  = _.right  !== undefined ? _.right  : margin2.right;
+	            margin2.bottom = _.bottom !== undefined ? _.bottom : margin2.bottom;
+	            margin2.left   = _.left   !== undefined ? _.left   : margin2.left;
 	        }},
 	        color:  {get: function(){return color;}, set: function(_){
 	            color = nv.utils.getColor(_);
 	            legend.color(color);
 	            lines.color(color);
+	        }},
+	        interpolate: {get: function(){return lines.interpolate();}, set: function(_){
+	            lines.interpolate(_);
+	            lines2.interpolate(_);
+	        }},
+	        xTickFormat: {get: function(){return xAxis.tickFormat();}, set: function(_){
+	            xAxis.tickFormat(_);
+	            x2Axis.tickFormat(_);
+	        }},
+	        yTickFormat: {get: function(){return yAxis.tickFormat();}, set: function(_){
+	            yAxis.tickFormat(_);
+	            y2Axis.tickFormat(_);
+	        }},
+	        x: {get: function(){return lines.x();}, set: function(_){
+	            lines.x(_);
+	            lines2.x(_);
+	        }},
+	        y: {get: function(){return lines.y();}, set: function(_){
+	            lines.y(_);
+	            lines2.y(_);
 	        }},
 	        rightAlignYAxis: {get: function(){return rightAlignYAxis;}, set: function(_){
 	            rightAlignYAxis = _;
@@ -62949,6 +62998,12 @@
 	    nv.utils.initOptions(chart);
 	
 	    return chart;
+	};
+	
+	nv.models.lineWithFocusChart = function() {
+	  return nv.models.lineChart()
+	    .margin({ bottom: 30 }) 
+	    .focusEnable( true );
 	};
 	nv.models.linePlusBarChart = function() {
 	    "use strict";
@@ -62999,10 +63054,13 @@
 	        , defaultState = null
 	        , legendLeftAxisHint = ' (left axis)'
 	        , legendRightAxisHint = ' (right axis)'
+	        , switchYAxisOrder = false
 	        ;
 	
 	    lines.clipEdge(true);
 	    lines2.interactive(false);
+	    // We don't want any points emitted for the focus chart's scatter graph.
+	    lines2.pointActive(function(d) { return false });
 	    xAxis.orient('bottom').tickPadding(5);
 	    y1Axis.orient('left');
 	    y2Axis.orient('right');
@@ -63017,6 +63075,18 @@
 	    //============================================================
 	    // Private Variables
 	    //------------------------------------------------------------
+	
+	    var getBarsAxis = function() {
+	        return switchYAxisOrder
+	            ? { main: y1Axis, focus: y3Axis }
+	            : { main: y2Axis, focus: y4Axis }
+	    }
+	
+	    var getLinesAxis = function() {
+	        return switchYAxisOrder
+	            ? { main: y2Axis, focus: y4Axis }
+	            : { main: y1Axis, focus: y3Axis }
+	    }
 	
 	    var stateGetter = function(data) {
 	        return function(){
@@ -63034,6 +63104,12 @@
 	                });
 	        }
 	    };
+	
+	    var allDisabled = function(data) {
+	      return data.every(function(series) {
+	        return series.disabled;
+	      });
+	    }
 	
 	    function chart(selection) {
 	        selection.each(function(data) {
@@ -63081,13 +63157,15 @@
 	
 	            x = bars.xScale();
 	            x2 = x2Axis.scale();
-	            y1 = bars.yScale();
-	            y2 = lines.yScale();
-	            y3 = bars2.yScale();
-	            y4 = lines2.yScale();
+	
+	            // select the scales and series based on the position of the yAxis
+	            y1 = switchYAxisOrder ? lines.yScale() : bars.yScale();
+	            y2 = switchYAxisOrder ? bars.yScale() : lines.yScale();
+	            y3 = switchYAxisOrder ? lines2.yScale() : bars2.yScale();
+	            y4 = switchYAxisOrder ? bars2.yScale() : lines2.yScale();
 	
 	            var series1 = data
-	                .filter(function(d) { return !d.disabled && d.bar })
+	                .filter(function(d) { return !d.disabled && (switchYAxisOrder ? !d.bar : d.bar) })
 	                .map(function(d) {
 	                    return d.values.map(function(d,i) {
 	                        return { x: getX(d,i), y: getY(d,i) }
@@ -63095,7 +63173,7 @@
 	                });
 	
 	            var series2 = data
-	                .filter(function(d) { return !d.disabled && !d.bar })
+	                .filter(function(d) { return !d.disabled && (switchYAxisOrder ? d.bar : !d.bar) })
 	                .map(function(d) {
 	                    return d.values.map(function(d,i) {
 	                        return { x: getX(d,i), y: getY(d,i) }
@@ -63145,7 +63223,11 @@
 	                g.select('.nv-legendWrap')
 	                    .datum(data.map(function(series) {
 	                        series.originalKey = series.originalKey === undefined ? series.key : series.originalKey;
-	                        series.key = series.originalKey + (series.bar ? legendLeftAxisHint : legendRightAxisHint);
+	                        if(switchYAxisOrder) {
+	                            series.key = series.originalKey + (series.bar ? legendRightAxisHint : legendLeftAxisHint);
+	                        } else {
+	                            series.key = series.originalKey + (series.bar ? legendLeftAxisHint : legendRightAxisHint);
+	                        }
 	                        return series;
 	                    }))
 	                    .call(legend);
@@ -63191,9 +63273,11 @@
 	                    {values: []}
 	                ]);
 	            var lines2Wrap = g.select('.nv-context .nv-linesWrap')
-	                .datum(!dataLines[0].disabled ? dataLines : [
-	                    {values: []}
-	                ]);
+	                .datum(allDisabled(dataLines) ?
+	                       [{values: []}] :
+	                       dataLines.filter(function(dataLine) {
+	                         return !dataLine.disabled;
+	                       }));
 	
 	            g.select('.nv-context')
 	                .attr('transform', 'translate(0,' + ( availableHeight1 + margin.bottom + margin2.top) + ')');
@@ -63359,9 +63443,10 @@
 	                );
 	
 	                var focusLinesWrap = g.select('.nv-focus .nv-linesWrap')
-	                    .datum(dataLines[0].disabled ? [{values:[]}] :
-	                        dataLines
-	                            .map(function(d,i) {
+	                    .datum(allDisabled(dataLines) ? [{values:[]}] :
+	                           dataLines
+	                           .filter(function(dataLine) { return !dataLine.disabled; })
+	                           .map(function(d,i) {
 	                                return {
 	                                    area: d.area,
 	                                    fillOpacity: d.fillOpacity,
@@ -63374,7 +63459,7 @@
 	                );
 	
 	                // Update Main (Focus) X Axis
-	                if (dataBars.length) {
+	                if (dataBars.length && !switchYAxisOrder) {
 	                    x = bars.xScale();
 	                } else {
 	                    x = lines.xScale();
@@ -63407,10 +63492,17 @@
 	                    ._ticks( nv.utils.calcTicksY(availableHeight1/36, data) )
 	                    .tickSize(dataBars.length ? 0 : -availableWidth, 0); // Show the y2 rules only if y1 has none
 	
+	                // Calculate opacity of the axis
+	                var barsOpacity = dataBars.length ? 1 : 0;
+	                var linesOpacity = dataLines.length && !allDisabled(dataLines) ? 1 : 0;
+	
+	                var y1Opacity = switchYAxisOrder ? linesOpacity : barsOpacity;
+	                var y2Opacity = switchYAxisOrder ? barsOpacity : linesOpacity;
+	
 	                g.select('.nv-focus .nv-y1.nv-axis')
-	                    .style('opacity', dataBars.length ? 1 : 0);
+	                    .style('opacity', y1Opacity);
 	                g.select('.nv-focus .nv-y2.nv-axis')
-	                    .style('opacity', dataLines.length && !dataLines[0].disabled ? 1 : 0)
+	                    .style('opacity', y2Opacity)
 	                    .attr('transform', 'translate(' + x.range()[1] + ',0)');
 	
 	                g.select('.nv-focus .nv-y1.nv-axis').transition().duration(transitionDuration)
@@ -63434,10 +63526,9 @@
 	        tooltip
 	            .duration(100)
 	            .valueFormatter(function(d, i) {
-	                return y2Axis.tickFormat()(d, i);
+	                return getLinesAxis().main.tickFormat()(d, i);
 	            })
 	            .data(evt)
-	            .position(evt.pos)
 	            .hidden(false);
 	    });
 	
@@ -63454,7 +63545,7 @@
 	        tooltip
 	            .duration(0)
 	            .valueFormatter(function(d, i) {
-	                return y1Axis.tickFormat()(d, i);
+	                return getBarsAxis().main.tickFormat()(d, i);
 	            })
 	            .data(evt)
 	            .hidden(false);
@@ -63465,7 +63556,7 @@
 	    });
 	
 	    bars.dispatch.on('elementMousemove.tooltip', function(evt) {
-	        tooltip.position({top: d3.event.pageY, left: d3.event.pageX})();
+	        tooltip();
 	    });
 	
 	    //============================================================
@@ -63506,24 +63597,18 @@
 	        legendLeftAxisHint:    {get: function(){return legendLeftAxisHint;}, set: function(_){legendLeftAxisHint=_;}},
 	        legendRightAxisHint:    {get: function(){return legendRightAxisHint;}, set: function(_){legendRightAxisHint=_;}},
 	
-	        // deprecated options
-	        tooltips:    {get: function(){return tooltip.enabled();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltips', 'use chart.tooltip.enabled() instead');
-	            tooltip.enabled(!!_);
-	        }},
-	        tooltipContent:    {get: function(){return tooltip.contentGenerator();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltipContent', 'use chart.tooltip.contentGenerator() instead');
-	            tooltip.contentGenerator(_);
-	        }},
-	
 	        // options that require extra logic in the setter
 	        margin: {get: function(){return margin;}, set: function(_){
 	            margin.top    = _.top    !== undefined ? _.top    : margin.top;
 	            margin.right  = _.right  !== undefined ? _.right  : margin.right;
 	            margin.bottom = _.bottom !== undefined ? _.bottom : margin.bottom;
 	            margin.left   = _.left   !== undefined ? _.left   : margin.left;
+	        }},
+	        focusMargin: {get: function(){return margin2;}, set: function(_){
+	            margin2.top    = _.top    !== undefined ? _.top    : margin2.top;
+	            margin2.right  = _.right  !== undefined ? _.right  : margin2.right;
+	            margin2.bottom = _.bottom !== undefined ? _.bottom : margin2.bottom;
+	            margin2.left   = _.left   !== undefined ? _.left   : margin2.left;
 	        }},
 	        duration: {get: function(){return transitionDuration;}, set: function(_){
 	            transitionDuration = _;
@@ -63545,548 +63630,15 @@
 	            lines2.y(_);
 	            bars.y(_);
 	            bars2.y(_);
-	        }}
-	    });
-	
-	    nv.utils.inheritOptions(chart, lines);
-	    nv.utils.initOptions(chart);
-	
-	    return chart;
-	};
-	nv.models.lineWithFocusChart = function() {
-	    "use strict";
-	
-	    //============================================================
-	    // Public Variables with Default Settings
-	    //------------------------------------------------------------
-	
-	    var lines = nv.models.line()
-	        , lines2 = nv.models.line()
-	        , xAxis = nv.models.axis()
-	        , yAxis = nv.models.axis()
-	        , x2Axis = nv.models.axis()
-	        , y2Axis = nv.models.axis()
-	        , legend = nv.models.legend()
-	        , brush = d3.svg.brush()
-	        , tooltip = nv.models.tooltip()
-	        , interactiveLayer = nv.interactiveGuideline()
-	        ;
-	
-	    var margin = {top: 30, right: 30, bottom: 30, left: 60}
-	        , margin2 = {top: 0, right: 30, bottom: 20, left: 60}
-	        , color = nv.utils.defaultColor()
-	        , width = null
-	        , height = null
-	        , height2 = 50
-	        , useInteractiveGuideline = false
-	        , x
-	        , y
-	        , x2
-	        , y2
-	        , showLegend = true
-	        , brushExtent = null
-	        , noData = null
-	        , dispatch = d3.dispatch('brush', 'stateChange', 'changeState')
-	        , transitionDuration = 250
-	        , state = nv.utils.state()
-	        , defaultState = null
-	        ;
-	
-	    lines.clipEdge(true).duration(0);
-	    lines2.interactive(false);
-	    xAxis.orient('bottom').tickPadding(5);
-	    yAxis.orient('left');
-	    x2Axis.orient('bottom').tickPadding(5);
-	    y2Axis.orient('left');
-	
-	    tooltip.valueFormatter(function(d, i) {
-	        return yAxis.tickFormat()(d, i);
-	    }).headerFormatter(function(d, i) {
-	        return xAxis.tickFormat()(d, i);
-	    });
-	
-	    //============================================================
-	    // Private Variables
-	    //------------------------------------------------------------
-	
-	    var stateGetter = function(data) {
-	        return function(){
-	            return {
-	                active: data.map(function(d) { return !d.disabled })
-	            };
-	        }
-	    };
-	
-	    var stateSetter = function(data) {
-	        return function(state) {
-	            if (state.active !== undefined)
-	                data.forEach(function(series,i) {
-	                    series.disabled = !state.active[i];
-	                });
-	        }
-	    };
-	
-	    function chart(selection) {
-	        selection.each(function(data) {
-	            var container = d3.select(this),
-	                that = this;
-	            nv.utils.initSVG(container);
-	            var availableWidth = nv.utils.availableWidth(width, container, margin),
-	                availableHeight1 = nv.utils.availableHeight(height, container, margin) - height2,
-	                availableHeight2 = height2 - margin2.top - margin2.bottom;
-	
-	            chart.update = function() { container.transition().duration(transitionDuration).call(chart) };
-	            chart.container = this;
-	
-	            state
-	                .setter(stateSetter(data), chart.update)
-	                .getter(stateGetter(data))
-	                .update();
-	
-	            // DEPRECATED set state.disableddisabled
-	            state.disabled = data.map(function(d) { return !!d.disabled });
-	
-	            if (!defaultState) {
-	                var key;
-	                defaultState = {};
-	                for (key in state) {
-	                    if (state[key] instanceof Array)
-	                        defaultState[key] = state[key].slice(0);
-	                    else
-	                        defaultState[key] = state[key];
-	                }
+	        }},
+	        switchYAxisOrder:    {get: function(){return switchYAxisOrder;}, set: function(_){
+	            // Switch the tick format for the yAxis
+	            if(switchYAxisOrder !== _) {
+	                var tickFormat = y1Axis.tickFormat();
+	                y1Axis.tickFormat(y2Axis.tickFormat());
+	                y2Axis.tickFormat(tickFormat);
 	            }
-	
-	            // Display No Data message if there's nothing to show.
-	            if (!data || !data.length || !data.filter(function(d) { return d.values.length }).length) {
-	                nv.utils.noData(chart, container)
-	                return chart;
-	            } else {
-	                container.selectAll('.nv-noData').remove();
-	            }
-	
-	            // Setup Scales
-	            x = lines.xScale();
-	            y = lines.yScale();
-	            x2 = lines2.xScale();
-	            y2 = lines2.yScale();
-	
-	            // Setup containers and skeleton of chart
-	            var wrap = container.selectAll('g.nv-wrap.nv-lineWithFocusChart').data([data]);
-	            var gEnter = wrap.enter().append('g').attr('class', 'nvd3 nv-wrap nv-lineWithFocusChart').append('g');
-	            var g = wrap.select('g');
-	
-	            gEnter.append('g').attr('class', 'nv-legendWrap');
-	
-	            var focusEnter = gEnter.append('g').attr('class', 'nv-focus');
-	            focusEnter.append('g').attr('class', 'nv-x nv-axis');
-	            focusEnter.append('g').attr('class', 'nv-y nv-axis');
-	            focusEnter.append('g').attr('class', 'nv-linesWrap');
-	            focusEnter.append('g').attr('class', 'nv-interactive');
-	
-	            var contextEnter = gEnter.append('g').attr('class', 'nv-context');
-	            contextEnter.append('g').attr('class', 'nv-x nv-axis');
-	            contextEnter.append('g').attr('class', 'nv-y nv-axis');
-	            contextEnter.append('g').attr('class', 'nv-linesWrap');
-	            contextEnter.append('g').attr('class', 'nv-brushBackground');
-	            contextEnter.append('g').attr('class', 'nv-x nv-brush');
-	
-	            // Legend
-	            if (showLegend) {
-	                legend.width(availableWidth);
-	
-	                g.select('.nv-legendWrap')
-	                    .datum(data)
-	                    .call(legend);
-	
-	                if ( margin.top != legend.height()) {
-	                    margin.top = legend.height();
-	                    availableHeight1 = nv.utils.availableHeight(height, container, margin) - height2;
-	                }
-	
-	                g.select('.nv-legendWrap')
-	                    .attr('transform', 'translate(0,' + (-margin.top) +')')
-	            }
-	
-	            wrap.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-	
-	            
-	            //Set up interactive layer
-	            if (useInteractiveGuideline) {
-	                interactiveLayer
-	                    .width(availableWidth)
-	                    .height(availableHeight1)
-	                    .margin({left:margin.left, top:margin.top})
-	                    .svgContainer(container)
-	                    .xScale(x);
-	                wrap.select(".nv-interactive").call(interactiveLayer);
-	            }
-	
-	            // Main Chart Component(s)
-	            lines
-	                .width(availableWidth)
-	                .height(availableHeight1)
-	                .color(
-	                data
-	                    .map(function(d,i) {
-	                        return d.color || color(d, i);
-	                    })
-	                    .filter(function(d,i) {
-	                        return !data[i].disabled;
-	                    })
-	            );
-	
-	            lines2
-	                .defined(lines.defined())
-	                .width(availableWidth)
-	                .height(availableHeight2)
-	                .color(
-	                data
-	                    .map(function(d,i) {
-	                        return d.color || color(d, i);
-	                    })
-	                    .filter(function(d,i) {
-	                        return !data[i].disabled;
-	                    })
-	            );
-	
-	            g.select('.nv-context')
-	                .attr('transform', 'translate(0,' + ( availableHeight1 + margin.bottom + margin2.top) + ')')
-	
-	            var contextLinesWrap = g.select('.nv-context .nv-linesWrap')
-	                .datum(data.filter(function(d) { return !d.disabled }))
-	
-	            d3.transition(contextLinesWrap).call(lines2);
-	
-	            // Setup Main (Focus) Axes
-	            xAxis
-	                .scale(x)
-	                ._ticks( nv.utils.calcTicksX(availableWidth/100, data) )
-	                .tickSize(-availableHeight1, 0);
-	
-	            yAxis
-	                .scale(y)
-	                ._ticks( nv.utils.calcTicksY(availableHeight1/36, data) )
-	                .tickSize( -availableWidth, 0);
-	
-	            g.select('.nv-focus .nv-x.nv-axis')
-	                .attr('transform', 'translate(0,' + availableHeight1 + ')');
-	
-	            // Setup Brush
-	            brush
-	                .x(x2)
-	                .on('brush', function() {
-	                    onBrush();
-	                });
-	
-	            if (brushExtent) brush.extent(brushExtent);
-	
-	            var brushBG = g.select('.nv-brushBackground').selectAll('g')
-	                .data([brushExtent || brush.extent()])
-	
-	            var brushBGenter = brushBG.enter()
-	                .append('g');
-	
-	            brushBGenter.append('rect')
-	                .attr('class', 'left')
-	                .attr('x', 0)
-	                .attr('y', 0)
-	                .attr('height', availableHeight2);
-	
-	            brushBGenter.append('rect')
-	                .attr('class', 'right')
-	                .attr('x', 0)
-	                .attr('y', 0)
-	                .attr('height', availableHeight2);
-	
-	            var gBrush = g.select('.nv-x.nv-brush')
-	                .call(brush);
-	            gBrush.selectAll('rect')
-	                .attr('height', availableHeight2);
-	            gBrush.selectAll('.resize').append('path').attr('d', resizePath);
-	
-	            onBrush();
-	
-	            // Setup Secondary (Context) Axes
-	            x2Axis
-	                .scale(x2)
-	                ._ticks( nv.utils.calcTicksX(availableWidth/100, data) )
-	                .tickSize(-availableHeight2, 0);
-	
-	            g.select('.nv-context .nv-x.nv-axis')
-	                .attr('transform', 'translate(0,' + y2.range()[0] + ')');
-	            d3.transition(g.select('.nv-context .nv-x.nv-axis'))
-	                .call(x2Axis);
-	
-	            y2Axis
-	                .scale(y2)
-	                ._ticks( nv.utils.calcTicksY(availableHeight2/36, data) )
-	                .tickSize( -availableWidth, 0);
-	
-	            d3.transition(g.select('.nv-context .nv-y.nv-axis'))
-	                .call(y2Axis);
-	
-	            g.select('.nv-context .nv-x.nv-axis')
-	                .attr('transform', 'translate(0,' + y2.range()[0] + ')');
-	
-	            //============================================================
-	            // Event Handling/Dispatching (in chart's scope)
-	            //------------------------------------------------------------
-	
-	            legend.dispatch.on('stateChange', function(newState) {
-	                for (var key in newState)
-	                    state[key] = newState[key];
-	                dispatch.stateChange(state);
-	                chart.update();
-	            });
-	
-	            interactiveLayer.dispatch.on('elementMousemove', function(e) {
-	                lines.clearHighlights();
-	                var singlePoint, pointIndex, pointXLocation, allData = [];
-	                data
-	                    .filter(function(series, i) {
-	                        series.seriesIndex = i;
-	                        return !series.disabled;
-	                    })
-	                    .forEach(function(series,i) {
-	                            var extent = brush.empty() ? x2.domain() : brush.extent();
-	                            var currentValues = series.values.filter(function(d,i) {
-	                            return lines.x()(d,i) >= extent[0] && lines.x()(d,i) <= extent[1];
-	                        });
-	 
-	                        pointIndex = nv.interactiveBisect(currentValues, e.pointXValue, lines.x());
-	                        var point = currentValues[pointIndex];
-	                        var pointYValue = chart.y()(point, pointIndex);
-	                        if (pointYValue != null) {
-	                            lines.highlightPoint(i, pointIndex, true);
-	                        }
-	                        if (point === undefined) return;
-	                        if (singlePoint === undefined) singlePoint = point;
-	                        if (pointXLocation === undefined) pointXLocation = chart.xScale()(chart.x()(point,pointIndex));
-	                        allData.push({
-	                            key: series.key,
-	                            value: chart.y()(point, pointIndex),
-	                            color: color(series,series.seriesIndex)
-	                        });
-	                    });
-	                //Highlight the tooltip entry based on which point the mouse is closest to.
-	                if (allData.length > 2) {
-	                    var yValue = chart.yScale().invert(e.mouseY);
-	                    var domainExtent = Math.abs(chart.yScale().domain()[0] - chart.yScale().domain()[1]);
-	                    var threshold = 0.03 * domainExtent;
-	                    var indexToHighlight = nv.nearestValueIndex(allData.map(function(d){return d.value}),yValue,threshold);
-	                    if (indexToHighlight !== null)
-	                        allData[indexToHighlight].highlight = true;
-	                }
-	
-	                var xValue = xAxis.tickFormat()(chart.x()(singlePoint,pointIndex));
-	                interactiveLayer.tooltip
-	                    .position({left: e.mouseX + margin.left, top: e.mouseY + margin.top})
-	                    .chartContainer(that.parentNode)
-	                    .valueFormatter(function(d,i) {
-	                        return d == null ? "N/A" : yAxis.tickFormat()(d);
-	                    })
-	                    .data({
-	                        value: xValue,
-	                        index: pointIndex,
-	                        series: allData
-	                    })();
-	
-	                interactiveLayer.renderGuideLine(pointXLocation);
-	
-	            });
-	
-	            interactiveLayer.dispatch.on("elementMouseout",function(e) {
-	                lines.clearHighlights();
-	            });
-	
-	            dispatch.on('changeState', function(e) {
-	                if (typeof e.disabled !== 'undefined') {
-	                    data.forEach(function(series,i) {
-	                        series.disabled = e.disabled[i];
-	                    });
-	                }
-	                chart.update();
-	            });
-	
-	            //============================================================
-	            // Functions
-	            //------------------------------------------------------------
-	
-	            // Taken from crossfilter (http://square.github.com/crossfilter/)
-	            function resizePath(d) {
-	                var e = +(d == 'e'),
-	                    x = e ? 1 : -1,
-	                    y = availableHeight2 / 3;
-	                return 'M' + (.5 * x) + ',' + y
-	                    + 'A6,6 0 0 ' + e + ' ' + (6.5 * x) + ',' + (y + 6)
-	                    + 'V' + (2 * y - 6)
-	                    + 'A6,6 0 0 ' + e + ' ' + (.5 * x) + ',' + (2 * y)
-	                    + 'Z'
-	                    + 'M' + (2.5 * x) + ',' + (y + 8)
-	                    + 'V' + (2 * y - 8)
-	                    + 'M' + (4.5 * x) + ',' + (y + 8)
-	                    + 'V' + (2 * y - 8);
-	            }
-	
-	
-	            function updateBrushBG() {
-	                if (!brush.empty()) brush.extent(brushExtent);
-	                brushBG
-	                    .data([brush.empty() ? x2.domain() : brushExtent])
-	                    .each(function(d,i) {
-	                        var leftWidth = x2(d[0]) - x.range()[0],
-	                            rightWidth = availableWidth - x2(d[1]);
-	                        d3.select(this).select('.left')
-	                            .attr('width',  leftWidth < 0 ? 0 : leftWidth);
-	
-	                        d3.select(this).select('.right')
-	                            .attr('x', x2(d[1]))
-	                            .attr('width', rightWidth < 0 ? 0 : rightWidth);
-	                    });
-	            }
-	
-	
-	            function onBrush() {
-	                brushExtent = brush.empty() ? null : brush.extent();
-	                var extent = brush.empty() ? x2.domain() : brush.extent();
-	
-	                //The brush extent cannot be less than one.  If it is, don't update the line chart.
-	                if (Math.abs(extent[0] - extent[1]) <= 1) {
-	                    return;
-	                }
-	
-	                dispatch.brush({extent: extent, brush: brush});
-	
-	
-	                updateBrushBG();
-	
-	                // Update Main (Focus)
-	                var focusLinesWrap = g.select('.nv-focus .nv-linesWrap')
-	                    .datum(
-	                    data
-	                        .filter(function(d) { return !d.disabled })
-	                        .map(function(d,i) {
-	                            return {
-	                                key: d.key,
-	                                area: d.area,
-	                                values: d.values.filter(function(d,i) {
-	                                    return lines.x()(d,i) >= extent[0] && lines.x()(d,i) <= extent[1];
-	                                })
-	                            }
-	                        })
-	                );
-	                focusLinesWrap.transition().duration(transitionDuration).call(lines);
-	
-	
-	                // Update Main (Focus) Axes
-	                g.select('.nv-focus .nv-x.nv-axis').transition().duration(transitionDuration)
-	                    .call(xAxis);
-	                g.select('.nv-focus .nv-y.nv-axis').transition().duration(transitionDuration)
-	                    .call(yAxis);
-	            }
-	        });
-	
-	        return chart;
-	    }
-	
-	    //============================================================
-	    // Event Handling/Dispatching (out of chart's scope)
-	    //------------------------------------------------------------
-	
-	    lines.dispatch.on('elementMouseover.tooltip', function(evt) {
-	        tooltip.data(evt).position(evt.pos).hidden(false);
-	    });
-	
-	    lines.dispatch.on('elementMouseout.tooltip', function(evt) {
-	        tooltip.hidden(true)
-	    });
-	
-	    //============================================================
-	    // Expose Public Variables
-	    //------------------------------------------------------------
-	
-	    // expose chart's sub-components
-	    chart.dispatch = dispatch;
-	    chart.legend = legend;
-	    chart.lines = lines;
-	    chart.lines2 = lines2;
-	    chart.xAxis = xAxis;
-	    chart.yAxis = yAxis;
-	    chart.x2Axis = x2Axis;
-	    chart.y2Axis = y2Axis;
-	    chart.interactiveLayer = interactiveLayer;
-	    chart.tooltip = tooltip;
-	
-	    chart.options = nv.utils.optionsFunc.bind(chart);
-	
-	    chart._options = Object.create({}, {
-	        // simple options, just get/set the necessary values
-	        width:      {get: function(){return width;}, set: function(_){width=_;}},
-	        height:     {get: function(){return height;}, set: function(_){height=_;}},
-	        focusHeight:     {get: function(){return height2;}, set: function(_){height2=_;}},
-	        showLegend: {get: function(){return showLegend;}, set: function(_){showLegend=_;}},
-	        brushExtent: {get: function(){return brushExtent;}, set: function(_){brushExtent=_;}},
-	        defaultState:    {get: function(){return defaultState;}, set: function(_){defaultState=_;}},
-	        noData:    {get: function(){return noData;}, set: function(_){noData=_;}},
-	
-	        // deprecated options
-	        tooltips:    {get: function(){return tooltip.enabled();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltips', 'use chart.tooltip.enabled() instead');
-	            tooltip.enabled(!!_);
-	        }},
-	        tooltipContent:    {get: function(){return tooltip.contentGenerator();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltipContent', 'use chart.tooltip.contentGenerator() instead');
-	            tooltip.contentGenerator(_);
-	        }},
-	
-	        // options that require extra logic in the setter
-	        margin: {get: function(){return margin;}, set: function(_){
-	            margin.top    = _.top    !== undefined ? _.top    : margin.top;
-	            margin.right  = _.right  !== undefined ? _.right  : margin.right;
-	            margin.bottom = _.bottom !== undefined ? _.bottom : margin.bottom;
-	            margin.left   = _.left   !== undefined ? _.left   : margin.left;
-	        }},
-	        color:  {get: function(){return color;}, set: function(_){
-	            color = nv.utils.getColor(_);
-	            legend.color(color);
-	            // line color is handled above?
-	        }},
-	        interpolate: {get: function(){return lines.interpolate();}, set: function(_){
-	            lines.interpolate(_);
-	            lines2.interpolate(_);
-	        }},
-	        xTickFormat: {get: function(){return xAxis.tickFormat();}, set: function(_){
-	            xAxis.tickFormat(_);
-	            x2Axis.tickFormat(_);
-	        }},
-	        yTickFormat: {get: function(){return yAxis.tickFormat();}, set: function(_){
-	            yAxis.tickFormat(_);
-	            y2Axis.tickFormat(_);
-	        }},
-	        duration:    {get: function(){return transitionDuration;}, set: function(_){
-	            transitionDuration=_;
-	            yAxis.duration(transitionDuration);
-	            y2Axis.duration(transitionDuration);
-	            xAxis.duration(transitionDuration);
-	            x2Axis.duration(transitionDuration);
-	        }},
-	        x: {get: function(){return lines.x();}, set: function(_){
-	            lines.x(_);
-	            lines2.x(_);
-	        }},
-	        y: {get: function(){return lines.y();}, set: function(_){
-	            lines.y(_);
-	            lines2.y(_);
-	        }},
-	        useInteractiveGuideline: {get: function(){return useInteractiveGuideline;}, set: function(_){
-	            useInteractiveGuideline = _;
-	            if (useInteractiveGuideline) {
-	                lines.interactive(false);
-	                lines.useVoronoi(false);
-	            }
+	            switchYAxisOrder=_;
 	        }}
 	    });
 	
@@ -64175,10 +63727,10 @@
 	                parsed.forEach(function(series, i){
 	                    // if series is non-stackable, use un-parsed data
 	                    if (series.nonStackable) {
-	                        data[i].nonStackableSeries = nonStackableCount++; 
+	                        data[i].nonStackableSeries = nonStackableCount++;
 	                        parsed[i] = data[i];
 	                    } else {
-	                        // don't stack this seires on top of the nonStackable seriees 
+	                        // don't stack this seires on top of the nonStackable seriees
 	                        if (i > 0 && parsed[i - 1].nonStackable){
 	                            parsed[i].values.map(function(d,j){
 	                                d.y0 -= parsed[i - 1].values[j].y;
@@ -64214,7 +63766,7 @@
 	                                posBase = posBase + f.size;
 	                            }
 	                        }
-	                        
+	
 	                    });
 	                });
 	            }
@@ -64351,10 +63903,13 @@
 	                    });
 	                })
 	                .on('click', function(d,i) {
+	                    var element = this;
 	                    dispatch.elementClick({
 	                        data: d,
 	                        index: i,
-	                        color: d3.select(this).style("fill")
+	                        color: d3.select(this).style("fill"),
+	                        event: d3.event,
+	                        element: element
 	                    });
 	                    d3.event.stopPropagation();
 	                })
@@ -64404,9 +63959,9 @@
 	                    })
 	                    .attr('height', function(d,i,j) {
 	                        if (!data[j].nonStackable) {
-	                            return Math.max(Math.abs(y(d.y+d.y0) - y(d.y0)), 1);
+	                            return Math.max(Math.abs(y(d.y+d.y0) - y(d.y0)), 0);
 	                        } else {
-	                            return Math.max(Math.abs(y(getY(d,i)) - y(0)),1) || 0;
+	                            return Math.max(Math.abs(y(getY(d,i)) - y(0)), 0) || 0;
 	                        }
 	                    })
 	                    .attr('x', function(d,i,j) {
@@ -64414,7 +63969,7 @@
 	                        if (data[j].nonStackable) {
 	                            width = d.series * x.rangeBand() / data.length;
 	                            if (data.length !== nonStackableCount){
-	                                width = data[j].nonStackableSeries * x.rangeBand()/(nonStackableCount*2); 
+	                                width = data[j].nonStackableSeries * x.rangeBand()/(nonStackableCount*2);
 	                            }
 	                        }
 	                        return width;
@@ -64425,7 +63980,7 @@
 	                        } else {
 	                            // if all series are nonStacable, take the full width
 	                            var width = (x.rangeBand() / nonStackableCount);
-	                            // otherwise, nonStackable graph will be only taking the half-width 
+	                            // otherwise, nonStackable graph will be only taking the half-width
 	                            // of the x rangeBand
 	                            if (data.length !== nonStackableCount) {
 	                                width = x.rangeBand()/(nonStackableCount*2);
@@ -64519,8 +64074,7 @@
 	    nv.utils.initOptions(chart);
 	
 	    return chart;
-	};
-	nv.models.multiBarChart = function() {
+	};nv.models.multiBarChart = function() {
 	    "use strict";
 	
 	    //============================================================
@@ -64530,6 +64084,7 @@
 	    var multibar = nv.models.multiBar()
 	        , xAxis = nv.models.axis()
 	        , yAxis = nv.models.axis()
+	        , interactiveLayer = nv.interactiveGuideline()
 	        , legend = nv.models.legend()
 	        , controls = nv.models.legend()
 	        , tooltip = nv.models.tooltip()
@@ -64547,6 +64102,7 @@
 	        , rightAlignYAxis = false
 	        , reduceXTicks = true // if false a tick will show for every data point
 	        , staggerLabels = false
+	        , wrapLabels = false
 	        , rotateLabels = 0
 	        , x //can be accessed via chart.xScale()
 	        , y //can be accessed via chart.yScale()
@@ -64556,6 +64112,7 @@
 	        , dispatch = d3.dispatch('stateChange', 'changeState', 'renderEnd')
 	        , controlWidth = function() { return showControls ? 180 : 0 }
 	        , duration = 250
+	        , useInteractiveGuideline = false
 	        ;
 	
 	    state.stacked = false // DEPRECATED Maintained for backward compatibility
@@ -64674,6 +64231,7 @@
 	            gEnter.append('g').attr('class', 'nv-barsWrap');
 	            gEnter.append('g').attr('class', 'nv-legendWrap');
 	            gEnter.append('g').attr('class', 'nv-controlsWrap');
+	            gEnter.append('g').attr('class', 'nv-interactive');
 	
 	            // Legend
 	            if (showLegend) {
@@ -64765,6 +64323,11 @@
 	                        });
 	                }
 	
+	                if (wrapLabels) {
+	                    g.selectAll('.tick text')
+	                        .call(nv.utils.wrapTicks, chart.xAxis.rangeBand())
+	                }
+	
 	                if (reduceXTicks)
 	                    xTicks
 	                        .filter(function(d,i) {
@@ -64791,6 +64354,17 @@
 	
 	                g.select('.nv-y.nv-axis')
 	                    .call(yAxis);
+	            }
+	
+	            //Set up interactive layer
+	            if (useInteractiveGuideline) {
+	                interactiveLayer
+	                    .width(availableWidth)
+	                    .height(availableHeight)
+	                    .margin({left:margin.left, top:margin.top})
+	                    .svgContainer(container)
+	                    .xScale(x);
+	                wrap.select(".nv-interactive").call(interactiveLayer);
 	            }
 	
 	            //============================================================
@@ -64843,33 +64417,73 @@
 	                }
 	                chart.update();
 	            });
+	
+	            if (useInteractiveGuideline) {
+	                interactiveLayer.dispatch.on('elementMousemove', function(e) {
+	                    if (e.pointXValue == undefined) return;
+	
+	                    var singlePoint, pointIndex, pointXLocation, xValue, allData = [];
+	                    data
+	                        .filter(function(series, i) {
+	                            series.seriesIndex = i;
+	                            return !series.disabled;
+	                        })
+	                        .forEach(function(series,i) {
+	                            pointIndex = x.domain().indexOf(e.pointXValue)
+	
+	                            var point = series.values[pointIndex];
+	                            if (point === undefined) return;
+	
+	                            xValue = point.x;
+	                            if (singlePoint === undefined) singlePoint = point;
+	                            if (pointXLocation === undefined) pointXLocation = e.mouseX
+	                            allData.push({
+	                                key: series.key,
+	                                value: chart.y()(point, pointIndex),
+	                                color: color(series,series.seriesIndex),
+	                                data: series.values[pointIndex]
+	                            });
+	                        });
+	
+	                    interactiveLayer.tooltip
+	                        .chartContainer(that.parentNode)
+	                        .data({
+	                            value: xValue,
+	                            index: pointIndex,
+	                            series: allData
+	                        })();
+	
+	                    interactiveLayer.renderGuideLine(pointXLocation);
+	                });
+	
+	                interactiveLayer.dispatch.on("elementMouseout",function(e) {
+	                    interactiveLayer.tooltip.hidden(true);
+	                });
+	            }
+	            else {
+	                multibar.dispatch.on('elementMouseover.tooltip', function(evt) {
+	                    evt.value = chart.x()(evt.data);
+	                    evt['series'] = {
+	                        key: evt.data.key,
+	                        value: chart.y()(evt.data),
+	                        color: evt.color
+	                    };
+	                    tooltip.data(evt).hidden(false);
+	                });
+	
+	                multibar.dispatch.on('elementMouseout.tooltip', function(evt) {
+	                    tooltip.hidden(true);
+	                });
+	
+	                multibar.dispatch.on('elementMousemove.tooltip', function(evt) {
+	                    tooltip();
+	                });
+	            }
 	        });
 	
 	        renderWatch.renderEnd('multibarchart immediate');
 	        return chart;
 	    }
-	
-	    //============================================================
-	    // Event Handling/Dispatching (out of chart's scope)
-	    //------------------------------------------------------------
-	
-	    multibar.dispatch.on('elementMouseover.tooltip', function(evt) {
-	        evt.value = chart.x()(evt.data);
-	        evt['series'] = {
-	            key: evt.data.key,
-	            value: chart.y()(evt.data),
-	            color: evt.color
-	        };
-	        tooltip.data(evt).hidden(false);
-	    });
-	
-	    multibar.dispatch.on('elementMouseout.tooltip', function(evt) {
-	        tooltip.hidden(true);
-	    });
-	
-	    multibar.dispatch.on('elementMousemove.tooltip', function(evt) {
-	        tooltip.position({top: d3.event.pageY, left: d3.event.pageX})();
-	    });
 	
 	    //============================================================
 	    // Expose Public Variables
@@ -64884,6 +64498,7 @@
 	    chart.yAxis = yAxis;
 	    chart.state = state;
 	    chart.tooltip = tooltip;
+	    chart.interactiveLayer = interactiveLayer;
 	
 	    chart.options = nv.utils.optionsFunc.bind(chart);
 	
@@ -64901,18 +64516,7 @@
 	        reduceXTicks:    {get: function(){return reduceXTicks;}, set: function(_){reduceXTicks=_;}},
 	        rotateLabels:    {get: function(){return rotateLabels;}, set: function(_){rotateLabels=_;}},
 	        staggerLabels:    {get: function(){return staggerLabels;}, set: function(_){staggerLabels=_;}},
-	
-	        // deprecated options
-	        tooltips:    {get: function(){return tooltip.enabled();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltips', 'use chart.tooltip.enabled() instead');
-	            tooltip.enabled(!!_);
-	        }},
-	        tooltipContent:    {get: function(){return tooltip.contentGenerator();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltipContent', 'use chart.tooltip.contentGenerator() instead');
-	            tooltip.contentGenerator(_);
-	        }},
+	        wrapLabels:   {get: function(){return wrapLabels;}, set: function(_){wrapLabels=!!_;}},
 	
 	        // options that require extra logic in the setter
 	        margin: {get: function(){return margin;}, set: function(_){
@@ -64935,6 +64539,9 @@
 	        rightAlignYAxis: {get: function(){return rightAlignYAxis;}, set: function(_){
 	            rightAlignYAxis = _;
 	            yAxis.orient( rightAlignYAxis ? 'right' : 'left');
+	        }},
+	        useInteractiveGuideline: {get: function(){return useInteractiveGuideline;}, set: function(_){
+	            useInteractiveGuideline = _;
 	        }},
 	        barColor:  {get: function(){return multibar.barColor;}, set: function(_){
 	            multibar.barColor(_);
@@ -65218,7 +64825,7 @@
 	                    })
 	                    .select('rect')
 	                    .attr('width', function(d,i) {
-	                        return Math.abs(y(getY(d,i) + d.y0) - y(d.y0))
+	                        return Math.abs(y(getY(d,i) + d.y0) - y(d.y0)) || 0
 	                    })
 	                    .attr('height', x.rangeBand() );
 	            else
@@ -65236,7 +64843,7 @@
 	                    .select('rect')
 	                    .attr('height', x.rangeBand() / data.length )
 	                    .attr('width', function(d,i) {
-	                        return Math.max(Math.abs(y(getY(d,i)) - y(0)),1)
+	                        return Math.max(Math.abs(y(getY(d,i)) - y(0)),1) || 0
 	                    });
 	
 	            //store old scales for use in transitions on update
@@ -65439,7 +65046,7 @@
 	
 	            // Setup Scales
 	            x = multibar.xScale();
-	            y = multibar.yScale();
+	            y = multibar.yScale().clamp(true);
 	
 	            // Setup containers and skeleton of chart
 	            var wrap = container.selectAll('g.nv-wrap.nv-multiBarHorizontalChart').data([data]);
@@ -65556,9 +65163,11 @@
 	
 	                switch (d.key) {
 	                    case 'Grouped':
+	                    case controlLabels.grouped:
 	                        multibar.stacked(false);
 	                        break;
 	                    case 'Stacked':
+	                    case controlLabels.stacked:
 	                        multibar.stacked(true);
 	                        break;
 	                }
@@ -65613,7 +65222,7 @@
 	    });
 	
 	    multibar.dispatch.on('elementMousemove.tooltip', function(evt) {
-	        tooltip.position({top: d3.event.pageY, left: d3.event.pageX})();
+	        tooltip();
 	    });
 	
 	    //============================================================
@@ -65643,18 +65252,6 @@
 	        showYAxis:    {get: function(){return showYAxis;}, set: function(_){showYAxis=_;}},
 	        defaultState:    {get: function(){return defaultState;}, set: function(_){defaultState=_;}},
 	        noData:    {get: function(){return noData;}, set: function(_){noData=_;}},
-	
-	        // deprecated options
-	        tooltips:    {get: function(){return tooltip.enabled();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltips', 'use chart.tooltip.enabled() instead');
-	            tooltip.enabled(!!_);
-	        }},
-	        tooltipContent:    {get: function(){return tooltip.contentGenerator();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltipContent', 'use chart.tooltip.contentGenerator() instead');
-	            tooltip.contentGenerator(_);
-	        }},
 	
 	        // options that require extra logic in the setter
 	        margin: {get: function(){return margin;}, set: function(_){
@@ -65703,7 +65300,10 @@
 	        getX = function(d) { return d.x },
 	        getY = function(d) { return d.y},
 	        interpolate = 'monotone',
-	        useVoronoi = true
+	        useVoronoi = true,
+	        interactiveLayer = nv.interactiveGuideline(),
+	        useInteractiveGuideline = false,
+	        legendRightAxisHint = ' (right axis)'
 	        ;
 	
 	    //============================================================
@@ -65716,6 +65316,9 @@
 	
 	        lines1 = nv.models.line().yScale(yScale1),
 	        lines2 = nv.models.line().yScale(yScale2),
+	
+	        scatters1 = nv.models.scatter().yScale(yScale1),
+	        scatters2 = nv.models.scatter().yScale(yScale2),
 	
 	        bars1 = nv.models.multiBar().stacked(false).yScale(yScale1),
 	        bars2 = nv.models.multiBar().stacked(false).yScale(yScale2),
@@ -65731,6 +65334,8 @@
 	        tooltip = nv.models.tooltip(),
 	        dispatch = d3.dispatch();
 	
+	    var charts = [lines1, lines2, scatters1, scatters2, bars1, bars2, stack1, stack2];
+	
 	    function chart(selection) {
 	        selection.each(function(data) {
 	            var container = d3.select(this),
@@ -65745,6 +65350,8 @@
 	
 	            var dataLines1 = data.filter(function(d) {return d.type == 'line' && d.yAxis == 1});
 	            var dataLines2 = data.filter(function(d) {return d.type == 'line' && d.yAxis == 2});
+	            var dataScatters1 = data.filter(function(d) {return d.type == 'scatter' && d.yAxis == 1});
+	            var dataScatters2 = data.filter(function(d) {return d.type == 'scatter' && d.yAxis == 2});
 	            var dataBars1 =  data.filter(function(d) {return d.type == 'bar'  && d.yAxis == 1});
 	            var dataBars2 =  data.filter(function(d) {return d.type == 'bar'  && d.yAxis == 2});
 	            var dataStack1 = data.filter(function(d) {return d.type == 'area' && d.yAxis == 1});
@@ -65761,18 +65368,18 @@
 	            var series1 = data.filter(function(d) {return !d.disabled && d.yAxis == 1})
 	                .map(function(d) {
 	                    return d.values.map(function(d,i) {
-	                        return { x: d.x, y: d.y }
+	                        return { x: getX(d), y: getY(d) }
 	                    })
 	                });
 	
 	            var series2 = data.filter(function(d) {return !d.disabled && d.yAxis == 2})
 	                .map(function(d) {
 	                    return d.values.map(function(d,i) {
-	                        return { x: d.x, y: d.y }
+	                        return { x: getX(d), y: getY(d) }
 	                    })
 	                });
 	
-	            x   .domain(d3.extent(d3.merge(series1.concat(series2)), function(d) { return d.x } ))
+	            x   .domain(d3.extent(d3.merge(series1.concat(series2)), function(d) { return getX(d) }))
 	                .range([0, availableWidth]);
 	
 	            var wrap = container.selectAll('g.wrap.multiChart').data([data]);
@@ -65781,13 +65388,16 @@
 	            gEnter.append('g').attr('class', 'nv-x nv-axis');
 	            gEnter.append('g').attr('class', 'nv-y1 nv-axis');
 	            gEnter.append('g').attr('class', 'nv-y2 nv-axis');
-	            gEnter.append('g').attr('class', 'lines1Wrap');
-	            gEnter.append('g').attr('class', 'lines2Wrap');
-	            gEnter.append('g').attr('class', 'bars1Wrap');
-	            gEnter.append('g').attr('class', 'bars2Wrap');
 	            gEnter.append('g').attr('class', 'stack1Wrap');
 	            gEnter.append('g').attr('class', 'stack2Wrap');
+	            gEnter.append('g').attr('class', 'bars1Wrap');
+	            gEnter.append('g').attr('class', 'bars2Wrap');
+	            gEnter.append('g').attr('class', 'scatters1Wrap');
+	            gEnter.append('g').attr('class', 'scatters2Wrap');
+	            gEnter.append('g').attr('class', 'lines1Wrap');
+	            gEnter.append('g').attr('class', 'lines2Wrap');
 	            gEnter.append('g').attr('class', 'legendWrap');
+	            gEnter.append('g').attr('class', 'nv-interactive');
 	
 	            var g = wrap.select('g');
 	
@@ -65805,7 +65415,7 @@
 	                g.select('.legendWrap')
 	                    .datum(data.map(function(series) {
 	                        series.originalKey = series.originalKey === undefined ? series.key : series.originalKey;
-	                        series.key = series.originalKey + (series.yAxis == 1 ? '' : ' (right axis)');
+	                        series.key = series.originalKey + (series.yAxis == 1 ? '' : legendRightAxisHint);
 	                        return series;
 	                    }))
 	                    .call(legend);
@@ -65829,6 +65439,14 @@
 	                .height(availableHeight)
 	                .interpolate(interpolate)
 	                .color(color_array.filter(function(d,i) { return !data[i].disabled && data[i].yAxis == 2 && data[i].type == 'line'}));
+	            scatters1
+	                .width(availableWidth)
+	                .height(availableHeight)
+	                .color(color_array.filter(function(d,i) { return !data[i].disabled && data[i].yAxis == 1 && data[i].type == 'scatter'}));
+	            scatters2
+	                .width(availableWidth)
+	                .height(availableHeight)
+	                .color(color_array.filter(function(d,i) { return !data[i].disabled && data[i].yAxis == 2 && data[i].type == 'scatter'}));
 	            bars1
 	                .width(availableWidth)
 	                .height(availableHeight)
@@ -65850,12 +65468,16 @@
 	
 	            var lines1Wrap = g.select('.lines1Wrap')
 	                .datum(dataLines1.filter(function(d){return !d.disabled}));
+	            var scatters1Wrap = g.select('.scatters1Wrap')
+	                .datum(dataScatters1.filter(function(d){return !d.disabled}));
 	            var bars1Wrap = g.select('.bars1Wrap')
 	                .datum(dataBars1.filter(function(d){return !d.disabled}));
 	            var stack1Wrap = g.select('.stack1Wrap')
 	                .datum(dataStack1.filter(function(d){return !d.disabled}));
 	            var lines2Wrap = g.select('.lines2Wrap')
 	                .datum(dataLines2.filter(function(d){return !d.disabled}));
+	            var scatters2Wrap = g.select('.scatters2Wrap')
+	                .datum(dataScatters2.filter(function(d){return !d.disabled}));
 	            var bars2Wrap = g.select('.bars2Wrap')
 	                .datum(dataBars2.filter(function(d){return !d.disabled}));
 	            var stack2Wrap = g.select('.stack2Wrap')
@@ -65875,10 +65497,12 @@
 	                .range([0, availableHeight]);
 	
 	            lines1.yDomain(yScale1.domain());
+	            scatters1.yDomain(yScale1.domain());
 	            bars1.yDomain(yScale1.domain());
 	            stack1.yDomain(yScale1.domain());
 	
 	            lines2.yDomain(yScale2.domain());
+	            scatters2.yDomain(yScale2.domain());
 	            bars2.yDomain(yScale2.domain());
 	            stack2.yDomain(yScale2.domain());
 	
@@ -65890,6 +65514,9 @@
 	
 	            if(dataLines1.length){d3.transition(lines1Wrap).call(lines1);}
 	            if(dataLines2.length){d3.transition(lines2Wrap).call(lines2);}
+	
+	            if(dataScatters1.length){d3.transition(scatters1Wrap).call(scatters1);}
+	            if(dataScatters2.length){d3.transition(scatters2Wrap).call(scatters2);}
 	
 	            xAxis
 	                ._ticks( nv.utils.calcTicksX(availableWidth/100, data) )
@@ -65927,6 +65554,16 @@
 	                chart.update();
 	            });
 	
+	            if(useInteractiveGuideline){
+	                interactiveLayer
+	                    .width(availableWidth)
+	                    .height(availableHeight)
+	                    .margin({left:margin.left, top:margin.top})
+	                    .svgContainer(container)
+	                    .xScale(x);
+	                wrap.select(".nv-interactive").call(interactiveLayer);
+	            }
+	
 	            //============================================================
 	            // Event Handling/Dispatching
 	            //------------------------------------------------------------
@@ -65936,39 +65573,8 @@
 	                evt.value = evt.point.x;
 	                evt.series = {
 	                    value: evt.point.y,
-	                    color: evt.point.color
-	                };
-	                tooltip
-	                    .duration(100)
-	                    .valueFormatter(function(d, i) {
-	                        return yaxis.tickFormat()(d, i);
-	                    })
-	                    .data(evt)
-	                    .position(evt.pos)
-	                    .hidden(false);
-	            }
-	
-	            function mouseover_stack(evt) {
-	                var yaxis = data[evt.seriesIndex].yAxis === 2 ? yAxis2 : yAxis1;
-	                evt.point['x'] = stack1.x()(evt.point);
-	                evt.point['y'] = stack1.y()(evt.point);
-	                tooltip
-	                    .duration(100)
-	                    .valueFormatter(function(d, i) {
-	                        return yaxis.tickFormat()(d, i);
-	                    })
-	                    .data(evt)
-	                    .position(evt.pos)
-	                    .hidden(false);
-	            }
-	
-	            function mouseover_bar(evt) {
-	                var yaxis = data[evt.data.series].yAxis === 2 ? yAxis2 : yAxis1;
-	
-	                evt.value = bars1.x()(evt.data);
-	                evt['series'] = {
-	                    value: bars1.y()(evt.data),
-	                    color: evt.color
+	                    color: evt.point.color,
+	                    key: evt.series.key
 	                };
 	                tooltip
 	                    .duration(0)
@@ -65979,40 +65585,169 @@
 	                    .hidden(false);
 	            }
 	
-	            lines1.dispatch.on('elementMouseover.tooltip', mouseover_line);
-	            lines2.dispatch.on('elementMouseover.tooltip', mouseover_line);
-	            lines1.dispatch.on('elementMouseout.tooltip', function(evt) {
-	                tooltip.hidden(true)
-	            });
-	            lines2.dispatch.on('elementMouseout.tooltip', function(evt) {
-	                tooltip.hidden(true)
-	            });
+	            function mouseover_scatter(evt) {
+	                var yaxis = data[evt.seriesIndex].yAxis === 2 ? yAxis2 : yAxis1;
+	                evt.value = evt.point.x;
+	                evt.series = {
+	                    value: evt.point.y,
+	                    color: evt.point.color,
+	                    key: evt.series.key
+	                };
+	                tooltip
+	                    .duration(100)
+	                    .valueFormatter(function(d, i) {
+	                        return yaxis.tickFormat()(d, i);
+	                    })
+	                    .data(evt)
+	                    .hidden(false);
+	            }
 	
-	            stack1.dispatch.on('elementMouseover.tooltip', mouseover_stack);
-	            stack2.dispatch.on('elementMouseover.tooltip', mouseover_stack);
-	            stack1.dispatch.on('elementMouseout.tooltip', function(evt) {
-	                tooltip.hidden(true)
-	            });
-	            stack2.dispatch.on('elementMouseout.tooltip', function(evt) {
-	                tooltip.hidden(true)
-	            });
+	            function mouseover_stack(evt) {
+	                var yaxis = data[evt.seriesIndex].yAxis === 2 ? yAxis2 : yAxis1;
+	                evt.point['x'] = stack1.x()(evt.point);
+	                evt.point['y'] = stack1.y()(evt.point);
+	                tooltip
+	                    .duration(0)
+	                    .valueFormatter(function(d, i) {
+	                        return yaxis.tickFormat()(d, i);
+	                    })
+	                    .data(evt)
+	                    .hidden(false);
+	            }
 	
-	            bars1.dispatch.on('elementMouseover.tooltip', mouseover_bar);
-	            bars2.dispatch.on('elementMouseover.tooltip', mouseover_bar);
+	            function mouseover_bar(evt) {
+	                var yaxis = data[evt.data.series].yAxis === 2 ? yAxis2 : yAxis1;
 	
-	            bars1.dispatch.on('elementMouseout.tooltip', function(evt) {
-	                tooltip.hidden(true);
-	            });
-	            bars2.dispatch.on('elementMouseout.tooltip', function(evt) {
-	                tooltip.hidden(true);
-	            });
-	            bars1.dispatch.on('elementMousemove.tooltip', function(evt) {
-	                tooltip.position({top: d3.event.pageY, left: d3.event.pageX})();
-	            });
-	            bars2.dispatch.on('elementMousemove.tooltip', function(evt) {
-	                tooltip.position({top: d3.event.pageY, left: d3.event.pageX})();
-	            });
+	                evt.value = bars1.x()(evt.data);
+	                evt['series'] = {
+	                    value: bars1.y()(evt.data),
+	                    color: evt.color,
+	                    key: evt.data.key
+	                };
+	                tooltip
+	                    .duration(0)
+	                    .valueFormatter(function(d, i) {
+	                        return yaxis.tickFormat()(d, i);
+	                    })
+	                    .data(evt)
+	                    .hidden(false);
+	            }
 	
+	
+	
+	            function clearHighlights() {
+	              for(var i=0, il=charts.length; i < il; i++){
+	                var chart = charts[i];
+	                try {
+	                  chart.clearHighlights();
+	                } catch(e){}
+	              }
+	            }
+	
+	            function highlightPoint(serieIndex, pointIndex, b){
+	              for(var i=0, il=charts.length; i < il; i++){
+	                var chart = charts[i];
+	                try {
+	                  chart.highlightPoint(serieIndex, pointIndex, b);
+	                } catch(e){}
+	              }
+	            }
+	
+	            if(useInteractiveGuideline){
+	                interactiveLayer.dispatch.on('elementMousemove', function(e) {
+	                    clearHighlights();
+	                    var singlePoint, pointIndex, pointXLocation, allData = [];
+	                    data
+	                    .filter(function(series, i) {
+	                        series.seriesIndex = i;
+	                        return !series.disabled;
+	                    })
+	                    .forEach(function(series,i) {
+	                        var extent = x.domain();
+	                        var currentValues = series.values.filter(function(d,i) {
+	                            return chart.x()(d,i) >= extent[0] && chart.x()(d,i) <= extent[1];
+	                        });
+	
+	                        pointIndex = nv.interactiveBisect(currentValues, e.pointXValue, chart.x());
+	                        var point = currentValues[pointIndex];
+	                        var pointYValue = chart.y()(point, pointIndex);
+	                        if (pointYValue !== null) {
+	                            highlightPoint(i, pointIndex, true);
+	                        }
+	                        if (point === undefined) return;
+	                        if (singlePoint === undefined) singlePoint = point;
+	                        if (pointXLocation === undefined) pointXLocation = x(chart.x()(point,pointIndex));
+	                        allData.push({
+	                            key: series.key,
+	                            value: pointYValue,
+	                            color: color(series,series.seriesIndex),
+	                            data: point,
+	                            yAxis: series.yAxis == 2 ? yAxis2 : yAxis1
+	                        });
+	                    });
+	
+	                    interactiveLayer.tooltip
+	                    .chartContainer(chart.container.parentNode)
+	                    .valueFormatter(function(d,i) {
+	                        var yAxis = allData[i].yAxis;
+	                        return d === null ? "N/A" : yAxis.tickFormat()(d);
+	                    })
+	                    .data({
+	                        value: chart.x()( singlePoint,pointIndex ),
+	                        index: pointIndex,
+	                        series: allData
+	                    })();
+	
+	                    interactiveLayer.renderGuideLine(pointXLocation);
+	                });
+	
+	                interactiveLayer.dispatch.on("elementMouseout",function(e) {
+	                    clearHighlights();
+	                });
+	            } else {
+	                lines1.dispatch.on('elementMouseover.tooltip', mouseover_line);
+	                lines2.dispatch.on('elementMouseover.tooltip', mouseover_line);
+	                lines1.dispatch.on('elementMouseout.tooltip', function(evt) {
+	                    tooltip.hidden(true)
+	                });
+	                lines2.dispatch.on('elementMouseout.tooltip', function(evt) {
+	                    tooltip.hidden(true)
+	                });
+	
+	                scatters1.dispatch.on('elementMouseover.tooltip', mouseover_scatter);
+	                scatters2.dispatch.on('elementMouseover.tooltip', mouseover_scatter);
+	                scatters1.dispatch.on('elementMouseout.tooltip', function(evt) {
+	                    tooltip.hidden(true)
+	                });
+	                scatters2.dispatch.on('elementMouseout.tooltip', function(evt) {
+	                    tooltip.hidden(true)
+	                });
+	
+	                stack1.dispatch.on('elementMouseover.tooltip', mouseover_stack);
+	                stack2.dispatch.on('elementMouseover.tooltip', mouseover_stack);
+	                stack1.dispatch.on('elementMouseout.tooltip', function(evt) {
+	                    tooltip.hidden(true)
+	                });
+	                stack2.dispatch.on('elementMouseout.tooltip', function(evt) {
+	                    tooltip.hidden(true)
+	                });
+	
+	                bars1.dispatch.on('elementMouseover.tooltip', mouseover_bar);
+	                bars2.dispatch.on('elementMouseover.tooltip', mouseover_bar);
+	
+	                bars1.dispatch.on('elementMouseout.tooltip', function(evt) {
+	                    tooltip.hidden(true);
+	                });
+	                bars2.dispatch.on('elementMouseout.tooltip', function(evt) {
+	                    tooltip.hidden(true);
+	                });
+	                bars1.dispatch.on('elementMousemove.tooltip', function(evt) {
+	                    tooltip();
+	                });
+	                bars2.dispatch.on('elementMousemove.tooltip', function(evt) {
+	                    tooltip();
+	                });
+	            }
 	        });
 	
 	        return chart;
@@ -66023,8 +65758,11 @@
 	    //------------------------------------------------------------
 	
 	    chart.dispatch = dispatch;
+	    chart.legend = legend;
 	    chart.lines1 = lines1;
 	    chart.lines2 = lines2;
+	    chart.scatters1 = scatters1;
+	    chart.scatters2 = scatters2;
 	    chart.bars1 = bars1;
 	    chart.bars2 = bars2;
 	    chart.stack1 = stack1;
@@ -66033,6 +65771,7 @@
 	    chart.yAxis1 = yAxis1;
 	    chart.yAxis2 = yAxis2;
 	    chart.tooltip = tooltip;
+	    chart.interactiveLayer = interactiveLayer;
 	
 	    chart.options = nv.utils.optionsFunc.bind(chart);
 	
@@ -66045,18 +65784,7 @@
 	        yDomain2:    {get: function(){return yDomain2;}, set: function(_){yDomain2=_;}},
 	        noData:    {get: function(){return noData;}, set: function(_){noData=_;}},
 	        interpolate:    {get: function(){return interpolate;}, set: function(_){interpolate=_;}},
-	
-	        // deprecated options
-	        tooltips:    {get: function(){return tooltip.enabled();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltips', 'use chart.tooltip.enabled() instead');
-	            tooltip.enabled(!!_);
-	        }},
-	        tooltipContent:    {get: function(){return tooltip.contentGenerator();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltipContent', 'use chart.tooltip.contentGenerator() instead');
-	            tooltip.contentGenerator(_);
-	        }},
+	        legendRightAxisHint:    {get: function(){return legendRightAxisHint;}, set: function(_){legendRightAxisHint=_;}},
 	
 	        // options that require extra logic in the setter
 	        margin: {get: function(){return margin;}, set: function(_){
@@ -66072,6 +65800,8 @@
 	            getX = _;
 	            lines1.x(_);
 	            lines2.x(_);
+	            scatters1.x(_);
+	            scatters2.x(_);
 	            bars1.x(_);
 	            bars2.x(_);
 	            stack1.x(_);
@@ -66081,6 +65811,8 @@
 	            getY = _;
 	            lines1.y(_);
 	            lines2.y(_);
+	            scatters1.y(_);
+	            scatters2.y(_);
 	            stack1.y(_);
 	            stack2.y(_);
 	            bars1.y(_);
@@ -66092,6 +65824,22 @@
 	            lines2.useVoronoi(_);
 	            stack1.useVoronoi(_);
 	            stack2.useVoronoi(_);
+	        }},
+	
+	        useInteractiveGuideline: {get: function(){return useInteractiveGuideline;}, set: function(_){
+	            useInteractiveGuideline = _;
+	            if (useInteractiveGuideline) {
+	                lines1.interactive(false);
+	                lines1.useVoronoi(false);
+	                lines2.interactive(false);
+	                lines2.useVoronoi(false);
+	                stack1.interactive(false);
+	                stack1.useVoronoi(false);
+	                stack2.interactive(false);
+	                stack2.useVoronoi(false);
+	                scatters1.interactive(false);
+	                scatters2.interactive(false);
+	            }
 	        }}
 	    });
 	
@@ -66099,7 +65847,6 @@
 	
 	    return chart;
 	};
-	
 	
 	nv.models.ohlcBar = function() {
 	    "use strict";
@@ -66131,7 +65878,7 @@
 	        , yDomain
 	        , xRange
 	        , yRange
-	        , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'stateChange', 'changeState', 'renderEnd', 'chartClick', 'elementClick', 'elementDblClick', 'elementMouseover', 'elementMouseout', 'elementMousemove')
+	        , dispatch = d3.dispatch('stateChange', 'changeState', 'renderEnd', 'chartClick', 'elementClick', 'elementDblClick', 'elementMouseover', 'elementMouseout', 'elementMousemove')
 	        ;
 	
 	    //============================================================
@@ -66345,21 +66092,33 @@
 	        , height = null
 	        , x = d3.scale.ordinal()
 	        , y = {}
+	        , dimensionData = []
+	        , enabledDimensions = []
 	        , dimensionNames = []
-	        , dimensionFormats = []
+	        , displayBrush = true
 	        , color = nv.utils.defaultColor()
 	        , filters = []
 	        , active = []
 	        , dragging = []
+	        , axisWithUndefinedValues = []
 	        , lineTension = 1
-	        , dispatch = d3.dispatch('brush', 'elementMouseover', 'elementMouseout')
+	        , foreground
+	        , background
+	        , dimensions
+	        , line = d3.svg.line()
+	        , axis = d3.svg.axis()
+	        , dispatch = d3.dispatch('brushstart', 'brush', 'brushEnd', 'dimensionsOrder', "stateChange", 'elementClick', 'elementMouseover', 'elementMouseout', 'elementMousemove', 'renderEnd', 'activeChanged')
 	        ;
 	
 	    //============================================================
 	    // Private Variables
 	    //------------------------------------------------------------
 	
+	
+	    var renderWatch = nv.utils.renderWatch(dispatch);
+	
 	    function chart(selection) {
+	        renderWatch.reset();
 	        selection.each(function(data) {
 	            var container = d3.select(this);
 	            var availableWidth = nv.utils.availableWidth(width, container, margin),
@@ -66367,37 +66126,80 @@
 	
 	            nv.utils.initSVG(container);
 	
-	            active = data; //set all active before first brush call
+	
+	           //Convert old data to new format (name, values)
+	            if (data[0].values === undefined) {
+	                var newData = [];
+	                data.forEach(function (d) {
+	                        var val = {};
+	                        var key = Object.keys(d);
+	                        key.forEach(function (k) { if (k !== "name") val[k] = d[k] });
+	                        newData.push({ key: d.name, values: val });
+	                });
+	                data = newData;
+	            }
+	
+	            var dataValues = data.map(function (d) {return d.values});
+	            if (active.length === 0) {
+	                active = data;
+	            }; //set all active before first brush call
+	            
+	            dimensionNames = dimensionData.sort(function (a, b) { return a.currentPosition - b.currentPosition; }).map(function (d) { return d.key });
+	            enabledDimensions = dimensionData.filter(function (d) { return !d.disabled; });
+	            
 	
 	            // Setup Scales
-	            x.rangePoints([0, availableWidth], 1).domain(dimensionNames);
+	            x.rangePoints([0, availableWidth], 1).domain(enabledDimensions.map(function (d) { return d.key; }));
 	
 	            //Set as true if all values on an axis are missing.
-	            var onlyNanValues = {};
 	            // Extract the list of dimensions and create a scale for each.
+	            var oldDomainMaxValue = {};
+	            var displayMissingValuesline = false;
+	
 	            dimensionNames.forEach(function(d) {
-	                var extent = d3.extent(data, function(p) { return +p[d]; });
-	                onlyNanValues[d] = false;
+	                var extent = d3.extent(dataValues, function (p) { return +p[d]; });
+	                var min = extent[0];
+	                var max = extent[1];
+	                var onlyUndefinedValues = false;
 	                //If there is no values to display on an axis, set the extent to 0
-	                if (extent[0] === undefined) {
-	                    onlyNanValues[d] = true;
-	                    extent[0] = 0;
-	                    extent[1] = 0;
+	                if (isNaN(min) || isNaN(max)) {
+	                    onlyUndefinedValues = true;
+	                    min = 0;
+	                    max = 0;
 	                }
 	                //Scale axis if there is only one value
-	                if (extent[0] === extent[1]) {
-	                    extent[0] = extent[0] - 1;
-	                    extent[1] = extent[1] + 1;
+	                if (min === max) {
+	                    min = min - 1;
+	                    max = max + 1;
+	                }
+	                var f = filters.filter(function (k) { return k.dimension == d; });
+	                if (f.length !== 0) {
+	                    //If there is only NaN values, keep the existing domain.
+	                    if (onlyUndefinedValues) {
+	                        min = y[d].domain()[0];
+	                        max = y[d].domain()[1];
+	                    }
+	                        //If the brush extent is > max (< min), keep the extent value.
+	                    else if (!f[0].hasOnlyNaN && displayBrush) {
+	                        min = min > f[0].extent[0] ? f[0].extent[0] : min;
+	                        max = max < f[0].extent[1] ? f[0].extent[1] : max;
+	                    }
+	                        //If there is NaN values brushed be sure the brush extent is on the domain.
+	                    else if (f[0].hasNaN) {
+	                        max = max < f[0].extent[1] ? f[0].extent[1] : max;
+	                        oldDomainMaxValue[d] = y[d].domain()[1];
+	                        displayMissingValuesline = true;
+	                    }
 	                }
 	                //Use 90% of (availableHeight - 12) for the axis range, 12 reprensenting the space necessary to display "undefined values" text.
 	                //The remaining 10% are used to display the missingValue line.
 	                y[d] = d3.scale.linear()
-	                    .domain(extent)
+	                    .domain([min, max])
 	                    .range([(availableHeight - 12) * 0.9, 0]);
 	
-	                y[d].brush = d3.svg.brush().y(y[d]).on('brush', brush);
+	                axisWithUndefinedValues = [];
 	
-	                return d != 'name';
+	                y[d].brush = d3.svg.brush().y(y[d]).on('brushstart', brushstart).on('brush', brush).on('brushend', brushend);
 	            });
 	
 	            // Setup containers and skeleton of chart
@@ -66412,9 +66214,9 @@
 	
 	            wrap.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 	
-	            var line = d3.svg.line().interpolate('cardinal').tension(lineTension),
-	                axis = d3.svg.axis().orient('left'),
-	                axisDrag = d3.behavior.drag()
+	            line.interpolate('cardinal').tension(lineTension);
+	            axis.orient('left');
+	            var axisDrag = d3.behavior.drag()
 	                        .on('dragstart', dragStart)
 	                        .on('drag', dragMove)
 	                        .on('dragend', dragEnd);
@@ -66422,149 +66224,212 @@
 	            //Add missing value line at the bottom of the chart
 	            var missingValuesline, missingValueslineText;
 	            var step = x.range()[1] - x.range()[0];
-	            var axisWithMissingValues = [];
-	            var lineData = [0 + step / 2, availableHeight - 12, availableWidth - step / 2, availableHeight - 12];
-	            missingValuesline = wrap.select('.missingValuesline').selectAll('line').data([lineData]);
-	            missingValuesline.enter().append('line');
-	            missingValuesline.exit().remove();
-	            missingValuesline.attr("x1", function(d) { return d[0]; })
-	                    .attr("y1", function(d) { return d[1]; })
-	                    .attr("x2", function(d) { return d[2]; })
-	                    .attr("y2", function(d) { return d[3]; });
-	
-	            //Add the text "undefined values" under the missing value line
-	            missingValueslineText = wrap.select('.missingValuesline').selectAll('text').data(["undefined values"]);
-	            missingValueslineText.append('text').data(["undefined values"]);
-	            missingValueslineText.enter().append('text');
-	            missingValueslineText.exit().remove();
-	            missingValueslineText.attr("y", availableHeight)
-	                    //To have the text right align with the missingValues line, substract 92 representing the text size.
-	                    .attr("x", availableWidth - 92 - step / 2)
-	                    .text(function(d) { return d; });
-	
+	            if (!isNaN(step)) {
+	                var lineData = [0 + step / 2, availableHeight - 12, availableWidth - step / 2, availableHeight - 12];
+	                missingValuesline = wrap.select('.missingValuesline').selectAll('line').data([lineData]);
+	                missingValuesline.enter().append('line');
+	                missingValuesline.exit().remove();
+	                missingValuesline.attr("x1", function(d) { return d[0]; })
+	                        .attr("y1", function(d) { return d[1]; })
+	                        .attr("x2", function(d) { return d[2]; })
+	                        .attr("y2", function(d) { return d[3]; });
+	    
+	                //Add the text "undefined values" under the missing value line
+	                missingValueslineText = wrap.select('.missingValuesline').selectAll('text').data(["undefined values"]);
+	                missingValueslineText.append('text').data(["undefined values"]);
+	                missingValueslineText.enter().append('text');
+	                missingValueslineText.exit().remove();
+	                missingValueslineText.attr("y", availableHeight)
+	                        //To have the text right align with the missingValues line, substract 92 representing the text size.
+	                        .attr("x", availableWidth - 92 - step / 2)
+	                        .text(function(d) { return d; });
+	            }
 	            // Add grey background lines for context.
-	            var background = wrap.select('.background').selectAll('path').data(data);
+	            background = wrap.select('.background').selectAll('path').data(data);
 	            background.enter().append('path');
 	            background.exit().remove();
 	            background.attr('d', path);
 	
 	            // Add blue foreground lines for focus.
-	            var foreground = wrap.select('.foreground').selectAll('path').data(data);
+	            foreground = wrap.select('.foreground').selectAll('path').data(data);
 	            foreground.enter().append('path')
 	            foreground.exit().remove();
-	            foreground.attr('d', path).attr('stroke', color);
+	            foreground.attr('d', path)
+	                .style("stroke-width", function (d, i) {
+	                if (isNaN(d.strokeWidth)) { d.strokeWidth = 1;} return d.strokeWidth;})
+	                .attr('stroke', function (d, i) { return d.color || color(d, i); });
 	            foreground.on("mouseover", function (d, i) {
-	                d3.select(this).classed('hover', true);
+	                d3.select(this).classed('hover', true).style("stroke-width", d.strokeWidth + 2 + "px").style("stroke-opacity", 1);
 	                dispatch.elementMouseover({
 	                    label: d.name,
-	                    data: d.data,
-	                    index: i,
-	                    pos: [d3.mouse(this.parentNode)[0], d3.mouse(this.parentNode)[1]]
+	                    color: d.color || color(d, i)
 	                });
 	
 	            });
 	            foreground.on("mouseout", function (d, i) {
-	                d3.select(this).classed('hover', false);
+	                d3.select(this).classed('hover', false).style("stroke-width", d.strokeWidth + "px").style("stroke-opacity", 0.7);
 	                dispatch.elementMouseout({
 	                    label: d.name,
-	                    data: d.data,
 	                    index: i
 	                });
 	            });
-	
+	            foreground.on('mousemove', function (d, i) {
+	                dispatch.elementMousemove();
+	            });
+	            foreground.on('click', function (d) {
+	                dispatch.elementClick({
+	                    id: d.id
+	                });
+	            });
 	            // Add a group element for each dimension.
-	            var dimensions = g.selectAll('.dimension').data(dimensionNames);
+	            dimensions = g.selectAll('.dimension').data(enabledDimensions);
 	            var dimensionsEnter = dimensions.enter().append('g').attr('class', 'nv-parallelCoordinates dimension');
-	            dimensionsEnter.append('g').attr('class', 'nv-parallelCoordinates nv-axis');
-	            dimensionsEnter.append('g').attr('class', 'nv-parallelCoordinates-brush');
-	            dimensionsEnter.append('text').attr('class', 'nv-parallelCoordinates nv-label');
 	
-	            dimensions.attr('transform', function(d) { return 'translate(' + x(d) + ',0)'; });
-	            dimensions.exit().remove();
+	            dimensions.attr('transform', function(d) { return 'translate(' + x(d.key) + ',0)'; });
+	            dimensionsEnter.append('g').attr('class', 'nv-axis');
 	
 	            // Add an axis and title.
-	            dimensions.select('.nv-label')
+	            dimensionsEnter.append('text')
+	                    .attr('class', 'nv-label')
 	                .style("cursor", "move")
 	                .attr('dy', '-1em')
 	                .attr('text-anchor', 'middle')
-	                .text(String)
 	                .on("mouseover", function(d, i) {
 	                    dispatch.elementMouseover({
-	                        dim: d,
-	                        pos: [d3.mouse(this.parentNode.parentNode)[0], d3.mouse(this.parentNode.parentNode)[1]]
+	                        label: d.tooltip || d.key
 	                    });
 	                })
 	                .on("mouseout", function(d, i) {
 	                    dispatch.elementMouseout({
-	                        dim: d
+	                        label: d.tooltip
 	                    });
+	                })
+	                .on('mousemove', function (d, i) {
+	                    dispatch.elementMousemove();
 	                })
 	                .call(axisDrag);
 	
+	            dimensionsEnter.append('g').attr('class', 'nv-brushBackground');
+	            dimensions.exit().remove();
+	            dimensions.select('.nv-label').text(function (d) { return d.key });
 	            dimensions.select('.nv-axis')
 	                .each(function (d, i) {
-	                    d3.select(this).call(axis.scale(y[d]).tickFormat(d3.format(dimensionFormats[i])));
+	                    d3.select(this).call(axis.scale(y[d.key]).tickFormat(d3.format(d.format)));
 	                });
 	
-	                dimensions.select('.nv-parallelCoordinates-brush')
+	            // Add and store a brush for each axis.
+	            restoreBrush(displayBrush);
+	
+	            var actives = dimensionNames.filter(function (p) { return !y[p].brush.empty(); }),
+	                    extents = actives.map(function (p) { return y[p].brush.extent(); });
+	            var formerActive = active.slice(0);
+	
+	            //Restore active values
+	            active = [];
+	            foreground.style("display", function (d) {
+	                var isActive = actives.every(function (p, i) {
+	                    if ((isNaN(d.values[p]) || isNaN(parseFloat(d.values[p]))) && extents[i][0] == y[p].brush.y().domain()[0]) {
+	                        return true;
+	                    }
+	                    return (extents[i][0] <= d.values[p] && d.values[p] <= extents[i][1]) && !isNaN(parseFloat(d.values[p]));
+	                });
+	                if (isActive)
+	                    active.push(d);
+	                return !isActive ? "none" : null;
+	
+	            });
+	
+	            if (filters.length > 0 || !nv.utils.arrayEquals(active, formerActive)) {
+	               dispatch.activeChanged(active);
+	            }
+	
+	            // Returns the path for a given data point.
+	            function path(d) {
+	                return line(enabledDimensions.map(function (p) {
+	                    //If value if missing, put the value on the missing value line
+	                    if (isNaN(d.values[p.key]) || isNaN(parseFloat(d.values[p.key])) || displayMissingValuesline) {
+	                        var domain = y[p.key].domain();
+	                        var range = y[p.key].range();
+	                        var min = domain[0] - (domain[1] - domain[0]) / 9;
+	
+	                        //If it's not already the case, allow brush to select undefined values
+	                        if (axisWithUndefinedValues.indexOf(p.key) < 0) {
+	
+	                            var newscale = d3.scale.linear().domain([min, domain[1]]).range([availableHeight - 12, range[1]]);
+	                            y[p.key].brush.y(newscale);
+	                            axisWithUndefinedValues.push(p.key);
+	                        }
+	                        if (isNaN(d.values[p.key]) || isNaN(parseFloat(d.values[p.key]))) {
+	                            return [x(p.key), y[p.key](min)];
+	                        }
+	                    }
+	
+	                    //If parallelCoordinate contain missing values show the missing values line otherwise, hide it.
+	                    if (missingValuesline !== undefined) {
+	                        if (axisWithUndefinedValues.length > 0 || displayMissingValuesline) {
+	                            missingValuesline.style("display", "inline");
+	                            missingValueslineText.style("display", "inline");
+	                        } else {
+	                            missingValuesline.style("display", "none");
+	                            missingValueslineText.style("display", "none");
+	                        }
+	                    }
+	                    return [x(p.key), y[p.key](d.values[p.key])];
+	                }));
+	            }
+	
+	            function restoreBrush(visible) {
+	                filters.forEach(function (f) {
+	                    //If filter brushed NaN values, keep the brush on the bottom of the axis.
+	                    var brushDomain = y[f.dimension].brush.y().domain();
+	                    if (f.hasOnlyNaN) {
+	                        f.extent[1] = (y[f.dimension].domain()[1] - brushDomain[0]) * (f.extent[1] - f.extent[0]) / (oldDomainMaxValue[f.dimension] - f.extent[0]) + brushDomain[0];
+	                    }
+	                    if (f.hasNaN) {
+	                        f.extent[0] = brushDomain[0];
+	                    }
+	                    if (visible)
+	                        y[f.dimension].brush.extent(f.extent);
+	                });
+	                
+	                dimensions.select('.nv-brushBackground')
 	                .each(function (d) {
-	                    d3.select(this).call(y[d].brush);
+	                    d3.select(this).call(y[d.key].brush);
+	
 	                })
 	                .selectAll('rect')
 	                .attr('x', -8)
 	                .attr('width', 16);
-	
-	            // Returns the path for a given data point.
-	            function path(d) {
-	                return line(dimensionNames.map(function (p) {
-	                    //If value if missing, put the value on the missing value line
-	                    if(isNaN(d[p]) || isNaN(parseFloat(d[p]))) {
-	                        var domain = y[p].domain();
-	                        var range = y[p].range();
-	                        var min = domain[0] - (domain[1] - domain[0]) / 9;
-	
-	                        //If it's not already the case, allow brush to select undefined values
-	                        if(axisWithMissingValues.indexOf(p) < 0) {
-	
-	                            var newscale = d3.scale.linear().domain([min, domain[1]]).range([availableHeight - 12, range[1]]);
-	                            y[p].brush.y(newscale);
-	                            axisWithMissingValues.push(p);
-	                        }
-	
-	                        return [x(p), y[p](min)];
-	                    }
-	
-	                    //If parallelCoordinate contain missing values show the missing values line otherwise, hide it.
-	                    if(axisWithMissingValues.length > 0) {
-	                        missingValuesline.style("display", "inline");
-	                        missingValueslineText.style("display", "inline");
-	                    } else {
-	                        missingValuesline.style("display", "none");
-	                        missingValueslineText.style("display", "none");
-	                    }
-	
-	                     return [x(p), y[p](d[p])];
-	                }));
 	            }
-	
+	            
+	            // Handles a brush event, toggling the display of foreground lines.
+	            function brushstart() {
+	                //If brush aren't visible, show it before brushing again.
+	                if (displayBrush === false) {
+	                    restoreBrush(true);
+	                }
+	            }
+	            
 	            // Handles a brush event, toggling the display of foreground lines.
 	            function brush() {
-	                var actives = dimensionNames.filter(function(p) { return !y[p].brush.empty(); }),
+	                actives = dimensionNames.filter(function (p) { return !y[p].brush.empty(); }),
 	                    extents = actives.map(function(p) { return y[p].brush.extent(); });
 	
 	                filters = []; //erase current filters
 	                actives.forEach(function(d,i) {
 	                    filters[i] = {
 	                        dimension: d,
-	                        extent: extents[i]
+	                        extent: extents[i],
+	                        hasNaN: false,
+	                        hasOnlyNaN: false
 	                    }
 	                });
 	
 	                active = []; //erase current active list
 	                foreground.style('display', function(d) {
 	                    var isActive = actives.every(function(p, i) {
-	                        if(isNaN(d[p]) && extents[i][0] == y[p].brush.y().domain()[0]) return true;
-	                        return extents[i][0] <= d[p] && d[p] <= extents[i][1];
+	                        if ((isNaN(d.values[p]) || isNaN(parseFloat(d.values[p]))) && extents[i][0] == y[p].brush.y().domain()[0]) return true;
+	                        return (extents[i][0] <= d.values[p] && d.values[p] <= extents[i][1]) && !isNaN(parseFloat(d.values[p]));
 	                    });
 	                    if (isActive) active.push(d);
 	                    return isActive ? null : 'none';
@@ -66575,34 +66440,54 @@
 	                    active: active
 	                });
 	            }
-	
-	            function dragStart(d, i) {
-	                dragging[d] = this.parentNode.__origin__ = x(d);
+	            function brushend() {
+	                var hasActiveBrush = actives.length > 0 ? true : false;
+	                filters.forEach(function (f) {
+	                    if (f.extent[0] === y[f.dimension].brush.y().domain()[0] && axisWithUndefinedValues.indexOf(f.dimension) >= 0)
+	                        f.hasNaN = true;
+	                    if (f.extent[1] < y[f.dimension].domain()[0])
+	                        f.hasOnlyNaN = true;
+	                });
+	                dispatch.brushEnd(active, hasActiveBrush);
+	            }
+	            function dragStart(d) {
+	                dragging[d.key] = this.parentNode.__origin__ = x(d.key);
 	                background.attr("visibility", "hidden");
 	
 	            }
 	
-	            function dragMove(d, i) {
-	                dragging[d] = Math.min(availableWidth, Math.max(0, this.parentNode.__origin__ += d3.event.x));
+	            function dragMove(d) {
+	                dragging[d.key] = Math.min(availableWidth, Math.max(0, this.parentNode.__origin__ += d3.event.x));
 	                foreground.attr("d", path);
-	                dimensionNames.sort(function (a, b) { return position(a) - position(b); });
-	                x.domain(dimensionNames);
-	                dimensions.attr("transform", function(d) { return "translate(" + position(d) + ")"; });
+	                enabledDimensions.sort(function (a, b) { return dimensionPosition(a.key) - dimensionPosition(b.key); });
+	                enabledDimensions.forEach(function (d, i) { return d.currentPosition = i; });
+	                x.domain(enabledDimensions.map(function (d) { return d.key; }));
+	                dimensions.attr("transform", function(d) { return "translate(" + dimensionPosition(d.key) + ")"; });
 	            }
 	
 	            function dragEnd(d, i) {
 	                delete this.parentNode.__origin__;
-	                delete dragging[d];
-	                d3.select(this.parentNode).attr("transform", "translate(" + x(d) + ")");
+	                delete dragging[d.key];
+	                d3.select(this.parentNode).attr("transform", "translate(" + x(d.key) + ")");
 	                foreground
 	                  .attr("d", path);
 	                background
 	                  .attr("d", path)
 	                  .attr("visibility", null);
 	
+	                dispatch.dimensionsOrder(enabledDimensions);
+	            }
+	            function resetBrush() {
+	                filters = [];
+	                active = [];
+	                dispatch.stateChange();
+	            }
+	            function resetDrag() {
+	                dimensionName.map(function (d, i) { return d.currentPosition = d.originalPosition; });
+	                dispatch.stateChange();
 	            }
 	
-	            function position(d) {
+	            function dimensionPosition(d) {
 	                var v = dragging[d];
 	                return v == null ? x(d) : v;
 	            }
@@ -66622,15 +66507,43 @@
 	        // simple options, just get/set the necessary values
 	        width:         {get: function(){return width;},           set: function(_){width= _;}},
 	        height:        {get: function(){return height;},          set: function(_){height= _;}},
-	        dimensionNames: {get: function() { return dimensionNames;}, set: function(_){dimensionNames= _;}},
-	        dimensionFormats : {get: function(){return dimensionFormats;}, set: function (_){dimensionFormats=_;}},
+	        dimensionData: { get: function () { return dimensionData; }, set: function (_) { dimensionData = _; } },
+	        displayBrush: { get: function () { return displayBrush; }, set: function (_) { displayBrush = _; } },
+	        filters: { get: function () { return filters; }, set: function (_) { filters = _; } },
+	        active: { get: function () { return active; }, set: function (_) { active = _; } },
 	        lineTension:   {get: function(){return lineTension;},     set: function(_){lineTension = _;}},
 	
 	        // deprecated options
-	        dimensions: {get: function (){return dimensionNames;}, set: function(_){
+	        dimensions: {get: function () { return dimensionData.map(function (d){return d.key}); }, set: function (_) {
 	            // deprecated after 1.8.1
-	            nv.deprecated('dimensions', 'use dimensionNames instead');
-	            dimensionNames = _;
+	            nv.deprecated('dimensions', 'use dimensionData instead');
+	            if (dimensionData.length === 0) {
+	                _.forEach(function (k) { dimensionData.push({ key: k }) })
+	            } else {
+	                _.forEach(function (k, i) { dimensionData[i].key= k })
+	            }
+	        }
+	        },
+	        dimensionNames: {get: function () { return dimensionData.map(function (d){return d.key}); }, set: function (_) {
+	            // deprecated after 1.8.1
+	            nv.deprecated('dimensionNames', 'use dimensionData instead');
+	            dimensionNames = [];
+	            if (dimensionData.length === 0) {
+	                _.forEach(function (k) { dimensionData.push({ key: k }) })
+	            } else {
+	                _.forEach(function (k, i) { dimensionData[i].key = k })
+	            }
+	 
+	        }},
+	        dimensionFormats: {get: function () { return dimensionData.map(function (d) { return d.format }); }, set: function (_) {
+	            // deprecated after 1.8.1
+	            nv.deprecated('dimensionFormats', 'use dimensionData instead');
+	            if (dimensionData.length === 0) {
+	                _.forEach(function (f) { dimensionData.push({ format: f }) })
+	            } else {
+	                _.forEach(function (f, i) { dimensionData[i].format = f })
+	            }
+	
 	        }},
 	
 	        // options that require extra logic in the setter
@@ -66648,7 +66561,288 @@
 	    nv.utils.initOptions(chart);
 	    return chart;
 	};
-	nv.models.pie = function() {
+	nv.models.parallelCoordinatesChart = function () {
+	        "use strict";
+	        //============================================================
+	        // Public Variables with Default Settings
+	        //------------------------------------------------------------
+	
+	        var parallelCoordinates = nv.models.parallelCoordinates()
+	        var legend = nv.models.legend()
+	        var tooltip = nv.models.tooltip();
+	        var dimensionTooltip = nv.models.tooltip();
+	
+	        var margin = { top: 0, right: 0, bottom: 0, left: 0 }
+	        , width = null
+			, height = null
+	        , showLegend = true
+			, color = nv.utils.defaultColor()
+	        , state = nv.utils.state()
+	        , dimensionData = []
+	        , dimensionNames = []
+	        , displayBrush = true
+	        , defaultState = null
+	        , noData = null
+	        , dispatch = d3.dispatch('dimensionsOrder', 'brushEnd', 'stateChange', 'changeState', 'renderEnd')
+	        , controlWidth = function () { return showControls ? 180 : 0 }
+	        ;
+	
+		    //============================================================
+		
+			//============================================================
+	        // Private Variables
+	        //------------------------------------------------------------
+	
+	        var renderWatch = nv.utils.renderWatch(dispatch);
+	
+	        var stateGetter = function(data) {
+	            return function() {
+	                return {
+	                    active: data.map(function(d) { return !d.disabled })
+	                };
+	            }
+	        };
+	
+	        var stateSetter = function(data) {
+	            return function(state) {
+	                if(state.active !== undefined) {
+	                    data.forEach(function(series, i) {
+	                        series.disabled = !state.active[i];
+	                    });
+	                }
+	            }
+	        };
+	
+	        //============================================================
+	        // Chart function
+	        //------------------------------------------------------------
+	
+	        function chart(selection) {
+	            renderWatch.reset();
+	            renderWatch.models(parallelCoordinates);
+	
+	            selection.each(function(data) {
+	                var container = d3.select(this);
+	                nv.utils.initSVG(container);
+	
+	                var that = this;
+	
+	                var availableWidth = nv.utils.availableWidth(width, container, margin),
+	                    availableHeight = nv.utils.availableHeight(height, container, margin);
+	
+	                chart.update = function() { container.call(chart); };
+	                chart.container = this;
+	
+	                state.setter(stateSetter(dimensionData), chart.update)
+	                    .getter(stateGetter(dimensionData))
+	                    .update();
+	
+	                //set state.disabled
+	                state.disabled = dimensionData.map(function (d) { return !!d.disabled });
+	
+	                //Keep dimensions position in memory
+	                dimensionData = dimensionData.map(function (d) {d.disabled = !!d.disabled; return d});
+	                dimensionData.forEach(function (d, i) {
+	                    d.originalPosition = isNaN(d.originalPosition) ? i : d.originalPosition;
+	                    d.currentPosition = isNaN(d.currentPosition) ? i : d.currentPosition;
+	                });
+	
+	                var currentDimensions = dimensionNames.map(function (d) { return d.key; });
+	                var newDimensions = dimensionData.map(function (d) { return d.key; });
+	                dimensionData.forEach(function (k, i) {
+	                    var idx = currentDimensions.indexOf(k.key);
+	                        if (idx < 0) {
+	                            dimensionNames.splice(i, 0, k);
+	                        } else {
+	                            var gap = dimensionNames[idx].currentPosition - dimensionNames[idx].originalPosition;
+	                            dimensionNames[idx].originalPosition = k.originalPosition;
+	                            dimensionNames[idx].currentPosition = k.originalPosition + gap;
+	                        }
+	                });
+	                //Remove old dimensions
+	                dimensionNames = dimensionNames.filter(function (d) { return newDimensions.indexOf(d.key) >= 0; });
+	
+	               if (!defaultState) {
+	                    var key;
+	                    defaultState = {};
+	                    for(key in state) {
+	                        if(state[key] instanceof Array)
+	                            defaultState[key] = state[key].slice(0);
+	                        else
+	                            defaultState[key] = state[key];
+	                    }
+	                }
+	
+	                // Display No Data message if there's nothing to show.
+	                if(!data || !data.length) {
+	                    nv.utils.noData(chart, container);
+	                    return chart;
+	                } else {
+	                    container.selectAll('.nv-noData').remove();
+	                }
+	                
+	                //------------------------------------------------------------
+	                // Setup containers and skeleton of chart
+	
+	                var wrap = container.selectAll('g.nv-wrap.nv-parallelCoordinatesChart').data([data]);
+	                var gEnter = wrap.enter().append('g').attr('class', 'nvd3 nv-wrap nv-parallelCoordinatesChart').append('g');
+	
+	                var g = wrap.select('g');
+	                
+	                gEnter.append('g').attr('class', 'nv-parallelCoordinatesWrap');
+	                gEnter.append('g').attr('class', 'nv-legendWrap');
+	
+	                g.select("rect")
+	                    .attr("width", availableWidth)
+	                    .attr("height", (availableHeight > 0) ? availableHeight : 0);
+	
+	                // Legend
+	                if (showLegend) {
+	                    legend.width(availableWidth)
+	                        .color(function (d) { return "rgb(188,190,192)"; });
+	
+	                    g.select('.nv-legendWrap')
+	                        .datum(dimensionNames.sort(function (a, b) { return a.originalPosition - b.originalPosition; }))
+	                        .call(legend);
+	
+	                    if (margin.top != legend.height()) {
+	                        margin.top = legend.height();
+	                        availableHeight = nv.utils.availableHeight(height, container, margin);
+	                    }
+	                    wrap.select('.nv-legendWrap')
+	                       .attr('transform', 'translate( 0 ,' + (-margin.top) + ')');
+	                }
+	                wrap.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+	
+	                
+	               
+	
+	                // Main Chart Component(s)
+	                parallelCoordinates
+	                    .width(availableWidth)
+	                    .height(availableHeight)
+	                    .dimensionData(dimensionNames)
+	                    .displayBrush(displayBrush);
+			
+			        var parallelCoordinatesWrap = g.select('.nv-parallelCoordinatesWrap ')
+	                  .datum(data);
+	
+			        parallelCoordinatesWrap.transition().call(parallelCoordinates);
+			  
+					//============================================================
+	                // Event Handling/Dispatching (in chart's scope)
+	                //------------------------------------------------------------
+	                //Display reset brush button
+			        parallelCoordinates.dispatch.on('brushEnd', function (active, hasActiveBrush) {
+			            if (hasActiveBrush) {
+			                displayBrush = true;
+			                dispatch.brushEnd(active);
+			            } else {
+	
+			                displayBrush = false;
+			            }
+			        });
+	
+			        legend.dispatch.on('stateChange', function(newState) {
+			            for(var key in newState) {
+			                state[key] = newState[key];
+			            }
+			            dispatch.stateChange(state);
+			            chart.update();
+			        });
+	
+	                //Update dimensions order and display reset sorting button
+			        parallelCoordinates.dispatch.on('dimensionsOrder', function (e) {
+			            dimensionNames.sort(function (a, b) { return a.currentPosition - b.currentPosition; });
+			            var isSorted = false;
+			            dimensionNames.forEach(function (d, i) {
+			                d.currentPosition = i;
+			                if (d.currentPosition !== d.originalPosition)
+			                    isSorted = true;
+			            });
+			            dispatch.dimensionsOrder(dimensionNames, isSorted);
+			        });
+	
+					// Update chart from a state object passed to event handler
+	                dispatch.on('changeState', function (e) {
+	
+	                    if (typeof e.disabled !== 'undefined') {
+	                        dimensionNames.forEach(function (series, i) {
+	                            series.disabled = e.disabled[i];
+	                        });
+	                        state.disabled = e.disabled;
+	                    }
+	                    chart.update();
+	                });
+	            });
+	
+	            renderWatch.renderEnd('parraleleCoordinateChart immediate');
+	            return chart;
+	        }
+	
+			//============================================================
+	        // Event Handling/Dispatching (out of chart's scope)
+	        //------------------------------------------------------------
+	
+	        parallelCoordinates.dispatch.on('elementMouseover.tooltip', function (evt) {
+	            evt['series'] = {
+	                key: evt.label,
+	                color: evt.color
+	            };
+	            tooltip.data(evt).hidden(false);
+	        });
+	
+	        parallelCoordinates.dispatch.on('elementMouseout.tooltip', function(evt) {
+	            tooltip.hidden(true)
+	        });
+	
+	        parallelCoordinates.dispatch.on('elementMousemove.tooltip', function () {
+	            tooltip();
+	        });
+			 //============================================================
+	        // Expose Public Variables
+	        //------------------------------------------------------------
+			
+			// expose chart's sub-components
+	        chart.dispatch = dispatch;
+	        chart.parallelCoordinates = parallelCoordinates;
+	        chart.legend = legend;
+	        chart.tooltip = tooltip;
+	
+	        chart.options = nv.utils.optionsFunc.bind(chart);
+	
+	        chart._options = Object.create({}, {
+	            // simple options, just get/set the necessary values
+	            width: { get: function () { return width; }, set: function (_) { width = _; } },
+	            height: { get: function () { return height; }, set: function (_) { height = _; } },
+	            showLegend: { get: function () { return showLegend; }, set: function (_) { showLegend = _; } },
+	            defaultState: { get: function () { return defaultState; }, set: function (_) { defaultState = _; } },
+	            dimensionData: { get: function () { return dimensionData; }, set: function (_) { dimensionData = _; } },
+	            displayBrush: { get: function () { return displayBrush; }, set: function (_) { displayBrush = _; } },
+	            noData: { get: function () { return noData; }, set: function (_) { noData = _; } },
+	
+	            // options that require extra logic in the setter
+	            margin: {
+	                get: function () { return margin; },
+	                set: function (_) {
+	                    margin.top = _.top !== undefined ? _.top : margin.top;
+	                    margin.right = _.right !== undefined ? _.right : margin.right;
+	                    margin.bottom = _.bottom !== undefined ? _.bottom : margin.bottom;
+	                    margin.left = _.left !== undefined ? _.left : margin.left;
+	                }
+	            },
+	            color: {get: function(){return color;}, set: function(_){
+	                    color = nv.utils.getColor(_);
+	                    legend.color(color);
+	                    parallelCoordinates.color(color);
+	                }}
+	        });
+	
+	        nv.utils.inheritOptions(chart, parallelCoordinates);
+	        nv.utils.initOptions(chart);
+	
+	        return chart;
+	    };nv.models.pie = function() {
 	    "use strict";
 	
 	    //============================================================
@@ -66827,10 +67021,13 @@
 	                dispatch.elementMousemove({data: d.data, index: i});
 	            });
 	            ae.on('click', function(d, i) {
+	                var element = this;
 	                dispatch.elementClick({
 	                    data: d.data,
 	                    index: i,
-	                    color: d3.select(this).style("fill")
+	                    color: d3.select(this).style("fill"),
+	                    event: d3.event,
+	                    element: element
 	                });
 	            });
 	            ae.on('dblclick', function(d, i) {
@@ -66908,6 +67105,9 @@
 	                var createHashKey = function(coordinates) {
 	                    return Math.floor(coordinates[0]/avgWidth) * avgWidth + ',' + Math.floor(coordinates[1]/avgHeight) * avgHeight;
 	                };
+	                var getSlicePercentage = function(d) {
+	                    return (d.endAngle - d.startAngle) / (2 * Math.PI);
+	                };
 	
 	                pieLabels.watchTransition(renderWatch, 'pie labels').attr('transform', function (d, i) {
 	                    if (labelSunbeamLayout) {
@@ -66930,7 +67130,8 @@
 	                        Adjust the label's y-position to remove the overlap.
 	                        */
 	                        var center = labelsArc[i].centroid(d);
-	                        if (d.value) {
+	                        var percent = getSlicePercentage(d);
+	                        if (d.value && percent >= labelThreshold) {
 	                            var hashKey = createHashKey(center);
 	                            if (labelLocationHash[hashKey]) {
 	                                center[1] -= avgHeight;
@@ -66947,7 +67148,7 @@
 	                        return labelSunbeamLayout ? ((d.startAngle + d.endAngle) / 2 < Math.PI ? 'start' : 'end') : 'middle';
 	                    })
 	                    .text(function(d, i) {
-	                        var percent = (d.endAngle - d.startAngle) / (2 * Math.PI);
+	                        var percent = getSlicePercentage(d);
 	                        var label = '';
 	                        if (!d.value || percent < labelThreshold) return '';
 	
@@ -67085,12 +67286,12 @@
 	        , defaultState = null
 	        , noData = null
 	        , duration = 250
-	        , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'stateChange', 'changeState','renderEnd')
+	        , dispatch = d3.dispatch('stateChange', 'changeState','renderEnd')
 	        ;
 	
 	    tooltip
-	        .headerEnabled(false)
 	        .duration(0)
+	        .headerEnabled(false)
 	        .valueFormatter(function(d, i) {
 	            return pie.valueFormat()(d, i);
 	        });
@@ -67256,7 +67457,7 @@
 	    });
 	
 	    pie.dispatch.on('elementMousemove.tooltip', function(evt) {
-	        tooltip.position({top: d3.event.pageY, left: d3.event.pageX})();
+	        tooltip();
 	    });
 	
 	    //============================================================
@@ -67277,18 +67478,6 @@
 	        showLegend:     {get: function(){return showLegend;},     set: function(_){showLegend=_;}},
 	        legendPosition: {get: function(){return legendPosition;}, set: function(_){legendPosition=_;}},
 	        defaultState:   {get: function(){return defaultState;},   set: function(_){defaultState=_;}},
-	
-	        // deprecated options
-	        tooltips:    {get: function(){return tooltip.enabled();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltips', 'use chart.tooltip.enabled() instead');
-	            tooltip.enabled(!!_);
-	        }},
-	        tooltipContent:    {get: function(){return tooltip.contentGenerator();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltipContent', 'use chart.tooltip.contentGenerator() instead');
-	            tooltip.contentGenerator(_);
-	        }},
 	
 	        // options that require extra logic in the setter
 	        color: {get: function(){return color;}, set: function(_){
@@ -67353,6 +67542,7 @@
 	        , dispatch     = d3.dispatch('elementClick', 'elementDblClick', 'elementMouseover', 'elementMouseout', 'renderEnd')
 	        , useVoronoi   = true
 	        , duration     = 250
+	        , interactiveUpdateDelay = 300
 	        ;
 	
 	
@@ -67402,8 +67592,18 @@
 	            else
 	                x.range(xRange || [0, availableWidth]);
 	
-	            y   .domain(yDomain || d3.extent(seriesData.map(function(d) { return d.y }).concat(forceY)))
-	                .range(yRange || [availableHeight, 0]);
+	             if (chart.yScale().name === "o") {
+	                    var min = d3.min(seriesData.map(function(d) { if (d.y !== 0) return d.y; }));
+	                    y.clamp(true)
+	                        .domain(yDomain || d3.extent(seriesData.map(function(d) {
+	                            if (d.y !== 0) return d.y;
+	                            else return min * 0.1;
+	                        }).concat(forceY)))
+	                        .range(yRange || [availableHeight, 0]);
+	                } else {
+	                        y.domain(yDomain || d3.extent(seriesData.map(function (d) { return d.y;}).concat(forceY)))
+	                        .range(yRange || [availableHeight, 0]);
+	                }
 	
 	            z   .domain(sizeDomain || d3.extent(seriesData.map(function(d) { return d.size }).concat(forceSize)))
 	                .range(sizeRange || _sizeRange_def);
@@ -67526,7 +67726,7 @@
 	                        })
 	                        .attr("id", function(d,i) {
 	                            return "nv-path-"+i; })
-	                        .attr("clip-path", function(d,i) { return "url(#nv-clip-"+i+")"; })
+	                        .attr("clip-path", function(d,i) { return "url(#nv-clip-"+id+"-"+i+")"; })
 	                        ;
 	
 	                    // good for debugging point hover issues
@@ -67540,11 +67740,11 @@
 	                    if (clipVoronoi) {
 	                        // voronoi sections are already set to clip,
 	                        // just create the circles with the IDs they expect
-	                        wrap.select('.nv-point-clips').selectAll('clipPath').remove();
-	                        wrap.select('.nv-point-clips').selectAll("clipPath")
-	                            .data(vertices)
+	                        wrap.select('.nv-point-clips').selectAll('*').remove(); // must do * since it has sub-dom
+	                        var pointClips = wrap.select('.nv-point-clips').selectAll('clipPath').data(vertices);
+	                        var vPointClips = pointClips
 	                            .enter().append("svg:clipPath")
-	                            .attr("id", function(d, i) { return "nv-clip-"+i;})
+	                            .attr("id", function(d, i) { return "nv-clip-"+id+"-"+i;})
 	                            .append("svg:circle")
 	                            .attr('cx', function(d) { return d[0]; })
 	                            .attr('cy', function(d) { return d[1]; })
@@ -67576,6 +67776,7 @@
 	                            point: point,
 	                            series: series,
 	                            pos: pos,
+	                            relativePos: [x(getX(point, d.point)) + margin.left, y(getY(point, d.point)) + margin.top],
 	                            seriesIndex: d.series,
 	                            pointIndex: d.point
 	                        });
@@ -67610,7 +67811,8 @@
 	                            dispatch.elementClick({
 	                                point: point,
 	                                series: series,
-	                                pos: [x(getX(point, i)) + margin.left, y(getY(point, i)) + margin.top],
+	                                pos: [x(getX(point, i)) + margin.left, y(getY(point, i)) + margin.top], //TODO: make this pos base on the page
+	                                relativePos: [x(getX(point, i)) + margin.left, y(getY(point, i)) + margin.top],
 	                                seriesIndex: d.series,
 	                                pointIndex: i
 	                            });
@@ -67623,7 +67825,8 @@
 	                            dispatch.elementDblClick({
 	                                point: point,
 	                                series: series,
-	                                pos: [x(getX(point, i)) + margin.left, y(getY(point, i)) + margin.top],
+	                                pos: [x(getX(point, i)) + margin.left, y(getY(point, i)) + margin.top],//TODO: make this pos base on the page
+	                                relativePos: [x(getX(point, i)) + margin.left, y(getY(point, i)) + margin.top],
 	                                seriesIndex: d.series,
 	                                pointIndex: i
 	                            });
@@ -67636,7 +67839,8 @@
 	                            dispatch.elementMouseover({
 	                                point: point,
 	                                series: series,
-	                                pos: [x(getX(point, i)) + margin.left, y(getY(point, i)) + margin.top],
+	                                pos: [x(getX(point, i)) + margin.left, y(getY(point, i)) + margin.top],//TODO: make this pos base on the page
+	                                relativePos: [x(getX(point, i)) + margin.left, y(getY(point, i)) + margin.top],
 	                                seriesIndex: d.series,
 	                                pointIndex: i,
 	                                color: color(d, i)
@@ -67650,6 +67854,8 @@
 	                            dispatch.elementMouseout({
 	                                point: point,
 	                                series: series,
+	                                pos: [x(getX(point, i)) + margin.left, y(getY(point, i)) + margin.top],//TODO: make this pos base on the page
+	                                relativePos: [x(getX(point, i)) + margin.left, y(getY(point, i)) + margin.top],
 	                                seriesIndex: d.series,
 	                                pointIndex: i,
 	                                color: color(d, i)
@@ -67667,7 +67873,9 @@
 	            groups.exit()
 	                .remove();
 	            groups
-	                .attr('class', function(d,i) { return 'nv-group nv-series-' + i })
+	                .attr('class', function(d,i) {
+	                    return (d.classed || '') + ' nv-group nv-series-' + i;
+	                })
 	                .classed('hover', function(d) { return d.hover });
 	            groups.watchTransition(renderWatch, 'scatter: groups')
 	                .style('fill', function(d,i) { return color(d, i) })
@@ -67690,7 +67898,7 @@
 	                .style('fill', function (d) { return d.color })
 	                .style('stroke', function (d) { return d.color })
 	                .attr('transform', function(d) {
-	                    return 'translate(' + x0(getX(d[0],d[1])) + ',' + y0(getY(d[0],d[1])) + ')'
+	                    return 'translate(' + nv.utils.NaNtoZero(x0(getX(d[0],d[1]))) + ',' + nv.utils.NaNtoZero(y0(getY(d[0],d[1]))) + ')'
 	                })
 	                .attr('d',
 	                    nv.utils.symbol()
@@ -67701,7 +67909,7 @@
 	            groups.exit().selectAll('path.nv-point')
 	                .watchTransition(renderWatch, 'scatter exit')
 	                .attr('transform', function(d) {
-	                    return 'translate(' + x(getX(d[0],d[1])) + ',' + y(getY(d[0],d[1])) + ')'
+	                    return 'translate(' + nv.utils.NaNtoZero(x(getX(d[0],d[1]))) + ',' + nv.utils.NaNtoZero(y(getY(d[0],d[1]))) + ')'
 	                })
 	                .remove();
 	            points.each(function(d) {
@@ -67716,7 +67924,7 @@
 	                .watchTransition(renderWatch, 'scatter points')
 	                .attr('transform', function(d) {
 	                    //nv.log(d, getX(d[0],d[1]), x(getX(d[0],d[1])));
-	                    return 'translate(' + x(getX(d[0],d[1])) + ',' + y(getY(d[0],d[1])) + ')'
+	                    return 'translate(' + nv.utils.NaNtoZero(x(getX(d[0],d[1]))) + ',' + nv.utils.NaNtoZero(y(getY(d[0],d[1]))) + ')'
 	                })
 	                .attr('d',
 	                    nv.utils.symbol()
@@ -67725,9 +67933,15 @@
 	            );
 	
 	            // Delay updating the invisible interactive layer for smoother animation
-	            clearTimeout(timeoutID); // stop repeat calls to updateInteractiveLayer
-	            timeoutID = setTimeout(updateInteractiveLayer, 300);
-	            //updateInteractiveLayer();
+	            if( interactiveUpdateDelay )
+	            {
+	                clearTimeout(timeoutID); // stop repeat calls to updateInteractiveLayer
+	                timeoutID = setTimeout(updateInteractiveLayer, interactiveUpdateDelay );
+	            }
+	            else
+	            {
+	                updateInteractiveLayer();
+	            }
 	
 	            //store old scales for use in transitions on update
 	            x0 = x.copy();
@@ -67756,8 +67970,10 @@
 	        };
 	        this.highlightPoint = function (seriesIndex, pointIndex, isHoverOver) {
 	            nv.dom.write(function() {
-	                container.select(" .nv-series-" + seriesIndex + " .nv-point-" + pointIndex)
-	                    .classed("hover", isHoverOver);
+	                container.select('.nv-groups')
+	                  .selectAll(".nv-series-" + seriesIndex)
+	                  .selectAll(".nv-point-" + pointIndex)
+	                  .classed("hover", isHoverOver);
 	            });
 	        };
 	    };
@@ -67796,6 +68012,7 @@
 	        clipRadius:   {get: function(){return clipRadius;}, set: function(_){clipRadius=_;}},
 	        showVoronoi:   {get: function(){return showVoronoi;}, set: function(_){showVoronoi=_;}},
 	        id:           {get: function(){return id;}, set: function(_){id=_;}},
+	        interactiveUpdateDelay: {get:function(){return interactiveUpdateDelay;}, set: function(_){interactiveUpdateDelay=_;}},
 	
 	
 	        // simple functor options
@@ -68079,7 +68296,7 @@
 	                    .call(yAxis);
 	            }
 	
-	
+	            // Setup Distribution
 	            if (showDistX) {
 	                distX
 	                    .getData(scatter.x())
@@ -68145,10 +68362,10 @@
 	
 	            scatter.dispatch.on('elementMouseover.tooltip', function(evt) {
 	                container.select('.nv-series-' + evt.seriesIndex + ' .nv-distx-' + evt.pointIndex)
-	                    .attr('y1', evt.pos.top - availableHeight - margin.top);
+	                    .attr('y1', evt.relativePos[1] - availableHeight);
 	                container.select('.nv-series-' + evt.seriesIndex + ' .nv-disty-' + evt.pointIndex)
-	                    .attr('x2', evt.pos.left + distX.size() - margin.left);
-	                tooltip.position(evt.pos).data(evt).hidden(false);
+	                    .attr('x2', evt.relativePos[0] + distX.size());
+	                tooltip.data(evt).hidden(false);
 	            });
 	
 	            //store old scales for use in transitions on update
@@ -68189,26 +68406,6 @@
 	        defaultState:     {get: function(){return defaultState;}, set: function(_){defaultState=_;}},
 	        noData:     {get: function(){return noData;}, set: function(_){noData=_;}},
 	        duration:   {get: function(){return duration;}, set: function(_){duration=_;}},
-	
-	        // deprecated options
-	        tooltips:    {get: function(){return tooltip.enabled();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltips', 'use chart.tooltip.enabled() instead');
-	            tooltip.enabled(!!_);
-	        }},
-	        tooltipContent:    {get: function(){return tooltip.contentGenerator();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltipContent', 'use chart.tooltip.contentGenerator() instead');
-	            tooltip.contentGenerator(_);
-	        }},
-	        tooltipXContent:    {get: function(){return tooltip.contentGenerator();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltipContent', 'This option is removed, put values into main tooltip.');
-	        }},
-	        tooltipYContent:    {get: function(){return tooltip.contentGenerator();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltipContent', 'This option is removed, put values into main tooltip.');
-	        }},
 	
 	        // options that require extra logic in the setter
 	        margin: {get: function(){return margin;}, set: function(_){
@@ -68255,9 +68452,17 @@
 	        , yDomain
 	        , xRange
 	        , yRange
+	        , dispatch = d3.dispatch('renderEnd')
 	        ;
 	
+	    //============================================================
+	    // Private Variables
+	    //------------------------------------------------------------
+	
+	    var renderWatch = nv.utils.renderWatch(dispatch);
+	    
 	    function chart(selection) {
+	        renderWatch.reset();
 	        selection.each(function(data) {
 	            var availableWidth = width - margin.left - margin.right,
 	                availableHeight = height - margin.top - margin.bottom;
@@ -68320,7 +68525,8 @@
 	                            getY(d, d.pointIndex) == y.domain()[0] ? 'nv-point nv-minValue' : 'nv-point nv-maxValue'
 	                });
 	        });
-	
+	        
+	        renderWatch.renderEnd('sparkline immediate');
 	        return chart;
 	    }
 	
@@ -68358,6 +68564,7 @@
 	        }}
 	    });
 	
+	    chart.dispatch = dispatch;
 	    nv.utils.initOptions(chart);
 	    return chart;
 	};
@@ -68384,9 +68591,18 @@
 	        , alignValue = true
 	        , rightAlignValue = false
 	        , noData = null
+	        , dispatch = d3.dispatch('renderEnd')
 	        ;
+	        
+	    //============================================================
+	    // Private Variables
+	    //------------------------------------------------------------
+	
+	    var renderWatch = nv.utils.renderWatch(dispatch);
 	
 	    function chart(selection) {
+	        renderWatch.reset();
+	        renderWatch.models(sparkline);
 	        selection.each(function(data) {
 	            var container = d3.select(this);
 	            nv.utils.initSVG(container);
@@ -68530,7 +68746,7 @@
 	            }
 	
 	        });
-	
+	        renderWatch.renderEnd('sparklinePlus immediate');
 	        return chart;
 	    }
 	
@@ -68539,6 +68755,7 @@
 	    //------------------------------------------------------------
 	
 	    // expose chart's sub-components
+	    chart.dispatch = dispatch;
 	    chart.sparkline = sparkline;
 	
 	    chart.options = nv.utils.optionsFunc.bind(chart);
@@ -68584,6 +68801,7 @@
 	        , container = null
 	        , getX = function(d) { return d.x } // accessor to get the x value from a data point
 	        , getY = function(d) { return d.y } // accessor to get the y value from a data point
+	        , defined = function(d,i) { return !isNaN(getY(d,i)) && getY(d,i) !== null } // allows a line to be not continuous when it is not defined
 	        , style = 'stack'
 	        , offset = 'zero'
 	        , order = 'default'
@@ -68680,10 +68898,13 @@
 	                .width(availableWidth)
 	                .height(availableHeight)
 	                .x(getX)
-	                .y(function(d) { return d.display.y + d.display.y0 })
+	                .y(function(d) {
+	                    if (d.display !== undefined) { return d.display.y + d.display.y0; }
+	                })
 	                .forceY([0])
 	                .color(data.map(function(d,i) {
-	                    return d.color || color(d, d.seriesIndex);
+	                    d.color = d.color || color(d, d.seriesIndex);
+	                    return d.color;
 	                }));
 	
 	            var scatterWrap = g.select('.nv-scatterWrap')
@@ -68702,6 +68923,7 @@
 	            g.attr('clip-path', clipEdge ? 'url(#nv-edge-clip-' + id + ')' : '');
 	
 	            var area = d3.svg.area()
+	                .defined(defined)
 	                .x(function(d,i)  { return x(getX(d,i)) })
 	                .y0(function(d) {
 	                    return y(d.display.y0)
@@ -68712,6 +68934,7 @@
 	                .interpolate(interpolate);
 	
 	            var zeroArea = d3.svg.area()
+	                .defined(defined)
 	                .x(function(d,i)  { return x(getX(d,i)) })
 	                .y0(function(d) { return y(d.display.y0) })
 	                .y1(function(d) { return y(d.display.y0) });
@@ -68837,6 +69060,7 @@
 	        // simple options, just get/set the necessary values
 	        width:      {get: function(){return width;}, set: function(_){width=_;}},
 	        height:     {get: function(){return height;}, set: function(_){height=_;}},
+	        defined: {get: function(){return defined;}, set: function(_){defined=_;}},
 	        clipEdge: {get: function(){return clipEdge;}, set: function(_){clipEdge=_;}},
 	        offset:      {get: function(){return offset;}, set: function(_){offset=_;}},
 	        order:    {get: function(){return order;}, set: function(_){order=_;}},
@@ -68920,6 +69144,8 @@
 	        , showYAxis = true
 	        , rightAlignYAxis = false
 	        , useInteractiveGuideline = false
+	        , showTotalInTooltip = true
+	        , totalLabel = 'TOTAL'
 	        , x //can be accessed via chart.xScale()
 	        , y //can be accessed via chart.yScale()
 	        , state = nv.utils.state()
@@ -69237,7 +69463,7 @@
 	
 	            interactiveLayer.dispatch.on('elementMousemove', function(e) {
 	                stacked.clearHighlights();
-	                var singlePoint, pointIndex, pointXLocation, allData = [];
+	                var singlePoint, pointIndex, pointXLocation, allData = [], valueSum = 0;
 	                data
 	                    .filter(function(series, i) {
 	                        series.seriesIndex = i;
@@ -69262,6 +69488,10 @@
 	                            color: color(series,series.seriesIndex),
 	                            stackedValue: point.display
 	                        });
+	
+	                        if (showTotalInTooltip && stacked.style() != 'expand') {
+	                          valueSum += tooltipValue;
+	                        };
 	                    });
 	
 	                allData.reverse();
@@ -69287,7 +69517,16 @@
 	                        allData[indexToHighlight].highlight = true;
 	                }
 	
-	                var xValue = xAxis.tickFormat()(chart.x()(singlePoint,pointIndex));
+	                //If we are not in 'expand' mode, add a 'Total' row to the tooltip.
+	                if (showTotalInTooltip && stacked.style() != 'expand' && allData.length >= 2) {
+	                    allData.push({
+	                        key: totalLabel,
+	                        value: valueSum,
+	                        total: true
+	                    });
+	                }
+	
+	                var xValue = chart.x()(singlePoint,pointIndex);
 	
 	                var valueFormatter = interactiveLayer.tooltip.valueFormatter();
 	                // Keeps track of the tooltip valueFormatter if the chart changes to expanded view
@@ -69306,7 +69545,6 @@
 	                }
 	
 	                interactiveLayer.tooltip
-	                    .position({left: pointXLocation + margin.left, top: e.mouseY + margin.top})
 	                    .chartContainer(that.parentNode)
 	                    .valueFormatter(valueFormatter)
 	                    .data(
@@ -69356,7 +69594,7 @@
 	    stacked.dispatch.on('elementMouseover.tooltip', function(evt) {
 	        evt.point['x'] = stacked.x()(evt.point);
 	        evt.point['y'] = stacked.y()(evt.point);
-	        tooltip.data(evt).position(evt.pos).hidden(false);
+	        tooltip.data(evt).hidden(false);
 	    });
 	
 	    stacked.dispatch.on('elementMouseout.tooltip', function(evt) {
@@ -69392,18 +69630,8 @@
 	        showControls:    {get: function(){return showControls;}, set: function(_){showControls=_;}},
 	        controlLabels:    {get: function(){return controlLabels;}, set: function(_){controlLabels=_;}},
 	        controlOptions:    {get: function(){return controlOptions;}, set: function(_){controlOptions=_;}},
-	
-	        // deprecated options
-	        tooltips:    {get: function(){return tooltip.enabled();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltips', 'use chart.tooltip.enabled() instead');
-	            tooltip.enabled(!!_);
-	        }},
-	        tooltipContent:    {get: function(){return tooltip.contentGenerator();}, set: function(_){
-	            // deprecated after 1.7.1
-	            nv.deprecated('tooltipContent', 'use chart.tooltip.contentGenerator() instead');
-	            tooltip.contentGenerator(_);
-	        }},
+	        showTotalInTooltip:      {get: function(){return showTotalInTooltip;}, set: function(_){showTotalInTooltip=_;}},
+	        totalLabel:      {get: function(){return totalLabel;}, set: function(_){totalLabel=_;}},
 	
 	        // options that require extra logic in the setter
 	        margin: {get: function(){return margin;}, set: function(_){
@@ -69457,6 +69685,7 @@
 	        , id = Math.floor(Math.random() * 10000) //Create semi-unique ID in case user doesn't select one
 	        , container = null
 	        , color = nv.utils.defaultColor()
+	        , groupColorByParent = true
 	        , duration = 500
 	        , dispatch = d3.dispatch('chartClick', 'elementClick', 'elementDblClick', 'elementMousemove', 'elementMouseover', 'elementMouseout', 'renderEnd')
 	        ;
@@ -69502,6 +69731,16 @@
 	
 	            var g = wrapEnter.selectAll('nv-sunburst');
 	
+	            chart.update = function() { 
+	                if ( duration === 0 ) {
+	                    container.call(chart);
+	                } else {
+	                    container.transition().duration(duration).call(chart);
+	                }
+	            };
+	            chart.container = this;
+	
+	
 	            wrap.attr('transform', 'translate(' + availableWidth / 2 + ',' + availableHeight / 2 + ')');
 	
 	            container.on('click', function (d, i) {
@@ -69522,7 +69761,15 @@
 	                .append("path")
 	                .attr("d", arc)
 	                .style("fill", function (d) {
-	                    return color((d.children ? d : d.parent).name);
+	                    if (d.color) {
+	                        return d.color;
+	                    }
+	                    else if (groupColorByParent) {
+	                        return color((d.children ? d : d.parent).name);
+	                    }
+	                    else {
+	                        return color(d.name);
+	                    }
 	                })
 	                .style("stroke", "#FFF")
 	                .on("click", function(d) {
@@ -69630,6 +69877,7 @@
 	        mode:       {get: function(){return mode;}, set: function(_){mode=_;}},
 	        id:         {get: function(){return id;}, set: function(_){id=_;}},
 	        duration:   {get: function(){return duration;}, set: function(_){duration=_;}},
+	        groupColorByParent: {get: function(){return groupColorByParent;}, set: function(_){groupColorByParent=!!_;}},
 	
 	        // options that require extra logic in the setter
 	        margin: {get: function(){return margin;}, set: function(_){
@@ -69664,17 +69912,21 @@
 	        , defaultState = null
 	        , noData = null
 	        , duration = 250
-	        , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'stateChange', 'changeState','renderEnd')
+	        , dispatch = d3.dispatch('stateChange', 'changeState','renderEnd')
 	        ;
+	
+	    tooltip.duration(0);
 	
 	    //============================================================
 	    // Private Variables
 	    //------------------------------------------------------------
 	
 	    var renderWatch = nv.utils.renderWatch(dispatch);
-	    tooltip.headerEnabled(false).duration(0).valueFormatter(function(d, i) {
-	        return d;
-	    });
+	    tooltip
+	        .headerEnabled(false)
+	        .valueFormatter(function(d, i) {
+	            return d;
+	        });
 	
 	    //============================================================
 	    // Chart function
@@ -69693,10 +69945,11 @@
 	                availableHeight = nv.utils.availableHeight(height, container, margin);
 	
 	            chart.update = function() {
-	                if (duration === 0)
+	                if (duration === 0) {
 	                    container.call(chart);
-	                else
-	                    container.transition().duration(duration).call(chart)
+	                } else {
+	                    container.transition().duration(duration).call(chart);
+	                }
 	            };
 	            chart.container = this;
 	
@@ -69746,7 +69999,7 @@
 	    });
 	
 	    sunburst.dispatch.on('elementMousemove.tooltip', function(evt) {
-	        tooltip.position({top: d3.event.pageY, left: d3.event.pageX})();
+	        tooltip();
 	    });
 	
 	    //============================================================
@@ -69787,8 +70040,37 @@
 	    return chart;
 	};
 	
-	nv.version = "1.8.1";
+	nv.version = "1.8.2";
 	})();
+
+/***/ },
+/* 274 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _domainsSkillFactory = __webpack_require__(275);
+	
+	var _domainsSkillFactory2 = _interopRequireDefault(_domainsSkillFactory);
+	
+	var _domainsSkillCloudFactory = __webpack_require__(282);
+	
+	var _domainsSkillCloudFactory2 = _interopRequireDefault(_domainsSkillCloudFactory);
+	
+	var _domainsChartDataFactory = __webpack_require__(264);
+	
+	var _domainsChartDataFactory2 = _interopRequireDefault(_domainsChartDataFactory);
+	
+	var rootCloud = _domainsSkillCloudFactory2['default'].create(_domainsSkillFactory2['default'].create(__webpack_require__(285)));
+	exports.rootCloud = rootCloud;
+	var rootChart = _domainsChartDataFactory2['default'].createBySkillList(rootCloud.nodes.get(0).skill.children);
+	exports.rootChart = rootChart;
+	var initialSkill = rootCloud.rootNode.skill;
+	exports.initialSkill = initialSkill;
 
 /***/ },
 /* 275 */
@@ -69800,50 +70082,21 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _domainsSkillFactory = __webpack_require__(276);
-	
-	var _domainsSkillFactory2 = _interopRequireDefault(_domainsSkillFactory);
-	
-	var _domainsSkillCloudFactory = __webpack_require__(283);
-	
-	var _domainsSkillCloudFactory2 = _interopRequireDefault(_domainsSkillCloudFactory);
-	
-	var _domainsChartDataFactory = __webpack_require__(265);
-	
-	var _domainsChartDataFactory2 = _interopRequireDefault(_domainsChartDataFactory);
-	
-	var rootCloud = _domainsSkillCloudFactory2['default'].create(_domainsSkillFactory2['default'].create(__webpack_require__(286)));
-	exports.rootCloud = rootCloud;
-	var rootChart = _domainsChartDataFactory2['default'].createBySkillList(rootCloud.nodes.get(0).skill.children);
-	exports.rootChart = rootChart;
-	var initialSkill = rootCloud.rootNode.skill;
-	exports.initialSkill = initialSkill;
-
-/***/ },
-/* 276 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var _domainsSkill = __webpack_require__(277);
+	var _domainsSkill = __webpack_require__(276);
 	
 	var _domainsSkill2 = _interopRequireDefault(_domainsSkill);
 	
-	var _domainsSkillImage = __webpack_require__(278);
+	var _domainsSkillImage = __webpack_require__(277);
 	
 	var _domainsSkillImage2 = _interopRequireDefault(_domainsSkillImage);
 	
-	var _immutable = __webpack_require__(248);
+	var _immutable = __webpack_require__(247);
 	
 	var _lodash = __webpack_require__(191);
 	
-	var _matchCase = __webpack_require__(245);
+	var _matchCase = __webpack_require__(244);
 	
 	var _matchCase2 = _interopRequireDefault(_matchCase);
 	
@@ -69878,7 +70131,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 277 */
+/* 276 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -69940,7 +70193,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 278 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69953,7 +70206,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var _domainsImageRepository = __webpack_require__(279);
+	var _domainsImageRepository = __webpack_require__(278);
 	
 	var _domainsImageRepository2 = _interopRequireDefault(_domainsImageRepository);
 	
@@ -69998,7 +70251,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 279 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70007,12 +70260,12 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var _immutable = __webpack_require__(248);
+	var _immutable = __webpack_require__(247);
 	
 	var image = _immutable.Map({
-	    mongodb: __webpack_require__(280),
-	    crawl: __webpack_require__(281),
-	    arduino: __webpack_require__(282)
+	    mongodb: __webpack_require__(279),
+	    crawl: __webpack_require__(280),
+	    arduino: __webpack_require__(281)
 	});
 	
 	var ImageRepository = (function () {
@@ -70031,25 +70284,25 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 280 */
+/* 279 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAc4AAACMCAMAAADC37lRAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpGNzdGMTE3NDA3MjA2ODExODE5Q0MwMDY4Q0VEOEFBMyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowNzFEQjJEQzg5M0YxMUU1Qjg4OUJDMjAyOTE5MkIwQiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowNzFEQjJEQjg5M0YxMUU1Qjg4OUJDMjAyOTE5MkIwQiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgTWFjaW50b3NoIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MDE4MDExNzQwNzIwNjgxMTkxMDlBRTM0MEUzMUEyNEIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Rjc3RjExNzQwNzIwNjgxMTgxOUNDMDA2OENFRDhBQTMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6FaMlwAAADAFBMVEWzsrPM5cxesFDb2snOzMzW1dVYrk6WxZbm5eW327bi4eFhslJUU1WEg4STkpOjo6SSpnmbm5zn5tlLSkzGxcV7envKycje3d14t3rBwcHa2dn8/Pyp1ajS0dBbWlxClkREmUVjYmTZ69lzcnRMqEpptWlIpkn6+vpGn0ZDmESHxIiLioxEpEhHoka2tJny8epramz29vb4+PhFnEXs9uzt7OxGpUhGnkZRqkzw8PDIxsW9vb2pqarz+fNKpkpAkkNQqkz+/v5NqEvs6+FUrE3p6Oju7u7l8uX09PTy8vKnp4e6ubpXrU7q6uqura5ClERRqlRdsF/Ew6t1vG3DwcBNmk/X1taIvIlnqWXT0tJbr0/w7+9YnFW6up9brVuzqpBApkTMyslDo0f5/PnFw8LD4MPPzs5Jn0elzKZJoEfCwL93r3ZBlETMy7VEmEXb2tm/vqXo5+ZHpkn8/vzj4uLPzrrq6elVplJWq1nJx8ZPqkvV1NQ9kUBjpV3Z2Nc3jz3s6+tBk0Pk5OR2dXei0aFNpUpFp0dynmSYmJmrqqvNzMvJx7FcsFBRUFLd3NxGlEZHl0pFn0ZubW9oaGny8fCwq4/f3tyrq6xVqFBSqU2QkJFmtVOOjY9PoFB4eHlWVVd8v3nf7t9mZWd+fX9XrE1TrE1Tq01Fm0VOlk2IiIlKo0lGnUVYV1lLqEpOTU+8u7zt7e1gYGH9/f1eXV+wsLH19fXLy8umpqavr69Dl0S7urvx8fHExMTT09P5+flXrk7MzMzz8/OWlZf7+/vu7ufU09Tb29vDwsNFnUVwcHG/v7/o5+jh4OCFhYbV08CoqKj9/v1PqUvv7++enp/r6+v08+/k4+Pn5+fw9+/49/jPz89+o23GxseBgIKv1rDc29rX19fZ19fR0NCQx5CMx3/f39/8/fzQzrnIyMidzZxIpkyhoKK93L75+/nAwMBjnlhInUf3+vduuV9Kp0qCwoSvr5G2trf39/T39/fu7u24uLjg8N3Bv75IR0n////////QSOnKAAABAHRSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AU/cHJQAAGMpJREFUeNrsnX9cVWWex1EhbwQawy/lJoKmaIIpCQnq1jVBSdE01kLLVgMMc0I3xkJ2HIOm1MKZlcJZJCiYlTUZRAikVAoYMRzIRBcbEnUxGxx9uc1oDNt0D3Pvueec+/z4Pueec0GXez3fV3/kuec5P5738/083+f7PM/BpU8zJzIXrQo0nJo5Kk5OMK2qHB8nh5lWW46Nk+M0ns6Dk+M0ns6Dk+M0ns6Dk9NwOhFOjtN4Og9OFOG4GRpOx8aJeeR95zX3dGicuMB+M+FLjacD48Rp/v2vM5O17tNxceI0n/9mz28nvKzxdFScOM0vr+zZ89uwu7Xw1ilwfvXNHjPOVTM0no6JE+M2/0kTzT2LwiIvacNPh8RJREH33HPPnj13hYWFndd4OiBOmqYJ5woTTq37dECcBM2hCM4Pr2k8HRnn/L8ORXGGfZis8XQsnCiuOU8OHSrwHMrjDPvlEI2nI+FEYX37zQoSZ9hvxmk4HRTn6ytWrCBxhq2ar/F0GJwoquRP71qx4m0LTyvOsAlzNJ4OiPPv99wF4gy7qeF0EJxox/n+IjPOFTTOsNc1ng6H875FixYh7oni/HCIxtMRcKKrSd6ex8QZtuorDadD4fzy/XkCzhUAztQHNPcc/DgRRHfPM+NE3BPFOWnSpGsaTgfCOWPC3nnz5tE4Jwm2Fpv81KpwMOJEEwibZ+7F1XZo6iTMLmk4HQbn/FUz9+7F1ZbEmTpO4zmocSJ4rmyeOZNQWxLnpFEaTgfBOX/RozMF95TUlsI5KVnD6Rg4r2ze/CihtqZQiOQ5Qa/xHLw4kbB26alTFpyI2g5N/XfSPa9pOB0B5/n7zTgJtQVwTtB6TwfA+eWEuadOUWpL43z4O633HLQ4rWSGzJ07F1BbBOfDgo3ScA5+nJfuv38uoLY8zocxWztO4znYcX616nf3Q2qb+jBtwzWcgx1n8o0b90NqC+Dc/+ocDeegxGl1swd+dwNS27dTP6do7t+vjVUGOc45S2/cANUWxblfsO+0YAgxTt7sLd0vnENu3ADVVvDO/ZJ9brb3Zmg4bYOUp2N3QSU4r0w046TU1oTzIZSjYA/dreFUBZOqK7sLKsP55J9vgGq7woTzc9o0tbWDJlJb/WkJbJzWfO0TEyeCamvCCdAsfUVTW47rB1COG3CgKM4h/zoRVlsc50OSJd/pODn7zc7SKnDeZ8GJq+1dZp4izocwK72k4bztphznzciJDLVNfQi0p1++w3lyg40ngvPlCZGY2u61qu3aUojm52s/0HAOLp4IzhlPRMJqy8JZWnpNw2mx9DT/y+7tuo2bzBaj07W7u+fl+funBaSZ/stL39g2vZLN52xai1jUUlqX5Z5uMnf39I3/RxeUx2ndyhAZyVJbEmepYMM1nLxF/GjL1mUca19gAGnWJ8gW9Fse36iYJ4IzOTSSpbappSRIi43ScPLm+qMSW7cjvQ7AucVmQZ+8EPU474uMZKmtCWcpZKv0Gk6T9fol/ajMknbSQN2SrtssFx2hjCeC81IkU23XBoE0S61p2zvbOw0h9Zv8U9Yh2AJ0m7Zu3XQ2fWfmDhz1ER2J09BYHasL8JHOSFie19KSdyFzBybCWWpx3gyNZKktiDMoKKj0Aw2n1Q77SZUfi9Cqi/VfjYIZAykuF5Ii/h4gHqo7k4kQ3agS55OhDLVdROIMkmyIhhOxKEkb9YQDtmUirutXD/GsEH9G3be+w+rw1epwTggNZamtiDOIsDt9pELKZo1Q9Rl6ilZcCiLF7wA4w5MAnJwhQCq1RR3OpWuYars2iGHnNZyoHRVqfjUwJDG4W5XTB/DPxmgIJ8cdkxpBuCqcr4ay1Pau7xg0S1+4PTjV30F5CeUXBq5JBqminIIjzJXWcMeP7j/10XQnabbpUii1SRXOJ0KZasvCGXSFgVPt1JCKLJrqdFt/Ly33954YQ0gYJ7cgQ+J5jO2dMcQPktzutO07NE5AbT9liS2UFhqwVKTSc+24tpoS8ueowsnFWQctOsU4pZSTm/04MbVl4gwaLvNu/QM6sBP6diXOFT4FgLOGgZPbau0+w5XiDBf73ETVOGG1/TRVgXcO6FyBkpPtvPYtmN2gcLoyC+yUeF5QilOfQQm0olBoDUttP1072WbfOZBzP7dyXulWXFYGJ3m/RinVkNTLwLmVKFIpFklThXNpKFNtGTgnB71wK+r8Vk4T3pLryuEkb3lWck93pTgzSLdVlkZYw1JbGudkwc7fysq5lX40oNeV/vd/IJz4XSulhB8xOJVwRjDyC0l1qnCOWhMKqK2Z56LUyRRI3l66dgvrhnOUa9vEid3XXXLPd5ThrFCutSjOB0LXMNSWxzkZsiHsl1zQUyONhMfMHpF/1ecw8ZjHr+aPOORTYau2etMOjGwoGHG651i97HmNHV7iHWJPjCjx7fTqnm7j0uFpP3jljzjtkhKLJ3Cgq7sfn92Qn+9V6xqhHifKszoBVlsmTmHcGV2nDufra5hqm/oxCHNy0AdwNRliZu0rM46w/MO/IdDIW9HVBdYzXD1zLEdzprTLVPiCE61CafMFPM81Ms6LqtkWbDR2WHqwKcKljVUfNcqwrCmoEq+ck11rDSj9G0ieIa75wd7Wc3tY7YqJE+UpJW8TFeGstmjtugiVMyrX1jDVloXzvRlALbmfaNhVbn5vL75uWqV6MBqL/YWTasZbDxrLe1g1Hu8VaMQt9widHYuvGVnowf/aZfpneyt6fnYEq53sDsavXN7Z0xRRXx178XROFT4mrK4lTjUG1jaqxInwzJMyfZUKcFZ2WWjGqJ3vHEfgRNSWxvmx2cY+TTZj//zsKgnfdlOlbfPG6qGMT1S1dxLVsx2snOlXLV7mXY5epBXT7PqrvsXl0m9NXOXucvzSxTDPhXw7KWr2bS5DTs4JDDTfMhjNqBp+EJoU9hS7WuzGKaUSEnpt4wwfY1HaCmWrhZCVfHNeZaotivNjxEaR75ON1uQPXAfZrI3FbZyhNoc8ajwC1E1TMc/Sc3TL2fYxs5utl0DzY/noVbzPtBVSl84GHKl3ivkXj8VR5kZTQ5XpRE6NLeEPje9pOpu13KVEaiwen6nDaeVZLU19RoE4swx6QyW/SqG3YievtAlb6jjVOE2hLUNtLTg/po3KInR1elhrpeGkuT1XlRQUZFuPFpyx1I9HcXGR9dSDh6mq6eahBx+Vupxp0skITxcUQ84nB4200a7fywOsuiz+ezdRYrT11Bb+ih4HJPkpkcTZ1U6cIdLESgSIMyE6w8+vZscOv2ghaPKJUDxZgOK8EspQ23lrx34MWjL9Rm09xWgF52fyDattt+SR5vZddfro4crKarcRUmM/SdHkf5qGiEzICEnpEJXSLd5F9K5exy821Zy0Hg2kmgrvm0bEvQ5hV/Cy/pDOC63HcqRwrai5Ren24TRII88YECe9AjCpSxeiHueQNQy1/c/vQJyTfz0f6kD0tRKkgnirdFr7qMAeKdTYKbIvJuSkicfvgfdQ28QrbMPC6ERE4rO7hO7cMFq64SfEA56gFNUgRGZFo2u9Tu5EVv9YHu84VvwT6V4GNTit9ewKzqqwcfIeerlRCU8UJ9J54mpL4xzL29NfwlGjl+Ca3ejBGimWiUOOxohjBTxq77Uo6yHiwmII5X0RPy71oLvRsEyMij3xk+ssjK6jx84J170MuXEn8RRXxbv12IezSx7nOp9on+jopKR1xNrMrSpxcjcZsS2Ccyxi64czBgFC+z2NHxUGEDlnsaNHhKrByVnUr4jsNGLKYEKuYm/NAYyMVXiy28ei+dhj9AqdLu6H3UZp+INVvDjKCg63C+cYankBGQqZLCR8QUW6G+ax/rZ5Yruvr7HUdv9YHKRgyfI4D8B1TnhAMwCowoKtlbqyGLQQbpQpHCaiEyFk9cYlu8DCOBxqa3jYZMEWHEI+RYronif6550RNgcq+ohExEnT1OGc8QSstntL1wMwx773FWMeCMY5vQps7CctR6cB1FwonIcDQWcWcRIa/JFwGBtTGHItnbUBkAPjVSxMFwIAur0WAiMaO/rOKCVZoZXIIt10VTi5BxhqC+N8ipXdPg7i5Hwth8/hRzsERZxOuYXxKF2RDUJFjgdxLsdPPiocXoi1CMv4KBjfmbUQCLCFSPojpvwYyw7bgVOKbJWkEcwe6mZdIF+vCicrtgVxrr/Gmns6B+MUApbr+NHLdM3oyoHuDYNv9GhDjx6DcWYJY4paLHFoGTKV4XnX43Rwoxeibh/6KSI8wABO5bgTX43LxMkZMiWey224J/4Rt5cngGr7aBDknM/MYU0D+cA4vahBOh/eWNh5VFDhUVEckGoV1XaLAu+MyAGU+YyQOUwHBi9CDh9rVJBGSNmvHjtwThenVMbgAZYPCydXlwHnBembEF/MPA+pLQPncE4lzpGgd57xoNxN6E7LFgCP7gulBY/CONuKAJzTA6HHqLVE3RFA6LYTeIrTdMZBcc5W2r2QhzNLYuLkdNBOFQgogXPOKkhtT720hKb50jgmTobY7gZxCn1ZWRzVaYE4GyC/EL3TDXZlPOUkJAunAB2BL9RBNgFPcUD4Ld8OnO7AviQzziOMxSVYiiFNfu0M+fHw+yC1PQWMUpbQH4myhXM2iDOqiOo7C9hiK0WrHykQWzGWPgkMVIwe8Wg/mUs/sZgOzgTid7Gz3mfHfOdReCOLhBOaAloOz5FSPEmcc14NFXBGWtV2LiC1S4aoxrlYJc7yGKAihU4OH8QwcFaDOE8AQployQVjI8ztwnl+wFO4e0MuDi/9ImhKkVAApxxnu4gzRX4tFIkT6T1FtT21+ZcESZOtf5FTjbNHJU5jAPDQYqrngArvxAepC4Sj3ilE9rD8KPS4Rmhy/Ww5lIZShHMTOOq0gfOMWKhDCU7kds9bgltUba04l/AkeaOd0yZOF9m+8zCdah8NPPRnUGpAFU5RJYweKXivvpADvXibDM5DMM4deN3gg2HhHDJ1KIszlr23BeNA/9GqZCq23fwhypG3JdCfrZIOXLcnFDpMp/JOs73T210BTjETS1S6XkzqeG/jt6jH8+FV+SziTonCWYUyOE/AOK3LRiia9WLSrkINzgp625EcTvSWN0m13fzha+sJ+zX0YX8bST4xFOq2ibNbnIECnvk6lFZn4AwJBnFybdJkaPmu1n3j+YFoLqXs4rizDIjIxL7T3xZOZlDjRv4QIhPZchuBKdLp7TvT/Dc1YjwBnPOfIGJbGueS4ZwdOHcDMgn2nWI2JyeGfjEXKFuqTmxNTciTWH/gceiP9LxtMBULSeYmrIsgplQyZbbr4m6WRK0ZlXZfQzj9qTSC4XJmTHVdnPuxCAgn9td1ifW2p1IJmq/9fI4szgOy3lljE2flNCMrBy/2qz1gh9qhJLLlbfQ0ZInRtN2xUNVPMTJz8CfAYaeEk+md0hYVuqFKySKgDXPiJxKswdqWPH11VFQIV+cWYwMnd5NQ2/ck73yNt/XJcj2n5EEH4FQKgTOuiFZPMRbaZWBMZnjgHYyfEXR80TuvAhVkSDTd1zt4fOe2H1oYlT/aCIxQsVchhw2JjE9dUFLrT//Um8BO/EhLraVml3WBe2ddzY6kLE6fuADAieKYsRRT27nPvCZwFGw4JzNKkTJmLJyfgZm4g+jqki2i41ynZNIyEzoCHr24wji9oJo9UW4s6jbIRBZcXCAzJLPkbJvJ4uJMZlIdfMULwu8Xgd+kBX5Z7HJSh6s/FsJF+ei5rRl6LuKCDZzckD+janvqfx/BaD79F3maoqq6wPk5wjtjcoDYRow9i8k8nyU7n9MOjylqYLEFcOo6+ZWj8uYlLmDzh6MkajmpNJMJ7tQwpIk0oVZU/yOcXjC3YcE5M6RWEmuKcM04q6PrOD2yK9sF3iJ7HlXbU29iOP95nLzUSrl2cqKwAFrAIU5Y4asDpIVFhBtyJWBsI8xWkpcWvZMaOfYeygFmXimLEefBxtdBkwme5PnSTkw6bjWPRMbIDjaksUgGuTA4XLhsgjW8OKsz4UxKj+kyz8oEgDgxJJcQ9/yPr5cgNB+5xtnCKXR9i4nHagWTA0JLP4jX2D5oMZc4hCkku6ZaGGd1IByxpAgzmYW2tiTNFp8CT+a185irzjCjGWzdgOCaG4XkXlIMfC8pj0fMtHBxAs0kJF7jcSYs90k0d/tptnF++74V52/u/ZVA0mwvcLJRLTKJRTpFM6jBruCgpEJaAH0VUaYWnk9xBSPcJRuQMLVJrgGRJp+NwSO7A9rj65n7kgy+0vJDhHwcv1gih/bAPPRTbbFogFWnE78g1cVoQpXIVzfbkVfuvSC0kR1ov1ORZxZbbuNqc8nlME6MyZwJotpOfOXx//q3RwRb8hRn0zmvi+tp8R1vPtCmBK5XrLHONnxkJ62zzpZa3xE+DiqmFimkB8KiKDpt+SwMWD22j8k7p+zgtMLWbdtPLK+g+rRYaQ14sRQ2NfGzLx5Eks4QstKNWEmZ2RITG7UyquKsf4fotj46qNs0NMal16BF/bZkxcdGRUXFt4wRSq67gClSiJvehLPS4GdygtgmBk6Myoylgnu+8fPHn5FwjqqUdU6DruZQtrQ1x6Ogp8viSTq/2dbtHTkl27ss7M4e2VZlHcp3Lk5B9KtL2vPg7euyXKdL67GEk7449oru3Z7WLRPBDQtTLLQvHzlZaN0jdLCgZ0w4NWdKWs60bZfJbF6u9Ou0k11ZMZdHt/LvEUx0gGndCr6BGt0SAsDUu/n5rLNRsovMTLW0cCtNwyH31ZwhMw6KbCknm79UwPnmc2/+wgJz/YvPw4sapHGVN1lFzXyDpg5n46onbVdAfQ7dreAtNAaPxcQgsZOCkstjoLc1Wdf8xAYbWea9jYh64vZhT2F5Ee+GekYcI/Nx4o6N8GhUZ6tkwrEo2qEzdZWHDZw+qvFiO8fCSfM0qe0bXz93r+CdOE0AZ40RBPQZdZhfiZdVTh7G0t2Ni8ndnWWnqfx0M3XpYvPhnTQpJE5yZ/M0ZpOd25Fi0omnUFmAABsou910zLCrQ/6Dxl3p4PogfcDFqLrG3k2JOo6Nk+DJ/+2GN+5993tL5/kUc5+EeGhnVXBuc2FJq2dra2tnYfau4kB+RvByVXBxbvOubN/CQt/sXc2mwyP58dSu3PG+vp6eprM9W0sKm3PLiHRcfU+h1cs8SmYBq018xR4wJ6ccCXyE0ayxXDqMLRKpb8hh8txHJcd9PK2b3crH19JJIi69o6trTJerq2vKaj+TZURnCLY6JTEtfWu1zIf9DReOZmYe7eoyld7h59edEZ2UlJSQkJQU3e2amJa1MoRZMMp/S0AAxprGifOc8aTJPf/p3nenfm1W2+EGFk1r31lHPHgj/ziGcD3+wQE9rzsG8i31tBxF1Cxu2Nfpmb89JQp8Kf/RrkfTWrJ0Z+LP/CGrvSnTdTQ/RqisOV6T2JTevik+flO7zv9ix7ka/Nq6MiZPYDhan+jiNcXTs2CkTzxn2wyVJjPvTNBXcirNVC4kpO6P4eEhjQa1ZfsAnDjPv9ycGPnK4+9OnfrML351nmPS/P/5gyL9sTPmPrf56sIDn7jM9ppSGIzKvi/nmGYbJ8e9/i8/f+77qRuefXGcDE2H4+lj8s1AZD104x98CqS4zKPitlT97cFJ3ibZ1HVO3fDWg7I0HQun3pyMHU9GVW3SduDM20HzlnxOzsX251s3fD916oZh8jQdCmeUOXzKBuLFxezOc8Arvs/uP+Uq95uL7c/xDvt+6rPLfj/IcPbjhjrzwKNsE/RTKziFJ1e99sNUX1a2XB8bJ17gMbPW/k0W5u3m2Z8bnuHHnCPB31LAFUD2+IpNlqrLKvpQtovtz2X/7dlnN/zsWxs0B5Snsm9N23lxyzIheHNAGx8OBVYr0QD1792POpMvSGw5sgFn2bPLvjDYojlQSG1drb+3a7IkduDhY28VPo+p6CkUPEif/XWm7m8guCi4zc82LBtm7/UH7q9bDNCfyKgFlulak7keeCQEXGBw/yUQJTiHbXhrGOcYr2Obp7BSYhaIs4tYb+Zwb+mioEHnLftpntPgdJHL/OQTC46cEudPlv3pJ06D8yL0vQTxt3J8DUWfU+J87K0vnAenXlgvXd5N0Yw3D2F8Q5wd5+9/6kQ4pX1+3ieJJUKZ5uVJ2fWck+KUauDBPw17zHlwGqTvnU6bZWVXmTbFvNCgc4FD01SE87+/cCac1s8AGo1FJSMP1IzpOOcyItcM03tkJef8OA0PPvagwXlwci3F8LT1rsz+jOAdBieH/u2CPifgGVcAwAxeqHd4mkpxck6Fk+MSS/BVZzklx+uc4UXV4uxzDpwcp3NpzS3yMFvV+BEnIpzkRV361PHscxqeA5r61nAObp59Toizz6lo9jk9zDsLZ5/T07SBE6+CPoc3Z6dpG6eTmVPDvPNw2gLq4C935+GUAer4r3Yn4oSYOslb3bE4ndP+IcAAHtXv+EGHGb0AAAAASUVORK5CYII="
 
 /***/ },
-/* 281 */
+/* 280 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOoAAACMCAMAAABF58U7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDowMTgwMTE3NDA3MjA2ODExOTdEQ0Y1OUM2OTU3QTBGRCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoyQzkyMDJDQzhCNzExMUU1ODhDQUIyNzIxMkQwRUM4NSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoyQzkyMDJDQjhCNzExMUU1ODhDQUIyNzIxMkQwRUM4NSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgTWFjaW50b3NoIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MDQ4MDExNzQwNzIwNjgxMTk3RENGNTlDNjk1N0EwRkQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDE4MDExNzQwNzIwNjgxMTk3RENGNTlDNjk1N0EwRkQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7G7/pOAAADAFBMVEX+/v4BAQH9/f38/PwCAgIFBQX39/cDAwMHBwf6+voNDQ0ICAjf39/5+fklJSUaGhoxMTH19fUXFxcTExPU1NQEBAT29vbp6eno6Ojr6+vx8fHg4OBQUFDn5+fc3NwfHx83Nzfk5OQKCgoGBgbHx8fy8vIrKyvNzc0LCwv4+PhnZ2fLy8tGRkYsLCzs7OzW1tYSEhLY2Ng1NTUVFRUODg7S0tLCwsLKysqqqqrX19exsbG1tbWTk5OGhoaXl5etra1OTk5bW1sJCQlERETm5uY6OjouLi5DQ0Pi4uLu7u7j4+MYGBgRERG/v7/d3d04ODjR0dGFhYXv7+8nJyfZ2dm4uLjDw8OysrJ9fX16enp2dnZYWFhPT09qamoeHh6rq6swMDCBgYFjY2N0dHRBQUHw8PAqKirt7e0PDw8hISHGxsbBwcHT09O3t7eEhISPj4+np6eKioojIyNVVVVsbGydnZ1tbW2pqakUFBRcXFxMTEwQEBAMDAyLi4thYWGHh4ckJCRpaWlZWVmSkpKOjo6goKBvb28dHR3l5eWioqK7u7v7+/teXl5ycnL09PQcHBwoKCg/Pz+lpaUmJiYWFhZ5eXk5OTkiIiKCgoJWVlbQ0NAvLy+wsLCsrKy2traoqKimpqba2tqRkZHFxcVRUVEzMzO+vr7Ozs7IyMh8fHx+fn6urq5aWlqenp7q6uoZGRlfX19xcXHExMSYmJgyMjItLS1LS0t/f39AQEBJSUl3d3c7Ozuvr6+Dg4Pb29t7e3vV1dXMzMxKSkpoaGg+Pj6IiIi0tLRlZWVNTU26urq9vb1ra2uWlpZdXV1XV1ekpKQ9PT3h4eHz8/PAwMBFRUW8vLyhoaGfn59ISEiVlZUbGxt4eHhmZmazs7NgYGDJyclwcHCJiYmbm5tubm5UVFSQkJBiYmI8PDy5ubmjo6OcnJxTU1OamprPz88gICCZmZmUlJQpKSlCQkJ1dXVzc3ONjY2MjIxHR0eAgIDe3t42NjZkZGRSUlL///8AAAD////bjyOoAAABAHRSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AU/cHJQAADlhJREFUeNrsnXVg1EgXwKfbdustdXelLW2pG3WHOhUopbQUCsXd3d3d3d3l0MP9OPTc3V0yfLvJblmJJ5td+O79Q0kyk/fbmbx58+ZNAl783wj4D/U/VDqCtMjrjYqoyOuKiuDJ64iKEMhrh6rA5hC3eFD9D+9t0jFWwDdoj9jqYlMoFat/k3SKFfAKajLiuhVUkPOvG6octPWTbVBF6nSIFfDXpCO6QTWJmK07rIAv0spciCfRlTrDCvgh3T/UEOLL0hJdYQW8kN5YAgnF0ltHWAEfpKVGkESy/XWDFXAntZgLyWWrSCdYAWfS1kMglXyuE64E4ErqcglSS3ddYAUcSbPOQMiAFXkVUTHNz7WC9KTBROusgBOpUxtIV9LCtM0KuJCKf4b0pdt3WmblhDoKMhHbOu0+sIADaWfIUDqJtMkK2JM+g4wlbb8WWQFr0lhj5qiw50XtsbJGzZ8I2UiveK2xAraNehCylHHaYmWL+jFkLae1xArYkZp3YI8K39XOTAew677BkIsMma8NVnaoMcacUGGusxZYARtSi0WQo2x7IPwDC9h032WQs/xkJzgrG9RCA2oUQ6oLuq7WbVRUOf+elKA2m+N6U10TFSswKwvUd6gg9N43R5BAW8qZjsDRcMCYNNyHAqH4Bnrde/aUrIcFZWWOuopc/zZP5DO1Usp+fsBOSFbAlLSZ1CZZHnFoWa4CoZSsvV0FZGWMOprMqg4oU8wMaGtKyRrpopOoqFKPSOZnu8NUsiBohCmGCNesDFH1TxIqvaqtYqIH+q+3Le05nU6hohqtJdLY6iuVlBb0rw+pUc1ChGJlhioiatTcItXcHfTvvobUrJGtBWIFjBrVTw9f3eDW6nFP9L9PabjDpQLFTJmhDsdX9k88ZdED62igRscJwwqYkJZZ4eo6AV9V6RFrSxqspt2dhIBlhNoOV9M3CNRED46jNaXzfCwAK2BAGoPrEkwnVFJ61Lk9vfnrXSeNswL6pEgmno41xDEx9PgEmnN1y0pNszJAHYinYaMDsYLYqnpvmqwZwzTMCmiT+uNZmDVhZOqhp6bRDsL8qVlWQLv7dsJRrkMCqXLoOdGbtFlrTTTJShs1zkxdNYN1FKphJQ1ps3Zx0SAroEkqjlRXzGgapWKE/YFAlrtrjhXQ7L5487Fl1GphWd/d6LNGOmmMFdAjnY2TWlduTUMr9IotvgxYNdaugBapoyeOUgPp6ISQuFkErE0aYgUUSmJRout4i/2AlkaYFT7OgPWphbCoSoGTehyFxvxFUyH0MndLBqzBmmlWQA2KJOLlwCbTVQerY+dYBqxHNMIKqEBd3PvgRYjeBrS1weqJN6CP6nNRINSWnSSzl9UMye4ahKfjAXMGymDV3WbQrEfFGmAFhKQDSUZD+36Muhh2cX8GrCcEQJWDJpAmNA9g9jAhjIecDDv+WQH+U/p1BxrZvQyj5QhyxIi+N6xBVCVblEyqxvvMDaSs3iQbuqh623lnBTig4V1ItRjFZqolfy7O0GUN1QyqEqj+HvJw0F59VqOerHbxdJqoBlv4ZgVKpOLw905HkqvQaMFyfJfdQkTXb5qrAVR5a/rVX1phRhnGLGDvySD08gvk0eECTaHei6Rzf8OHHHw2rGicPU3WUp6bVYbqsrflDgFeJLefwMU7xcr2MaOJOtiB4a0owuYy1HdlJt7ril0eSdjrPHfS8AW0x9YNzGYUVJv5ZagN0lVvrxN9EaQigNgL38dpxoGWzStnkImI0J8R04CVoc7xS/TzRpC27dYQ33niFoRzo76VzcARto9BaEavaMG+tMCIw7D7ZBYjbSZ3UobJte8gpOtBKgKc2gYe3lJiLiZgBfJCRbs9ye5q3A4g3LvvWmY5l0GdHQmXM5UlPGXo2z1tMqQR214T3Z6Z47HKUB98SJ62PbYfwgOpsyfTBNPeqTj3VQP1GKVi1cc0dFQvh7XVDYqlQbN+XJdTyBbdSeVX5X2DOB03bx5OM/W6oq+qMopqHkExzbjHC+lqXxaoMNMc1+TMTP0x+ceVyzo9WUzQVTI7qiiNoh5Rvuj78R9FKR0YxAsp0oVdlvSMtTik7aKoM3XX4qCmKDRgdv/VCHg2RrHMJI6ksuJXWaeEnxepgDrQ2nhoNEVJbxQ1f6UsVNa+8wWJNftIeVdqFwteSJsGs09/v2shD+2F7ywpQ8pCaZabqqg5ZpamoCdykhP69P/je9UwqD930yvNdTkOOcgq1MgUVP/kC/W6htLfIJyqiPpCtiwYsbUqpBpnn9s3LryQljRy29bQSeJpTTjAuNjIvJfKY6j5df0ckSsqCSxLhhhBeMqED9KyXzI47uAw2nJzDZtyDaqo0pl5muLo0nv0uMNikAOXO3N3BhGkXwD33Sq2BuyK5bfo3+IDX5Of9F1zeVgJ1mtdN/jzQKq/C2pRPlZD9cNOLHVL6Qt4epGbrHDWU22SwhUOcgR5GO2RpNf2nF7lzN8r62SFQ5ZA7Uq1IqpUKxCXuMOCz5fzyQqvj9AyKfRdrYKKC8jdb7hnBrUu6WSonINz8oo+0z5oho/hTIxJDZWPMKSsqjnzhCczmKGSEBa0uzFJAVWuHW+QmOkdLSSjXm/MS7EZ+lxldh9jrYz6gl9M6XsjhDW9egOKkr4alP7p2PKqYwpO1gII74Txi6pm1m77CNx1DWeh97Wz/MZpYcvBNq65MPQCr6gqnD0qDmrBAvXBXLyoQNeuL1cjevxRrGiBeQRt+m5j9/RGK0ERTw6dtPLXgGiYifl5G+qRwKXYmSgnBBH3AbyhtmCGpU7PXqCF1kRTqEzM44bJdvu4i5DCCKVIER+oCu3pPs9KaMaRPYOgZMIz5qG6B3RRukt8uZg3VMW6N3gKPoQOzk1yHTG7XSS0/0ydtenE8oN5St4C4AfUu0H4fmtUPAUN/pcNHG08N4x65QZwJ83P27G7PdSKWG6WuAdzzMc9z/RQICPwcgG30RNBBp7s2kt4Rp/oaGwiseaRNF25NOdUotruWbWFDG6gm7bKOpNNm0WjlxKmNfBlsGQrhdnNrs7OHpWLx0sPfXp6hAey/wu4KFF5Tqbm0gMOnIh/tSE0OPDF+AlX+7o7xs7tMCYaf9Nnm7w949tES/74eVJtTbkee9Q3Z71xaqmk/BNZzpx8mfDvQXtMIfR6TJr4DxhzOnrLX929utEmeLF8ZcTx0dT3t3UliHXV6CMmBet/34gWax5uw5o11wPJbx74uEIaFu44Pfhu6FHZ0pSxIQxq+OWIXRZpggAj0pB0G9uTwz9M3+vmNdh0pNfT9OppN0MkNxZVzPVUb66Wifk1pd7gtJJGj46KGDljxowFtsoh26AfXyZZlUo8QVCwvnYhtuxl4BZDlSDAAHXTLfUXLekVb0RchuEG3H2aZ9/HZlbS9hwUfPly8LwrdSUWEif5N5K3yPkYmuZMvuqc5djawkLs5OG3duq13BXGhmOxH+5SH9XnaE5MSjFmMS7F+3NDxUo6V0ydHKSiVOQ+O/MC0czTXpa51z4ZPnzoof4SeeNd6TtX7cvPDK+U/OqFd1bcP1RZVuZeJU+D8LWsmboDQaYRBYf1Rq/voW4WHph7b/rc2H6k5IKt59ROi/bJ1l96dw50IGCli1r0iVo8zMzrYzTwtmPe5nCVG8cO+CikJcZq7V5YPblcZW01p34/eOy26tm9WbMGzt4YqvyMD+7kiusMzE+s71glmfB7Nqufc759fAHW5RYO+aGIA6p48tIZx7q1apFt15fF/yVbCgQItTh8sPt4T+U9ABGdFDrbB7dWSA5Fd2sve0BM7zwUEdVV1Qr6PMQ70ePcl99+sk1ag8EA9qhA39oa4Sgi750/3JHMfMwso2VrvSmKLebXLrR9ilNC7LTux8sjfGH7nVghyaPYI2ZDu0nfdHFzSwvehyYeft3oRvz7dlxXX9u5ikMH5kuaPouCl2PW7woNkK5Wn3JROvndWdkwlu9R1IRFpQvSMwN8FLp3h1PTh46anDZ3XRb1vTgONjTqRfDe+6Hwq9+HZySDsUle4W+HavMo641J3JeOtyt0pFfm3dIQBqTcUGlch3PCugH6rFO6RLmI/lsmKpXYHSWY2xz4PNBbrO4NckB9wXMvnzIWhhM3vcvZ8Udz/i5e7rWoy97a8yeSx52YJE+X1rNdcvB2RfPhxNTUPYUlHlkzzxWk1g6zUOQiDmgDTYGK9ElYi7r7kXX9sFmZ+O+ENA52VDfudmJ6IWzAO6nJTPMLHuZZfUfdoNfE+FW5F/ar+DIpZfxClUWfGvYfuOI3Yij+YKpbQEQQzDAdObhD1xGuYsVsR30mqC0/XML2+BHx8fEj6r6sWzxlwKyd7FcL+UO19vvdTWXKYjY4++2aW1Ni0V5n/e+iQ3UekvHQzppUVVZjmJCoDpvf9AxYNKpzcurN+OSVh2r3bm3sZiXP9Whf/E9yoChwoWRicmzo1QubpzlzG5w57LPhAdXfz3W+igejb+26PeXgMVnkwMCr7i1sZe55ObRxK+1nly8sKe/RfTUxSfi2RjY7TfMYpmBkjJ+3SduV6C0UqACoaEwxqQGlHTMgSdUZ6PVF97N27lk9LDTApvHBBl+cv8qUBikiqzFvwEAxYqE3NqNXVLf0Xd8uTi3cvv3mxU1NOowqpaX8AQ5Plj62Un+2y54dgVW7rgfYBhka+ppGW3nm5BzruSRK7uoaWGXfSkkKLHrQZB4+hz9WTX9qVgk2Dntfqfy1W63DvPv2TXDc7zJfXyrznWIHhVpJ3CRDaZMbGflG5Xx6VvTqoKrgVkgGnIlkc/mwtiUhbaWSENIcw++3yAT6gPBLlEmm9UKZXO2gvoQN+afydUdVeWwVj5Cb8RevICrBqhGZ1eb17sJ+7FurHxUW+Lvmr9xXil5N+Z8AAwBL4a3DPxkeigAAAABJRU5ErkJggg=="
 
 /***/ },
-/* 282 */
+/* 281 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKEAAAB4CAMAAACtvmJjAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDowMjgwMTE3NDA3MjA2ODExQUE5N0Q5OEE5NkIyMkZCRCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpDQ0VGMjM5NjhCN0YxMUU1QkI5MUJDMDNCNkIwNDRFNSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpDQ0VGMjM5NThCN0YxMUU1QkI5MUJDMDNCNkIwNDRFNSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgTWFjaW50b3NoIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MDI4MDExNzQwNzIwNjgxMUFBOTdEOThBOTZCMjJGQkQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDI4MDExNzQwNzIwNjgxMUFBOTdEOThBOTZCMjJGQkQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6QmeN9AAADAFBMVEWGu8s0hZRhqLyWj25Xh5FBQUE5kaoAbY6ZmZlcpLkSfJozjacyMTDMzMyim5kYWWzt7OzW5+0jIyPw8PCUw9Hp8vUsiqQjhaEsOz/V0M9ukZhgproRYXhCPTsYFxdTnrQ9Pj4mRk9BlK0tP0ROaG/EzLLY2ti1tbQAdJRsaVUAcJBoqr16tMXm5uaioaEIdpW01N2FIR0Yg6H258jBwMDP09MFdZUYgJ1STEp5d3czS1JXoLZEm7X9/f4Abo8qWmPi7vJ1scMgW2u51+C7vLwrKys9QkMNepiFk5eWlpbM4+kLeJdDPz63w8c5S04kSlVJQ0GmzdiUUU8dgZ7Qzs6kvMNJmrGSwdAEWnQXfZuysrL88e7k4N5VU0wAdZaXxdKarrMDcI4AeJkUJisAcpNOnrQ0SU5jmKbJxMKyxbb4+PgAdpgAcZJodXkNO0gwLS3B3OQhiKVZorcCAQEAaYpsrL81MC+jcnEXXnL6/P2rwsj+9/IUeZYTRFEEb40Aaow7l7GNsbuDh4iRpqzj3LmtrKwDdJRwr8ErZ3nx9ff0+PolVWPq5uUnJSULaoTc6/AEc5IZe5Xp6OiRmJo5NTWct79PnLKYv8r4+vsyREqdyNUlWWZCTk6pnposXGc7RUinfnxOSEUxOTsBcpJVpbxLm7J7dmGIrrklgJIBdJTz4ruMvs04QERJX2YsT1oAdpas0NtPkqQnh6Kpvq0DcJFpZWRFipqHgWEIc5ESdZEAZogNVWl/fX0xXma5trZcWU4EaYYUgaD/+vk8OTgGbosBbIoujqphXlISbITv7u5ypLOdl5V+tsdLSkgJbIi/x8pFl68dHBylsrYAcZEyNjggICCgq68CcpEHa4gtKCZopLfl6+YiMzjIx8fNyMa8t7a10NQCcZHBuLWcmpokiqdGRkUEeZkoKCc8UliPwM9CmLGsoqBrp7j/+fYEcZSjrrEYUGCRQ0ARERBHmLCAvtAfg6Bbc3l1b24PZn+CuMmzs7MAcpIzMzP///8Ac5P///8WajKfAAABAHRSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AU/cHJQAAF5NJREFUeNrsXA98U9W9L5XkktwiUCABSpsYHYSTwmVOE2zpldLRIIkIBgthz1QwoDN3FtumawUbdJgOobRi1wl1VOmq1GKHGQJW0LkiPPbqlu7Cq7zhNh5WHr75nmtfnHiau/3uvfnTtEmTQvXj5/P2TXKa3z3nnvPN75zf7/zOvfc06e/fdCT9k+FoM/R/UxCLod+/LDktTXyLSE4W38JHTCIRyBtQJC2cIUppgdeAcmLd4ZYCX/gMKCA7NIDiIIbLjAzteuj3DzzwwEMC4MvvH3LRHMdh+CCXi+D/Xi/scXLstXlhioMY6lhEqu6bHoGf1JOscCJhyE2SMYjTtrjdWq0WEg6SFi0vc5wgc0FZzNeG8rV8BcFT3IFD4Sq4SJmhJ4UoDmaIiZ9+Oms8YNXtq8bDm8f3Hj/M10+TcJr/kAm1bVy+fGOWkEAqJMuzRHnjxoEHB8gbv7DZyiNPCVaxfKjcdtJaE4shd5HMfhyI3f7hi/fe++KH8G3VfSopr0N8EVRf4fc7XY1l1efN5rrU6nRz+vnUfnN6UWoRyNUgd5xPrQvIZQPlMvNMh60BinSY05eAZC5LPR9xSlnqkgFy40kiN6jEITrUutqfnD5+1Yf3fhtwL1Cc/grBj0MOyafmVDyf419JbFxS0tsj6S8pUUvUGSWXeyTVJV09kjpB7i1J6VFfLsnokRSVlEh4eUmP5FxJ6oqZesfiDr6IpIs/JFTRETgFZOGUOuGUjJL+5b8lkmMyZJWa+6B/X/y2gBdvHz/9SSxYB2tc5M+pyPEXujb2Z6T2SM5mZEB1lzNSgEwGtFHXxctdGR0SdUoG0O7P6AL5XEYd0MlIWTHT4Wjo6BJPOdsjScmoBoaCnJrRz1cBp3QIp1RndIAOYzMkfvo9fhzeKzK8d3yIIaY7eUf1vJRoXLFgwYp0PjGbX1qwwJz+UlhesOAlQTYLcnpYLode5qV0c2RuoEiwSlEejqE9JkOOqW1dtH1SNoHL9504sXjx4hMnGiYs3ndi3+LF++68E2Qx2dcA8omGkHwnL0OyS9vyRcOdwnn8oQahyL5QkYY79wlZAXndcL1M1oOl3P7DIb0M/UzcSlKE1gZYv95h0378f1u1t9ptDptj62M228cLf/6u1rb11LuQ/e7C9Vrjwk+MDtvWn3+ktRm3LrRxUItjIZSzMR99YtO++9gnDlvLY1s/tmlP/fyUVnvrwls/hjq2PqbVfrTwlJaLzZDjREu5TbSUh8FSniRQwGPXTrh5z8byLzbuadyxq23Pnv+6rwA5m40MUmRmGpG1WKVA7g3J9QgpNGlGWpmZZkE4U7YFI3JKkhvOx6Z6qRFftGQmYaRIhhNrs5OP4ab64j44xakzIn2fTEPTfc5ihIfToUdz33TwNg//8K9//eFt4G2m/0SjQIIOtbtgDJklMAxfUjeaYcjs0LoVCg9i5BoVhd0mjRJxlNeLsMni1WO3T2ZlsVyOeGpyoYIWN8IcliuMkJrc8KPleiCu14O/b6EMHG5xE3DUaIH8YS1lc8Bjjw97bDrAUH306Ar1wTk3nFbnv3/DnI4dNnexs55AhtW6WlauSpbSXHN2NoJpCRRikRX7EDbWC75UnJSEjuBor4HFSCpnMcfAAbve2yQWAWW3dmOaXCYjhmOINH95fPqqVauECW8V/+Un/+EN6lA9Z86K/IP3v/zOwfyel0+n77BhTb0SIYu0AHTmZvV2To/0HKYw58Z6PQKFyDVo8NzLauTARmMKjG5slF4M5NC5m5QIU1c8aDiGEB785nd33/34k0++8sorT979u7t/9xuXqEJgKElXS/Lz1Wq1pFGiVgNDrkpnYJEvu8rIQFt2XkuQIKUVOFBkE9+HA7QXAN+rnDt8yB3KsRoojCk5/EJCF9tSoIZjnk5NsadP6i0gOxXHqGALtl0SmBLy8/kUGEp4HXoKDEBGLg+2ITSLFHKGY+QkC/Y7kBoe8CdKfMNQTqeGRn06GVhKTIYMw3CY8Fztk9EaabKPKW5BoTa0u/LNPEMgCAwlPEOkKeTNiGEjmsIUbwFu4wiDMuzWaHws8kghlorZyw/MmDHWjlkrSSYrpMX1KopsCdcA4/DllyX5B08f5cfhUX4cwmxtxEO1InhQPCSUZBFGmGUQ/5f/TQzDIsTQCANYPjZpzpXzvksxzDh8+tKNS2uha1gY+Jwd67mByrHxDHvUB0/f8A7Y8lHelqFVJpo2ouoIefoszXIShs8Gq9Lj5li5RdqnNKg0JooyeeAsPemRY+QhPcxAhpHLg6fH3TijibEzAxHu5d/mQ7zVmJWenp7flg5fF9sGEMJxGIINKjI9Xk2fQuPz9mWm6cG5kKrkTl1umswr1RSbWGyqkoIONblkhMf2j3967dqnv7ztuzxuG7f0rqVjB4GyB5tsmXlPW9uu99ruuaccNbS17bgY0g4dCYKOBpey2VDgKfD0ueUeab2CIIwWA1IVGCx6juA8cBZLGlmaUKosEePQP+844Km7wvi3SCx9szY0jnwfffyRXPHuY+8alPzsrA0SVBRnJwRV8KOqVxULf+ENCBzm5WJINO4IHX73rnHj7pr35doYePvftzDhgUSSpCGZzK0indQA14HI0NowAJlMFkNIk8FLSMQvsrQhSG7mBnobgeG4ebO/jIHZAxmSXrLP6sxOU2bWh4cni7WwCAQQQbS3I45xtYtCaSlyo9KAABINdgsAc0aQQrlSYjBghrhGhtjn0XvkHgNMGpaQc2FhMD37yz/Pz/v+6+IEx9LNh2q2L9pURdH8CPXyQp6O4iMITEgzMzuv6Kpyc5OvOp2QFq6uam5CQ+1qcC/HY2gf4NAYBD4chb0QrVG4DmzbvDnnOzO6hTK1q8EpLNru92/yEegYCBW8kAdBDkZpSQqTyejWm7DeZMKUya3XW6o6twzxWHikDAe734ECrZFtObBt++Q/vPqQsPKHVVrOFYXcIJvkn2QlVvorkpR6S3KNf34tQ2d3HiYtCCk9uFmPOA1FKFqvSEtVuYeHuCei6pp6OSogOjToFWBCimd5HSLf9gpZKYHoUusmf94V/1RNqd6DSz01fpnLesXkaq0niLRkXJPmcq80KjY5ZZuaS6uk9BCGxcGLN4kxjD5HBI4yBNvEu7t1Qs+7nP69Lo6iKD0hn8QvvEoPFz9DHi7V+fNc9SqCSCqgCZlMXzjfwuw17k1ub/fmHSbThoxEfLg1QPH6dTh4ABX6Ze3kokWLDjEuTYW/00Wsfsa/vbnUU1HDQogrMCyWUZ31hajQMt+DWNMmqzVXjwePH8Z1RaR4vQyHDiBgWOprbb3ixC4pz5AuzvOvVLh8FYsu5npBh80E6NCUhK5ktwJDGhjKLUkBhgN5MsTeUWE4hKNLB72MBO9orQE77nO1S5cZCKGXm9NoIlfX3n61wNTKWA/lUYXO9vYNeYTUSUepjRUpjoAhjjoahaN2BpyvGEgiy9SK4lKaRa6gpbh4j61YBJZivCInPIecmfON8la9K3sSpdyU+5dNGlcuWAq2w2tAteDgGPrQNTJ0APhp2eGAiRmCVcTp5QArJbhNwunPSfLIrcU1/mWCt2lVmKyyRf75xzDdl0SVWnTJBlrvgR9FugllZ9Kp9uwq8DZ2BKEihMJi5MjCzAL+s28kDO3BXtBW3hPETTO1ptx6UmU48K1ZkybNOiJYJHv4ao4/R/DYFgLVXskB9z3V75+/BVqkVUleI2LcFAVOmwKPDa4fPLYRsQeEWemAItmjI2FCMDn3XlXS3Ab/NYxDrP3gbFkQE2xIalEU/s+Bbb/evPk7Y7sDsx65smbqovnNtYgXFHsnTV2UV98tXBZAPl2mc0pmZ9LVqtWdmUlJVVemOKUQX6Mxr366+devjtmQ1rxah5B8E9jxVClxTQw57Qf7+wMom+BAHjmZZj3wrWXLZn1L1CHQoGnKqEcuIdBHiNYbKUSwrDhMYdHPh9Sm0BvRkIHGbJt85g/bxpzS+fqqaKJTuFKZd/HaGNoiGPKjE7ndYnMiQROsTwkaEXI9mI+BBAEhAktVxuCyPgBGeIsH7SZ+UvK82d3NcHpMz8+peKQiZ5Gx/tp0+NsIhno3rI6gfqlUKhZE0ikQJiv09Z1Ko8HYXEAoNliMKoVVYcKD3dRA1yJE5uICjPf6/JXKSfrEGdoHuKuIXrYZM+vJesuBbX+YvP07Y4UGaNUhX65T06fq1Ej7SNLpaq2SJSfnulHiTpWWPsMvmpyjMQ5t8pVplpX6A9s+3fzpq0J8iGszV/dlu11eXRKZO0WhWa3X+WRpVbm1OAqXWLc+iL5lU2tyEQ4zhFXAtTJUaUin5dlfzp//5+8fWcc3qrdycrkbUxqFniT1Cg1lpeQmjQ/HIoSH+H+eIuWTEzjobS7NuzRv3uxYePt/h7VlWPBTsKx2N+FQ7Szm19AYRhWs1cFGQMYESnxmF46BD4C/IsOH1679cu3bt4XxcAT++F0Liqgrwh86YNkPsAtp5OzPXcfdq6ARiQwnTwScmSxi7uzZD7w+CJE2iG0f3HRzEDNtsXWCE7KMQaUYFJhU+U+QYQS2z377RzSNaJgk+T/Ce0hT3RcZO2OHifVi00j0ZI9fhDF47OvKA9jVIjKMvG4z+U//+SN3vGa1nFYLH/5LSAs45rhK5EeEhrAh+6JwvcWcnp4u+UIbhWHNkdfHuIc2Eb1T7JEHRqJPHOPak+GKZ//9N5xWq1ccnZO+wxaF4TKaZmLqwD4iexypbQipXPrmwXeOAsOemAyjnzwaN5UTMigGVeabe1aYzeYVK9IbhmeIr7thHK0eHK+BlvJGAQfz2yq1Cepw2ApxgowHfrcPZ+/a8vyDBxsbIcmq5IZniOO4L5wwURyVWNQ6W+wnDy6Yc7/aLJlzOr3BEVeH9uvo5mG441idjQzJntKD79wwByzlhpfTdzhG1MvDjKhr4B09F/lydW8efOmd90GH9y9I3JavzXBGOm75DFauKPDtSFfzt0PU6sYvbCPTIR5lVxjo64he9jmLP5qpVufn8ze+2lq4eAzx9fffyPwTYzRSW/asuP99UCL08mLHaHibEU930SXRJpHSW6DYf3p4S8GxA2E8En3gmLHpMD/Mrlcq31Tz3kbdM+edeJaCR3niTUT7yJOdRu5JD8BcHoMhjhHJ8Der8VdLk7V6FLf+qmGH+Cq3cSMbh/j6vXd8944QIzzpIYDjrs9jJ5CJY3h5e6K1JMQw7g1FPOo6xQkzxNfYpVECymuY4e3ciHs5MX3En71H4FnjMNQKa0LhQmvUXv2KPFCCDIUrSBMWC69SO8N8dTONfbj4e3gdOtacF64rnP/xkTFjmMQNIl5Je/zfguPpkG/Dbl+/pjqlCF6pd/zsxqXu+IsN7WhBWI3H06Hd/eaWLTPPp/CovmPejUsHr42H4mLlaKIpHkNmy9LnnrujWmB4ebHlwLPDji+evaN8/7RRxMxfxGP47LhL845fFhieX+NAKO7oc0woG03MdMRl+NylS8cDOrxl7NgjcV3u+gll/aOIwEW1GAz5h7WA4bwAw+o7/vtnS932uDpM+foY2gUdjgvqsPoHzz03IwZD/NXq0B5Lh2IvB3V4udxEUXFd8teqQ9FSbgwyBEuJPqfgr3IcxrMUbDoy9sgtoi1Xfz5jxlg9/iaNQzHYZdavERgWpQqWEi9k+VptOcDAseZyEaA69fOlS2fYv1k6FNk4vnhQxEyHvSnuwvTr9tjiA4XiQ1jvIeGWfpyAxDbzptHEF7ZEIthgtDL0XkCkbWtZzN8XEJZnWhucIHyC34WjIYQlWyAJHOETmzaQaYsR2/D3UyZBSB09JAopC6PSMWNcNLYFRNp15IALcbavIcbOmTVr1t03vUW8FwV0sGvXT7iw57Wnnnptz4W31vMEJ1zY+NrS4yCuWT/SeyiR4RGOz9D/iKSuv6ys6OBQ7Fd/pg0aRNHf/rhz9+6dq44XvWXTOj5LOT59587dcz/825I1jmFuG+CRLQ1iMew4ByiSmAdD0pH+RKBPJxTddWbiXMDEM+OWvOX4rOjSZFGc+NTlNbZrWLfgETFUpwKqlwxFdfUTovU3XXjjzFwRuyfe8eAHS45P3h0Qd79xIaEr2NGvSOARMEytDuFyiOH5J8RRRu+5Lchw7pk/TmtvnD4xJM6ehhJdayV8dyU6w4EIcLx8/qZKYSC+99rO3UFKcyfesuYHIYJzd//LCSLaVTMc+bi2PShg+6CbLJFXFtnwHfBhGaZeFpCa2v+vwkAsHUBp5+QfrFk6Ocxw9+el4TZRbAQuFQ4LO00prDSTCEMR5871/9gxmOFcnuGZsLjzcxc0DAF6C4vkqwsHYfUUHpAmCftEqM69U0J5U0QUwmsKX7IwExXXbJ+aVMuMgGHHLS2BXg4rbXAvv0awmr5axiQjKbdvMMhTHo9SKZVKFW5htWsYkKfks5RKi8J3SuFTakiP1ZvDTx+dxEgZYi295+FHgg8cbB9/85rl00PiI3+6GTFksZKlSAOFh3Strrmgvk8q8yR5xW1hbDiPUGmcGq9U6a4ivXLCnezNNe3lnwjKqaFGrEMtO+2Np+cFsPb4g6Upd4TFNy5gRkNqWMor80GwwYafh2YwpmQWlSpTl+bRSQdbPK7NTUt2ZsrqfZmabJKmdJrVnpU5Fc+HnqpKjGHdLbylaLtvTkktCaC/7sIH+1POBaTe/pRHMaNIJpHem2wFdgZriIPRjd0UJTcZ5B7SaBridviHxqxGk9JopCwmrFfK5YerhCfTDh1ORIfnBHQFbLl2Wll/US/PqKujruzCr86W1Z0XRXVd2TQOeVs9iKpPsyDWqiuGlQP/vByStvbRSJmkgg51FhpQMIhnhQ0hfAHEYH4rDWYxb+kIvlKH+ChGiRJg2CUgIyPAUDth/7RpN1/Yv3/anmnTpn2GPxPFs4L41i+Qr0qBKI/HymKTQg4rB4McqChkGoQssgIGc31SIxNYCHks/Jyi1GNssUJiVBiwuK/PTflMSF/c6TTQ8b3Nua4gw0cdgViQXldZWXnkSGUlUUloW7h1gMrXx7xHrKskbBzy6UhEyTp9oBqNrAljhc6AkCdJATq9KkXYrUpTijpEinpvE2PKTjIgXJBNQqHsPvgFGg3Cem+zATEuF0R0XEE0hudC6AohI+OJ9RFRrS0YM4YupwkiAm+C3GnFRgabVBq3nSML5Azr0ZCINXjBRJoUZGDTCDY1S1nsVkgpjA31PtC51MPa3aS0FjM+rzywtY5tjcKwGugMRS8wxMLDs8OCPaU4hd2ybMqOrVJSb+eaVQaG8ci8iDEUb4AYUJNmEic7Ru6sR1yLSqfnEJmpRIw19xOovFjntjNkkkEYoxy6mjOIYT9oMLW3JBoedbBN9Z06Kx3jqmpT7bFj3U3d69axXBNad4yXu2ubuo8dq21qqt1yDAqYKMjfAoUCzz11U5CPIOHQMaqpCeRuUXZfBFkIU8TNCwMYPv/G+z3neh98NBresh3by5uXB0WNRLQ7lr/wQlZW1gsvLM/KWi4mMeQdgtdqC8obQ4VEWSzUBoEKIavwD9oNx080D838YH0UOLQumfBcWF539CvEWWVdqenmjtSuOnP6ki5+n78gn+Pl86JcnW6uA8eaxf9jhXWNRV3VZl7uMHdUd5WZzZFy40ktrXrGH22/XpVDG7UbMbE6p6KCd/NstFjO3VYk7NzvLTnL7+uv7pGkBOQOiSSjJDW8s78ji/9BlcvPh3b6S8I7/c8GdvqXLT/JqCr8/uj7Ru1RbwFjIsmfA6gxsVGfVcvq7+U36Xf1QotLevt7JCD3QGO8XN1bBIx7U/md/b3mLJugQ1EW/llAKl++qPdyWO5oPIny/LEYxojHCenzfC+30lEvJNo2hnfuD9rnP1jOAitoOdwYkR+x0z8dkvyTdGvwH6AMYpgcc2VDyGr82wspNvrzfuUN+/id+vuEff6Br9HlcuHGQXnEQUgbIk+6SFz1/z0qw0465qqBtpJKxMZYcoj31xKBLaHyXOmUGP+1Y/sGqyEWrNbYeaMNq+r5GAy/Sfjn/1n6f8TwHwIMALT1O+33ql45AAAAAElFTkSuQmCC"
 
 /***/ },
-/* 283 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70060,15 +70313,15 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var _domainsSkillNode = __webpack_require__(284);
+	var _domainsSkillNode = __webpack_require__(283);
 	
 	var _domainsSkillNode2 = _interopRequireDefault(_domainsSkillNode);
 	
-	var _domainsSkillCloud = __webpack_require__(285);
+	var _domainsSkillCloud = __webpack_require__(284);
 	
 	var _domainsSkillCloud2 = _interopRequireDefault(_domainsSkillCloud);
 	
-	var _immutable = __webpack_require__(248);
+	var _immutable = __webpack_require__(247);
 	
 	var SkillCloudFactory = (function () {
 	    function SkillCloudFactory() {
@@ -70119,7 +70372,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 284 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70132,7 +70385,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var _matchCase = __webpack_require__(245);
+	var _matchCase = __webpack_require__(244);
 	
 	var _matchCase2 = _interopRequireDefault(_matchCase);
 	
@@ -70217,7 +70470,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 285 */
+/* 284 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -70323,7 +70576,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 286 */
+/* 285 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -70741,7 +70994,7 @@
 	};
 
 /***/ },
-/* 287 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -70758,27 +71011,27 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _componentsTagCloudCanvas = __webpack_require__(288);
+	var _componentsTagCloudCanvas = __webpack_require__(287);
 	
 	var _componentsTagCloudCanvas2 = _interopRequireDefault(_componentsTagCloudCanvas);
 	
-	var _domainsChartDataFactory = __webpack_require__(265);
+	var _domainsChartDataFactory = __webpack_require__(264);
 	
 	var _domainsChartDataFactory2 = _interopRequireDefault(_domainsChartDataFactory);
 	
-	var _componentsChartCanvas = __webpack_require__(272);
+	var _componentsChartCanvas = __webpack_require__(271);
 	
 	var _componentsChartCanvas2 = _interopRequireDefault(_componentsChartCanvas);
 	
-	var _componentsCommentCanvas = __webpack_require__(263);
+	var _componentsCommentCanvas = __webpack_require__(262);
 	
 	var _componentsCommentCanvas2 = _interopRequireDefault(_componentsCommentCanvas);
 	
-	var _constantsTagConst = __webpack_require__(290);
+	var _constantsTagConst = __webpack_require__(289);
 	
 	var TagConst = _interopRequireWildcard(_constantsTagConst);
 	
-	var _actionsAction = __webpack_require__(259);
+	var _actionsAction = __webpack_require__(258);
 	
 	var Action = _interopRequireWildcard(_actionsAction);
 	
@@ -70792,7 +71045,7 @@
 	
 	var _lodash = __webpack_require__(191);
 	
-	var _matchCase = __webpack_require__(245);
+	var _matchCase = __webpack_require__(244);
 	
 	var _matchCase2 = _interopRequireDefault(_matchCase);
 	
@@ -70892,7 +71145,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 288 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70907,7 +71160,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _componentsServiceTagCloudLayout = __webpack_require__(289);
+	var _componentsServiceTagCloudLayout = __webpack_require__(288);
 	
 	var _componentsServiceTagCloudLayout2 = _interopRequireDefault(_componentsServiceTagCloudLayout);
 	
@@ -70915,7 +71168,7 @@
 	
 	var React = _interopRequireWildcard(_react);
 	
-	var d3 = __webpack_require__(271);
+	var d3 = __webpack_require__(270);
 	var color = d3.scale.category20();
 	
 	var TagCloudCanvas = (function (_Component) {
@@ -71085,7 +71338,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 289 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71094,9 +71347,9 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var _immutable = __webpack_require__(248);
+	var _immutable = __webpack_require__(247);
 	
-	var d3 = __webpack_require__(271);
+	var d3 = __webpack_require__(270);
 	var color = d3.scale.category20();
 	
 	var TagCloudLayout = (function () {
@@ -71173,7 +71426,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 290 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71182,19 +71435,19 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _domainsTagFactory = __webpack_require__(291);
+	var _domainsTagFactory = __webpack_require__(290);
 	
 	var _domainsTagFactory2 = _interopRequireDefault(_domainsTagFactory);
 	
-	var _domainsTagCloudFactory = __webpack_require__(293);
+	var _domainsTagCloudFactory = __webpack_require__(292);
 	
 	var _domainsTagCloudFactory2 = _interopRequireDefault(_domainsTagCloudFactory);
 	
-	var _domainsChartDataFactory = __webpack_require__(265);
+	var _domainsChartDataFactory = __webpack_require__(264);
 	
 	var _domainsChartDataFactory2 = _interopRequireDefault(_domainsChartDataFactory);
 	
-	var root = _domainsTagFactory2['default'].create(__webpack_require__(296));
+	var root = _domainsTagFactory2['default'].create(__webpack_require__(295));
 	exports.root = root;
 	var rootCloud = _domainsTagCloudFactory2['default'].create(root);
 	exports.rootCloud = rootCloud;
@@ -71202,7 +71455,7 @@
 	exports.rootChart = rootChart;
 
 /***/ },
-/* 291 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71213,11 +71466,11 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var _domainsTag = __webpack_require__(292);
+	var _domainsTag = __webpack_require__(291);
 	
 	var _domainsTag2 = _interopRequireDefault(_domainsTag);
 	
-	var _immutable = __webpack_require__(248);
+	var _immutable = __webpack_require__(247);
 	
 	var _lodash = __webpack_require__(191);
 	
@@ -71246,7 +71499,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 292 */
+/* 291 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -71307,7 +71560,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 293 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71318,15 +71571,15 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var _domainsTagNode = __webpack_require__(294);
+	var _domainsTagNode = __webpack_require__(293);
 	
 	var _domainsTagNode2 = _interopRequireDefault(_domainsTagNode);
 	
-	var _domainsTagCloud = __webpack_require__(295);
+	var _domainsTagCloud = __webpack_require__(294);
 	
 	var _domainsTagCloud2 = _interopRequireDefault(_domainsTagCloud);
 	
-	var _immutable = __webpack_require__(248);
+	var _immutable = __webpack_require__(247);
 	
 	var TagCloudFactory = (function () {
 	    function TagCloudFactory() {
@@ -71372,7 +71625,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 294 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -71385,7 +71638,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var _matchCase = __webpack_require__(245);
+	var _matchCase = __webpack_require__(244);
 	
 	var _matchCase2 = _interopRequireDefault(_matchCase);
 	
@@ -71437,7 +71690,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 295 */
+/* 294 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -71469,7 +71722,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 296 */
+/* 295 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -71854,7 +72107,7 @@
 	};
 
 /***/ },
-/* 297 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71891,13 +72144,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 298 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var isReactClassish = __webpack_require__(299),
-	    isReactElementish = __webpack_require__(300);
+	var isReactClassish = __webpack_require__(298),
+	    isReactElementish = __webpack_require__(299);
 	
 	function makeExportsHot(m, React) {
 	  if (isReactElementish(m.exports, React)) {
@@ -71951,7 +72204,7 @@
 
 
 /***/ },
-/* 299 */
+/* 298 */
 /***/ function(module, exports) {
 
 	function hasRender(Class) {
@@ -72001,10 +72254,10 @@
 	module.exports = isReactClassish;
 
 /***/ },
-/* 300 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isReactClassish = __webpack_require__(299);
+	var isReactClassish = __webpack_require__(298);
 	
 	function isReactElementish(obj, React) {
 	  if (!obj) {
@@ -72018,7 +72271,7 @@
 	module.exports = isReactElementish;
 
 /***/ },
-/* 301 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(2), RootInstanceProvider = __webpack_require__(10), ReactMount = __webpack_require__(12), React = __webpack_require__(66); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -72032,11 +72285,11 @@
 	
 	var _redux = __webpack_require__(176);
 	
-	var _reduxThunk = __webpack_require__(302);
+	var _reduxThunk = __webpack_require__(301);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _reducers = __webpack_require__(303);
+	var _reducers = __webpack_require__(302);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
@@ -72047,8 +72300,8 @@
 	
 	  if (true) {
 	    // Enable Webpack hot module replacement for reducers
-	    module.hot.accept(303, function () {
-	      var nextReducer = __webpack_require__(303);
+	    module.hot.accept(302, function () {
+	      var nextReducer = __webpack_require__(302);
 	      store.replaceReducer(nextReducer);
 	    });
 	  }
@@ -72058,17 +72311,14 @@
 	
 	module.exports = exports['default'];
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(298); if (makeExportsHot(module, __webpack_require__(66))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "configureStore.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(297); if (makeExportsHot(module, __webpack_require__(66))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "configureStore.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)(module)))
 
 /***/ },
-/* 302 */
+/* 301 */
 /***/ function(module, exports) {
 
 	'use strict';
-	
-	exports.__esModule = true;
-	exports['default'] = thunkMiddleware;
 	
 	function thunkMiddleware(_ref) {
 	  var dispatch = _ref.dispatch;
@@ -72081,10 +72331,10 @@
 	  };
 	}
 	
-	module.exports = exports['default'];
+	module.exports = thunkMiddleware;
 
 /***/ },
-/* 303 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72095,23 +72345,23 @@
 	
 	var _redux = __webpack_require__(176);
 	
-	var _reducersSkill = __webpack_require__(304);
+	var _reducersSkill = __webpack_require__(303);
 	
 	var _reducersSkill2 = _interopRequireDefault(_reducersSkill);
 	
-	var _reducersTag = __webpack_require__(305);
+	var _reducersTag = __webpack_require__(304);
 	
 	var _reducersTag2 = _interopRequireDefault(_reducersTag);
 	
-	var _reducersBackground = __webpack_require__(306);
+	var _reducersBackground = __webpack_require__(305);
 	
 	var _reducersBackground2 = _interopRequireDefault(_reducersBackground);
 	
-	var _reducersCrosshair = __webpack_require__(307);
+	var _reducersCrosshair = __webpack_require__(306);
 	
 	var _reducersCrosshair2 = _interopRequireDefault(_reducersCrosshair);
 	
-	var _reducersZoom = __webpack_require__(308);
+	var _reducersZoom = __webpack_require__(307);
 	
 	var _reducersZoom2 = _interopRequireDefault(_reducersZoom);
 	
@@ -72122,7 +72372,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 304 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72134,13 +72384,13 @@
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 	
-	var _constantsSkillConst = __webpack_require__(275);
+	var _constantsSkillConst = __webpack_require__(274);
 	
 	var SkillConst = _interopRequireWildcard(_constantsSkillConst);
 	
-	var _constantsActionConst = __webpack_require__(260);
+	var _constantsActionConst = __webpack_require__(259);
 	
-	var _matchCase = __webpack_require__(245);
+	var _matchCase = __webpack_require__(244);
 	
 	var _matchCase2 = _interopRequireDefault(_matchCase);
 	
@@ -72166,7 +72416,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 305 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72176,9 +72426,9 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _constantsActionConst = __webpack_require__(260);
+	var _constantsActionConst = __webpack_require__(259);
 	
-	var _matchCase = __webpack_require__(245);
+	var _matchCase = __webpack_require__(244);
 	
 	var _matchCase2 = _interopRequireDefault(_matchCase);
 	
@@ -72200,7 +72450,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 306 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72210,9 +72460,9 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _constantsActionConst = __webpack_require__(260);
+	var _constantsActionConst = __webpack_require__(259);
 	
-	var _matchCase = __webpack_require__(245);
+	var _matchCase = __webpack_require__(244);
 	
 	var _matchCase2 = _interopRequireDefault(_matchCase);
 	
@@ -72244,7 +72494,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 307 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72254,9 +72504,9 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _constantsActionConst = __webpack_require__(260);
+	var _constantsActionConst = __webpack_require__(259);
 	
-	var _matchCase = __webpack_require__(245);
+	var _matchCase = __webpack_require__(244);
 	
 	var _matchCase2 = _interopRequireDefault(_matchCase);
 	
@@ -72287,7 +72537,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 308 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72297,9 +72547,9 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _constantsActionConst = __webpack_require__(260);
+	var _constantsActionConst = __webpack_require__(259);
 	
-	var _matchCase = __webpack_require__(245);
+	var _matchCase = __webpack_require__(244);
 	
 	var _matchCase2 = _interopRequireDefault(_matchCase);
 	
