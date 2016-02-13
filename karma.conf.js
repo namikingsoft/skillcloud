@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports = function(config) {
   config.set({
     basePath: '',
@@ -41,7 +43,8 @@ module.exports = function(config) {
       },
       resolve: {
         extensions: ['', '.js', '.jsx', '.ts', '.tsx'],
-        modulesDirectories: ['src', 'node_modules', 'bower_components'],
+        modulesDirectories: ['node_modules', 'bower_components'],
+        root: path.join(__dirname, 'src'),
       },
       webpackMiddleware: {
         noInfo: true

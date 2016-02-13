@@ -1,5 +1,6 @@
 var webpack = require('webpack');
-var glob = require("glob");
+var glob = require('glob');
+var path = require('path');
 
 module.exports = {
   devtool: 'source-map',
@@ -43,7 +44,8 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.ts', '.tsx'],
-    modulesDirectories: ['./src', './node_modules', './bower_components'],
+    modulesDirectories: ['node_modules', 'bower_components'],
+    root: path.join(__dirname, 'src'),
   },
   devServer: {
     contentBase: "./public",
