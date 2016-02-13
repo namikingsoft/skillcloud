@@ -43,7 +43,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.ts', '.tsx'],
-    modulesDirectories: ['src', 'node_modules', 'bower_components'],
+    modulesDirectories: ['./src', './node_modules', './bower_components'],
   },
   devServer: {
     contentBase: "./public",
