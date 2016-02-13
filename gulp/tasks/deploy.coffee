@@ -20,5 +20,5 @@ gulp.task 'deploy:init', shell.task [
 
 gulp.task 'deploy:clone', shell.task [
   "rm -rf public"
-  "git clone -b #{config.git.branch} #{config.git.url} public"
+  "git clone --depth 1 -b #{config.git.branch} #{config.git.url} public"
 ]
