@@ -20,4 +20,4 @@ deployment:
     branch: master
     commands:
       - npm run clone
-      - npm run deploy
+      - npm run build
