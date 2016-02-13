@@ -6,6 +6,7 @@
   "scripts": {
     "postinstall": "tsd install",
     "build": "webpack",
+    "clone": "gulp deploy:clone",
     "deploy": "npm run build && gulp deploy",
     "start": "webpack-dev-server",
     "test": "karma start --single-run",

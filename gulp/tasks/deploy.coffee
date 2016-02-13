@@ -6,7 +6,7 @@ message = 'Site updated at ' + new Date().toLocaleString()
 
 gulp.task 'deploy', shell.task [
   "git add --all"
-  "git commit -m '#{message}'"
+  "git commit --allow-empty -m '#{message}'"
   "git push #{config.git.remote} #{config.git.branch}"
 ],
   cwd: 'public'

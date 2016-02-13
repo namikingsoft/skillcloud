@@ -1,0 +1,21 @@
+general:
+  branches:
+    only:
+      - source
+    ignore:
+      - master
+
+machine:
+  timezone: Asia/Tokyo
+
+dependencies:
+  pre:
+    - git config --global user.name "Circle CI"
+    - git config --global user.email "circleci@example.com"
+
+deployment:
+  master:
+    branch: source
+    commands:
+      - npm run clone
+      - npm run deploy
