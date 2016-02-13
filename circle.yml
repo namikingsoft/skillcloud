@@ -1,9 +1,9 @@
 general:
   branches:
     only:
-      - source
-    ignore:
       - master
+    ignore:
+      - gh-pages
 
 machine:
   timezone: Asia/Tokyo
@@ -15,7 +15,7 @@ dependencies:
 
 deployment:
   master:
-    branch: source
+    branch: master
     commands:
       - npm run clone
       - npm run deploy
