@@ -1,4 +1,4 @@
-Skill Cloud [![Build Status][travis-badge]][travis-url]
+Skill Cloud [![Build Status][circleci-badge]][circleci-url]
 =============================
 
 This is visializing skill of namikingsoft like cloud.  
@@ -42,5 +42,5 @@ npm test
 npm run test:watch
 ```
 
-[travis-badge]: https://travis-ci.org/namikingsoft/skillcloud.svg?branch=master
-[travis-url]: https://travis-ci.org/namikingsoft/skillcloud
+[circleci-badge]: https://circleci.com/gh/namikingsoft/skillcloud.svg?style=shield&circle-token=bbe776d43dd71bb616f7a4a4cb7e13e159e99b64
+[circleci-url]: https://circleci.com/gh/namikingsoft/skillcloud
