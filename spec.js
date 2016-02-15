@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "fa550bffc6ef3c193946"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "76ab63c2d960dc34ee0e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -40187,22 +40187,22 @@
 						"children": [
 							{
 								"name": "スケジュール管理",
-								"experience": 38,
+								"experience": 20,
 								"interest": 50
 							},
 							{
 								"name": "タスク管理",
-								"experience": 38,
+								"experience": 50,
 								"interest": 50
 							},
 							{
 								"name": "プレゼン",
-								"experience": 38,
+								"experience": 45,
 								"interest": 50
 							},
 							{
 								"name": "後輩指導",
-								"experience": 38,
+								"experience": 30,
 								"interest": 50
 							}
 						]
@@ -40215,17 +40215,17 @@
 						"children": [
 							{
 								"name": "チケット駆動",
-								"experience": 38,
+								"experience": 50,
 								"interest": 50
 							},
 							{
 								"name": "PullRequest駆動",
-								"experience": 38,
+								"experience": 40,
 								"interest": 50
 							},
 							{
 								"name": "GitFlow",
-								"experience": 38,
+								"experience": 35,
 								"interest": 50
 							}
 						]
