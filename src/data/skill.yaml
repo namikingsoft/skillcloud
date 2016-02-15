@@ -303,16 +303,16 @@ children:
         チームのタスク管理、スケジュール管理、後輩の指導、客先での説明プレゼンなど。
       children:
         - name: スケジュール管理
-          experience: 38
+          experience: 20
           interest: 50
         - name: タスク管理
-          experience: 38
+          experience: 50
           interest: 50
         - name: プレゼン
-          experience: 38
+          experience: 45
           interest: 50
         - name: 後輩指導
-          experience: 38
+          experience: 30
           interest: 50
     - name: スクラム開発
       experience: 80
@@ -323,11 +323,11 @@ children:
         タスク管理、PullRequest駆動の開発を行ってきました。
       children:
         - name: チケット駆動
-          experience: 38
+          experience: 50
           interest: 50
         - name: PullRequest駆動
-          experience: 38
+          experience: 40
           interest: 50
         - name: GitFlow
-          experience: 38
+          experience: 35
           interest: 50
